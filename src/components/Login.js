@@ -1,10 +1,12 @@
 import '../css/Login.css';
 
-import {Button, Form, FormGroup, Input} from 'reactstrap';
+import {Button, Form} from 'reactstrap';
 import GoogleLogin from 'react-google-login';
 import {React, Component} from "react";
 import { Link } from 'react-router-dom';
 import MicrosoftLogin from "react-microsoft-login";
+
+import bg from '../assets/bg.png';
 
 
 class Login extends Component {  
@@ -14,49 +16,81 @@ class Login extends Component {
     console.log(response.profileObj.name);
     console.log(response.profileObj.email);
   }
-  
-  
+  /*microsoftResponse = (response) => {
+    console.log(response);
+  };*/
+  authHandler = (err, data) => {
+    console.log(err, data);
+  };  
 
  render(){
-  
-
     return (
-      <Form className="login-form">
-        <h2 className="text-center">Welcome to Universal RX</h2>
-        <h6 className="text-center welcomedes">Universal Orthodontic Lab Digital Prescription</h6>
-        <FormGroup>
-          <Input className="acctlogin" type="email" placeholder="Username"></Input>
-        </FormGroup>
-        <FormGroup>
-          <Input className="acctlogin" type="password" placeholder="Password"></Input>
-        </FormGroup>
-        <div className="forgot-password text-left">
-          <a href="/forgot-password"><span className="pt-3">Forgot Your Password?</span></a>
-        </div>
-        <Button className="btn-lg btn-primary btn-block" type="submit">Log in</Button>
-        <div className="text-center pt-3">Or continue with your social account</div>
-        <div class="row socialLogin">
-          <div class="col-md-6">
-            <GoogleLogin
-              clientId="448097078035-h3ikudenh75bdpriivj7bg8067dlcutr.apps.googleusercontent.com" 
-              className="mt-3 mb-3"
-              onSuccess={this.responseGoogle}
-              onFailure={this.responseGoogle}
-              cookiePolicy={'single_host_origin'}
-              theme= "dark" />
-          </div> 
-          <div class="col-md-6">
-            <MicrosoftLogin 
-            
-            />
-          </div>
-        </div>
-        <div className="text-left pt-3">Do you have an account? 
-          
-          <Link to= '/SignUp' className="links"> Join free today</Link>
-        </div>
-      </Form>
-      
+     <Form>
+       <div>
+         <div className="login-form">
+           <div className="form-container">
+              <div className="login-banner">
+                <h6 className="text-left">Welcome back</h6>
+                <h3 className="text-left">Login to your account</h3>
+              </div>
+              <div className="login-group">
+                <div className="login-field">
+                  <span className="login-label">Email</span>
+                  <input type="email" className="form-control"/>
+                </div>
+                <div className="login-field">
+                  <span className="login-label">Password</span>
+                  <input type="password" className="form-control"/>
+                </div>  
+              </div>
+              <div className="login-group overflow-hidden pt-2 pb-2">
+                <div className="remember-me">
+                  <input type='checkbox' name='remember-me' value='remember'/> Remember me
+                </div>
+                <div className="forgot-password text-right">
+                  <a href="/forgot-password"><span className="pt-3">Forgot Your Password?</span></a>
+                </div>
+              </div>
+              <div className="login-group">
+                <Button className="btn-lg btn-primary btn-block" type="submit">Log in</Button>
+              </div>
+              <div className="login-group pt-1 pb-1">
+                <div className="text-center pt-3">Or</div>
+              </div>
+              <div className="login-group pt-3">
+                <div className="social-login">
+                  <div className="social-google">
+                    <GoogleLogin
+                      clientId="448097078035-h3ikudenh75bdpriivj7bg8067dlcutr.apps.googleusercontent.com" 
+                      className="mt-1 mb-1"
+                      onSuccess={this.responseGoogle}
+                      onFailure={this.responseGoogle}
+                      cookiePolicy={'single_host_origin'}
+                      theme= "dark"
+                      buttonText="Continue with Google"
+                    />
+                  </div> 
+                  <div className="social-ms">
+                    <MicrosoftLogin 
+                    clientId="ddcae730-c8c6-47af-8171-af06bc0325ab"
+                    className="mt-1 mb-1"
+                    buttonTheme="light"
+                    authCallback={this.authHandler}
+                    //Button display name="Continue with Microsoft"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="login-group pt-5">
+                <div className="text-center pt-3">Do you have an account? <Link to= '/SignUp' className="links"> Join free today</Link></div>
+              </div>
+           </div>
+         </div>
+         <div className="login-bg">
+           <div><img src={bg} className="bg" alt="bg" /></div>
+         </div>
+       </div>
+     </Form>
     );
   }
 }
