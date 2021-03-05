@@ -21,7 +21,37 @@ class Login extends Component {
   };*/
   authHandler = (err, data) => {
     console.log(err, data);
-  };  
+  }; 
+
+/* Defined as id password state value */
+state = {
+    userEmail: '',
+    userPW: ''
+}
+
+/* input value change ==> onChange */
+handleChange = (e) => {
+  this.setState({
+    [e.target.name]: e.target.value
+  })
+}
+
+/*handleSubmit = (e) => {
+  // Prevent Page reload
+  e.preventDefault();
+  this.props.onCreate(this.state);
+  this.setState({
+    userEmail: '',
+    userPW: ''
+  })
+}
+*/
+
+appsubmit = () => {
+  console.log(this.state.userEmail)
+  console.log(this.state.userPW)
+}
+
 
  render(){
     return (
@@ -36,11 +66,11 @@ class Login extends Component {
               <div className="login-group">
                 <div className="login-field">
                   <span className="login-label">Email</span>
-                  <input type="email" className="form-control"/>
+                  <input type="email" className="form-control" name="userEmail" value={this.state.userEmail} onChange={this.handleChange}/>
                 </div>
                 <div className="login-field">
                   <span className="login-label">Password</span>
-                  <input type="password" className="form-control"/>
+                  <input type="password" className="form-control" name="userPW" value={this.state.userPW} onChange={this.handleChange}/>
                 </div>  
               </div>
               <div className="login-group overflow-hidden pt-2 pb-2">
@@ -52,7 +82,7 @@ class Login extends Component {
                 </div>
               </div>
               <div className="login-group">
-                <Button className="btn-lg btn-primary btn-block" type="submit">Log in</Button>
+               <Button className="btn-lg btn-primary btn-block" onClick={this.appsubmit} type="submit">Log in</Button>
               </div>
               <div className="login-group pt-1 pb-1">
                 <div className="text-center pt-3">Or</div>
