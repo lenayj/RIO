@@ -23,7 +23,7 @@ state = {
                         <div className="resetPssword-group">
                             <div className="resetPssword-field">
                                 <span className="resetPssword-label">New Password</span>
-                                <input type="password" className="form-control" name="newPW" value={this.state.newPW}/>
+                                <input type="password" className="form-control" name="newPW"/>
                             </div>
                             <div className="resetPssword-field">
                                 <span className="resetPssword-label">Confirm Password</span>
