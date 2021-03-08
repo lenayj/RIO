@@ -1,4 +1,5 @@
 import '../css/Login.css';
+import { userService } from '../_services';
 
 import {Button, Form} from 'reactstrap';
 import GoogleLogin from 'react-google-login';
@@ -10,12 +11,68 @@ import bg from '../assets/bg.png';
 
 
 class Login extends Component {  
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        usernameOrEmail: '',
+        password: '',
+        submitted: false,
+        loading: false,
+        error: ''
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+}
+
+handleChange(e) {
+  const { name, value } = e.target;
+  this.setState({ [name]: value });
+}
+
+handleSubmit(e) {
+  e.preventDefault();
+
+  this.setState({ submitted: true });
+  const { usernameOrEmail, password } = this.state;
+
+  if (!(usernameOrEmail && password)) {
+      return;
+  }
+
+  this.setState({ loading: true });
+  userService.login(usernameOrEmail, password)
+      .then(
+          user => {
+              const { from } = this.props.location.state || { from: { pathname: "/" } };
+              this.props.history.push(from);
+          },
+          error => this.setState({ error, loading: false })
+      );
+}
+
+
+
   responseGoogle=(response)=>{
-    //console.log(response);
+    console.log(response);
     console.log(response.profileObj);
     console.log(response.profileObj.name);
     console.log(response.profileObj.email);
+    // this.setState({[usernameOrEmail] : response.profileObj.email });
+    debugger;
+    userService.gmaillogin(response.profileObj.email, response.tokenObj.access_token)
+      .then(
+          user => {
+              const { from } = this.props.location.state || { from: { pathname: "/" } };
+              this.props.history.push(from);
+          },
+          error => this.setState({ error, loading: false })
+      );
+// }
   }
+  
   /*microsoftResponse = (response) => {
     console.log(response);
   };*/
