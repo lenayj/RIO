@@ -1,6 +1,5 @@
 .register-form {
     margin: 0 auto;
-    padding-top: 20px;
     width: 550px;
 }
 
@@ -10,18 +9,15 @@
     box-shadow: 0 1px 6px 0 rgb(0 0 0 / 12%), 0 1px 6px 0 rgb(0 0 0 / 12%);
 }
 
+/*
 .panel-body {
     padding: 15px;
 }
+*/
 
 .register-form form {
     margin: 0 auto;
     width: 450px;
-}
-
-.register-form .register-banner {
-    text-align: center;
-    margin: 20px 0;
 }
 
 .register-form .part-header {
