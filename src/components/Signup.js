@@ -1,5 +1,5 @@
 import '../css/SignUp.css';
-import React, { Component } from "react";
+import React from "react";
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
@@ -8,7 +8,7 @@ function SignUp () {
   const {register, handleSubmit, errors, getValues} = useForm();
   const sleep = ms => new Promise(resolve => setTimeout(resolve,null));
   const onSubmit = (data) => {
-    console.log(data);
+    //console.log(data);
   }
   const validatePassword = async(value) => {
     await sleep(1000);
@@ -18,8 +18,9 @@ function SignUp () {
   }
   
         return (
-          
-          <div className="register-form pt-3">
+          <div className="app full-screen register">
+          <div>
+          <div className="register-form">
             <div className="register-banner text-left mb-4 mt-4">
                   <h3>Create an Account</h3>
             </div>
@@ -128,7 +129,7 @@ function SignUp () {
                         Already registered? <Link to= '/Login' className="links">Login</Link>
                     </p>
                   </div>
-            </form></div></div></div>
+            </form></div></div></div></div></div>
         );
     };
   

@@ -11,16 +11,18 @@ import bg from '../assets/bg.png';
 
 class Login extends Component {  
   responseGoogle=(response)=>{
-    //console.log(response);
+    /*
+    console.log(response);
     console.log(response.profileObj);
     console.log(response.profileObj.name);
     console.log(response.profileObj.email);
+    */
   }
   /*microsoftResponse = (response) => {
     console.log(response);
   };*/
   authHandler = (err, data) => {
-    console.log(err, data);
+    //console.log(err, data);
   }; 
 
 /* Defined as id password state value */
@@ -48,8 +50,8 @@ handleChange = (e) => {
 */
 
 appsubmit = () => {
-  console.log(this.state.userEmail)
-  console.log(this.state.userPW)
+  /*console.log(this.state.userEmail)
+  console.log(this.state.userPW)*/
 }
 
 
@@ -87,7 +89,7 @@ appsubmit = () => {
               <div className="login-group pt-1 pb-1">
                 <div className="text-center pt-3">Or</div>
               </div>
-              <div className="login-group pt-3">
+              <div className="login-group">
                 <div className="social-login">
                   <div className="social-google">
                     <GoogleLogin
@@ -96,7 +98,7 @@ appsubmit = () => {
                       onSuccess={this.responseGoogle}
                       onFailure={this.responseGoogle}
                       cookiePolicy={'single_host_origin'}
-                      theme= "dark"
+                      theme= "light"
                       buttonText="Continue with Google"
                     />
                   </div> 
@@ -112,7 +114,7 @@ appsubmit = () => {
                 </div>
               </div>
               <div className="login-group pt-5">
-                <div className="text-center pt-3">Do you have an account? <Link to= '/SignUp' className="links"> Join free today</Link></div>
+                <div className="text-center pt-4">Do you have an account? <Link to= '/SignUp' className="links"> Join free today</Link></div>
               </div>
            </div>
          </div>
