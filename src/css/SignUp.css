@@ -26,23 +26,25 @@
     font-size: 20px;
 }
 
-.input-group {
+.form-input {
     position: relative;
     display: table;
     border-collapse: separate;
 }
 
-.input-group {
+.form-input {
     width: 100%;
 }
 
-.input-group .col-md-12{
+.form-input .col-md-12{
     padding-bottom: 1%;
 }
+
+/*
 .register-form form .privacy-policy {
-    text-align: center;
-    margin-top: 20px;
+    
 }
+*/
 
 .register-form form .register-button {
     text-align: center;

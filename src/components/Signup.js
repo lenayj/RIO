@@ -1,9 +1,22 @@
 import '../css/SignUp.css';
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
-export default class SignUp extends Component {
-    render() {
+function SignUp () {
+
+  const {register, handleSubmit, errors, getValues} = useForm();
+  const sleep = ms => new Promise(resolve => setTimeout(resolve,null));
+  const onSubmit = (data) => {
+    console.log(data);
+  }
+  const validatePassword = async(value) => {
+    await sleep(1000);
+    if(value === getValues('password')) return true;
+
+    return false;
+  }
+  
         return (
           
           <div className="register-form pt-3">
@@ -13,18 +26,47 @@ export default class SignUp extends Component {
             <div className="panel panel-default">
               <div className="panel-body">
                 
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  {/*<h6>{this.state.email} {this.state.password}</h6>*/}
+                  <div>
+                    <div className="part-header">
+                      <h5>Personal Information</h5>
+                    </div>
+                    <div className="form-input">
+                      <div className="col-md-12">
+                        <input type="text" className="form-control" placeholder="First Name" 
+                        name="firstName" ref={register({required:true})}/>
+                        {errors.firstName && errors.firstName.type === "required" && (<p className="text-danger">First Name field is required</p>)}
+                      </div>
+                      {/*<div>{this.state.firstName}</div>*/}
+                      <div className="col-md-12">
+                        <input type="text" className="form-control" placeholder="Last Name" 
+                        name="lastName" ref={register({required:true})}/>
+                        {errors.lastName && errors.lastName.type === "required" && (<p className="text-danger">Last Name field is required</p>)}
+                      </div>  
+                    </div>
+                  </div>  
                   
                   <div>
                     <div className="part-header">
                       <h5>Account Security</h5>
                     </div>
-                    <div className="input-group">
+                    <div className="form-input">
                       <div className="col-md-12">
-                        <input type="email" className="form-control" placeholder="Email Address" />
+                        <input type="email" className="form-control" placeholder="Email Address" 
+                        name="email" ref={register({required:true})}/>
+                        {errors.email && errors.email.type === "required" && (<p className="text-danger">Email field is required</p>)}
                       </div>
                       <div className="col-md-12">
-                        <input type="password" className="form-control" placeholder="Password" />
+                        <input type="password" className="form-control" placeholder="Password" 
+                        name="password" ref={register({required:true})}/>
+                        {errors.password && errors.password.type === "required" && (<p className="text-danger">Password field is required</p>)}
+                      </div>
+                      <div className="col-md-12">
+                        <input type="password" className="form-control" placeholder="Confirm Password" 
+                        name="confirmPassword" ref={register({required:true, validate: validatePassword})}/>
+                        {errors.confirmPassword && errors.confirmPassword.type === "required" && (<p className="text-danger">Confirm Password field is required</p>)}
+                        {errors.confirmPassword && errors.confirmPassword.type === "validate" && (<p className="text-danger">Passwords does not match</p>)}
                       </div>  
                     </div>
                   </div>
@@ -33,30 +75,21 @@ export default class SignUp extends Component {
                     <div className="part-header">
                       <h5>Practice Information</h5>
                     </div>
-                    <div className="input-group">
+                    <div className="form-input">
                       <div className="col-md-12">
-                        <input type="text" className="form-control" placeholder="Practice Name" />
+                        <input type="text" className="form-control" placeholder="Practice Name" 
+                        name="practiceName" ref={register({required:true})}/>
+                        {errors.practiceName && errors.practiceName.type === "required" && (<p className="text-danger">Practice Name field is required</p>)}
                       </div>
                       <div className="col-md-12">
-                        <input type="text" className="form-control" placeholder="Office Name" />
+                        <input type="text" className="form-control" placeholder="Office Name" 
+                        name="officeName" ref={register({required:true})}/>
+                        {errors.officeName && errors.officeName.type === "required" && (<p className="text-danger">Office Name field is required</p>)}
                       </div>  
                     </div>
                   </div>
-                    
-                  <div>
-                    <div className="part-header">
-                      <h5>Personal Information</h5>
-                    </div>
-                    <div className="input-group">
-                      <div className="col-md-12">
-                        <input type="text" className="form-control" placeholder="First Name" />
-                      </div>
-                      <div className="col-md-12">
-                        <input type="text" className="form-control" placeholder="Last Name" />
-                      </div>  
-                    </div>
-                  </div>  
 
+{/* Billing Address
                   <div>
                     <div className="part-header">
                       <h5>Billing Address</h5>
@@ -79,15 +112,16 @@ export default class SignUp extends Component {
                       </div>  
                     </div>
                   </div>    
-                  
-                  <div className="privacy-policy">
-                    By clicking the button below, I agree to the 
-                    <a rel="noopener noreferrer" target="_blank" href="http://labslip.uniortholab.com/privacy-statement/"> Privacy Policy</a> 
-                      and <a rel="noopener noreferrer" target="_blank" href="http://labslip.uniortholab.com/terms-of-service/"> Terms of Service</a>
-                     .</div>
+*/}                  
+                  <div className="privacy-policy mb-3 mt-3 text-right">
+                    <div>By clicking the button below,</div> 
+                    <div>I agree to the <a rel="noopener noreferrer" target="_blank" href="http://labslip.uniortholab.com/privacy-statement/">Privacy Policy</a> and
+                    <a rel="noopener noreferrer" target="_blank" href="http://labslip.uniortholab.com/terms-of-service/"> Terms of Service</a>.
+                    </div>
+                  </div>
 
                   <div className="register-button">
-                    <button type="submit" className="btn btn-primary btn-lg btn-block">Create Account</button>
+                    <button type="submit" value="submit" className="btn btn-primary btn-lg btn-block">Create Account</button>
                   </div>
 
                   <div className="mt-3">
@@ -97,5 +131,7 @@ export default class SignUp extends Component {
                   </div>
             </form></div></div></div>
         );
-    }
-}
+    };
+  
+
+export default SignUp;
