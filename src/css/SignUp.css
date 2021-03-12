@@ -1,6 +1,5 @@
 .register-form {
     margin: 0 auto;
-    padding-top: 20px;
     width: 550px;
 }
 
@@ -10,18 +9,15 @@
     box-shadow: 0 1px 6px 0 rgb(0 0 0 / 12%), 0 1px 6px 0 rgb(0 0 0 / 12%);
 }
 
+/*
 .panel-body {
     padding: 15px;
 }
+*/
 
 .register-form form {
     margin: 0 auto;
     width: 450px;
-}
-
-.register-form .register-banner {
-    text-align: center;
-    margin: 20px 0;
 }
 
 .register-form .part-header {
@@ -30,23 +26,25 @@
     font-size: 20px;
 }
 
-.input-group {
+.form-input {
     position: relative;
     display: table;
     border-collapse: separate;
 }
 
-.input-group {
+.form-input {
     width: 100%;
 }
 
-.input-group .col-md-12{
+.form-input .col-md-12{
     padding-bottom: 1%;
 }
+
+/*
 .register-form form .privacy-policy {
-    text-align: center;
-    margin-top: 20px;
+    
 }
+*/
 
 .register-form form .register-button {
     text-align: center;
