@@ -37,7 +37,6 @@ function SignUp () {
                         name="firstName" ref={register({required:true})}/>
                         {errors.firstName && errors.firstName.type === "required" && (<p className="text-danger">First Name field is required</p>)}
                       </div>
-                      {/*<div>{this.state.firstName}</div>*/}
                       <div className="col-md-12">
                         <input type="text" className="form-control" placeholder="Last Name" 
                         name="lastName" ref={register({required:true})}/>
