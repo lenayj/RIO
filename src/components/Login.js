@@ -135,7 +135,7 @@ appsubmit = () => {
                   <input type='checkbox' name='remember-me' value='remember'/> Remember me
                 </div>
                 <div className="forgot-password text-right">
-                  <a href="/forgot-password"><span className="pt-3">Forgot Your Password?</span></a>
+                  <a href="/forgot-password"><span className="pt-3"><Link to= '/forgotPassword' className="links">Forgot Your Password?</Link></span></a>
                 </div>
               </div>
               <div className="login-group">
