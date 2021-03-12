@@ -27,7 +27,6 @@ function SignUp () {
               <div className="panel-body">
                 
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  {/*<h6>{this.state.email} {this.state.password}</h6>*/}
                   <div>
                     <div className="part-header">
                       <h5>Personal Information</h5>
