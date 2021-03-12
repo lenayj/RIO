@@ -11,12 +11,12 @@ state = {
     confirmPW: ''
 }
 
-/* input value change ==> onChange 
+/* input value change ==> onChange */ 
 handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     })
-}*/
+}
 
     render() {
         return (
