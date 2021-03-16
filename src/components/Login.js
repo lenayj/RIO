@@ -4,26 +4,23 @@ import {Button, Form} from 'reactstrap';
 import GoogleLogin from 'react-google-login';
 import {React, Component} from "react";
 import { Link } from 'react-router-dom';
-import MicrosoftLogin from "react-microsoft-login";
+import MicrosoftLogin from 'react-microsoft-login';
 
 import bg from '../assets/bg.png';
 
-
 class Login extends Component {  
-  responseGoogle=(response)=>{
-    /*
-    console.log(response);
+  
+  responseGoogle=(response)=>{    
+    /*console.log(response);
     console.log(response.profileObj);
     console.log(response.profileObj.name);
-    console.log(response.profileObj.email);
-    */
+    console.log(response.profileObj.email);*/  
   }
-  /*microsoftResponse = (response) => {
-    console.log(response);
-  };*/
+  
   authHandler = (err, data) => {
-    //console.log(err, data);
-  }; 
+      /*console.log(err, data);
+      console.log(data.name);*/
+  };
 
 /* Defined as id password state value */
 state = {
@@ -39,21 +36,18 @@ handleChange = (e) => {
 }
 
 /*handleSubmit = (e) => {
-  // Prevent Page reload
   e.preventDefault();
   this.props.onCreate(this.state);
   this.setState({
     userEmail: '',
     userPW: ''
   })
-}
-*/
+}*/
 
 appsubmit = () => {
   /*console.log(this.state.userEmail)
   console.log(this.state.userPW)*/
 }
-
 
  render(){
     return (
@@ -99,7 +93,7 @@ appsubmit = () => {
                       onFailure={this.responseGoogle}
                       cookiePolicy={'single_host_origin'}
                       theme= "light"
-                      buttonText="Continue with Google"
+                      buttonText="Sign in with Google"
                     />
                   </div> 
                   <div className="social-ms">
@@ -108,7 +102,7 @@ appsubmit = () => {
                     className="mt-1 mb-1"
                     buttonTheme="light"
                     authCallback={this.authHandler}
-                    //Button display name="Continue with Microsoft"
+                    //debug='true'
                     />
                   </div>
                 </div>
