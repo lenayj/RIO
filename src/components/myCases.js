@@ -6,6 +6,7 @@ class MyCases extends Component {
     super(props)
     this.state = {
       myCase: [],
+      caseId:'',
       isLoading: false,
       isError: false
     }
@@ -21,18 +22,38 @@ class MyCases extends Component {
     
     if (response.ok) {
       const myCase = await response.json()
+      //console.log(myCase)
       this.setState({myCase,isLoading:false})
     } else {
       this.setState({isError:true,isLoading:false})
     }
 
   }
-  
-  /* Set Attribute as a Table Header */
+
+/* Call Open Msg Modal */
+  openMSG = (e) => {
+    const case_id = e.target.id
+    const url = 'http://localhost:3000/renderOpenMSG'
+    window.open(url+'?msgurl="' + url + '"&caseid='+ case_id, "Messenger", "width=350, height=400")
+  }
+
+ 
+  /* Set Attribute as a Table Header 
   renderTableHeader = () => {
     return Object.keys(this.state.myCase[0]).map(attr => <th key={attr}>
       {attr.toUpperCase()}
     </th>)
+  }*/
+  renderTableHeader = () => {
+    return <tr>
+    <th>CASE NO.</th>
+    <th>DATA SENT</th>
+    <th>PATIENT NAME</th>
+    <th>LABSLIP</th>
+    <th>STL FILES</th>
+    <th>STATUS</th>
+    <th>QUESTION</th>
+    </tr>
   }
 
   /* Set Data in a Table Row
@@ -49,22 +70,22 @@ class MyCases extends Component {
           <td>{cases.username}</td>
           {/*Labslip field 'img_name'
           :: Link required
-          :: <td><a href={cases.img_name} target="_blank">View</a></td>*/}
+          :: <td><a href={cases.img_name} target="_blank" rel="noreferrer">View</a></td>*/}
           <td>{cases.email}</td>
           {/*STL File field 'file_name'
           :: if !files -> Not Uploaded else File Link required*/}
           <td>
             {`${cases.address.street},${cases.address.city}`}
           </td>
-          {/*Status field 'status'*/}
-          <td>{cases.phone}</td>
           {/*Question field 'case_id'*/}
           <td>{cases.website}</td>
-          <td><button id={cases.id} className="openMsg">Leave a message</button></td>
+          {/*Message field 'case_id'*/}
+          <td><button id={cases.id} onClick={this.openMSG}>Leave a message</button></td>
         </tr>
       )
     })
   }
+
 
 
   render() {
@@ -87,10 +108,8 @@ class MyCases extends Component {
         </div>
         <div className="table-responsive">
           <table className="table table-striped">
-            <thead>
-              <tr>
-                {this.renderTableHeader()}
-              </tr>
+            <thead>              
+                {this.renderTableHeader()}              
             </thead>
             <tbody id="user-cases">
               {this.renderTableRows()}
