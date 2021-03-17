@@ -8,12 +8,14 @@ class Header extends Component{
 
     render(){
         if(window.location.pathname === '/Login' || window.location.pathname === '/Signup' ||
-        window.location.pathname === '/forgotPassword' || window.location.pathname === '/resetPassword') return null;
+        window.location.pathname === '/forgotPassword' || window.location.pathname === '/resetPassword' ||
+        window.location.pathname === '/renderOpenMSG') return null;
         return (
             <header className="Header">
                 <Link to= '/App' className="links"><img src={logo} className="Logo" alt="logo" /></Link>
                 <nav className="Nav">
                     <Link to= '/myCases' className="links">My Cases</Link>
+                    <Link to= '/newCase' className="links">New Case</Link>
                     {/*<Link to= '/SignUp' className="links">SignUp</Link>*/}
                 </nav>
             </header>    
