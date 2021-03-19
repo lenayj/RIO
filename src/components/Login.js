@@ -4,24 +4,23 @@ import {Button, Form} from 'reactstrap';
 import GoogleLogin from 'react-google-login';
 import {React, Component} from "react";
 import { Link } from 'react-router-dom';
-import MicrosoftLogin from "react-microsoft-login";
+import MicrosoftLogin from 'react-microsoft-login';
 
 import bg from '../assets/bg.png';
 
-
 class Login extends Component {  
-  responseGoogle=(response)=>{
-    //console.log(response);
+  
+  responseGoogle=(response)=>{    
+    /*console.log(response);
     console.log(response.profileObj);
     console.log(response.profileObj.name);
-    console.log(response.profileObj.email);
+    console.log(response.profileObj.email);*/  
   }
-  /*microsoftResponse = (response) => {
-    console.log(response);
-  };*/
+  
   authHandler = (err, data) => {
-    console.log(err, data);
-  }; 
+      /*console.log(err, data);
+      console.log(data.name);*/
+  };
 
 /* Defined as id password state value */
 state = {
@@ -37,21 +36,18 @@ handleChange = (e) => {
 }
 
 /*handleSubmit = (e) => {
-  // Prevent Page reload
   e.preventDefault();
   this.props.onCreate(this.state);
   this.setState({
     userEmail: '',
     userPW: ''
   })
-}
-*/
+}*/
 
 appsubmit = () => {
-  console.log(this.state.userEmail)
-  console.log(this.state.userPW)
+  /*console.log(this.state.userEmail)
+  console.log(this.state.userPW)*/
 }
-
 
  render(){
     return (
@@ -87,7 +83,7 @@ appsubmit = () => {
               <div className="login-group pt-1 pb-1">
                 <div className="text-center pt-3">Or</div>
               </div>
-              <div className="login-group pt-3">
+              <div className="login-group">
                 <div className="social-login">
                   <div className="social-google">
                     <GoogleLogin
@@ -96,8 +92,8 @@ appsubmit = () => {
                       onSuccess={this.responseGoogle}
                       onFailure={this.responseGoogle}
                       cookiePolicy={'single_host_origin'}
-                      theme= "dark"
-                      buttonText="Continue with Google"
+                      theme= "light"
+                      buttonText="Sign in with Google"
                     />
                   </div> 
                   <div className="social-ms">
@@ -106,13 +102,13 @@ appsubmit = () => {
                     className="mt-1 mb-1"
                     buttonTheme="light"
                     authCallback={this.authHandler}
-                    //Button display name="Continue with Microsoft"
+                    //debug='true'
                     />
                   </div>
                 </div>
               </div>
               <div className="login-group pt-5">
-                <div className="text-center pt-3">Do you have an account? <Link to= '/SignUp' className="links"> Join free today</Link></div>
+                <div className="text-center pt-4">Do you have an account? <Link to= '/SignUp' className="links"> Join free today</Link></div>
               </div>
            </div>
          </div>
