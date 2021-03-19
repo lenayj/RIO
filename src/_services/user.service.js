@@ -2,7 +2,9 @@
 export const userService = {
     login,
     logout,
-    gmaillogin
+    gmaillogin,
+    signup,
+    outlooklogin
 };
 
 function login(usernameOrEmail, password) {
@@ -24,11 +26,11 @@ function login(usernameOrEmail, password) {
         });
 }
 
-function gmaillogin(email, token) {
+function gmaillogin(email, token, firstName, lastName) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, token })
+        body: JSON.stringify({ email, token, firstName, lastName  })
     };
 
     return fetch(`http://localhost:8080/api/auth/gmaillogin/`, requestOptions)
@@ -43,8 +45,42 @@ function gmaillogin(email, token) {
         });
 }
 
+function outlooklogin(email, token, firstName, lastName) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, token, firstName, lastName })
+    };
+
+    return fetch(`http://localhost:8080/api/auth/outlooklogin/`, requestOptions)
+        .then(handleResponse)
+        .then(user => {
+            if (user) {
+                user.authdata = window.btoa(email + ':' + token);
+                localStorage.setItem('user', JSON.stringify(user));
+            }
+
+            return user;
+        });
+}
+
 function logout() {
     localStorage.removeItem('user');
+}
+
+function signup(SignupDetails) {
+    debugger;
+    JSON.stringify(SignupDetails)
+    console.log(SignupDetails);
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(SignupDetails)
+    };
+
+    return fetch(`http://localhost:8080/api/auth/signup/`, requestOptions)
+        .then(handleResponse)
+        .then(user => {return user;}); // TODO: redirect to the relevant place 
 }
 
 function handleResponse(response) {

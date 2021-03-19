@@ -17,7 +17,7 @@ class Login extends Component {
 
     this.state = {
         usernameOrEmail: '',
-        password: '',
+        password: '', 
         submitted: false,
         loading: false,
         error: ''
@@ -60,9 +60,8 @@ handleSubmit(e) {
     console.log(response.profileObj);
     console.log(response.profileObj.name);
     console.log(response.profileObj.email);
-    // this.setState({[usernameOrEmail] : response.profileObj.email });
     debugger;
-    userService.gmaillogin(response.profileObj.email, response.tokenObj.access_token)
+    userService.gmaillogin(response.profileObj.email, response.tokenObj.access_token,response.profileObj.name.split(" ")[0],response.profileObj.name.split(" ")[1])
       .then(
           user => {
               const { from } = this.props.location.state || { from: { pathname: "/" } };
@@ -70,45 +69,47 @@ handleSubmit(e) {
           },
           error => this.setState({ error, loading: false })
       );
-// }
   }
-  
-  /*microsoftResponse = (response) => {
-    console.log(response);
-  };*/
+
+  // responseMicrosoft=(response)=>{
+  //   console.log(response);
+    // console.log(response.profileObj);
+    // console.log(response.profileObj.name);
+    // console.log(response.profileObj.email);
+    // debugger;
+    // userService.outlooklogin(response.profileObj.email, response.tokenObj.access_token)
+    //   .then(
+    //       user => {
+    //           const { from } = this.props.location.state || { from: { pathname: "/" } };
+    //           this.props.history.push(from);
+    //       },
+    //       error => this.setState({ error, loading: false })
+    //   );
+  // }
+
+  responseMicrosoft = (err, data) => {
+    debugger;
+    console.log(data.account);
+    userService.outlooklogin(data.account.userName, data.accessToken,data.account.name.split(" ")[0],data.account.name.split(" ")[1])
+      .then(
+          user => {
+              const { from } = this.props.location.state || { from: { pathname: "/" } };
+              this.props.history.push(from);
+          },
+          error => this.setState({ error, loading: false })
+      );
+  };
+
+
   authHandler = (err, data) => {
     console.log(err, data);
   }; 
 
-/* Defined as id password state value */
-state = {
-    userEmail: '',
-    userPW: ''
-}
-
-/* input value change ==> onChange */
 handleChange = (e) => {
   this.setState({
     [e.target.name]: e.target.value
   })
 }
-
-/*handleSubmit = (e) => {
-  // Prevent Page reload
-  e.preventDefault();
-  this.props.onCreate(this.state);
-  this.setState({
-    userEmail: '',
-    userPW: ''
-  })
-}
-*/
-
-appsubmit = () => {
-  console.log(this.state.userEmail)
-  console.log(this.state.userPW)
-}
-
 
  render(){
     return (
@@ -123,11 +124,11 @@ appsubmit = () => {
               <div className="login-group">
                 <div className="login-field">
                   <span className="login-label">Email</span>
-                  <input type="email" className="form-control" name="userEmail" value={this.state.userEmail} onChange={this.handleChange}/>
+                  <input type="email" className="form-control" name="usernameOrEmail" value={this.state.usernameOrEmail} onChange={this.handleChange}/>
                 </div>
                 <div className="login-field">
                   <span className="login-label">Password</span>
-                  <input type="password" className="form-control" name="userPW" value={this.state.userPW} onChange={this.handleChange}/>
+                  <input type="password" className="form-control" name="password" value={this.state.password} onChange={this.handleChange}/>
                 </div>  
               </div>
               <div className="login-group overflow-hidden pt-2 pb-2">
@@ -139,7 +140,7 @@ appsubmit = () => {
                 </div>
               </div>
               <div className="login-group">
-               <Button className="btn-lg btn-primary btn-block" onClick={this.appsubmit} type="submit">Log in</Button>
+               <Button className="btn-lg btn-primary btn-block" onClick={this.handleSubmit} type="submit">Log in</Button>
               </div>
               <div className="login-group pt-1 pb-1">
                 <div className="text-center pt-3">Or</div>
@@ -162,7 +163,7 @@ appsubmit = () => {
                     clientId="ddcae730-c8c6-47af-8171-af06bc0325ab"
                     className="mt-1 mb-1"
                     buttonTheme="light"
-                    authCallback={this.authHandler}
+                    authCallback={this.responseMicrosoft}
                     //Button display name="Continue with Microsoft"
                     />
                   </div>
