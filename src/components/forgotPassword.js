@@ -1,16 +1,21 @@
 import '../css/forgotPassword.css';
 
-import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import React from "react";
 import {Button} from 'reactstrap';
+import { useForm } from 'react-hook-form';
 
 /* Let customers submit email address to receive the password reset link 
 and sends the 'resetPassword' link to reset the password. */
 
-class forgotPassword extends Component {
+function ForgotPassword() {
+
+    const {register, handleSubmit, errors} = useForm();
+    const onSubmit = (data) => {
+        //console.log(data);
+    }
     
-    render() {
         return (
+            <div className="app full-screen register">
             <div>
                 <div className="forgotPassword-form pt-3">
                     <div className="forgotPassword-banner text-left mb-4 mt-4">
@@ -18,10 +23,12 @@ class forgotPassword extends Component {
                     </div>
                     <div className="panel panel-default">
                         <div className="panel-body">
-                            <form>
+                            <form onSubmit={handleSubmit(onSubmit)}>
                                 <div className="forgotPassword-group mb-3">
                                     <div className="forgotPassword-field mb-3">
-                                        <input type="email" className="form-control" placeholder="Enter Email"/>
+                                        <input type="email" className="form-control" placeholder="Enter Email"
+                                        name="PWResetEmail" ref={register({required:true})}/>
+                                        {errors.PWResetEmail && errors.PWResetEmail.type === "required" && (<p className="text-danger">Email field is required</p>)}
                                     </div>
                                 </div>
                                 <div className="mb-3">
@@ -32,10 +39,9 @@ class forgotPassword extends Component {
                     </div>
                 </div>
             </div>
-       
+            </div>
           
         );
-    }
-}
+    };
 
-export default forgotPassword;
+export default ForgotPassword;

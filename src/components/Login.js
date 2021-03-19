@@ -5,10 +5,9 @@ import {Button, Form} from 'reactstrap';
 import GoogleLogin from 'react-google-login';
 import {React, Component} from "react";
 import { Link } from 'react-router-dom';
-import MicrosoftLogin from "react-microsoft-login";
+import MicrosoftLogin from 'react-microsoft-login';
 
 import bg from '../assets/bg.png';
-
 
 class Login extends Component {  
 
@@ -102,8 +101,9 @@ handleSubmit(e) {
 
 
   authHandler = (err, data) => {
-    console.log(err, data);
-  }; 
+      /*console.log(err, data);
+      console.log(data.name);*/
+  };
 
 handleChange = (e) => {
   this.setState({
@@ -145,7 +145,7 @@ handleChange = (e) => {
               <div className="login-group pt-1 pb-1">
                 <div className="text-center pt-3">Or</div>
               </div>
-              <div className="login-group pt-3">
+              <div className="login-group">
                 <div className="social-login">
                   <div className="social-google">
                     <GoogleLogin
@@ -154,8 +154,8 @@ handleChange = (e) => {
                       onSuccess={this.responseGoogle}
                       onFailure={this.responseGoogle}
                       cookiePolicy={'single_host_origin'}
-                      theme= "dark"
-                      buttonText="Continue with Google"
+                      theme= "light"
+                      buttonText="Sign in with Google"
                     />
                   </div> 
                   <div className="social-ms">
@@ -170,7 +170,7 @@ handleChange = (e) => {
                 </div>
               </div>
               <div className="login-group pt-5">
-                <div className="text-center pt-3">Do you have an account? <Link to= '/SignUp' className="links"> Join free today</Link></div>
+                <div className="text-center pt-4">Do you have an account? <Link to= '/SignUp' className="links"> Join free today</Link></div>
               </div>
            </div>
          </div>
