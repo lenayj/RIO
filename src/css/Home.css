@@ -1,0 +1,28 @@
+.homebg {
+    background-color: #f7f7f7;
+}
+
+.grettingMsg{
+    margin-left:4%;
+}
+
+.greetingUsers h1 {
+    font-weight: 600;
+}
+
+.menuIcon {
+    margin: 4% 4% 0;
+}
+
+.menuIcon img{
+    width: 95%;
+    margin-bottom: 5%;
+}
+
+.menuIcon .row .col img:hover {
+    border: 1px solid #007bfd;
+}
+
+.menuIcon .row .col:hover {
+    opacity: 0.6;
+}
