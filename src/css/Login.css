@@ -6,6 +6,13 @@
 .login-bg{
     width:50%;
     float:right;
+    overflow: hidden;
+}
+
+.login-bg img{
+  max-height: 100%; 
+  width: auto;
+  display: block;
 }
 
 .login-form .form-container{
