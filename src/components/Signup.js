@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
+
 function SignUp () {
 
   const {register, handleSubmit, errors, getValues} = useForm();
@@ -115,7 +116,7 @@ function SignUp () {
 */}                  
                   <div className="privacy-policy mb-3 mt-3 text-right">
                     <div>By clicking the button below,</div> 
-                    <div>I agree to the <a rel="noopener noreferrer" target="_blank" href="http://labslip.uniortholab.com/privacy-statement/">Privacy Policy</a> and
+                    <div>I agree to the <Link to='/privacyStatement' target="_blank">Privact Statement</Link> and
                     <a rel="noopener noreferrer" target="_blank" href="http://labslip.uniortholab.com/terms-of-service/"> Terms of Service</a>.
                     </div>
                   </div>
