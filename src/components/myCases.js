@@ -86,18 +86,18 @@ export class MyCases extends PureComponent {
         }
         return tableData.length > 0 
         ? (
-            <div>
-                 <h1>My Cases</h1>
+            <div className="myCases">
+                 <h1 className="title-wording">My Cases</h1>
 
-                 <table border="1">
+                 <table className="table">
                      <thead>
                         <tr>
                             <th>CASE NO.</th>
-                            <th>DATA SENT</th>
+                            <th>STATUS</th>                            
                             <th>PATIENT NAME</th>
                             <th>LABSLIP</th>
-                            <th>STL FILES</th>
-                            <th>STATUS</th>
+                            <th>STL FILES</th>                            
+                            <th>DATA SENT</th>
                             <th>QUESTION</th>
                         </tr>
                      </thead>
