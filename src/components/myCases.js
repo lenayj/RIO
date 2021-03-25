@@ -136,11 +136,11 @@ export class MyCases extends PureComponent {
                      </tbody>
                  </table>   
                 
-                <div>{tableData.length} Entries in Total </div>
+                <div className="text-right">{tableData.length} Entries in Total </div>
 
                  <ReactPaginate
-                    previousLabel={"prev"}
-                    nextLabel={"next"}
+                    previousLabel={"<"}
+                    nextLabel={">"}
                     breakLabel={"..."}
                     breakClassName={"break-me"}
                     pageCount={this.state.pageCount}

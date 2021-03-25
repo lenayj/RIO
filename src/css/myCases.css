@@ -10,9 +10,11 @@
 }
 
 .table td button {
-    background: #007acc;
+    /*background: #007acc;
+    border: none;*/
+    color: #007acc;
     border: none;
-    color: white;
+    background: none;
     padding: 10px;
 }
 

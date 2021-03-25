@@ -9,6 +9,7 @@ import resetPassword from './resetPassword';
 import forgotPassword from './forgotPassword';
 import myCases from './myCases';
 import newCase from './newCase';
+import newCasePersonalInfo from './newCasePersonalInfo';
 import renderOpenMSG from './renderOpenMSG';
 import myAccount from './myAccount';
 
@@ -24,6 +25,7 @@ export default () => (
         <Route path='/forgotPassword' component={forgotPassword}/>
         <Route path='/myCases' component={myCases}/>
         <Route path='/newCase' component={newCase}/>
+        <Route path='/newCasePersonalInfo' component={newCasePersonalInfo}/>
         <Route path='/renderOpenMSG' component={renderOpenMSG}/>
         <Route path='/myAccount' component={myAccount}/>
 

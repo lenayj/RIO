@@ -84,7 +84,7 @@ These third parties may use cookies or other tracking technologies to collect in
 
 • <b>Do Not Track.</b> “Do Not Track” is a privacy preference that you can set in your web browser. 
 When you turn on the Do Not Track signal, your browser sends a message to websites requesting them not to track you. 
-For information about Do Not Track, visit <a href="https://allaboutdnt.com/" target="_blank">www.allaboutdnt.org</a>. At this time, we do not respond to Do Not Track browser 
+For information about Do Not Track, visit <a href="https://allaboutdnt.com/" target="_blank" rel="noreferrer">www.allaboutdnt.org</a>. At this time, we do not respond to Do Not Track browser 
 settings or signals. In addition, we may use other technology that is standard on the internet, 
 such as pixel tags, web beacons, and other similar technologies, to track visitors to the Website. 
 Those tools may be used by us and by third parties to collect information about you and your internet activity, 
