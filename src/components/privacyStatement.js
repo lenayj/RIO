@@ -156,7 +156,6 @@ to our claim adjudication service. In the event that there is a conflict or inco
 of the protected health information between(i) this Statement and (ii) our compliance obligations with HIPAA 
 and contractual commitments with the subject entity, then the latter will govern.</div><br/><br/><br/>
 
-
 <div><b>6.OPTING OUT</b><br/><br/>
 
 We may periodically send you email messages describing news, information, updates,or promotional offers 
