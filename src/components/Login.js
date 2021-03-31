@@ -113,7 +113,7 @@ appsubmit = () => {
            </div>
          </div>
          <div className="login-bg">
-           <div><img src={bg} className="bg" alt="bg" /></div>
+           <div className="overflow"><img src={bg} className="bg" alt="bg" /></div>
          </div>
        </div>
      </Form>
