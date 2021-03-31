@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import '../css/newCase.css';
-import MyCases from './myCases'
 
 class newCasePersonalInfo extends Component {
 
