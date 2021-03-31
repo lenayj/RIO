@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import MultiStep from 'react-multistep'
 import '../css/newCase.css';
 import NewCasePersonalInfo from './newCasePersonalInfo'
-import MyCases from './myCases'
+import NewCasePrescription from './newCasePrescription'
 
 class NewCase extends Component {
 
     render(){
         const steps = [
             { component: <NewCasePersonalInfo /> },
-            { component: <MyCases /> },
+            { component: <NewCasePrescription /> },
           ]
           
         const prevStyle = {'background':'#007bff', 'text-align': 'center', 'color': 'white', 'border': 'none', 'width': '200px'
