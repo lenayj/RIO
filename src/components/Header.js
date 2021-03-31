@@ -25,8 +25,8 @@ class Header extends Component{
     }
 
     render(){
-        if(window.location.pathname === '/Login' || 
-        window.location.pathname === '/signup' || window.location.pathname === '/privacyStatement' ||
+        if(window.location.pathname === '/Login' || window.location.pathname === '/signup' || 
+        window.location.pathname === '/privacyStatement' || window.location.pathname === '/termsAndService' ||
         window.location.pathname === '/forgotPassword' || window.location.pathname === '/resetPassword' ||
         window.location.pathname === '/renderOpenMSG') return null;
         return (
