@@ -11,7 +11,7 @@ function ForgotPassword() {
 
     const {register, handleSubmit, errors} = useForm();
     const onSubmit = (data) => {
-        //console.log(data);
+       
     }
     
         return (
