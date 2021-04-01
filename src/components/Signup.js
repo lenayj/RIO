@@ -89,31 +89,7 @@ function SignUp () {
                       </div>  
                     </div>
                   </div>
-
-{/* Billing Address
-                  <div>
-                    <div className="part-header">
-                      <h5>Billing Address</h5>
-                    </div>
-                    <div className="input-group">
-                      <div className="col-md-12">
-                        <input type="text" className="form-control" placeholder="Street address" />
-                      </div>
-                      <div className="col-md-12">
-                        <input type="text" className="form-control" placeholder="Street address 2" />
-                      </div>
-                      <div className="col-md-12">
-                        <input type="text" className="form-control" placeholder="City" />
-                      </div>
-                      <div className="col-md-12">
-                        <input type="text" className="form-control" placeholder="State" />
-                      </div>
-                      <div className="col-md-12">
-                        <input type="text" className="form-control" placeholder="Zip" />
-                      </div>  
-                    </div>
-                  </div>    
-*/}                  
+                                  
                   <div className="privacy-policy mb-3 mt-3 text-right">
                     <div>By clicking the button below,</div> 
                     <div>I agree to the <Link to='/privacyStatement' target="_blank">Privact Statement</Link> and
