@@ -59,7 +59,6 @@ handleSubmit(e) {
     console.log(response.profileObj);
     console.log(response.profileObj.name);
     console.log(response.profileObj.email);
-    debugger;
     userService.gmaillogin(response.profileObj.email, response.tokenObj.access_token,response.profileObj.name.split(" ")[0],response.profileObj.name.split(" ")[1])
       .then(
           user => {
@@ -70,25 +69,7 @@ handleSubmit(e) {
       );
   }
 
-  // responseMicrosoft=(response)=>{
-  //   console.log(response);
-    // console.log(response.profileObj);
-    // console.log(response.profileObj.name);
-    // console.log(response.profileObj.email);
-    // debugger;
-    // userService.outlooklogin(response.profileObj.email, response.tokenObj.access_token)
-    //   .then(
-    //       user => {
-    //           const { from } = this.props.location.state || { from: { pathname: "/" } };
-    //           this.props.history.push(from);
-    //       },
-    //       error => this.setState({ error, loading: false })
-    //   );
-  // }
-
   responseMicrosoft = (err, data) => {
-    debugger;
-    console.log(data.account);
     userService.outlooklogin(data.account.userName, data.accessToken,data.account.name.split(" ")[0],data.account.name.split(" ")[1])
       .then(
           user => {
@@ -97,12 +78,6 @@ handleSubmit(e) {
           },
           error => this.setState({ error, loading: false })
       );
-  };
-
-
-  authHandler = (err, data) => {
-      /*console.log(err, data);
-      console.log(data.name);*/
   };
 
 handleChange = (e) => {

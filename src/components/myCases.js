@@ -63,7 +63,6 @@ export class MyCases extends PureComponent {
             .get('https://jsonplaceholder.typicode.com/users')
             .then(res => {
                 var tdata = res.data;
-                //console.log('data-->'+JSON.stringify(tdata))
 				var slice = tdata.slice(this.state.offset, this.state.offset + this.state.perPage)
                 this.setState({
                     pageCount: Math.ceil(tdata.length / this.state.perPage),

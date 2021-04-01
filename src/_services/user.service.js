@@ -4,7 +4,9 @@ export const userService = {
     logout,
     gmaillogin,
     signup,
-    outlooklogin
+    outlooklogin,
+    forgotPassword,
+    resetPassword
 };
 
 function login(usernameOrEmail, password) {
@@ -56,10 +58,10 @@ function outlooklogin(email, token, firstName, lastName) {
         .then(handleResponse)
         .then(user => {
             if (user) {
+                console.log(user);
                 user.authdata = window.btoa(email + ':' + token);
                 localStorage.setItem('user', JSON.stringify(user));
             }
-
             return user;
         });
 }
@@ -68,10 +70,19 @@ function logout() {
     localStorage.removeItem('user');
 }
 
+function forgotPassword(email) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(email)
+    };
+
+    return fetch(`http://localhost:8080/forgotPassword`, requestOptions)
+        .then(handleResponse)
+        .then(user => {return user;}); // TODO: redirect to the relevant place 
+}
+
 function signup(SignupDetails) {
-    debugger;
-    JSON.stringify(SignupDetails)
-    console.log(SignupDetails);
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -98,4 +109,23 @@ function handleResponse(response) {
 
         return data;
     });
+}
+
+function resetPassword(password, confirmPassword, email, token) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, confirmPassword, token })
+    };
+
+    return fetch(`http://localhost:8080/api/auth/resetPassword/`, requestOptions)
+        .then(handleResponse)
+        .then(user => {
+            if (user) {
+                user.authdata = window.btoa(email + ':' + password);
+                localStorage.setItem('user', JSON.stringify(user));
+            }
+
+            return user;
+        });
 }
