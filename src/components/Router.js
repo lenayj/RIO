@@ -17,6 +17,5 @@ export default () => (
         <Route path='/termsAndService' component={termsAndService}/>
         <Route path='/resetPassword' component={resetPassword}/>
         <Route path='/forgotPassword' component={forgotPassword}/>
-
     </Router>
 )
