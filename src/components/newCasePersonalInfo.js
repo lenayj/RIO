@@ -9,15 +9,13 @@ class newCasePersonalInfo extends Component {
                 <div>
                     <div className="newCase-form">
                         {/*
-                        <div className="newCase-banner text-left mb-4 mt-4">
-                            <h1 className="title-wording">New Case</h1>
-                        </div>
                         <div className="newCase-step text-left mb-4 mt-4">
                             <div className="bullet current"><span>1</span></div>
                             <div className="d-inline font-weight-bold mt-2 ml-3 mr-3 ">Personal Information</div>
                             <div className="bullet"><span>2</span></div>
                             <div className="d-inline mt-2 ml-3">Make Prescription</div>
                         </div>*/}
+                        <br/>
                         <div className="panel panel-default">
                             <div className="panel-body">
                                 <form>
@@ -111,9 +109,6 @@ class newCasePersonalInfo extends Component {
                             </div>
                         </div>
                         <br/><br/>
-                        <div className="newCase-bottom text-right mb-4 mt-4">
-                            <button type="button" className="btn btn-primary btn-lg">Continue</button>
-                    </div>
                     </div>
                 </div>
             </div>
