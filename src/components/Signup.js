@@ -39,7 +39,7 @@ function SignUp () {
                         name="firstName" ref={register({required:true})}/>
                         {errors.firstName && errors.firstName.type === "required" && (<p className="text-danger">First Name field is required</p>)}
                       </div>
-                      {/*<div>{this.state.firstName}</div>*/}
+                      
                       <div className="col-md-12">
                         <input type="text" className="form-control" placeholder="Last Name" 
                         name="lastName" ref={register({required:true})}/>
@@ -89,7 +89,7 @@ function SignUp () {
                       </div>  
                     </div>
                   </div>
-                                  
+
                   <div className="privacy-policy mb-3 mt-3 text-right">
                     <div>By clicking the button below,</div> 
                     <div>I agree to the <Link to='/privacyStatement' target="_blank">Privact Statement</Link> and
