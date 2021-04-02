@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
+
 function SignUp () {
 
   const {register, handleSubmit, errors, getValues} = useForm();
@@ -38,6 +39,7 @@ function SignUp () {
                         name="firstName" ref={register({required:true})}/>
                         {errors.firstName && errors.firstName.type === "required" && (<p className="text-danger">First Name field is required</p>)}
                       </div>
+                      
                       <div className="col-md-12">
                         <input type="text" className="form-control" placeholder="Last Name" 
                         name="lastName" ref={register({required:true})}/>
@@ -88,34 +90,10 @@ function SignUp () {
                     </div>
                   </div>
 
-{/* Billing Address
-                  <div>
-                    <div className="part-header">
-                      <h5>Billing Address</h5>
-                    </div>
-                    <div className="input-group">
-                      <div className="col-md-12">
-                        <input type="text" className="form-control" placeholder="Street address" />
-                      </div>
-                      <div className="col-md-12">
-                        <input type="text" className="form-control" placeholder="Street address 2" />
-                      </div>
-                      <div className="col-md-12">
-                        <input type="text" className="form-control" placeholder="City" />
-                      </div>
-                      <div className="col-md-12">
-                        <input type="text" className="form-control" placeholder="State" />
-                      </div>
-                      <div className="col-md-12">
-                        <input type="text" className="form-control" placeholder="Zip" />
-                      </div>  
-                    </div>
-                  </div>    
-*/}                  
                   <div className="privacy-policy mb-3 mt-3 text-right">
                     <div>By clicking the button below,</div> 
-                    <div>I agree to the <a rel="noopener noreferrer" target="_blank" href="http://labslip.uniortholab.com/privacy-statement/">Privacy Policy</a> and
-                    <a rel="noopener noreferrer" target="_blank" href="http://labslip.uniortholab.com/terms-of-service/"> Terms of Service</a>.
+                    <div>I agree to the <Link to='/privacyStatement' target="_blank">Privact Statement</Link> and
+                    <Link to='/termsAndService' target="_blank"> Terms of Service</Link>.
                     </div>
                   </div>
 

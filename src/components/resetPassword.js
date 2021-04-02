@@ -10,7 +10,7 @@ function ResetPassword() {
     const {register, handleSubmit, errors, getValues} = useForm();
     const sleep = ms => new Promise(resolve => setTimeout(resolve,null));
     const onSubmit = (data) => {
-      //console.log(data);
+      
     }
     const validatePassword = async(value) => {
       await sleep(1000);

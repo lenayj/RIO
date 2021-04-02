@@ -62,11 +62,11 @@ appsubmit = () => {
               <div className="login-group">
                 <div className="login-field">
                   <span className="login-label">Email</span>
-                  <input type="email" className="form-control" name="userEmail" value={this.state.userEmail} onChange={this.handleChange}/>
+                  <input type="email" className="form-control" name="userEmail" autoComplete="username" value={this.state.userEmail} onChange={this.handleChange}/>
                 </div>
                 <div className="login-field">
                   <span className="login-label">Password</span>
-                  <input type="password" className="form-control" name="userPW" value={this.state.userPW} onChange={this.handleChange}/>
+                  <input type="password" className="form-control" name="userPW" autoComplete="current-password" value={this.state.userPW} onChange={this.handleChange}/>
                 </div>  
               </div>
               <div className="login-group overflow-hidden pt-2 pb-2">
@@ -108,12 +108,12 @@ appsubmit = () => {
                 </div>
               </div>
               <div className="login-group pt-5">
-                <div className="text-center pt-4">Do you have an account? <Link to= '/SignUp' className="links"> Join free today</Link></div>
+                <div className="text-center pt-4">Do you have an account? <Link to= '/signup' className="links"> Join free today</Link></div>
               </div>
            </div>
          </div>
          <div className="login-bg">
-           <div><img src={bg} className="bg" alt="bg" /></div>
+           <div className="overflow"><img src={bg} className="bg" alt="bg" /></div>
          </div>
        </div>
      </Form>
