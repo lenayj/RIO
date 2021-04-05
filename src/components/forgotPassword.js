@@ -1,8 +1,9 @@
 import '../css/forgotPassword.css';
 
-import React from "react";
+import React,{useState} from "react";
 import {Button} from 'reactstrap';
 import { useForm } from 'react-hook-form';
+import { userService  } from "../_services/index";
 
 /* Let customers submit email address to receive the password reset link 
 and sends the 'resetPassword' link to reset the password. */
@@ -10,10 +11,11 @@ and sends the 'resetPassword' link to reset the password. */
 function ForgotPassword() {
 
     const {register, handleSubmit, errors} = useForm();
-    const onSubmit = (data) => {
-       
+    const [message,setMessage] = useState("");
+    const onSubmit = (email) => {
+        var retMsg = userService.forgotPassword(email);
+        setMessage("Please check your email for furthur instructions");
     }
-    
         return (
             <div className="app full-screen register">
             <div>
@@ -27,8 +29,9 @@ function ForgotPassword() {
                                 <div className="forgotPassword-group mb-3">
                                     <div className="forgotPassword-field mb-3">
                                         <input type="email" className="form-control" placeholder="Enter Email"
-                                        name="PWResetEmail" ref={register({required:true})}/>
+                                        name="email" ref={register({required:true})}/>
                                         {errors.PWResetEmail && errors.PWResetEmail.type === "required" && (<p className="text-danger">Email field is required</p>)}
+                                        {message}
                                     </div>
                                 </div>
                                 <div className="mb-3">

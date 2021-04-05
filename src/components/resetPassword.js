@@ -1,22 +1,28 @@
 import '../css/resetPassword.css';
 
-import React from "react";
+import React,{useState} from "react";
 import { Link } from 'react-router-dom';
 import {Button} from 'reactstrap';
 import { useForm } from 'react-hook-form';
+import { userService } from '../_services/index';
 
 function ResetPassword() {
 
     const {register, handleSubmit, errors, getValues} = useForm();
     const sleep = ms => new Promise(resolve => setTimeout(resolve,null));
-    const onSubmit = (data) => {
-      
-    }
+    const [message,setMessage] = useState("");
     const validatePassword = async(value) => {
       await sleep(1000);
-      if(value === getValues('newPW')) return true;
-  
+      if(value === getValues('newPassword')) return true;
       return false;
+    }
+
+    const onSubmit = (data) => {
+        const query = new URLSearchParams(window.location.href);
+        const token = query.get('token')
+        const email = window.location.href.split('?')[1].split('email=')[1].split('&')[0];
+        userService.resetPassword(data.newPassword,data.confirmPassword,email,token);
+        setMessage("Password for username '" + email + "' is successfully reset!");
     }
 
     return (
@@ -33,15 +39,15 @@ function ResetPassword() {
                                     <div className="resetPassword-field mb-3">
                                         <span className="resetaPssword-label">New Password</span>
                                         <input type="password" className="form-control" 
-                                        name="newPW" ref={register({required:true})}/>
-                                        {errors.newPW && errors.newPW.type === "required" && (<p className="text-danger">Password field is required</p>)}
+                                        name="newPassword" ref={register({required:true})}/>
+                                        {errors.newPassword && errors.newPassword.type === "required" && (<p className="text-danger">Password field is required</p>)}
                                     </div>
                                     <div className="resetPassword-field mb-3">
                                         <span className="resetPassword-label">Confirm Password</span>
                                         <input type="password" className="form-control" 
-                                        name="confirmPW" ref={register({required:true, validate: validatePassword})}/>
-                                        {errors.confirmPW && errors.confirmPW.type === "required" && (<p className="text-danger">Confirm Password field is required</p>)}
-                                        {errors.confirmPW && errors.confirmPW.type === "validate" && (<p className="text-danger">Passwords does not match</p>)}
+                                        name="confirmPassword" ref={register({required:true, validate: validatePassword})}/>
+                                        {errors.confirmPassword && errors.confirmPassword.type === "required" && (<p className="text-danger">Confirm Password field is required</p>)}
+                                        {errors.confirmPassword && errors.confirmPassword.type === "validate" && (<p className="text-danger">Passwords does not match</p>)}
                                     </div>  
                                 </div>
                                 <div className="mb-3">

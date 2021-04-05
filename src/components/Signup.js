@@ -2,6 +2,7 @@ import '../css/SignUp.css';
 import React from "react";
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import {userService} from '../_services/index'
 
 
 function SignUp () {
@@ -9,8 +10,14 @@ function SignUp () {
   const {register, handleSubmit, errors, getValues} = useForm();
   const sleep = ms => new Promise(resolve => setTimeout(resolve,null));
   const onSubmit = (data) => {
-    //console.log(data);
-  }
+    userService.signup(data)
+      .then(
+          user => {
+              alert("user saved:" + user);
+          },
+          error => {alert(error)}
+      );
+}
   const validatePassword = async(value) => {
     await sleep(1000);
     if(value === getValues('password')) return true;
