@@ -145,12 +145,12 @@ handleChange = (e) => {
                 </div>
               </div>
               <div className="login-group pt-5">
-                <div className="text-center pt-4">Do you have an account? <Link to= '/SignUp' className="links"> Join free today</Link></div>
+                <div className="text-center pt-4">Do you have an account? <Link to= '/signup' className="links"> Join free today</Link></div>
               </div>
            </div>
          </div>
          <div className="login-bg">
-           <div><img src={bg} className="bg" alt="bg" /></div>
+           <div className="overflow"><img src={bg} className="bg" alt="bg" /></div>
          </div>
        </div>
      </Form>
