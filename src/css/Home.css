@@ -1,5 +1,7 @@
-.homebg {
-    background-color: #f7f7f7;
+.dashboard-bg-color{
+    height: 150%;
+    width: auto;
+    background-color:rgb(251 250 250);
 }
 
 .grettingMsg{

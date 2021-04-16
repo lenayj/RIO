@@ -4,6 +4,8 @@ import Header from './Header';
 
 import Home from './Home';
 import myAccount from './myAccount';
+import myInfo from './myInfo';
+import officeAddr from './officeAddr';
 
 import Login from './Login';
 import Signup from './Signup';
@@ -26,6 +28,8 @@ export default () => (
         <Header />
         <Route path="/" exact component={Home} />
         <Route path='/myAccount' component={myAccount}/>
+        <Route path='/myInfo' component={myInfo}/>
+        <Route path='/officeAddr' component={officeAddr}/>
         <Route path='/Login' component={Login}/>
         <Route path='/signup' component={Signup}/>
         <Route path='/privacyStatement' component={privacyStatement}/>

@@ -1,0 +1,72 @@
+button.newCase-btn{
+    background-color: #24a19c;
+  padding: 8px 20px;
+  border: 1px solid #24a19c;
+  color: #fff;
+  margin: 2px 5px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 7px;
+}
+
+.newCase-form form {
+    width: 90%;
+    margin: 0 auto;
+    padding: 1% 0;
+}
+
+.newCase-form .panel.panel-default {
+    background: white;
+}
+
+.newCase-form .part-header{
+    margin-bottom:3%;
+}
+
+.newCase-form h3 {
+    font-weight: 600;
+}
+
+.preInfo{
+    margin-top:5%;
+}
+
+.deliveryType{
+    display:flex;
+    margin-top: 1rem;
+}
+
+.newCase-step {
+    display: flex;
+}
+
+.bullet{
+    height:40px;
+    width:40px;
+    color:white;
+    background:#ccc;
+    border-radius:50%;
+    display:inline-block;
+    position:relative;
+}
+
+.bullet.current{
+    height:40px;
+    width:40px;
+    color:white;
+    background:#007bff;
+    border-radius:50%;
+    display:inline-block;
+    position:relative;
+}
+
+.bullet span {
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 40px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}

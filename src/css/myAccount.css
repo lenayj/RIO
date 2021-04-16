@@ -1,0 +1,96 @@
+.myacct{
+    margin: 0 auto;
+}
+
+.myacct.myinfo{
+    width: 900px;
+}
+
+.myacct .row{
+    display: block;
+    margin: auto;
+    width:75%;
+}
+
+.directory .row{
+    width:100%;
+}
+
+.directory .col{
+    display: contents;
+}
+
+.myinfo .panel-body {
+    border: 2px solid #e5e5e5;
+    background-color: white;
+}
+
+.myinfo .form-row {
+    border-bottom: 2px solid #e5e5e5;
+    height: 70px;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.info-field, .info-value{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.officeAddr .row{
+    width:100%;
+}
+
+.officeAddr .col {
+    height: 180px;
+    border: 1px solid lightgrey;
+}
+
+.officeAddr.default .col, .officeAddr .col{
+    background-color: white;
+}
+
+.officeAddr.default .addNew{
+    display: flex;
+    border: 1px dashed lightgrey;
+}
+
+.officeAddr .addNew-btn{
+    margin: auto auto;
+}
+
+.officeAddr.default .first-row, .newAddr .first-row{
+    height:40%;
+}
+
+.officeAddr.default .second-row, .newAddr .second-row{
+    height:50%;
+}
+
+.officeAddr.default .third-row, .newAddr .third-row{
+    height:10%;
+}
+
+.addr-field {
+    margin: 20px;
+    height: 135px;
+}
+
+.defaultAddr-mark{
+    display: table;
+    background-color: rgb(15, 160, 10);
+    color: white;
+    width: 150px;
+    height: 35px;
+    border-radius: 2em;
+}
+
+.defaultAddr-mark p{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.addNew, .newAddr{
+    margin-right: 48px;
+}
