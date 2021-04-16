@@ -63,6 +63,7 @@ export class MyCases extends PureComponent {
             .get('https://jsonplaceholder.typicode.com/users')
             .then(res => {
                 var tdata = res.data;
+                //console.log('data-->'+JSON.stringify(tdata))
 				var slice = tdata.slice(this.state.offset, this.state.offset + this.state.perPage)
                 this.setState({
                     pageCount: Math.ceil(tdata.length / this.state.perPage),
@@ -85,18 +86,18 @@ export class MyCases extends PureComponent {
         }
         return tableData.length > 0 
         ? (
-            <div>
-                 <h1>My Cases</h1>
+            <div className="myCases">
+                 <h1 className="title-wording">My Cases</h1>
 
-                 <table border="1">
+                 <table className="table">
                      <thead>
                         <tr>
                             <th>CASE NO.</th>
-                            <th>DATA SENT</th>
+                            <th>STATUS</th>                            
                             <th>PATIENT NAME</th>
                             <th>LABSLIP</th>
-                            <th>STL FILES</th>
-                            <th>STATUS</th>
+                            <th>STL FILES</th>                            
+                            <th>DATA SENT</th>
                             <th>QUESTION</th>
                         </tr>
                      </thead>
@@ -135,11 +136,11 @@ export class MyCases extends PureComponent {
                      </tbody>
                  </table>   
                 
-                <div>{tableData.length} Entries in Total </div>
+                <div className="text-right">{tableData.length} Entries in Total </div>
 
                  <ReactPaginate
-                    previousLabel={"prev"}
-                    nextLabel={"next"}
+                    previousLabel={"<"}
+                    nextLabel={">"}
                     breakLabel={"..."}
                     breakClassName={"break-me"}
                     pageCount={this.state.pageCount}
