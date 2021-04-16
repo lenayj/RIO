@@ -7,6 +7,7 @@ import privacyStatement from './privacyStatement';
 import termsAndService from './termsAndService';
 import resetPassword from './resetPassword';
 import forgotPassword from './forgotPassword';
+import myCases from './myCases';
 
 
 export default () => (
@@ -17,5 +18,6 @@ export default () => (
         <Route path='/termsAndService' component={termsAndService}/>
         <Route path='/resetPassword' component={resetPassword}/>
         <Route path='/forgotPassword' component={forgotPassword}/>
+        <Route path='/myCases' component={myCases}/>
     </Router>
 )
