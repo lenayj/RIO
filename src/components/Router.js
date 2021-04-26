@@ -20,7 +20,7 @@ import renderOpenMSG from './renderOpenMSG';
 import newCase from './newCase';
 import newCasePersonalInfo from './newCasePersonalInfo';
 import newCasePrescription from './newCasePrescription';
-import newCaseConfirmation from './newCaseConfirmation';
+import newCaseOfficeInfo from './newCaseOfficeInfo';
 
 
 export default () => (
@@ -41,7 +41,7 @@ export default () => (
         <Route path='/newCase' component={newCase}/>
         <Route path='/newCasePersonalInfo' component={newCasePersonalInfo}/>
         <Route path='/newCasePrescription' component={newCasePrescription}/>
-        <Route path='/newCaseConfirmation' component={newCaseConfirmation}/>
+        <Route path='/newCaseOfficeInfo' component={newCaseOfficeInfo}/>
 
 
     </Router>
