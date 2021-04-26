@@ -13,6 +13,9 @@ import myCases from './myCases';
 import renderOpenMSG from './renderOpenMSG';
 
 import newCase from './newCase';
+import newCasePersonalInfo from './newCasePersonalInfo';
+import newCasePrescription from './newCasePrescription';
+import newCaseOfficeInfo from './newCaseOfficeInfo';
 
 export default () => (
     <Router>
@@ -26,5 +29,8 @@ export default () => (
         <Route path='/myCases' component={myCases}/>
         <Route path='/renderOpenMSG' component={renderOpenMSG}/>
         <Route path='/newCase' component={newCase}/>
+        <Route path='/newCasePersonalInfo' component={newCasePersonalInfo}/>
+        <Route path='/newCasePrescription' component={newCasePrescription}/>
+        <Route path='/newCaseOfficeInfo' component={newCaseOfficeInfo}/>
     </Router>
 )
