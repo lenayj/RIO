@@ -1,0 +1,39 @@
+.myCases{
+    margin:0 auto;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+
+.table td button {
+    /*background: #007acc;
+    border: none;*/
+    color: #007acc;
+    border: none;
+    background: none;
+    padding: 10px;
+}
+
+.table td {
+    padding: 0.5rem !important;
+}
+
+thead tr {
+    background-color: #eeeeee;
+    border-bottom: 3px double #eeeeee;
+}
+
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+    padding: 10px;
+}
+
+th, td {
+    text-align: center !important;
+    vertical-align: middle !important;
+    height: 60px;
+}
