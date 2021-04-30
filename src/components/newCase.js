@@ -8,11 +8,7 @@ import '../css/newCase.css';
 
 
 class NewCase extends Component {   
-    /*Todo: When clicked U,L button on instructions field, add 'active' to className to toggle className*/
-    addActiveclassName() {
     
-    }
-
     render(){
         
         return (
