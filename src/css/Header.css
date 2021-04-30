@@ -1,0 +1,96 @@
+button:hover{
+    cursor: pointer;
+}
+
+a.links:hover{
+    text-decoration: none;
+}
+
+.Navbar2 a:hover {
+    color:#007bfd;
+    border-bottom: 3px solid #007bfd;
+}
+
+.Navbar{
+    background-color:black;
+    width:100%;
+    height:70px;
+    display:flex;
+}
+
+.Navbar .leftSide{
+    flex:30%;
+    display: flex;
+    align-items: center;
+    padding-left:70px;
+}
+
+.leftSide .inner{
+    padding-top:5px;
+}
+
+.leftSide h2{
+    font-weight:700;
+}
+
+.Navbar .rightSide{
+    flex:70%;
+    display: grid;
+    align-items: center;
+    padding-right:70px;
+}
+
+.Navbar .rightSide .inner{
+    width:100%;
+    display: grid;
+    grid-template-columns: repeat(10,auto);
+    justify-content: flex-end;
+    padding-right: 25px;
+}
+
+.rightSide .navbar{
+    padding-right: 3%;
+}
+
+.rightSide input{
+    width: 220px;
+    height: 30px;
+    border:none;
+    padding-right:15px;
+    color: black;
+    text-align:right;
+}
+
+.rightSide .inner .searchbar button{
+    height: 34px;
+    width:40px;
+}
+
+.Navbar2{
+    grid-area: nav;
+    display: grid;
+    grid-template-columns: repeat(25,auto);
+    align-items:  center;
+    justify-items: center;
+    width:100%;
+    height:50px;
+    border-bottom: solid lightgray;
+    padding-left:100px;
+}
+
+.Navbar2 a {
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 11px 16px;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+  }
+
+.Navbar .links{
+   color:white; 
+}
+.Navbar2 .links{
+    color:gray;
+    font-size: 1.02rem;
+}

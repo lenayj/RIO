@@ -10,7 +10,9 @@ sendMSG = () => {
     
     render(){
         const { search } = this.props.location;	
+        //console.log(search)        
         const case_id = search.charAt(search.length-1);
+        //console.log(case_id) 
 
         return <div className="msg-contaner">
         <div className='msg-content'></div>
