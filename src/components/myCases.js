@@ -13,32 +13,32 @@ class MyCases extends Component {
         debugger;
         super(props)
     
-    //     this.state = {
-    //         offset: 0,
-    //         tableData: [],
-    //         orgtableData: [],
-    //         perPage: 10,
-    //         currentPage: 0,
-    //         isLoading: false,
-    //         isError: false
+        this.state = {
+            offset: 0,
+            tableData: [],
+            orgtableData: [],
+            perPage: 10,
+            currentPage: 0,
+            isLoading: false,
+            isError: false
         }
 
-    //     this.handlePageClick = this.handlePageClick.bind(this);
+        this.handlePageClick = this.handlePageClick.bind(this);
 
-    // }
+    }
 
-    // handlePageClick = (e) => {
-    //     const selectedPage = e.selected;
-    //     const offset = selectedPage * this.state.perPage;
+    handlePageClick = (e) => {
+        const selectedPage = e.selected;
+        const offset = selectedPage * this.state.perPage;
 
-    //     this.setState({
-    //         currentPage: selectedPage,
-    //         offset: offset
-    //     }, () => {
-    //         this.loadMoreData()
-    //     });
+        this.setState({
+            currentPage: selectedPage,
+            offset: offset
+        }, () => {
+            this.loadMoreData()
+        });
 
-    // };
+    };
 
     /* Call Open Msg Modal */
     // openMSG = (e) => {
@@ -47,21 +47,22 @@ class MyCases extends Component {
     //     window.open(url+'?msgurl="' + url + '"&caseid='+ case_id, "Messenger", "width=350, height=400")
     // }
 
-    // loadMoreData() {
-	// 	const data = this.state.orgtableData;
+    loadMoreData() {
+        debugger;
+		const data = this.props.item.items;
 		
-	// 	const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
-	// 	this.setState({
-	// 		pageCount: Math.ceil(data.length / this.state.perPage),
-	// 		tableData:slice
-	// 	})
-    // }
+		const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
+		this.setState({
+			pageCount: Math.ceil(data.length / this.state.perPage),
+			tableData:slice
+		})
+    }
 
    componentDidMount(){
        debugger;
        this.props.getItems();
         // this.getData();
-        this.getData();
+        // this.getData();
     }
     
     // getData() {
@@ -89,7 +90,7 @@ class MyCases extends Component {
         // if(isError){
         // return <div>Error...</div>
         // }
-        return this.props.item.items.length > 0 
+        return this.state.tableData.length > 0 
         ? (
             <div className="myCases">
                  <h1 className="title-wording">My Cases</h1>
@@ -122,7 +123,7 @@ class MyCases extends Component {
                  </table>   
                 
                 <div>{this.props.item.items.length} Entries in Total </div>
-                <div className="text-right">{tableData.length} Entries in Total </div>
+                {/* <div className="text-right">{tableData.length} Entries in Total </div> */}
 
                  <ReactPaginate
                     previousLabel={"<"}

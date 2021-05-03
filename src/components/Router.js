@@ -10,7 +10,6 @@ import resetPassword from './resetPassword';
 import forgotPassword from './forgotPassword';
 import myCases from './myCases';
 
-import myCases from './myCases';
 import renderOpenMSG from './renderOpenMSG';
 
 import newCase from './newCase';

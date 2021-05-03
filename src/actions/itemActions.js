@@ -17,7 +17,7 @@ export const getItems = () => (dispatch,getState) => {
         dispatch({
             type: GET_ITEMS,
             payload:res.data
-        }))
+    }))
 }
 
 export const setItemsLoading = () => {
