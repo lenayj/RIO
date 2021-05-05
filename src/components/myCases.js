@@ -64,18 +64,19 @@ export class MyCases extends PureComponent {
             .then(res => {
                 var tdata = res.data;
                 //console.log('data-->'+JSON.stringify(tdata))
-				var slice = tdata.slice(this.state.offset, this.state.offset + this.state.perPage)
+                var slice = tdata.slice(this.state.offset, this.state.offset + this.state.perPage)
                 this.setState({
                     pageCount: Math.ceil(tdata.length / this.state.perPage),
                     orgtableData : tdata,
-                    tableData:slice
+                    tableData:slice,
+                    dataTotal: tdata.length
                 })
             });
     }
 
 
     render() {
-        const {tableData,isLoading, isError} = this.state
+        const {tableData,dataTotal,isLoading, isError} = this.state
     
         if(isLoading){
         return <div>Loading...</div>
@@ -122,7 +123,7 @@ export class MyCases extends PureComponent {
                                     ? <a href={tdata.img_name} className="stl_file" id='stl_file' target="_blank">View & Download</a> 
                                     : 'Not Uploaded'}</td>*/}
                                     <td>
-                                        {`${tdata.address.street},${tdata.address.city}`}
+                                       {`${tdata.address.street},${tdata.address.city}`}
                                     </td>
                                     {/*STATUS field 'status'*/}
                                     <td>{tdata.website}</td>
@@ -136,7 +137,7 @@ export class MyCases extends PureComponent {
                      </tbody>
                  </table>   
                 
-                <div className="text-right">{tableData.length} Entries in Total </div>
+                <div className="text-right">{dataTotal} Entries in Total </div>
 
                  <ReactPaginate
                     previousLabel={"<"}

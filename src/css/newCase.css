@@ -42,10 +42,6 @@ textarea::placeholder {
     background-color: white;
 }
 
-.accordion .card .card-body{
-    padding: 0.5rem 1.25rem;
-}
-
 .appliance-image {
     border: 1px solid lightgray;
 }
@@ -136,6 +132,10 @@ label.instructions {
 }
 
 /*Prescription Part*/
+.section-prescription .card-body{
+    padding: 0.5rem 1.25rem;
+}
+
 .location {
     margin-top: 0.5rem;
 }
@@ -191,6 +191,81 @@ label.instructions {
     border: 1px solid lightgray;
 }
 
+ul.react-tabs__tab-list {
+    height: auto;
+    width: 135px;
+    float: left;
+    list-style: none;
+    padding: 1rem 0 0 0;
+    margin-bottom: 0;
+}
+
+.react-tabs__tab {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0px;
+    text-align: left;
+    padding: 10px;
+    height: 65px;
+}
+
+.react-tabs__tab:hover{
+    cursor:pointer;
+    color: cornflowerblue;
+}
+
+.react-tabs__tab--selected {
+    color: cornflowerblue;
+}
+
+.section-design .card-body {
+    padding: 0 1.25rem;
+}
+
+.react-tabs__tab-panel {
+    width: 87%;
+    padding-left: 1rem;
+    float:right;
+    border-left: 1px solid lightgray;
+}
+
+.react-tabs__tab-panel--selected {
+    border-left: 1px solid lightgray;
+    min-height: 520px;
+    padding-top: 1rem;
+}
+
+.tab-pane img {
+    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display:block;
+}
+
+.design {
+    display: inline-block;
+    width: 145px;
+    padding: 0.55rem;
+    margin: 0.125rem;
+    text-align: center;
+}
+
+.custom .design{
+    width:625px;
+}
+
+.design:hover{
+    border: 1px solid lightsteelblue;
+    background-color: rgb(229, 238, 248, 0.5);
+    border-radius: 15%;
+}
+
+
+.design span {
+    font-weight: bolder;
+}
+
+
 /*Dropzone*/
 section.container.dropzone {
     width: 100%;
@@ -217,24 +292,4 @@ section.container.dropzone {
     color:cornflowerblue;
     font-size: 1.25rem;
     font-weight: 600;
-}
-
-/*Doctor/Office Info*/
-.defaultAddr-mark{
-    display: table;
-    background-color: rgb(15, 160, 10);
-    color: white;
-    width: 150px;
-    height: 35px;
-    border-radius: 2em;
-}
-
-.defaultAddr-mark p{
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-}
-
-.doctorOfficeInfo .part-value {
-    padding-left: 25px;
 }
