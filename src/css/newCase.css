@@ -238,3 +238,55 @@ section.container.dropzone {
 .doctorOfficeInfo .part-value {
     padding-left: 25px;
 }
+
+/*Drawing*/
+.teethImg {
+    background-image: url("/src/assets/newcase/teeth.png");
+    width: 630px;
+    height: 380px;
+    display: inline-block;
+}
+
+.drawing-canvas {
+    position: absolute;
+    z-index: 10;
+    background: none !important;
+}
+
+.drawing-tool {
+    float: right;
+    padding: 10px 10px 0 10px;
+}
+
+.overview-titles {
+    margin-bottom: 8px;
+    text-align: center;
+    font-style: italic;
+    font-weight: 700;
+    color: #6495ed;
+}
+
+.drawing-tool button {
+    font-style: italic;
+    font-size: 12px;
+    color: black;
+    padding: 8px;
+    font-weight: 500;
+    border: 1px solid #5a6268;
+    background-color: rgba(255,255,255,0);
+}
+
+.drawing-tool #color-picker {
+    padding: 0px;
+    vertical-align: bottom;
+}
+
+.drawing-tool #line-color {
+    width: 46px;
+    height: 46px;
+}
+
+.drawing-tool #reset-btn {
+    margin-right: 0px;
+    margin-left: -1px;
+}
