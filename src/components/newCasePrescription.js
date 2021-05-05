@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Accordion, Card, Button } from 'react-bootstrap'
 import Dropzone from 'react-dropzone';
+import CanvasDraw from "react-canvas-draw";
 
 import '../css/newCase.css';
 
@@ -13,8 +14,14 @@ class NewCasePrescription extends Component {
           this.setState({files})
           {/*console.log(files)*/}
         };
+            
         this.state = {
-          files: []
+          files: [],
+          color: "#ffc600",
+          width: 616.33,
+          height: 382,
+          brushRadius: 0,
+          lazyRadius: 0
         };
       }
     
@@ -184,7 +191,87 @@ class NewCasePrescription extends Component {
                             </div>
                             <div className="inp-drawing col-md-7">
                                 <div className="appliance-image">
+                                     {/* Canvas here */}
+
+                                     <div>
+                                    <button
+                                        onClick={() => {
+                                        localStorage.setItem(
+                                            "savedDrawing",
+                                            this.saveableCanvas.getSaveData()
+                                        );
+                                        }}
+                                    >
+                                        Save
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                        this.saveableCanvas.clear();
+                                        }}
+                                    >
+                                        Clear
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                        this.saveableCanvas.undo();
+                                        }}
+                                    >
+                                        Undo
+                                    </button>
+                                    <div>
+                                        <label>Width:</label>
+                                        <input
+                                        type="number"
+                                        value={this.state.width}
+                                        onChange={e =>
+                                            this.setState({ width: parseInt(e.target.value, 10) })
+                                        }
+                                        />
+                                    </div>
+                                    <div>
+                                        <label>Height:</label>
+                                        <input
+                                        type="number"
+                                        value={this.state.height}
+                                        onChange={e =>
+                                            this.setState({ height: parseInt(e.target.value, 10) })
+                                        }
+                                        />
+                                    </div>
+                                    <div>
+                                        <label>Brush-Radius:</label>
+                                        <input
+                                        type="number"
+                                        value={this.state.brushRadius}
+                                        onChange={e =>
+                                            this.setState({ brushRadius: parseInt(e.target.value, 10) })
+                                        }
+                                        />
+                                    </div>
+                                    <div>
+                                        <label>Lazy-Radius:</label>
+                                        <input
+                                        type="number"
+                                        value={this.state.lazyRadius}
+                                        onChange={e =>
+                                            this.setState({ lazyRadius: parseInt(e.target.value, 10) })
+                                        }
+                                        />
+                                    </div>
+                                    </div>
+                                    
+                                    <div className="">
+                                    <CanvasDraw
+                                    ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
+                                    brushColor={this.state.color}
+                                    brushRadius={this.state.brushRadius}
+                                    lazyRadius={this.state.lazyRadius}
+                                    canvasWidth={this.state.width}
+                                    canvasHeight={this.state.height}
+                                    />
+                                     
                                     <img src="/images/appliance/teeth.png" alt="teeth"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
