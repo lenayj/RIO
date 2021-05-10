@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Accordion, Card, Button } from 'react-bootstrap'
+import { Accordion, Card } from 'react-bootstrap'
 import Dropzone from 'react-dropzone';
 import CanvasDraw from "react-canvas-draw";
 
@@ -10,6 +10,9 @@ class NewCasePrescription extends Component {
 
     constructor() {
         super();
+        this.upperImage= React.createRef();
+        this.lowerImage = React.createRef();
+        
         this.onDrop = (files) => {
           this.setState({files})
           {/*console.log(files)*/}
@@ -17,15 +20,57 @@ class NewCasePrescription extends Component {
             
         this.state = {
           files: [],
-          color: "#ffc600",
+          color: "black",
           width: 616.33,
           height: 382,
+          appliance_types: new Map(),
           brushRadius: 3,
-          lazyRadius: 0
+          lazyRadius: 0,
+          canvasDrawData:{}
         };
+
+        this.setState(this.state.appliance_types,this.state.appliance_types.set("U",""));
+        this.setState(this.state.appliance_types,this.state.appliance_types.set("L",""));
+
+        this.toggleLowerApplianceImages = this.toggleLowerApplianceImages.bind(this);
+        this.toggleUpperApplianceImages = this.toggleUpperApplianceImages.bind(this);
+      
+    }
+
+      toggleLowerApplianceImages = (event) => {
+        if(this.state.appliance_types.get("L") == event.target.id){
+            {/*console.log("GOD are you there?");*/}
+            this.lowerImage.current.src="";
+            this.setState({appliance_types:this.state.appliance_types.set("L","")});
+        }
+        else{
+            this.setState({appliance_types:this.state.appliance_types.set("L",event.target.id)});
+            this.lowerImage.current.src="/images/appliance/"+ event.target.id + ".png";
+            {/*console.log(this.lowerImage);*/}
+        }
+      }
+
+      toggleUpperApplianceImages = (event) => {
+        if(this.state.appliance_types.get("U") == event.target.id){
+            {/*console.log("GOD are you there?");*/}
+            this.upperImage.current.src="";
+            this.setState({appliance_types:this.state.appliance_types.set("U","")});
+        }
+        else{
+            this.setState({appliance_types:this.state.appliance_types.set("U",event.target.id)});
+            this.upperImage.current.src="/images/appliance/"+ event.target.id + ".png";
+            {/*console.log(this.lowerImage);*/}
+        }
+      }
+
+      storeCanvasDrawingData(data){
+        
+        this.setState({canvasDrawData:data});
+        console.log(this.state.canvasDrawData);
       }
     
     render(){
+
         const files = this.state.files.map(file => (
             <li key={file.name}>
               {/*{file.name} - {file.size} bytes*/}
@@ -34,8 +79,8 @@ class NewCasePrescription extends Component {
           ));
 
         return ( 
-            <div className="prescription mt-5">
-                <div className="part-header">
+            <div className="prescription mt-5">               
+                <div className="part-header"> 
                     <h3>Prescription</h3>
                 </div>
 
@@ -53,10 +98,32 @@ class NewCasePrescription extends Component {
                                         <Accordion.Collapse eventKey="0">
                                             <Card.Body>
                                                 <div className="retainer-appliances">
-                                                    <div className="location"><span className="appliances">- Standard Hawley Retainer</span><label className="location_l" id="Standard_Hawley_Retainer_L"></label><label className="location_u" id="Standard_Hawley_Retainer_U"></label><input type="radio" name="appliance-u" id="inp-Standard_Hawley_Retainer_U" value="Standard_Hawley_Retainer_U" hidden /><input type="radio" name="appliance-l" id="inp-Standard_Hawley_Retainer_L" value="Standard_Hawley_Retainer_L" hidden /></div>
-                                                    <div className="location"><span className="appliances">- Circumferential Hawley Retainer</span><label className="location_l" id="Circumferential_Hawley_Retainer_L"></label><label className="location_u" id="Circumferential_Hawley_Retainer_U"></label><input type="radio" name="appliance-u" id="inp-Circumferential_Hawley_Retainer_U" value="Circumferential_Hawley_Retainer_U" hidden /><input type="radio" name="appliance-l" id="inp-Circumferential_Hawley_Retainer_L" value="Circumferential_Hawley_Retainer_L" hidden /></div>
-                                                    <div className="location"><span className="appliances">- Hawley with Flat Bow Rdeacetainer</span><label className="location_l" id="Hawley_with_Flat_Bow_Retainer_L"></label><label className="location_u" id="Hawley_with_Flat_Bow_Retainer_U"></label><input type="radio" name="appliance-u" id="inp-Hawley_with_Flat_Bow_Retainer_U" value="Hawley_with_Flat_Bow_Retainer_U" hidden /><input type="radio" name="appliance-l" id="inp-Hawley_with_Flat_Bow_Retainer_L" value="Hawley_with_Flat_Bow_Retainer_L" hidden /></div>
-                                                    <div className="location"><span className="appliances">- Circumferential with Flat Bow Retainer</span><label className="location_l" id="Circumferential_with_Flat_Bow_Retainer_L"></label><label className="location_u" id="Circumferential_with_Flat_Bow_Retainer_U"></label><input type="radio" name="appliance-u" id="inp-Circumferential_with_Flat_Bow_Retainer_U" value="Circumferential_with_Flat_Bow_Retainer_U" hidden /><input type="radio" name="appliance-l" id="inp-Circumferential_with_Flat_Bow_Retainer_L" value="Circumferential_with_Flat_Bow_Retainer_L" hidden /></div>
+                                                    <div className="location">
+                                                        <span className="appliances">- Standard Hawley Retainer</span>
+                                                        <label className={"location_l" + (this.state.appliance_types.get("L") == "Standard_Hawley_Retainer_L" ? " active" : "") }  
+                                                            onClick={(event) => {
+                                                                this.toggleLowerApplianceImages(event);                                                                    
+                                                            }} 
+                                                            id="Standard_Hawley_Retainer_L">
+                                                        </label>
+                                                        <label className={"location_u" + (this.state.appliance_types.get("U") == "Standard_Hawley_Retainer_U" ? " active" : "") }  
+                                                            onClick={(event) => {
+                                                                this.toggleUpperApplianceImages(event);
+                                                            }}
+                                                            id="Standard_Hawley_Retainer_U" >
+                                                        </label>
+                                                    </div>
+                                                    <div className="location">
+                                                        <span className="appliances">- Circumferential Hawley Retainer</span>
+                                                        <label className={"location_l" + (this.state.appliance_types.get("L") == "Circumferential_Hawley_Retainer_L" ? " active" : "") }  
+                                                            onClick={(event) => {
+                                                                this.toggleLowerApplianceImages(event);  
+                                                            }} 
+                                                                id="Circumferential_Hawley_Retainer_L">
+                                                        </label>
+                                                        <label className="location_u" id="Circumferential_Hawley_Retainer_U" ></label><input type="radio" name="appliance-u" id="inp-Circumferential_Hawley_Retainer_U" value="Circumferential_Hawley_Retainer_U" hidden /><input type="radio" name="appliance-l" id="inp-Circumferential_Hawley_Retainer_L" value="Circumferential_Hawley_Retainer_L" hidden /></div>
+                                                    <div className="location"><span className="appliances">- Hawley with Flat Bow Rdeacetainer</span><label className={"location_l" + (this.state.appliance_types.get("Hawley_with_Flat_Bow_Retainer_L") == "L" ? " active" : "") }  onClick={(event) => {this.setState({appliance_types:this.state.appliance_types.set(event.target.id,"L")});}} id="Hawley_with_Flat_Bow_Retainer_L"></label><label className="location_u" id="Hawley_with_Flat_Bow_Retainer_U" ></label><input type="radio" name="appliance-u" id="inp-Hawley_with_Flat_Bow_Retainer_U" value="Hawley_with_Flat_Bow_Retainer_U" hidden /><input type="radio" name="appliance-l" id="inp-Hawley_with_Flat_Bow_Retainer_L" value="Hawley_with_Flat_Bow_Retainer_L" hidden /></div>
+                                                    <div className="location"><span className="appliances">- Circumferential with Flat Bow Retainer</span><label className={"location_l" + (this.state.appliance_types.get("Circumferential_with_Flat_Bow_Retainer_L") == "L" ? " active" : "") }  onClick={(event) => {this.setState({appliance_types:this.state.appliance_types.set(event.target.id,"L")});}} id="Circumferential_with_Flat_Bow_Retainer_L"></label><label className="location_u" id="Circumferential_with_Flat_Bow_Retainer_U"></label><input type="radio" name="appliance-u" id="inp-Circumferential_with_Flat_Bow_Retainer_U" value="Circumferential_with_Flat_Bow_Retainer_U" hidden /><input type="radio" name="appliance-l" id="inp-Circumferential_with_Flat_Bow_Retainer_L" value="Circumferential_with_Flat_Bow_Retainer_L" hidden /></div>
                                                 </div>
                                             </Card.Body>
                                         </Accordion.Collapse>
@@ -190,12 +257,13 @@ class NewCasePrescription extends Component {
                                 </Accordion>
                             </div>
                             <div className="inp-drawing col-md-7">
-                                <div className="appliance-image">
+                                <div className="canvas">
                                      {/* Canvas here */}
-
-                                     <div className="drawing-tool">
+                                    <div className="drawing-tool">
                                         <p class="overview-titles">DRAWING</p>
-                                        <button type="button" id="color-picker" title="color"><input type="color" id="line-color" width="30"/></button>
+                                        <button type="button" id="color-picker" title="color">
+                                            <input type="color" id="line-color" width="30" onChange={(event) => {this.setState({color:event.target.value})}}/>
+                                        </button>
                                         <button type="button" id="undo-btn" title="undo" onClick={() => {this.saveableCanvas.undo();}}>
                                             <img src="../images/newcase/icon/undo.png" width="30"/>
                                         </button>
@@ -205,6 +273,11 @@ class NewCasePrescription extends Component {
                                     </div>
                                         
                                     <div className="teethImg">
+                                        <div class="appliance-image">
+                                            <img id="appliance-img-u" ref={this.upperImage}/>
+                                            <img id="appliance-img-l" ref={this.lowerImage}/>
+                                        </div>
+
                                         <CanvasDraw
                                         className="drawing-canvas"
                                         ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
@@ -214,6 +287,7 @@ class NewCasePrescription extends Component {
                                         canvasWidth={this.state.width}
                                         canvasHeight={this.state.height}
                                         hideGrid={true}
+                                        onChange={(event) => {this.storeCanvasDrawingData(JSON.parse(this.saveableCanvas.getSaveData()))}}
                                         />
                                     </div>
                                 </div>

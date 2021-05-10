@@ -46,7 +46,7 @@ textarea::placeholder {
     padding: 0.5rem 1.25rem;
 }
 
-.appliance-image {
+.canvas {
     border: 1px solid lightgray;
 }
 
@@ -186,6 +186,11 @@ label.instructions {
     height: 20px;
 }
 
+.location .active:before {
+    background-color: #2b6fb6;
+    opacity: 0.7;
+}
+
 /*Add Designs*/
 .section-design{
     border: 1px solid lightgray;
@@ -289,4 +294,28 @@ section.container.dropzone {
 .drawing-tool #reset-btn {
     margin-right: 0px;
     margin-left: -1px;
+}
+
+#appliance-img-u {
+    position: absolute;
+    top: 132px;
+    right: 308px;
+}
+
+#appliance-img-l {
+    position: absolute;
+    top: 132px;
+    right: 35px;
+}
+
+/*urxGenerator*/
+
+.canvas-contents {
+    position: absolute;
+    z-index: 10;
+}
+
+.labslip-inner-element {
+    position: absolute;
+    z-index: 5;
 }
