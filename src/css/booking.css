@@ -1,0 +1,69 @@
+/*Calendar*/
+.booking-form .react-calendar.urx {
+    width: 550px;
+    border: 1px solid lightgrey;
+    line-height: 2.25em;
+}
+
+.react-calendar__viewContainer {
+    padding: 0 40px 40px 40px;
+}
+
+button.react-calendar__navigation__label {
+    font-weight: bolder;
+    font-size: 1.5rem;
+}
+
+.booking-form .react-calendar__navigation {
+    height: 85px;
+    margin-bottom: 0;
+}
+
+.date-pick{
+    width: 550px;
+    height: 80px;
+    background: white;
+    border: 1px solid lightgrey;
+    border-bottom: none;
+}
+
+.pickup-date {
+    display: inline-block;
+    margin: 22px 22px 22px 40px;
+}
+
+.pickup-date span {
+    padding-right: 15px;
+    font-weight: bolder;
+}
+
+.pickup-date input {
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    height: 35px;
+}
+
+.reset {
+    display: inline-block;
+    font-weight: bold;
+    float: right;
+    margin: 27px 40px;
+    color:#0069d9;
+}
+
+/*Doctor/Office Information*/
+.booking-form .doctorOfficeInfo {
+    width: 60%;
+    background-color: white;
+    border: 1px solid lightgrey;
+}
+
+.booking-form .doctorOfficeInfo .part-value {
+    width: 600px;
+    height: 130px;
+    margin: 25px;
+}
+
+.booking-form .form-row span {
+    font-weight: bold;
+}

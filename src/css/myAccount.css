@@ -1,3 +1,4 @@
+/**********My Information Page*************/
 .myacct{
     margin: 0 auto;
 }
@@ -27,15 +28,30 @@
 
 .myinfo .form-row {
     border-bottom: 2px solid #e5e5e5;
-    height: 70px;
+    height: 90px;
     margin-right: 0;
     margin-left: 0;
+}
+
+.myinfo .btn{
+    width: 65px;
+    height: 30px;
+}
+
+.myinfo .edit{
+    margin: auto;
 }
 
 .info-field, .info-value{
     margin-top: auto;
     margin-bottom: auto;
 }
+
+.info-value{
+    font-weight:600;
+}
+
+/**********Office Addresses Page*************/
 
 .officeAddr .row{
     width:100%;
@@ -78,19 +94,43 @@
 
 .defaultAddr-mark{
     display: table;
-    background-color: rgb(15, 160, 10);
-    color: white;
-    width: 150px;
-    height: 35px;
-    border-radius: 2em;
+    color: rgb(15, 160, 10);
 }
 
-.defaultAddr-mark p{
+.defaultAddr-mark p {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
+    color: white;
+    background-color: rgb(15, 160, 10);
+    border-radius: 50%;
+    width: 25px;
+}
+
+.defaultAddr-mark span {
+    margin-left: 0.35rem;
+    font-weight: 600;
 }
 
 .addNew, .newAddr{
     margin-right: 48px;
+}
+
+.addNew-btn .btn{
+    width:150px;
+    border-radius: 40px;
+}
+
+
+/**********Edit/New Addresses Page*************/
+
+.editAddr .officeInfo {
+    background-color: white;
+    border: 1px solid lightgray;
+    padding: 30px;
+}
+
+.save-btn .btn {
+    width: 200px;
+    border-radius: 40px;
 }

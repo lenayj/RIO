@@ -1,4 +1,4 @@
-import '../css/myAccount.css';
+import '../../css/myAccount.css';
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
@@ -10,8 +10,7 @@ import { Link } from 'react-router-dom';
 class OfficeAddr extends Component {
 
     constructor(props) {
-        super(props);
-    
+        super(props);    
     
         this.displayData = [];
 
@@ -80,17 +79,39 @@ class OfficeAddr extends Component {
                     <div className="officeAddr default pt-3">
                         <div className="form-row">
                             <div className="addNew col col-md-5">
-                                <input type="button" value="+ New" className="addNew-btn btn btn-primary btn-lg"
-                                onClick={this.prependData}/>
+                                {/*<input type="button" value="+ New" className="addNew-btn btn btn-primary btn-lg"
+                                onClick={this.prependData}/>*/}
+                                <Link to={{
+                                        pathname: "/editAddr",
+                                        state: {
+                                            page: "New"
+                                        }
+                                    }} className="addNew-btn links">
+                                    <input type="button" value="+ New" className="btn btn-outline-primary btn-lg" />
+                                </Link>
                             </div>
                             <div className="defaultAddr col col-md-5">
                                 <div className="addr-field">
                                     <div className="first-row">
                                         <div className="user-name float-left"><b>John Smith</b></div>
-                                        <div className="defaultAddr-mark float-right"><p>&#10003; Your Default</p></div>
+                                        <div className="defaultAddr-mark float-right">
+                                            <p>&#10003;</p>
+                                            <span>Your Default</span>
+                                        </div>
                                     </div>
                                     <div className="second-row user-address">11917 FRONT ST, NORWALK, CA 90650</div>
-                                    <div className="third-row float-right">Edit | Delete</div>
+                                    <div className="third-row float-right">
+                                        <Link to={{
+                                            pathname: "/editAddr",
+                                            state: {
+                                                page: "Edit"
+                                            }
+                                        }} className="addNew-btn links">
+                                            <span>Edit</span>
+                                        </Link> 
+                                        <span>&nbsp;|&nbsp;</span>
+                                        <span>Delete</span>  
+                                    </div>
                                 </div>
                             </div>
                         </div>

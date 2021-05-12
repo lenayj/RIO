@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../css/newCase.css';
+import '../../css/newCase.css';
 
 class NewCasePersonalInfo extends Component {
 

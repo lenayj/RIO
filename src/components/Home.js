@@ -18,7 +18,7 @@ function Home(){
                         <div className="col"><Link to= '/mycases' className="links"><img src="/images/main/m_mycases.png" alt="m_mycases"/></Link></div>
                     </div>
                     <div className="row">
-                        <div className="col"><Link to= '/' className="links"><img src="/images/main/m_booking.png" alt="m_booking"/></Link></div>
+                        <div className="col"><Link to= '/booking' className="links"><img src="/images/main/m_booking.png" alt="m_booking"/></Link></div>
                         <div className="col"><Link to= '/myAccount' className="links"><img src="/images/main/m_myaccount.png" alt="m_myaccount"/></Link></div>
                     </div>
                     <div className="row">

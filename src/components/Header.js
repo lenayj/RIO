@@ -58,7 +58,7 @@ class Header extends Component{
                 <nav className="Navbar2">
                     <Link to= '/myCases' className="links">My Cases</Link>
                     <Link to= '/newCase' className="links">New Case</Link>
-                    <Link to= '/' className="links">Booking</Link>
+                    <Link to= '/booking' className="links">Booking</Link>
                     <Link to= '/myAccount' className="links">My Account</Link>
                     <Link to= '/' className="links">Support</Link>
                     <Link to= '/' className="links">View Invoices</Link>
