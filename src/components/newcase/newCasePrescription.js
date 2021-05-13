@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Accordion, Card, Button } from 'react-bootstrap'
 import Dropzone from 'react-dropzone';
 
-import '../css/newCase.css';
+import '../../css/newCase.css';
 
 
 class NewCasePrescription extends Component {

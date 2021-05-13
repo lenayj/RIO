@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
-import '../css/pagination.css';
-import '../css/myCases.css';
+import '../../css/pagination.css';
+import '../../css/myCases.css';
     
 
 export class MyCases extends PureComponent {
