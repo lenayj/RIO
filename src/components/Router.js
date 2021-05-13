@@ -9,6 +9,11 @@ import termsAndService from './login/termsAndService';
 import resetPassword from './login/resetPassword';
 import forgotPassword from './login/forgotPassword';
 
+import myAccount from './myaccount/myAccount';
+import myInfo from './myaccount/myInfo';
+import officeAddr from './myaccount/officeAddr';
+import editAddr from './myaccount/editAddr';
+
 import myCases from './mycases/myCases';
 import renderOpenMSG from './mycases/renderOpenMSG';
 
@@ -20,6 +25,8 @@ import newCaseOfficeInfo from './newcase/newCaseOfficeInfo';
 export default () => (
     <Router>
         <Header />
+
+        {/*Login and Sign up*/}
         <Route path='/Login' component={Login}/>
         <Route path='/signup' component={Signup}/>
         <Route path='/privacyStatement' component={privacyStatement}/>
@@ -27,9 +34,17 @@ export default () => (
         <Route path='/resetPassword' component={resetPassword}/>
         <Route path='/forgotPassword' component={forgotPassword}/>
 
+        {/*Allow users to check, edit and add user data or office addresses*/}
+        <Route path='/myAccount' component={myAccount}/>
+        <Route path='/myInfo' component={myInfo}/>
+        <Route path='/officeAddr' component={officeAddr}/>
+        <Route path='/editAddr' component={editAddr}/>
+
+        {/*Allow users to check submitted cases list*/}
         <Route path='/myCases' component={myCases}/>
         <Route path='/renderOpenMSG' component={renderOpenMSG}/>
 
+        {/*Allow users to create New Case*/}
         <Route path='/newCase' component={newCase}/>
         <Route path='/newCasePersonalInfo' component={newCasePersonalInfo}/>
         <Route path='/newCasePrescription' component={newCasePrescription}/>
