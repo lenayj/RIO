@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { Accordion, Card } from 'react-bootstrap'
 import Dropzone from 'react-dropzone';
 import CanvasDraw from "react-canvas-draw";
@@ -6,17 +6,20 @@ import CanvasDraw from "react-canvas-draw";
 import '../css/newCase.css';
 
 
-class NewCasePrescription extends Component {
+class NewCasePrescription extends PureComponent {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.upperImage= React.createRef();
         this.lowerImage = React.createRef();
+        console.log(props);
         
         this.onDrop = (files) => {
           this.setState({files})
           {/*console.log(files)*/}
         };
+
+        this.canvasDrawDataStack=[];
             
         this.state = {
           files: [],
@@ -26,7 +29,9 @@ class NewCasePrescription extends Component {
           appliance_types: new Map(),
           brushRadius: 3,
           lazyRadius: 0,
-          canvasDrawData:{}
+          canvasDrawData:null,
+          canvasElement:null,
+          submitted:null
         };
 
         this.setState(this.state.appliance_types,this.state.appliance_types.set("U",""));
@@ -68,6 +73,30 @@ class NewCasePrescription extends Component {
         this.setState({canvasDrawData:data});
         console.log(this.state.canvasDrawData);
       }
+
+      static getDerivedStateFromProps(nextProps){
+          
+          
+          return true;
+      }
+
+      storeCanvasElement(canvasElement){
+        // this.setState({canvasData: canvasElement}); 
+        this.canvasDrawDataStack.push(this.saveableCanvas.getSaveData());
+        console.log(this.canvasDrawDataStack);
+        return this.canvasDrawDataStack;
+        
+        // this.storeCanvasDrawingData(JSON.parse(this.saveableCanvas.getSaveData()));
+        // // debugger;
+        // if(this.state.canvasDrawData != null &&
+        //     this.state.canvasElement != this.saveableCanvas.canvas.interface.toDataURL()){
+        //     console.log(JSON.stringify(this.state.canvasDrawData));
+        //     this.saveableCanvas.loadSaveData(JSON.stringify(this.state.canvasDrawData));
+        // }
+       
+        // this.setState({canvasElement:this.saveableCanvas.canvas.interface.toDataURL()});
+        // console.log(this.state.canvasElement);
+      }
     
     render(){
 
@@ -77,6 +106,13 @@ class NewCasePrescription extends Component {
               {file.name}
             </li>
           ));
+          console.log(this.props.submitted);
+
+          if(this.props.submitted){
+            this.canvasDrawDataStack.map((ele) => {
+                this.saveableCanvas.loadSaveData(ele);
+            });
+          }
 
         return ( 
             <div className="prescription mt-5">               
@@ -287,7 +323,13 @@ class NewCasePrescription extends Component {
                                         canvasWidth={this.state.width}
                                         canvasHeight={this.state.height}
                                         hideGrid={true}
-                                        onChange={(event) => {this.storeCanvasDrawingData(JSON.parse(this.saveableCanvas.getSaveData()))}}
+                                        onChange={(event) => {
+                                                console.log(event);
+                                                //this.saveableCanvas.getSaveData()
+                                            
+                                                this.storeCanvasElement(event);
+                                            }
+                                        }
                                         />
                                     </div>
                                 </div>

@@ -9,7 +9,17 @@ import UrxGenerator from './urxGenerator';
 import '../css/newCase.css';
 
 
-class NewCase extends Component {   
+class NewCase extends Component {
+    
+    constructor(props){
+        super(props);
+        this.submit = false;
+    }
+
+    returnsubmit(){
+        alert("okok");
+        return this.submit;
+    }
     
     render(){
         
@@ -23,13 +33,18 @@ class NewCase extends Component {
                 <div className="newCase-form">
                     <form>
                         <NewCasePersonalInfo />
-                        <NewCasePrescription />
+                        <NewCasePrescription submitted={this.returnsubmit()}/>
                         <NewCaseOfficeInfo />
                     </form>
                 </div>
                 <UrxGenerator/>
                 <div className="newCase-submitBtn pt-5 pb-5">
-                        <input type="button" value="Submit" className="btn btn-primary btn-lg btn-block"/>
+                        <input type="button" value="Submit" className="btn btn-primary btn-lg btn-block" 
+                            onClick={(e) => {
+                                this.submit = true; 
+                                e.preventDefault();
+                                
+                            }}/>
                 </div>
             </div>
             </div>
