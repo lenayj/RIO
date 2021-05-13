@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
-import '../css/pagination.css';
-import '../css/myCases.css';
+import '../../css/pagination.css';
+import '../../css/myCases.css';
     
 
 export class MyCases extends PureComponent {
@@ -86,8 +86,8 @@ export class MyCases extends PureComponent {
         }
         return tableData.length > 0 
         ? (
-            <div className="myCases">
-                 <h1 className="title-wording">My Cases</h1>
+            <div className="table-width myCases">
+                 <div class="myCases-banner text-left mb-5 mt-4"><h1 className="title-wording">My Cases</h1></div>                
 
                  <table className="table">
                      <thead>

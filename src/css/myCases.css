@@ -1,5 +1,6 @@
-.myCases{
+.table-width{
     margin:0 auto;
+    width:75%;
 }
 
 .table {
@@ -36,4 +37,13 @@ th, td {
     text-align: center !important;
     vertical-align: middle !important;
     height: 60px;
+}
+
+/*****************Invoices**********************/
+span.paid{
+    color:darkgreen
+}
+
+.view-invoices.btn {
+    width: 100px;
 }

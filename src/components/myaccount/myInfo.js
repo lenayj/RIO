@@ -66,6 +66,11 @@ export class MyInfo extends Component {
                                 </div>
                             </div>
                             <div className="form-row">
+                                <div className="info-field col-md-4 ml-5"><span>Phone</span></div>
+                                <div className="info-value col-md-6"><span>000-000-0000</span></div>
+                                {this.editBtn()}
+                            </div>
+                            <div className="form-row">
                                 <div className="info-field col-md-4 ml-5"><span>Billing Address</span></div>
                                 <div className="info-value col-md-6"><span>11917 Front st</span></div>
                                 {this.editBtn()}

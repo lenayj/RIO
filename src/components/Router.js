@@ -8,22 +8,24 @@ import myInfo from './myaccount/myInfo';
 import officeAddr from './myaccount/officeAddr';
 import editAddr from './myaccount/editAddr'
 
-import Login from './Login';
-import Signup from './Signup';
-import privacyStatement from './privacyStatement';
-import termsAndService from './termsAndService';
-import resetPassword from './resetPassword';
-import forgotPassword from './forgotPassword';
+import Login from './login/Login';
+import Signup from './login/Signup';
+import privacyStatement from './login/privacyStatement';
+import termsAndService from './login/termsAndService';
+import resetPassword from './login/resetPassword';
+import forgotPassword from './login/forgotPassword';
 
-import myCases from './myCases';
-import renderOpenMSG from './renderOpenMSG';
+import myCases from './mycases/myCases';
+import renderOpenMSG from './mycases/renderOpenMSG';
 
 import newCase from './newcase/newCase';
 import newCasePersonalInfo from './newcase/newCasePersonalInfo';
 import newCasePrescription from './newcase/newCasePrescription';
 import newCaseOfficeInfo from './newcase/newCaseOfficeInfo';
 
-import booking from './booking';
+import booking from './booking/booking';
+
+import invoices from './invoices/invoices';
 
 
 export default () => (
@@ -58,6 +60,9 @@ export default () => (
 
     {/*Allow users to book a pickup*/}
         <Route path='/booking' component={booking}/>
+
+    {/*Allow users to check invoices list*/}
+        <Route path='/invoices' component={invoices}/>    
         
     </Router>
 )

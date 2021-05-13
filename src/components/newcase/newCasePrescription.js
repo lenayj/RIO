@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Accordion, Card, Button } from 'react-bootstrap'
+import { Accordion, Card } from 'react-bootstrap'
 import Dropzone from 'react-dropzone';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import '../../css/newCase.css';
 
@@ -243,351 +244,180 @@ class NewCasePrescription extends Component {
                                 </Accordion.Toggle>
                                 <Accordion.Collapse eventKey="8">
                                     <Card.Body>
-                                        <div className="color-content">
-                                            <div className="tab-title">
-                                                <ul className="nav nav-pills" id="pills-tab">
-                                                    <li className="nav-item mt-3"><a className="nav-link" id="pills-pattern-tab" data-toggle="pill" href="#pills-pattern" role="tab" aria-controls="pills-pattern" aria-selected="false">Pattern</a></li>
-                                                    <li className="nav-item"><a className="nav-link" id="pills-neon-tab" data-toggle="pill" href="#pills-neon" role="tab" aria-controls="pills-neon" aria-selected="false">Neon</a></li>
-                                                    <li className="nav-item"><a className="nav-link" id="pills-glitter-tab" data-toggle="pill" href="#pills-glitter" role="tab" aria-controls="pills-glitter" aria-selected="false">Glitter</a></li>
-                                                    <li className="nav-item"><a className="nav-link" id="pills-clear-tab" data-toggle="pill" href="#pills-clear" role="tab" aria-controls="pills-clear" aria-selected="false">Clear</a></li>
-                                                    <li className="nav-item"><a className="nav-link" id="pills-solid-tab" data-toggle="pill" href="#pills-solid" role="tab" aria-controls="pills-solid" aria-selected="false">Solid</a></li>
-                                                    <li className="nav-item"><a className="nav-link" id="pills-sport-tab" data-toggle="pill" href="#pills-sport" role="tab" aria-controls="pills-sport" aria-selected="false">Sport</a></li>
-                                                    <li className="nav-item"><a className="nav-link" id="pills-animal-tab" data-toggle="pill" href="#pills-animal" role="tab" aria-controls="pills-animal" aria-selected="false">Animal</a></li>
-                                                    <li className="nav-item"><a className="nav-link" id="pills-custom-tab" data-toggle="pill" href="#pills-custom" role="tab" aria-controls="pills-custom" aria-selected="false">Custom</a></li>
-                                                </ul>
-                                            </div>
+                                        <Tabs>
+                                            <TabList>
+                                                <Tab>Pattern</Tab>
+                                                <Tab>Neon</Tab>
+                                                <Tab>Glitter</Tab>
+                                                <Tab>Clear</Tab>
+                                                <Tab>Solid</Tab>
+                                                <Tab>Sport</Tab>
+                                                <Tab>Animal</Tab>
+                                                <Tab>Custom</Tab>
+                                            </TabList>
 
-                                            <div className="color-modal">
-                                                <div className="tab-content" id="pills-tabContent">
-                                                    <div className="tab-pane fade show active" id="pills-pattern" role="tabpanel" aria-labelledby="pills-pattern-tab">
-                                                        {/*<p>Title : <span className="color-name"></span></p>*/}
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/americanflag.jpg" id="americanflag" />
-                                                            <span>American Flag</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/apple.jpg" id="apple" />
-                                                            <span>Apple</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/baseball.jpg" id="baseball" />
-                                                            <span>Baseball</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/checker.jpg" id="checker" />
-                                                            <span>Checker</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/dice.jpg" id="dice" />
-                                                            <span>Dice</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/eyes.jpg" id="eyes" />
-                                                            <span>Eyes</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/fire.jpg" id="fire" />
-                                                            <span>Fire</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/flowers.jpg" id="flowers" />
-                                                            <span>Flowers</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/forest_green.jpg" id="forest_green" />
-                                                            <span>Forest Green</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/giraffe.jpg" id="giraffe" />
-                                                            <span>Giraffe</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/kite.jpg" id="kite" />
-                                                            <span>Kite</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/ladybug.jpg" id="ladybug" />
-                                                            <span>Ladybug</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/merrygoaround.jpg" id="merrygoaround" />
-                                                            <span>Merry-go-round</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/mexicoflag.jpg" id="mexicoflag" />
-                                                            <span>Mexico Flag</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/moonlight.jpg" id="moonlight" />
-                                                            <span>Moonlight</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/rainbow.jpg" id="rainbow" />
-                                                            <span>Rainbow</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/redrose.jpg" id="redrose" />
-                                                            <span>Red Rose</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/sailboat.jpg" id="sailboat" />
-                                                            <span>Sailboat</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/soccerball.jpg" id="soccerball" />
-                                                            <span>Soccer Ball</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/strawberry.jpg" id="strawberry" />
-                                                            <span>Strawberry</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/tiedie.jpg" id="tiedie" />
-                                                            <span>Tiedie</span>
-                                                        </div>    
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/tiger.jpg" id="tiger" />
-                                                            <span>Tiger</span>
-                                                        </div>    
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/watermelon.jpg" id="watermelon" />
-                                                            <span>Watermelon</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/whitedots.jpg" id="whitedots" />
-                                                            <span>White Dots</span>
-                                                        </div>    
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/1.pattern/yinyang.jpg" id="yinyang" />
-                                                            <span>Yinyang</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="tab-pane fade" id="pills-neon" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                                        {/*<p>Title : <span className="color-name"></span></p>*/}
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/2.neon/neon_blue.jpg" id="neon_blue" />
-                                                            <span>Neon Blue</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/2.neon/neon_glow_in_the dark.jpg" id="neon_glow_in_the dark" />
-                                                            <span>Neon Glow In The Dark</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/2.neon/neon_green.jpg" id="neon_green" />
-                                                            <span>Neon Green</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/2.neon/neon_orange.jpg" id="neon_orange" />
-                                                            <span>Neon Orange</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/2.neon/neon_pink.jpg" id="neon_pink" />
-                                                            <span>Neon Pink</span>
-                                                        </div>    
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/2.neon/neon_purple.jpg" id="neon_purple" />
-                                                            <span>Neon Purple</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/2.neon/neon_rainbow.jpg" id="neon_rainbow" />
-                                                            <span>Neon Rainbow</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/2.neon/neon_yellow.jpg" id="neon_yellow" />
-                                                            <span>Neon Yellow</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="tab-pane fade" id="pills-glitter" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                                        {/*<p>Title : <span className="color-name"></span></p>*/}
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/3.glitter/gl_aqua.jpg" id="gl_aqua" />
-                                                            <span>Aqua</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/3.glitter/gl_blue.jpg" id="gl_blue" />
-                                                            <span>Blue</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/3.glitter/gl_gold.jpg" id="gl_gold" />
-                                                            <span>Gold</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/3.glitter/gl_light_green.jpg" id="gl_light_green" />
-                                                            <span>Light Green</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/3.glitter/gl_multicolor.jpg" id="gl_multicolor" />
-                                                            <span>Multi Color</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/3.glitter/gl_red.jpg" id="gl_red" />
-                                                            <span>Red</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/3.glitter/gl_stardust.jpg" id="gl_stardust" />
-                                                            <span>Stardust</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/3.glitter/gl_violet.jpg" id="gl_violet" />
-                                                            <span>Violet</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="tab-pane fade" id="pills-clear" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                                        {/*<p>Title : <span className="color-name"></span></p>*/}
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/4.clear/cl_aqua.jpg" id="cl_aqua" />
-                                                            <span>Aqua</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/4.clear/cl_blue.jpg" id="cl_blue" />
-                                                            <span>Blue</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/4.clear/cl_clear.jpg" id="cl_clear" />
-                                                            <span>Clear</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/4.clear/cl_green.jpg" id="cl_green" />
-                                                            <span>Green</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/4.clear/cl_pink.jpg" id="cl_pink" />
-                                                            <span>Pink</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/4.clear/cl_purple.jpg" id="cl_purple" />
-                                                            <span>Purple</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/4.clear/cl_red.jpg" id="cl_red" />
-                                                            <span>Red</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/4.clear/cl_violet.jpg" id="cl_violet" />
-                                                            <span>Violet</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="tab-pane fade" id="pills-solid" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                                        {/*<p>Title : <span className="color-name"></span></p>*/}
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/5.solid/amber.jpg" id="amber" />
-                                                            <span>Amber</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/5.solid/black.jpg" id="black" />
-                                                            <span>Black</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/5.solid/brown.jpg" id="brown" />
-                                                            <span>Brown</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/5.solid/desert_storm.jpg" id="desert_storm" />
-                                                            <span>Desert Storm</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/5.solid/forest_green.jpg" id="forest_green" />
-                                                            <span>Forest Green</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/5.solid/midnight_purple.jpg" id="midnight_purple" />
-                                                            <span>Midnight Purple</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/5.solid/pink.jpg" id="pink" />
-                                                            <span>Pink</span>
-                                                        </div>
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/5.solid/violet.jpg" id="violet" />
-                                                            <span>Violet</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="tab-pane fade" id="pills-sport" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                                        {/*<p>Title : <span className="color-name"></span></p>*/}
-                                                        <img src="../images/newcase/design/6.sport/sd-1.jpg" id="sd-1" />
-                                                        <img src="../images/newcase/design/6.sport/sd-2.jpg" id="sd-2" />
-                                                        <img src="../images/newcase/design/6.sport/sd-3.jpg" id="sd-3" />
-                                                        <img src="../images/newcase/design/6.sport/sd-4.jpg" id="sd-4" />
-                                                        <img src="../images/newcase/design/6.sport/sd-5.jpg" id="sd-5" />
-                                                        <img src="../images/newcase/design/6.sport/sd-6.jpg" id="sd-6" />
-                                                        <img src="../images/newcase/design/6.sport/sd-7.jpg" id="sd-7" />
-                                                        <img src="../images/newcase/design/6.sport/sd-8.jpg" id="sd-8" />
-                                                        <img src="../images/newcase/design/6.sport/sd-9.jpg" id="sd-9" />
-                                                        <img src="../images/newcase/design/6.sport/sd-10.jpg" id="sd-10" />
-                                                        <img src="../images/newcase/design/6.sport/sd-11.jpg" id="sd-11" />
-                                                        <img src="../images/newcase/design/6.sport/sd-12.jpg" id="sd-12" />
-                                                        <img src="../images/newcase/design/6.sport/sd-13.jpg" id="sd-13" />
-                                                        <img src="../images/newcase/design/6.sport/sd-14.jpg" id="sd-14" />
-                                                        <img src="../images/newcase/design/6.sport/sd-15.jpg" id="sd-15" />
-                                                        <img src="../images/newcase/design/6.sport/sd-16.jpg" id="sd-16" />
-                                                        <img src="../images/newcase/design/6.sport/sd-17.jpg" id="sd-17" />
-                                                        <img src="../images/newcase/design/6.sport/sd-18.jpg" id="sd-18" />
-                                                        <img src="../images/newcase/design/6.sport/sd-19.jpg" id="sd-19" />
-                                                        <img src="../images/newcase/design/6.sport/sd-20.jpg" id="sd-20" />
-                                                        <img src="../images/newcase/design/6.sport/sd-21.jpg" id="sd-21" />
-                                                        <img src="../images/newcase/design/6.sport/sd-22.jpg" id="sd-22" />
-                                                        <img src="../images/newcase/design/6.sport/sd-23.jpg" id="sd-23" />
-                                                        <img src="../images/newcase/design/6.sport/sd-24.jpg" id="sd-24" />
-                                                        <img src="../images/newcase/design/6.sport/sd-25.jpg" id="sd-25" />
-                                                        <img src="../images/newcase/design/6.sport/sd-26.jpg" id="sd-26" />
-                                                        <img src="../images/newcase/design/6.sport/sd-27.jpg" id="sd-27" />
-                                                        <img src="../images/newcase/design/6.sport/sd-28.jpg" id="sd-28" />
-                                                        <img src="../images/newcase/design/6.sport/sd-29.jpg" id="sd-29" />
-                                                        <img src="../images/newcase/design/6.sport/sd-30.jpg" id="sd-30" />
-                                                    </div>
-                                                    <div className="tab-pane fade" id="pills-animal" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                                        {/*<p>Title : <span className="color-name"></span></p>*/}
-                                                        <img src="../images/newcase/design/7.animal/ad-1.jpg" id="ad-1" />
-                                                        <img src="../images/newcase/design/7.animal/ad-2.jpg" id="ad-2" />
-                                                        <img src="../images/newcase/design/7.animal/ad-3.jpg" id="ad-3" />
-                                                        <img src="../images/newcase/design/7.animal/ad-4.jpg" id="ad-4" />
-                                                        <img src="../images/newcase/design/7.animal/ad-5.jpg" id="ad-5" />
-                                                        <img src="../images/newcase/design/7.animal/ad-6.jpg" id="ad-6" />
-                                                        <img src="../images/newcase/design/7.animal/ad-7.jpg" id="ad-7" />
-                                                        <img src="../images/newcase/design/7.animal/ad-8.jpg" id="ad-8" />
-                                                        <img src="../images/newcase/design/7.animal/ad-9.jpg" id="ad-9" />
-                                                        <img src="../images/newcase/design/7.animal/ad-10.jpg" id="ad-10" />
-                                                        <img src="../images/newcase/design/7.animal/ad-11.jpg" id="ad-11" />
-                                                        <img src="../images/newcase/design/7.animal/ad-12.jpg" id="ad-12" />
-                                                        <img src="../images/newcase/design/7.animal/ad-13.jpg" id="ad-13" />
-                                                        <img src="../images/newcase/design/7.animal/ad-14.jpg" id="ad-14" />
-                                                        <img src="../images/newcase/design/7.animal/ad-15.jpg" id="ad-15" />
-                                                        <img src="../images/newcase/design/7.animal/ad-16.jpg" id="ad-16" />
-                                                        <img src="../images/newcase/design/7.animal/ad-17.jpg" id="ad-17" />
-                                                        <img src="../images/newcase/design/7.animal/ad-18.jpg" id="ad-18" />
-                                                        <img src="../images/newcase/design/7.animal/ad-19.jpg" id="ad-19" />
-                                                        <img src="../images/newcase/design/7.animal/ad-20.jpg" id="ad-20" />
-                                                        <img src="../images/newcase/design/7.animal/ad-21.jpg" id="ad-21" />
-                                                        <img src="../images/newcase/design/7.animal/ad-22.jpg" id="ad-22" />
-                                                        <img src="../images/newcase/design/7.animal/ad-23.jpg" id="ad-23" />
-                                                        <img src="../images/newcase/design/7.animal/ad-24.jpg" id="ad-24" />
-                                                        <img src="../images/newcase/design/7.animal/ad-25.jpg" id="ad-25" />
-                                                        <img src="../images/newcase/design/7.animal/ad-26.jpg" id="ad-26" />
-                                                        <img src="../images/newcase/design/7.animal/ad-27.jpg" id="ad-27" />
-                                                        <img src="../images/newcase/design/7.animal/ad-28.jpg" id="ad-28" />
-                                                        <img src="../images/newcase/design/7.animal/ad-29.jpg" id="ad-29" />
-                                                        <img src="../images/newcase/design/7.animal/ad-30.jpg" id="ad-30" />
-                                                        <img src="../images/newcase/design/7.animal/ad-31.jpg" id="ad-31" />
-                                                        <img src="../images/newcase/design/7.animal/ad-32.jpg" id="ad-32" />
-                                                        <img src="../images/newcase/design/7.animal/ad-33.jpg" id="ad-33" />
-                                                        <img src="../images/newcase/design/7.animal/ad-34.jpg" id="ad-34" />
-                                                        <img src="../images/newcase/design/7.animal/ad-35.jpg" id="ad-35" />
-                                                        <img src="../images/newcase/design/7.animal/ad-36.jpg" id="ad-36" />
-                                                        <img src="../images/newcase/design/7.animal/ad-37.jpg" id="ad-37" />
-                                                        <img src="../images/newcase/design/7.animal/ad-38.jpg" id="ad-38" />
-                                                        <img src="../images/newcase/design/7.animal/ad-39.jpg" id="ad-39" />
-                                                        <img src="../images/newcase/design/7.animal/ad-40.jpg" id="ad-40" />
-                                                    </div>
-                                                    <div className="tab-pane fade" id="pills-custom" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                                        {/*<p>Title : <span className="color-name"></span></p>*/}
-                                                        <div className="design">
-                                                            <img src="../images/newcase/design/8.custom/custom.jpg" id="custom" />
-                                                            <span>Custom</span>
-                                                        </div>
+                                            <TabPanel>
+                                                <div className="tab-pane pattern" id="pills-pattern">
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/americanflag.jpg" id="americanflag" alt="americanflag"/><span>American Flag</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/apple.jpg" id="apple" alt="apple"/><span>Apple</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/baseball.jpg" id="baseball" alt="baseball"/><span>Baseball</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/checker.jpg" id="checker" alt="checker"/><span>Checker</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/dice.jpg" id="dice" alt="dice"/><span>Dice</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/eyes.jpg" id="eyes" alt="eyes"/><span>Eyes</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/fire.jpg" id="fire" alt="fire"/><span>Fire</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/flowers.jpg" id="flowers" alt="flowers"/><span>Flowers</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/forest_green.jpg" id="forest_green" alt="forest_green"/><span>Forest Green</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/giraffe.jpg" id="giraffe" alt="giraffe"/><span>Giraffe</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/kite.jpg" id="kite" alt="kite"/><span>Kite</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/ladybug.jpg" id="ladybug" alt="ladybug"/><span>Ladybug</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/merrygoaround.jpg" id="merrygoaround" alt="merrygoaround"/><span>Merry-go-round</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/mexicoflag.jpg" id="mexicoflag" alt="mexicoflag"/><span>Mexico Flag</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/moonlight.jpg" id="moonlight" alt="moonlight"/><span>Moonlight</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/rainbow.jpg" id="rainbow" alt="rainbow"/><span>Rainbow</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/redrose.jpg" id="redrose" alt="redrose"/><span>Red Rose</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/sailboat.jpg" id="sailboat" alt="sailboat"/><span>Sailboat</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/soccerball.jpg" id="soccerball" alt="soccerball"/><span>Soccer Ball</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/strawberry.jpg" id="strawberry" alt="strawberry"/><span>Strawberry</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/tiedie.jpg" id="tiedie" alt="tiedie"/><span>Tiedie</span></div>    
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/tiger.jpg" id="tiger" alt="tiger"/><span>Tiger</span></div>    
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/watermelon.jpg" id="watermelon" alt="watermelon"/><span>Watermelon</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/whitedots.jpg" id="whitedots" alt="whitedots"/><span>White Dots</span></div>    
+                                                    <div className="design"><img src="../images/newcase/design/1.pattern/yinyang.jpg" id="yinyang" alt="yinyang"/><span>Yinyang</span>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                            </TabPanel>
+                                            <TabPanel>
+                                                <div className="tab-pane neon" id="pills-neon">
+                                                    <div className="design"><img src="../images/newcase/design/2.neon/neon_blue.jpg" id="neon_blue" alt="neon_blue"/><span>Neon Blue</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/2.neon/neon_glow_in_the dark.jpg" id="neon_glow_in_the dark" alt="neon_glow_in_the dark"/><span>Neon Glow In The Dark</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/2.neon/neon_green.jpg" id="neon_green" alt="neon_green"/><span>Neon Green</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/2.neon/neon_orange.jpg" id="neon_orange" alt="neon_orange"/><span>Neon Orange</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/2.neon/neon_pink.jpg" id="neon_pink" alt="neon_pink"/><span>Neon Pink</span></div>    
+                                                    <div className="design"><img src="../images/newcase/design/2.neon/neon_purple.jpg" id="neon_purple" alt="neon_purple"/><span>Neon Purple</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/2.neon/neon_rainbow.jpg" id="neon_rainbow" alt="neon_rainbow"/><span>Neon Rainbow</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/2.neon/neon_yellow.jpg" id="neon_yellow" alt="neon_yellow"/><span>Neon Yellow</span></div>
+                                                </div>
+                                            </TabPanel>
+                                            <TabPanel>
+                                                <div className="tab-pane glitter" id="pills-glitter">
+                                                    <div className="design"><img src="../images/newcase/design/3.glitter/gl_aqua.jpg" id="gl_aqua" alt="gl_aqua"/><span>Aqua</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/3.glitter/gl_blue.jpg" id="gl_blue" alt="gl_blue"/><span>Blue</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/3.glitter/gl_gold.jpg" id="gl_gold" alt="gl_gold"/><span>Gold</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/3.glitter/gl_light_green.jpg" id="gl_light_green" alt="gl_light_green"/><span>Light Green</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/3.glitter/gl_multicolor.jpg" id="gl_multicolor" alt="gl_multicolor"/><span>Multi Color</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/3.glitter/gl_red.jpg" id="gl_red" alt="gl_red"/><span>Red</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/3.glitter/gl_stardust.jpg" id="gl_stardust" alt="gl_stardust"/><span>Stardust</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/3.glitter/gl_violet.jpg" id="gl_violet" alt="gl_violet"/><span>Violet</span></div>
+                                                </div>
+                                            </TabPanel>
+                                            <TabPanel>
+                                                <div className="tab-pane clear" id="pills-clear">
+                                                    <div className="design"><img src="../images/newcase/design/4.clear/cl_aqua.jpg" id="cl_aqua" alt="cl_aqua"/><span>Aqua</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/4.clear/cl_blue.jpg" id="cl_blue" alt="cl_blue"/><span>Blue</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/4.clear/cl_clear.jpg" id="cl_clear" alt="cl_clear"/><span>Clear</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/4.clear/cl_green.jpg" id="cl_green" alt="cl_green"/><span>Green</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/4.clear/cl_pink.jpg" id="cl_pink" alt="cl_pink"/><span>Pink</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/4.clear/cl_purple.jpg" id="cl_purple" alt="cl_purple"/><span>Purple</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/4.clear/cl_red.jpg" id="cl_red" alt="cl_red"/><span>Red</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/4.clear/cl_violet.jpg" id="cl_violet" alt="cl_violet"/><span>Violet</span></div>
+                                                </div>
+                                            </TabPanel>
+                                            <TabPanel>
+                                                <div className="tab-pane solid" id="pills-solid">
+                                                    <div className="design"><img src="../images/newcase/design/5.solid/amber.jpg" id="amber" alt="amber"/><span>Amber</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/5.solid/black.jpg" id="black" alt="black"/><span>Black</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/5.solid/brown.jpg" id="brown" alt="brown"/><span>Brown</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/5.solid/desert_storm.jpg" id="desert_storm" alt="desert_storm"/><span>Desert Storm</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/5.solid/forest_green.jpg" id="forest_green" alt="forest_green"/><span>Forest Green</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/5.solid/midnight_purple.jpg" id="midnight_purple" alt="midnight_purple"/><span>Midnight Purple</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/5.solid/pink.jpg" id="pink" alt="pink"/><span>Pink</span></div>
+                                                    <div className="design"><img src="../images/newcase/design/5.solid/violet.jpg" id="violet" alt="violet"/><span>Violet</span></div>
+                                                </div>
+                                            </TabPanel>
+                                            <TabPanel>
+                                                <div className="tab-pane sport" id="pills-sport">
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-1.jpg" id="sd-1" alt="sd-1"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-2.jpg" id="sd-2" alt="sd-2"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-3.jpg" id="sd-3" alt="sd-3"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-4.jpg" id="sd-4" alt="sd-4"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-5.jpg" id="sd-5" alt="sd-5"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-6.jpg" id="sd-6" alt="sd-6"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-7.jpg" id="sd-7" alt="sd-7"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-8.jpg" id="sd-8" alt="sd-8"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-9.jpg" id="sd-9" alt="sd-9"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-10.jpg" id="sd-10" alt="sd-10"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-11.jpg" id="sd-11" alt="sd-11"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-12.jpg" id="sd-12" alt="sd-12"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-13.jpg" id="sd-13" alt="sd-13"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-14.jpg" id="sd-14" alt="sd-14"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-15.jpg" id="sd-15" alt="sd-15"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-16.jpg" id="sd-16" alt="sd-16"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-17.jpg" id="sd-17" alt="sd-17"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-18.jpg" id="sd-18" alt="sd-18"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-19.jpg" id="sd-19" alt="sd-19"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-20.jpg" id="sd-20" alt="sd-20"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-21.jpg" id="sd-21" alt="sd-21"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-22.jpg" id="sd-22" alt="sd-22"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-23.jpg" id="sd-23" alt="sd-23"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-24.jpg" id="sd-24" alt="sd-24"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-25.jpg" id="sd-25" alt="sd-25"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-26.jpg" id="sd-26" alt="sd-26"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-27.jpg" id="sd-27" alt="sd-27"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-28.jpg" id="sd-28" alt="sd-28"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-29.jpg" id="sd-29" alt="sd-29"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/6.sport/sd-30.jpg" id="sd-30" alt="sd-30"/></div>
+                                                </div>
+                                            </TabPanel>
+                                            <TabPanel>
+                                                <div className="tab-pane animal" id="pills-animal">
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-1.jpg" id="ad-1" alt="ad-1"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-2.jpg" id="ad-2" alt="ad-2"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-3.jpg" id="ad-3" alt="ad-3"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-4.jpg" id="ad-4" alt="ad-4"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-5.jpg" id="ad-5" alt="ad-5"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-6.jpg" id="ad-6" alt="ad-6"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-7.jpg" id="ad-7" alt="ad-7"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-8.jpg" id="ad-8" alt="ad-8"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-9.jpg" id="ad-9" alt="ad-9"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-10.jpg" id="ad-10" alt="ad-10"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-11.jpg" id="ad-11" alt="ad-11"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-12.jpg" id="ad-12" alt="ad-12"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-13.jpg" id="ad-13" alt="ad-13"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-14.jpg" id="ad-14" alt="ad-14"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-15.jpg" id="ad-15" alt="ad-15"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-16.jpg" id="ad-16" alt="ad-16"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-17.jpg" id="ad-17" alt="ad-17"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-18.jpg" id="ad-18" alt="ad-18"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-19.jpg" id="ad-19" alt="ad-19"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-20.jpg" id="ad-20" alt="ad-20"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-21.jpg" id="ad-21" alt="ad-21"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-22.jpg" id="ad-22" alt="ad-22"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-23.jpg" id="ad-23" alt="ad-23"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-24.jpg" id="ad-24" alt="ad-24"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-25.jpg" id="ad-25" alt="ad-25"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-26.jpg" id="ad-26" alt="ad-26"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-27.jpg" id="ad-27" alt="ad-27"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-28.jpg" id="ad-28" alt="ad-28"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-29.jpg" id="ad-29" alt="ad-29"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-30.jpg" id="ad-30" alt="ad-30"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-31.jpg" id="ad-31" alt="ad-31"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-32.jpg" id="ad-32" alt="ad-32"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-33.jpg" id="ad-33" alt="ad-33"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-34.jpg" id="ad-34" alt="ad-34"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-35.jpg" id="ad-35" alt="ad-35"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-36.jpg" id="ad-36" alt="ad-36"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-37.jpg" id="ad-37" alt="ad-37"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-38.jpg" id="ad-38" alt="ad-38"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-39.jpg" id="ad-39" alt="ad-39"/></div>
+                                                    <div className="design"><img src="../images/newcase/design/7.animal/ad-40.jpg" id="ad-40" alt="ad-40"/></div>
+                                                </div>
+                                            </TabPanel>
+                                            <TabPanel>
+                                                <div className="tab-pane custom" id="pills-custom">
+                                                    <div className="design"><img src="../images/newcase/design/8.custom/custom.jpg" id="custom" alt="custom" /><span></span></div>
+                                                </div>
+                                            </TabPanel>    
+                                        </Tabs>
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card>

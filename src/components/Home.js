@@ -23,7 +23,7 @@ function Home(){
                     </div>
                     <div className="row">
                         <div className="col"><Link to= '/' className="links"><img src="/images/main/m_support.png" alt="m_support"/></Link></div>
-                        <div className="col"><Link to= '/' className="links"><img src="/images/main/m_viewinvoices.png" alt="m_viewinvoices"/></Link></div>
+                        <div className="col"><Link to= '/invoices' className="links"><img src="/images/main/m_viewinvoices.png" alt="m_viewinvoices"/></Link></div>
                     </div>
                 </div>
             </div>

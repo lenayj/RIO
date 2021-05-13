@@ -1,4 +1,4 @@
-import '../css/resetPassword.css';
+import '../../css/resetPassword.css';
 
 import React from "react";
 import { Link } from 'react-router-dom';

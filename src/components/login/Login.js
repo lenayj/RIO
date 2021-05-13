@@ -1,4 +1,4 @@
-import '../css/Login.css';
+import '../../css/Login.css';
 
 import {Button, Form} from 'reactstrap';
 import GoogleLogin from 'react-google-login';
@@ -6,7 +6,7 @@ import {React, Component} from "react";
 import { Link } from 'react-router-dom';
 import MicrosoftLogin from 'react-microsoft-login';
 
-import bg from '../assets/bg.png';
+import bg from '../../assets/bg.png';
 
 class Login extends Component {  
   

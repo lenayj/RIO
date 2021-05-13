@@ -1,7 +1,7 @@
-import '../css/booking.css';
+import '../../css/booking.css';
 import 'react-calendar/dist/Calendar.css';
 
-import {React, Component, useState} from "react";
+import {React, Component} from "react";
 import Calendar from 'react-calendar';
 
 

@@ -17,14 +17,14 @@ class EditAddr extends Component {
                         <div className="row pt-3">
                         <Link to= '/myAccount' className="links"><div className="col text-secondary">My Account &gt;&nbsp;</div></Link>
                         <Link to= '/officeAddr' className="links"><div className="col text-secondary">Office Addresses &gt;&nbsp;</div></Link>
-                        { (this.state.page == 'New') 
+                        { (this.state.page === 'New') 
                             ? <div className="col text-dark">New Addresses</div>  
                             : <div className="col text-dark">Edit Addresses</div> 
                         }
                         </div>
                     </div>
                     <div className="myacct-banner text-left">
-                        { (this.state.page == 'New') 
+                        { (this.state.page === 'New') 
                             ? <h1 className="title-wording">New Addresses</h1>
                             : <h1 className="title-wording">Edit Addresses</h1>
                         }

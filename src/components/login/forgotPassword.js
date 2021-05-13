@@ -1,4 +1,4 @@
-import '../css/forgotPassword.css';
+import '../../css/forgotPassword.css';
 
 import React from "react";
 import {Button} from 'reactstrap';
