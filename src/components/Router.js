@@ -22,6 +22,8 @@ import newCasePersonalInfo from './newcase/newCasePersonalInfo';
 import newCasePrescription from './newcase/newCasePrescription';
 import newCaseOfficeInfo from './newcase/newCaseOfficeInfo';
 
+import invoices from './invoices/invoices';
+
 export default () => (
     <Router>
         <Header />
@@ -49,6 +51,9 @@ export default () => (
         <Route path='/newCasePersonalInfo' component={newCasePersonalInfo}/>
         <Route path='/newCasePrescription' component={newCasePrescription}/>
         <Route path='/newCaseOfficeInfo' component={newCaseOfficeInfo}/>
+
+        {/*Allow users to check invoices list*/}
+        <Route path='/invoices' component={invoices}/>   
 
     </Router>
 )

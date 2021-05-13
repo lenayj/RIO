@@ -60,7 +60,7 @@ class Header extends Component{
                     <Link to= '/newCase' className="links">New Case</Link>
                     <Link to= '/' className="links">Booking</Link>
                     <Link to= '/myAccount' className="links">My Account</Link>
-                    <Link to= '/' className="links">View Invoices</Link>
+                    <Link to= '/invoices' className="links">View Invoices</Link>
                     <a href="https://uniortholab.com/us/" target="_blank" rel="noreferrer" className="links">Go To UniversalLab.com</a>
                     <Link to= '/' className="links">Need More Help?</Link>
 
