@@ -30,8 +30,7 @@ class NewCasePrescription extends PureComponent {
           brushRadius: 3,
           lazyRadius: 0,
           canvasDrawData:null,
-          canvasElement:null,
-          submitted:null
+          canvasElement:null
         };
 
         this.setState(this.state.appliance_types,this.state.appliance_types.set("U",""));
@@ -39,7 +38,6 @@ class NewCasePrescription extends PureComponent {
 
         this.toggleLowerApplianceImages = this.toggleLowerApplianceImages.bind(this);
         this.toggleUpperApplianceImages = this.toggleUpperApplianceImages.bind(this);
-      
     }
 
       toggleLowerApplianceImages = (event) => {
@@ -53,6 +51,7 @@ class NewCasePrescription extends PureComponent {
             this.lowerImage.current.src="/images/appliance/"+ event.target.id + ".png";
             {/*console.log(this.lowerImage);*/}
         }
+        this.props.submitted(this.canvasDrawDataStack,this.saveableCanvas,this.state.appliance_types);
       }
 
       toggleUpperApplianceImages = (event) => {
@@ -66,6 +65,7 @@ class NewCasePrescription extends PureComponent {
             this.upperImage.current.src="/images/appliance/"+ event.target.id + ".png";
             {/*console.log(this.lowerImage);*/}
         }
+        this.props.submitted(this.canvasDrawDataStack,this.saveableCanvas,this.state.appliance_types);
       }
 
       storeCanvasDrawingData(data){
@@ -84,6 +84,8 @@ class NewCasePrescription extends PureComponent {
         // this.setState({canvasData: canvasElement}); 
         this.canvasDrawDataStack.push(this.saveableCanvas.getSaveData());
         console.log(this.canvasDrawDataStack);
+        this.props.submitted(this.canvasDrawDataStack,this.saveableCanvas,this.state.appliance_types);
+        
         return this.canvasDrawDataStack;
         
         // this.storeCanvasDrawingData(JSON.parse(this.saveableCanvas.getSaveData()));
@@ -106,13 +108,6 @@ class NewCasePrescription extends PureComponent {
               {file.name}
             </li>
           ));
-          console.log(this.props.submitted);
-
-          if(this.props.submitted){
-            this.canvasDrawDataStack.map((ele) => {
-                this.saveableCanvas.loadSaveData(ele);
-            });
-          }
 
         return ( 
             <div className="prescription mt-5">               
@@ -138,7 +133,7 @@ class NewCasePrescription extends PureComponent {
                                                         <span className="appliances">- Standard Hawley Retainer</span>
                                                         <label className={"location_l" + (this.state.appliance_types.get("L") == "Standard_Hawley_Retainer_L" ? " active" : "") }  
                                                             onClick={(event) => {
-                                                                this.toggleLowerApplianceImages(event);                                                                    
+                                                                this.toggleLowerApplianceImages(event);
                                                             }} 
                                                             id="Standard_Hawley_Retainer_L">
                                                         </label>
@@ -323,6 +318,7 @@ class NewCasePrescription extends PureComponent {
                                         canvasWidth={this.state.width}
                                         canvasHeight={this.state.height}
                                         hideGrid={true}
+                                        imgSrc="/src/assets/newcase/teeth.png"
                                         onChange={(event) => {
                                                 console.log(event);
                                                 //this.saveableCanvas.getSaveData()
