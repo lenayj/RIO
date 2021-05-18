@@ -21,6 +21,7 @@
     display: contents;
 }
 
+/**************My Info********************/
 .myinfo .panel-body {
     border: 2px solid #e5e5e5;
     background-color: white;
@@ -49,6 +50,29 @@
 
 .info-value{
     font-weight:600;
+}
+
+.update-info .btn {
+    width: 200px;
+    height: 45px;
+    float: right;
+    border-radius: 40px;
+}
+
+/*****************Update my informtaion**************************/
+
+.day.btn {
+    width: 80px;
+    margin-right: 10px;
+}
+
+.react-timerange-picker {
+    height: 40px;
+    width: 250px;
+}
+
+.react-timerange-picker__inputGroup {
+    text-align: center;
 }
 
 /**********Office Addresses Page*************/
@@ -124,7 +148,8 @@
 
 /**********Edit/New Addresses Page*************/
 
-.editAddr .officeInfo {
+.editAddr .officeInfo, 
+.update-myinfo .officeInfo{
     background-color: white;
     border: 1px solid lightgray;
     padding: 30px;

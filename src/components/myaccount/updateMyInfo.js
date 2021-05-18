@@ -1,39 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 import '@wojtekmaj/react-timerange-picker/dist/TimeRangePicker.css';
 import 'react-clock/dist/Clock.css';
 
-class EditAddr extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            page: props.location.state.page
-        }
-    }
+class UpdateMyInfo extends Component {
     
     render(){
         return (
             <div className="dashboard-bg-color">
-                <div className="container myacct editAddr">
+                <div className="container myacct update-myinfo">
                     <div className="directory pt-4">
                         <div className="row pt-3">
                         <Link to= '/myAccount' className="links"><div className="col text-secondary">My Account &gt;&nbsp;</div></Link>
-                        <Link to= '/officeAddr' className="links"><div className="col text-secondary">Office Addresses &gt;&nbsp;</div></Link>
-                        { (this.state.page === 'New') 
-                            ? <div className="col text-dark">New Addresses</div>  
-                            : <div className="col text-dark">Edit Addresses</div> 
-                        }
+                        <Link to= '/myInfo' className="links"><div className="col text-secondary">My Information &gt;&nbsp;</div></Link>
+                        <div className="col text-dark">Update Profile</div>  
                         </div>
                     </div>
                     <div className="myacct-banner text-left">
-                        { (this.state.page === 'New') 
-                            ? <h1 className="title-wording">New Addresses</h1>
-                            : <h1 className="title-wording">Edit Addresses</h1>
-                        }
+                        <h1 className="title-wording">Update Profile</h1>
                     </div>
-                    <div className="editAddr default pt-3">
+                    <div className="update-myinfo default pt-3">
                         <div className="officeInfo mb-3">                
                             <div className="part-header mb-4">
                                 <h3><b>Doctor/Office Information</b></h3>
@@ -71,9 +58,7 @@ class EditAddr extends Component {
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="officeInfo date-and-hours">
+                        <div className="officeInfo date-and-hours">
                             <div className="part-header mb-4">
                                 <h3><b>Office Hours</b></h3>
                             </div>
@@ -123,21 +108,17 @@ class EditAddr extends Component {
                                 </div>
                             </div>
                         </div>
-
-                        <div className="checkbox mt-4">
-                            <div className="defaultAddress">
-                                <input type='checkbox' name='defaultAddress' value='defaultAddress'/> Make this as a default address
-                            </div>
-                        </div>
-                        <div className="save mt-4">
-                            <div className="save-btn">
-                                <input type="button" value="Save" className="btn btn-primary btn-lg" />
-                            </div>
+                    </div>
+                    
+                    <div className="save mt-4">
+                        <div className="save-btn">
+                            <input type="button" value="Save" className="btn btn-primary btn-lg float-right" />
                         </div>
                     </div>
-                </div> 
+                </div>
+            </div> 
         );
     }
 }
 
-export default EditAddr;
+export default UpdateMyInfo;
