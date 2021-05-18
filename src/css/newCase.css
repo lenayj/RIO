@@ -40,6 +40,7 @@ textarea::placeholder {
 
 .accordion .card .card-header{
     background-color: white;
+    border-bottom: none;
 }
 
 .accordion .card .card-body{
