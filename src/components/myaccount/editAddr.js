@@ -129,7 +129,7 @@ class EditAddr extends Component {
                                 <input type='checkbox' name='defaultAddress' value='defaultAddress'/> Make this as a default address
                             </div>
                         </div>
-                        <div className="save mt-4">
+                        <div className="save mt-4 mb-5">
                             <div className="save-btn">
                                 <input type="button" value="Save" className="btn btn-primary btn-lg" />
                             </div>
