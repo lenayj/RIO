@@ -8,6 +8,7 @@ import UrxGenerator from './urxGenerator';
 
 import '../css/newCase.css';
 import reactCanvasDraw from './react-canvas-draw';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
 
 class NewCase extends Component {
@@ -28,6 +29,12 @@ class NewCase extends Component {
         this.appliance_types = appliance_types;
         debugger;
     }
+
+    getCompleteCaseImage =(completeCaseImage) => {
+        this.completeCaseImage =  completeCaseImage;
+        console.log(this.completeCaseImage);
+        debugger;
+    }
     
     render(){
         
@@ -45,7 +52,8 @@ class NewCase extends Component {
                         <NewCaseOfficeInfo />
                     </form>
                 </div>
-                <UrxGenerator canvasDrawDataStack={this.canvasDrawDataStack} canvasHtmlDataURL={this.state.canvasHtmlDataURL} appliance_types ={this.appliance_types}/>
+                <UrxGenerator canvasDrawDataStack={this.canvasDrawDataStack} canvasHtmlDataURL={this.state.canvasHtmlDataURL} 
+                appliance_types ={this.appliance_types} getCompleteCaseImage = {this.getCompleteCaseImage}/>
                 <div className="newCase-submitBtn pt-5 pb-5">
                         <input type="button" value="Submit" className="btn btn-primary btn-lg btn-block" 
                             onClick={(e) => {

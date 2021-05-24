@@ -1,9 +1,10 @@
-import { Component } from "react"
-
+import react, { Component } from "react";
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
  class UrxGenerator extends Component{
     
     constructor(props,applianceUpperSrc  = "", applianceLowerSrc  = ""){
         super(props);
+        this.completeCaseImage = null;
         this.state  = {
             formImageSrc  : "/images/newcase/form/form.png",
             caseId  : "",
@@ -30,7 +31,24 @@ import { Component } from "react"
             imgName  : "",
             fileName  : ""
         }
+    }
 
+
+    componentDidUpdate(){
+        var node = document.getElementById("labslip");
+        debugger;
+        console.log(toPng(node));
+
+        toPng(node)
+        .then(function (dataUrl) {
+            debugger;
+            var img = new Image();
+            img.src = dataUrl;
+            document.body.appendChild(img);
+        })
+        .catch(function (error) {
+            console.error('oops, something went wrong!', error);
+        });
     }
 
     addCheckForDueDate(dueDate){
@@ -42,7 +60,7 @@ import { Component } from "react"
     }
 
     render(){
-        return (
+        this.completeCaseImage = 
             <div id="labslip">
                 <div className="canvas-contents">
                     <img src={this.state.formImageSrc} alt="form"/>
@@ -70,8 +88,10 @@ import { Component } from "react"
                     <p className="labslip-inner-element" style={{fontsize:"16px",top:"170px",left:"670px",width:"230px",letterSpacing:"1px"}}> note </p>
                 </div>
             </div>
-            
-    )}
+
+            this.props.getCompleteCaseImage(this.completeCaseImage);
+        return this.completeCaseImage;
+    }
 }
 
 export default UrxGenerator;
