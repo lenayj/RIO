@@ -51,12 +51,12 @@ export class MyInfo extends Component {
                                 <div className="info-field col-md-4 ml-5"><span>Name</span></div>
                                 {/*get value required {data.username}*/}
                                 <div className="info-value col-md-6"><span>John Smith</span></div>
-                                {this.editBtn()}
+                                {/*{this.editBtn()}*/}
                             </div>
                             <div className="form-row">
                                 <div className="info-field col-md-4 ml-5"><span>Doctor's License #</span></div>
                                 <div className="info-value col-md-6"><span>123456789</span></div>
-                                {this.editBtn()}
+                                
                             </div>
                             <div className="form-row">
                                 <div className="info-field col-md-4 ml-5"><span>Email</span></div>
@@ -68,39 +68,45 @@ export class MyInfo extends Component {
                             <div className="form-row">
                                 <div className="info-field col-md-4 ml-5"><span>Phone</span></div>
                                 <div className="info-value col-md-6"><span>000-000-0000</span></div>
-                                {this.editBtn()}
+                                
                             </div>
                             <div className="form-row">
                                 <div className="info-field col-md-4 ml-5"><span>Billing Address</span></div>
                                 <div className="info-value col-md-6"><span>11917 Front st</span></div>
-                                {this.editBtn()}
+                                
                             </div>
                             <div className="form-row">
                                 <div className="info-field col-md-4 ml-5"><span>Main Contact Name</span></div>
                                 <div className="info-value col-md-6"><span>John Smith</span></div>
-                                {this.editBtn()}
+                                
                             </div>
                             <div className="form-row">
                                 <div className="info-field col-md-4 ml-5"><span>Main Contact Email</span></div>
                                 <div className="info-value col-md-6"><span>johnsmith@uniortholab.com</span></div>
-                                {this.editBtn()}
+                                
                             </div>
                             <div className="form-row">
                                 <div className="info-field col-md-4 ml-5"><span>Office Name</span></div>
                                 <div className="info-value col-md-6"><span>John Smith Dental</span></div>
-                                {this.editBtn()}
+                                
                             </div>
                             <div className="form-row">
                                 <div className="info-field col-md-4 ml-5"><span>Office Hours</span></div>
                                 <div className="info-value col-md-6"><span>09:00-18:00</span></div>
-                                {this.editBtn()}
+                                
                             </div>
                             <div className="form-row">
                                 <div className="info-field col-md-4 ml-5"><span>Office Lunch Hours</span></div>
                                 <div className="info-value col-md-6"><span>12:00-13:00</span></div>
-                                {this.editBtn()}
+                                
                             </div>
                         </div>
+                    </div>
+
+                    <div className="update-info">
+                        <Link to= '/updateMyInfo' className="links">
+                            <input type="button" className="btn btn-primary btn-lg mb-5" value="Edit Profile" />
+                        </Link>
                     </div>
                 </div> 
             </div>

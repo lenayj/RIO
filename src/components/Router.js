@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './Header';
 
 import Home from './Home';
+
 import myAccount from './myaccount/myAccount';
 import myInfo from './myaccount/myInfo';
+import updateMyInfo from './myaccount/updateMyInfo';
 import officeAddr from './myaccount/officeAddr';
 import editAddr from './myaccount/editAddr'
 
@@ -37,6 +39,7 @@ export default () => (
     {/*Allow users to check, edit and add user data or office addresses*/}
         <Route path='/myAccount' component={myAccount}/>
         <Route path='/myInfo' component={myInfo}/>
+        <Route path='/updateMyInfo' component={updateMyInfo}/>
         <Route path='/officeAddr' component={officeAddr}/>
         <Route path='/editAddr' component={editAddr}/>
         

@@ -24,11 +24,10 @@ textarea::placeholder {
 }
 
 .newCase-form .part-header{
-    margin-bottom:3%;
+    margin-bottom: 1rem;
 }
 
-.newCase-form .part-value{
-    /*margin: 0 auto;*/
+.newCase-form .part-value {
     padding: 15px;
     border: 1px solid lightgrey;
     background-color: white;
@@ -60,16 +59,6 @@ textarea::placeholder {
 
 .newCase-form h3 {
     font-weight: 600;
-}
-
-.doctorOfficeInfo .part-value {
-    width: 600px;
-    height: 150px;
-}
-
-.doctorOfficeInfo .form-row {
-    display: block;
-    height: 35%;
 }
 
 .deliveryType{
@@ -191,48 +180,55 @@ label.instructions {
     border: 1px solid lightgray;
 }
 
-.color-content .tab-title {
+ul.react-tabs__tab-list {
     height: auto;
     width: 135px;
-    border-right: 1px solid lightgray;
     float: left;
+    list-style: none;
+    padding: 1rem 0 0 0;
+    margin-bottom: 0;
 }
 
-.color-content li.nav-item {
+.react-tabs__tab {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0px;
+    text-align: left;
+    padding: 10px;
     height: 65px;
 }
 
-.color-content  li.nav-item a {
-    color: black;
-    font-size: 1.1rem;
-    font-weight: 600;
+.react-tabs__tab:hover{
+    cursor:pointer;
+    color: cornflowerblue;
+}
+
+.react-tabs__tab--selected {
+    color: cornflowerblue;
 }
 
 .section-design .card-body {
     padding: 0 1.25rem;
 }
 
-.color-modal .tab-pane, .color-modal p {
-    padding: 10px;
+.react-tabs__tab-panel {
+    width: 87%;
+    padding-left: 1rem;
+    float:right;
+    border-left: 1px solid lightgray;
 }
 
-.color-modal p {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 0px;
-    text-align: left;
+.react-tabs__tab-panel--selected {
+    border-left: 1px solid lightgray;
+    min-height: 520px;
+    padding-top: 1rem;
 }
 
-.color-modal .tab-pane img {
+.tab-pane img {
     margin: 10px;
     margin-left: auto;
     margin-right: auto;
-}
-
-.color-content img {
-    /*border: 6px solid #dedede;
-    border-radius: 5px;*/
-    display: block;
+    display:block;
 }
 
 .design {
@@ -243,35 +239,21 @@ label.instructions {
     text-align: center;
 }
 
+.custom .design{
+    width:625px;
+}
+
 .design:hover{
     border: 1px solid lightsteelblue;
     background-color: rgb(229, 238, 248, 0.5);
     border-radius: 15%;
 }
 
+
 .design span {
     font-weight: bolder;
 }
 
-.fade.show {
-    opacity: 1;
-}
-
-/*
-.color-content ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 13%;
-    height: 100%;
-    overflow: auto;
-}
-*/
-
-.color-content .tab-content {
-    float: right;
-    width: 80%;
-}
 
 /*Dropzone*/
 section.container.dropzone {
@@ -299,4 +281,52 @@ section.container.dropzone {
     color:cornflowerblue;
     font-size: 1.25rem;
     font-weight: 600;
+}
+
+/*Office Address*/
+.newCase-form .doctorOfficeInfo .part-value {
+    width: 45%;
+    height: auto;
+    padding:0;
+    border: 1px solid #5ba95b;
+    border-radius: 5px;
+}
+
+.newCase-form .doctorOfficeInfo .form-row {
+    height: 2rem;
+    margin-left: 0;
+    padding-left: 1.5rem;
+    display: block;
+    margin-right: 0;
+}
+
+.newCase-form .form-row.user-name {
+    margin-top: 1.25rem;
+}
+
+.newCase-form .form-row.phone {
+    margin-bottom: 0.75rem;
+}
+
+.newCase-form .defaultAddr-mark {
+    display: inline-block;
+    float: right;
+    background-color: #5ba95b;
+    padding: 8px 25px 0 25px;
+    height: 43px;
+    color: white;
+    font-weight: 600;
+    border-bottom-left-radius: 15px;
+}
+
+.newCase-form .doctorOfficeInfo h3 {
+    display: inline-block;
+}
+
+.address-edit {
+    padding-left: 3rem;
+    display: inline-block;
+    color:#007bff;
+    font-weight:bolder;
+    font-size: 1.25rem;
 }

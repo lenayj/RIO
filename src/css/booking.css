@@ -1,6 +1,16 @@
 /*Calendar*/
+.booking-form .first,
+.booking-form .second{
+    display:inline-block;
+}
+
+.booking-form .second{
+    width:45%;
+}
+
 .booking-form .react-calendar.urx {
-    width: 550px;
+    width: 600px;
+    max-width: 90%;
     border: 1px solid lightgrey;
     line-height: 2.25em;
 }
@@ -20,7 +30,7 @@ button.react-calendar__navigation__label {
 }
 
 .date-pick{
-    width: 550px;
+    width: 540px;
     height: 80px;
     background: white;
     border: 1px solid lightgrey;
@@ -41,6 +51,8 @@ button.react-calendar__navigation__label {
     border: 1px solid lightgrey;
     border-radius: 5px;
     height: 35px;
+    width: 150px;
+    text-align: center;
 }
 
 .reset {
@@ -51,19 +63,80 @@ button.react-calendar__navigation__label {
     color:#0069d9;
 }
 
+.reset:hover {
+    cursor: pointer;
+    color: grey;
+}
+
 /*Doctor/Office Information*/
 .booking-form .doctorOfficeInfo {
-    width: 60%;
+    /*width: 60%;*/
     background-color: white;
     border: 1px solid lightgrey;
 }
 
 .booking-form .doctorOfficeInfo .part-value {
-    width: 600px;
+    /*width: 600px;*/
     height: 130px;
     margin: 25px;
 }
 
 .booking-form .form-row span {
     font-weight: bold;
+}
+
+/*Booking Overview*/
+
+.booking-overview {
+    border: 1px solid lightgrey;
+    background-color: white;
+}
+
+.booking-overview .part-value {
+    padding: 2rem 2.75rem 0.75rem 2.75rem;
+    font-size: 1.125rem;
+}
+
+.booking-overview .form-row {
+    padding-top: 10px;
+}
+
+.booking-overview .form-row label {
+    float: left;
+    width: 50%;
+    text-align: right;
+    position: relative;
+    padding-right: 3%;
+}
+
+.booking-overview .form-row span {
+    float: right;
+    width: 49%;
+    position: relative;
+}
+
+.booking-overview .disclaimer {
+    padding: 2rem;
+}
+
+/*Header disclaimer*/
+.disclaimer .inner {
+    width: 85%;
+    background-color: white;
+    border: 1px solid red;
+    padding: 0.5rem 0;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: large;
+    box-shadow: 1px 1px 1px 0px;
+}
+
+.exclamation {
+    margin: 0 10px 0;
+    text-align: center;
+    color: white;
+    background-color: red;
+    border-radius: 50%;
+    width: 25px;
+    display: inline-block;
 }

@@ -10,19 +10,21 @@ class Booking extends Component{
     constructor() {
         super();
         this.state = {
-          value: '',
+          date: '',
         };
       }
       
-    onChange = (value) =>{
+    onChange = (date) =>{
         this.setState({
-            value: new Date()
+            date: date.toLocaleDateString()
         })
-        //console.log(value)
+        //console.log(date.toLocaleDateString())
     }
 
-    onClickDay = (value) => {
-        //alert('New date is: ', value)
+    clearDate = () =>{
+        this.setState({
+            date: ''
+        })
     }
 
     render(){
@@ -30,6 +32,9 @@ class Booking extends Component{
         return(
             <div className="dashboard-bg-color">            
                 <div className="container booking">
+                    <div className="disclaimer pt-4">
+                        <div className="inner text-danger"><p className="exclamation">&#33;</p>Due to Covid19, you may experience some delays with your orders. Thank you for your patience.</div> 
+                    </div>
                     <div className="booking-banner text-left mb-4 mt-4">
                                 <h1 className="title-wording">Book your pick-up</h1>
                     </div> 
@@ -43,13 +48,17 @@ class Booking extends Component{
                                 </div>                          
                             
                                 <div className="date-pick mt-4">
-                                    <div className="pickup-date"><span>Pick Up Date</span><input type="text" value={this.value}/></div>
-                                    <div className="reset">RESET</div>
+                                    <div className="pickup-date"><span>Pick Up Date</span><input type="text" value={this.state.date} disabled/></div>
+                                    <div className="reset" onClick={this.clearDate}>RESET</div>
                                 </div>
                                 <div className="calendar">
                                     <Calendar 
-                                    onChange={this.onChange} onClick={this.onClickDay} value={this.value} 
+                                    onChange={this.onChange} 
+                                    //onClick={this.onClickDay} 
+                                    value={this.date} 
                                     calendarType="US"
+                                    prev2Label={null}
+                                    next2Label={null}
                                     className="urx"/>
                                 </div>
                             </div>
@@ -75,7 +84,18 @@ class Booking extends Component{
                             <div className="third">
                                 <div className="booking-inner pt-5">
                                     <div className="booking-inner-title"><h2>Booking Overview</h2></div>
-                                    <div className="text-secondary mb-3">Please Check yout appointment details below and confirm</div>
+                                    <div className="text-secondary mb-3">Please Check your appointment details below and confirm</div>
+                                </div>
+                                <div className="booking-overview mt-4">
+                                    <div className="part-value">
+                                        <div className="form-row date"><label>Date:</label><span>{this.state.date}</span></div>
+                                        <div className="form-row office-name"><label>Office Name:</label><span>USOP Dental</span></div>
+                                        <div className="form-row user-address"><label>Address:</label><span>11917 FRONT ST, NORWALK, CA 90650</span></div>
+                                        <div className="form-row office-hours"><label>Office Hours:</label><span>Mon-Fri 9-6 | 12-1</span></div>
+                                    </div>
+                                    <div className="disclaimer">
+                                        <span className="text-danger">Pick up time is not guaranteed and can vary depending on availability.</span>    
+                                    </div>
                                 </div>
                             </div>
                         </form>

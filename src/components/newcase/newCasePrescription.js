@@ -12,15 +12,13 @@ class NewCasePrescription extends Component {
         super();
         this.onDrop = (files) => {
           this.setState({files})
-          console.log(files)
+          /*console.log(files)*/
         };
         this.state = {
           files: [],
         };
       }
 
- 
-    
     render(){
         const files = this.state.files.map(file => (
             <li key={file.name}>
@@ -436,7 +434,7 @@ class NewCasePrescription extends Component {
                     </div>
                     
                     <div className="section-fileupload">
-                        <Dropzone onDrop={this.onDrop} multiple={true} maxFiles={10}>
+                        <Dropzone onDrop={this.onDrop} multiple={true} maxFiles={10} accept={'.jpg, .jpeg, .png, .pdf, .stl'}>
                             {({getRootProps, getInputProps}) => (
                             <section className="container dropzone">
                                 <div {...getRootProps({className: 'field dropzone'})}>
