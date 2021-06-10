@@ -14,7 +14,7 @@ class EditAddr extends Component {
         // this is to set the initial state of the component
         
         this.state = {
-            page: props.location.state.page
+            //page: props.location.state.page
         }
         this.autocomplete = null
         this.handlePlaceSelect = this.handlePlaceSelect.bind(this)
@@ -114,12 +114,14 @@ class EditAddr extends Component {
                                         </div>  
                                     </div>
                                     <div className="form-row">
-                                        <div className="form-group col-md-12"> 
+                                        {/*<div className="form-group col-md-12"> 
                                             <input id="autocomplete" className="form-control input-field" type="text"/> 
-                                        </div>
+                    </div>*/}
                                         <div className="form-group col-md-12">
                                             <div><span>Street Address</span></div>
-                                            <input className="form-control"
+                                            <input className="form-control input-field"
+                                                id="autocomplete"
+                                                type="text"
                                                 name={"street_address"}
                                                 value={this.state.street_address || ''}
                                                 onChange={this.handleChange}/>                                                

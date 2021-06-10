@@ -21,6 +21,10 @@ class Booking extends Component{
         //console.log(date.toLocaleDateString())
     }
 
+    onClickDay = (date) => {
+        alert(date);
+    }
+
     clearDate = () =>{
         this.setState({
             date: ''
@@ -54,6 +58,7 @@ class Booking extends Component{
                                 <div className="calendar">
                                     <Calendar 
                                     onChange={this.onChange} 
+                                    onClickDay={this.onClickDay}
                                     //onClick={this.onClickDay} 
                                     value={this.date} 
                                     calendarType="US"
