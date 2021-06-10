@@ -112,7 +112,7 @@ class UpdateMyInfo extends Component {
                     
                     <div className="save mt-4">
                         <div className="save-btn">
-                            <input type="button" value="Save" className="btn btn-primary btn-lg float-right" />
+                            <input type="button" value="Save" className="btn btn-primary btn-lg float-right mb-4" />
                         </div>
                     </div>
                 </div>
