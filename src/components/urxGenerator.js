@@ -1,10 +1,12 @@
-import react, { Component } from "react";
+import React, { Component } from "react";
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
+import html2canvas from "html2canvas";
  class UrxGenerator extends Component{
     
     constructor(props,applianceUpperSrc  = "", applianceLowerSrc  = ""){
         super(props);
         this.completeCaseImage = null;
+        this.divRef = React.createRef();
         this.state  = {
             formImageSrc  : "/images/newcase/form/form.png",
             caseId  : "",
@@ -35,20 +37,26 @@ import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
 
     componentDidUpdate(){
-        var node = document.getElementById("labslip");
-        debugger;
-        console.log(toPng(node));
+        // var node = document.querySelector("#labslip");
+        // debugger;
+        // console.log(toPng(node));
 
-        toPng(node)
-        .then(function (dataUrl) {
-            debugger;
-            var img = new Image();
-            img.src = dataUrl;
-            document.body.appendChild(img);
-        })
-        .catch(function (error) {
-            console.error('oops, something went wrong!', error);
-        });
+        // toPng(node)
+        // .then(function (dataUrl) {
+        //     debugger;
+        //     var img = new Image();
+        //     img.src = dataUrl;
+        //     document.body.appendChild(img);
+        // })
+        // .catch(function (error) {
+        //     console.error('oops, something went wrong!', error);
+        // });
+        var a = document.querySelector("#labslip");
+        debugger;
+        html2canvas(a).then((canvas) => 
+            
+            {console.log(canvas.toDataURL());document.body.appendChild(canvas);debugger;}
+        );
     }
 
     addCheckForDueDate(dueDate){
@@ -61,8 +69,7 @@ import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
     render(){
         this.completeCaseImage = 
-            <div id="labslip">
-                <div className="canvas-contents">
+                <div id="labslip" className="canvas-contents" ref={this.divRef}>
                     <img src={this.state.formImageSrc} alt="form"/>
                     <div className="labslip-inner-element" style={{"z-Index":2,top:"365px",left:"46px",height:"220px",width:"600px"}}>
                         <img id="appliance-onimg-u" src={this.props.appliance_types == null ? "" : "/images/appliance/"+ this.props.appliance_types.get("U") + ".png" } alt=""/>
@@ -87,9 +94,8 @@ import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
                     <p className="labslip-inner-element" style={{fontsize:"18px",top:"729px",left:"455px"}}> pontic </p>
                     <p className="labslip-inner-element" style={{fontsize:"16px",top:"170px",left:"670px",width:"230px",letterSpacing:"1px"}}> note </p>
                 </div>
-            </div>
 
-            this.props.getCompleteCaseImage(this.completeCaseImage);
+            this.props.getCompleteCaseImage(this);
         return this.completeCaseImage;
     }
 }

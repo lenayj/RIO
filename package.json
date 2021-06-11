@@ -10,6 +10,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "html-to-image": "^1.6.2",
+    "html2canvas": "^1.0.0-rc.7",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
     "react-canvas-draw": "^1.1.1",
@@ -51,5 +52,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:8080"
 }
