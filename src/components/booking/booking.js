@@ -22,13 +22,23 @@ class Booking extends Component{
     }
 
     onClickDay = (date) => {
-        alert(date);
+        var today = new Date();
+        var istoday = today.getMonth()+1 + '-' + today.getDate();
+        var currentTime = today.getHours();
+        var selectedDate = date.getMonth()+1 + '-' + date.getDate();
+        //console.log(selectedDate);
+        //console.log(today.getMonth()+1 + '-' + today.getDate());
+
+        if(selectedDate == istoday && currentTime > 9){
+            this.clearDate();
+        }
     }
 
     clearDate = () =>{
         this.setState({
             date: ''
         })
+        console.log('working!');
     }
 
     render(){
