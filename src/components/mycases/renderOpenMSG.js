@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../css/messanger.css';
+import '../../css/messanger.css';
 
 class renderOpenMSG extends Component {
 

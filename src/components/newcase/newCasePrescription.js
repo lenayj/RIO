@@ -3,7 +3,7 @@ import { Accordion, Card} from 'react-bootstrap'
 import Dropzone from 'react-dropzone';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-import '../css/newCase.css';
+import '../../css/newCase.css';
 
 
 class NewCasePrescription extends Component {
