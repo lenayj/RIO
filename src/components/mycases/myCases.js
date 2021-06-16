@@ -64,12 +64,12 @@ export class MyCases extends PureComponent {
             .then(res => {
                 var tdata = res.data;
                 //console.log('data-->'+JSON.stringify(tdata))
-				var slice = tdata.slice(this.state.offset, this.state.offset + this.state.perPage)
+                var slice = tdata.slice(this.state.offset, this.state.offset + this.state.perPage)
                 this.setState({
                     pageCount: Math.ceil(tdata.length / this.state.perPage),
                     orgtableData : tdata,
                     tableData:slice,
-                    dataTotal:tdata.length
+                    dataTotal: tdata.length
                 })
             });
     }
@@ -123,7 +123,7 @@ export class MyCases extends PureComponent {
                                     ? <a href={tdata.img_name} className="stl_file" id='stl_file' target="_blank">View & Download</a> 
                                     : 'Not Uploaded'}</td>*/}
                                     <td>
-                                        {`${tdata.address.street},${tdata.address.city}`}
+                                       {`${tdata.address.street},${tdata.address.city}`}
                                     </td>
                                     {/*STATUS field 'status'*/}
                                     <td>{tdata.website}</td>
