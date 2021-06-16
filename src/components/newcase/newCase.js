@@ -4,7 +4,7 @@ import NewCasePersonalInfo from './newCasePersonalInfo'
 import NewCasePrescription from './newCasePrescription'
 import NewCaseOfficeInfo from './newCaseOfficeInfo'
 
-import '../css/newCase.css';
+import '../../css/newCase.css';
 
 
 class NewCase extends Component {   

@@ -1,9 +1,9 @@
-import '../css/forgotPassword.css';
+import '../../css/forgotPassword.css';
 
 import React,{useState} from "react";
 import {Button} from 'reactstrap';
 import { useForm } from 'react-hook-form';
-import { userService  } from "../_services/index";
+import { userService  } from "../../_services/index";
 
 /* Let customers submit email address to receive the password reset link 
 and sends the 'resetPassword' link to reset the password. */

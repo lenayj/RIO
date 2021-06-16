@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
-import '../css/pagination.css';
-import '../css/myCases.css';
+import '../../css/pagination.css';
+
     
 
-export class MyCases extends PureComponent {
+class Invoices extends Component {
 
     constructor(props) {
         super(props)
@@ -17,7 +17,7 @@ export class MyCases extends PureComponent {
             perPage: 10,
             currentPage: 0,
             isLoading: false,
-            isError: false
+            isError: false,
         }
 
         this.handlePageClick = this.handlePageClick.bind(this);
@@ -37,20 +37,13 @@ export class MyCases extends PureComponent {
 
     };
 
-    /* Call Open Msg Modal */
-    openMSG = (e) => {
-        const case_id = e.target.id
-        const url = 'http://localhost:3000/renderOpenMSG'
-        window.open(url+'?msgurl="' + url + '"&caseid='+ case_id, "Messenger", "width=350, height=400")
-    }
-
     loadMoreData() {
 		const data = this.state.orgtableData;
 		
 		const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
 		this.setState({
 			pageCount: Math.ceil(data.length / this.state.perPage),
-			tableData:slice
+			tableData:slice,
 		})
 	
     }
@@ -60,7 +53,7 @@ export class MyCases extends PureComponent {
     }
     getData() {
         axios
-            .get('https://jsonplaceholder.typicode.com/users')
+            .get('https://jsonplaceholder.typicode.com/todos')
             .then(res => {
                 var tdata = res.data;
                 //console.log('data-->'+JSON.stringify(tdata))
@@ -68,15 +61,16 @@ export class MyCases extends PureComponent {
                 this.setState({
                     pageCount: Math.ceil(tdata.length / this.state.perPage),
                     orgtableData : tdata,
-                    tableData:slice
+                    tableData:slice,
+                    dataTotal:tdata.length
                 })
             });
     }
 
 
     render() {
-        const {tableData,isLoading, isError} = this.state
-    
+        const {tableData,dataTotal,isLoading, isError} = this.state
+        
         if(isLoading){
         return <div>Loading...</div>
         }
@@ -86,19 +80,19 @@ export class MyCases extends PureComponent {
         }
         return tableData.length > 0 
         ? (
-            <div className="myCases">
-                 <h1 className="title-wording">My Cases</h1>
+            <div className="table-width invoices">
+                 <div class="myInvoices-banner text-left mb-5 mt-4"><h1 className="title-wording">My Invoices</h1></div>                
 
+                 <div>{this.orgtableData}</div>
                  <table className="table">
                      <thead>
                         <tr>
-                            <th>CASE NO.</th>
-                            <th>STATUS</th>                            
+                            <th>INVOICE NO.</th>
+                            <th>DATE</th>                            
                             <th>PATIENT NAME</th>
-                            <th>LABSLIP</th>
-                            <th>STL FILES</th>                            
-                            <th>DATA SENT</th>
-                            <th>QUESTION</th>
+                            <th>TOTAL</th>
+                            <th>STATUS</th>                            
+                            <th>INVOICE</th>
                         </tr>
                      </thead>
                      {/*Todo:: Key modify required here*/}
@@ -106,28 +100,16 @@ export class MyCases extends PureComponent {
                         {
                           this.state.tableData.map((tdata, i) => (
                                 <tr key={tdata.id}>
-                                    {/*Case No field 'case_id'*/}
-                                    <td>{tdata.id}</td>
-                                    {/*Data Sent field 'reg_data'*/}
-                                    <td>{tdata.name}</td>
-                                    {/*Patient Name field 'patient_first_name' + 'patient_last_name'*/}
-                                    <td>{tdata.username}</td>
-                                    {/*Labslip field 'img_name'
-                                    :: Link required
-                                    :: <td><a href={tdata.img_name} target="_blank" rel="noreferrer">View</a></td>*/}
-                                    <td>{tdata.email}</td>
-                                    {/*STL File field 'file_name'
-                                    :: if !files -> Not Uploaded else File Link required
-                                    Refer)) <td>{`${tdata.website}` === 'kale.biz' 
-                                    ? <a href={tdata.img_name} className="stl_file" id='stl_file' target="_blank">View & Download</a> 
-                                    : 'Not Uploaded'}</td>*/}
+                                    <td># {tdata.id}</td>
+                                    <td>{tdata.userId}</td>
+                                    <td>{tdata.title}</td>
+                                    <td>$ {tdata.userId}</td>
+                                    <td><span className="paid">PAID</span></td>
                                     <td>
-                                        {`${tdata.address.street},${tdata.address.city}`}
+                                        <a href="https://in.xero.com/U1FCmXxE4cWfDs9XH62PDllUJS9brKWSCcspyRWO" target="_blank" rel="noreferrer">
+                                            <input type="button" className="view-invoices btn btn-primary" value="View"/>
+                                        </a>
                                     </td>
-                                    {/*STATUS field 'status'*/}
-                                    <td>{tdata.website}</td>
-                                    {/*Message field 'case_id'*/}
-                                    <td><button id={tdata.id} onClick={this.openMSG}>Leave a message</button></td>
                                 </tr>
                             
                           ))
@@ -136,7 +118,7 @@ export class MyCases extends PureComponent {
                      </tbody>
                  </table>   
                 
-                <div className="text-right">{tableData.length} Entries in Total </div>
+                <div className="text-right">{dataTotal} Entries in Total </div>
 
                  <ReactPaginate
                     previousLabel={"<"}
@@ -152,9 +134,9 @@ export class MyCases extends PureComponent {
                     activeClassName={"active"}/>
             </div>
         ):(
-            <div>There is No Case List</div>
+            <div>There is No Invoice List</div>
           )
     }
 }
 
-export default MyCases;
+export default Invoices;

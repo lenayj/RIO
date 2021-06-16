@@ -218,23 +218,3 @@ section.container.dropzone {
     font-size: 1.25rem;
     font-weight: 600;
 }
-
-/*Doctor/Office Info*/
-.defaultAddr-mark{
-    display: table;
-    background-color: rgb(15, 160, 10);
-    color: white;
-    width: 150px;
-    height: 35px;
-    border-radius: 2em;
-}
-
-.defaultAddr-mark p{
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-}
-
-.doctorOfficeInfo .part-value {
-    padding-left: 25px;
-}

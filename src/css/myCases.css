@@ -2,6 +2,11 @@
     margin:0 auto;
 }
 
+.table-width{
+    margin:0 auto;
+    width:75%;
+}
+
 .table {
     width: 100%;
     max-width: 100%;
@@ -36,4 +41,13 @@ th, td {
     text-align: center !important;
     vertical-align: middle !important;
     height: 60px;
+}
+
+/*****************Invoices**********************/
+span.paid{
+    color:darkgreen
+}
+
+.view-invoices.btn {
+    width: 100px;
 }
