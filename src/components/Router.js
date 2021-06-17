@@ -23,6 +23,8 @@ import newCasePersonalInfo from './newcase/newCasePersonalInfo';
 import newCasePrescription from './newcase/newCasePrescription';
 import newCaseOfficeInfo from './newcase/newCaseOfficeInfo';
 
+import booking from './booking/booking';
+
 import invoices from './invoices/invoices';
 
 export default () => (
@@ -54,6 +56,9 @@ export default () => (
         <Route path='/newCasePrescription' component={newCasePrescription}/>
         <Route path='/newCaseOfficeInfo' component={newCaseOfficeInfo}/>
 
+        {/*Allow users to book a pickup*/}
+        <Route path='/booking' component={booking}/>
+        
         {/*Allow users to check invoices list*/}
         <Route path='/invoices' component={invoices}/>   
 
