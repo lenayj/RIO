@@ -2,6 +2,7 @@ import '../../css/myAccount.css';
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export class MyInfo extends Component {
 
@@ -9,11 +10,31 @@ export class MyInfo extends Component {
         super(props);    
     
         this.state = {
-        
+            name:"",
+            license:"12112232",
+            Email:"venkatesh@uniortholab.com",
+            Phone:"",
+            billingAddress: "",
+            mainContactName:"",
+            mainContactEmail:"",
+            officeName:"",
+            officeHours:"",
+            officeLunchHours:""
         }
 
         this.editBtn = this.editBtn.bind(this);
     };
+
+    componentDidMount(){
+        var yourConfig = {
+            headers: {
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjIzNzEyODI2LCJpYXQiOjE2MjM3MDk4MjYsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.0O2C8uiG5a3HY2osj-q71lX-sNvySTctds5j1mHGBIoN5Gxew7nuD35ugfvxXT2KY376pjWs0z8-zZymodT2qg"
+            }
+         }
+        axios.get("http://localhost:8080/myInformation?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
+            console.log(a);
+        })
+    }
 
     editBtn() {
         return (
