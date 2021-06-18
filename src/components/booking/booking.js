@@ -11,7 +11,10 @@ class Booking extends Component{
         super();
         this.state = {
           date: '',
-          active: false
+          activeTime: false,
+          activeArea:false,
+          /* Todo :: Bring User's city data from user information and set state */
+          city: ''
         };
       }
       
@@ -27,19 +30,21 @@ class Booking extends Component{
         var istoday = today.getMonth()+1 + '-' + today.getDate();
         var currentTime = today.getHours();
         var selectedDate = date.getMonth()+1 + '-' + date.getDate();
+        var pickupCity = this.state.city;
+        var notAllowedCity = ['ADELANTO','APPLE VALLEY','BAKERSFIELD','BANNING','BONITA','BEAUMONT','BERMUDA DUNES',
+        'CAMARILLO','CARDIFF','CARLSBAD','CATHEDRAL CITY','CHULA VISTA','COACHELLA','CORONADO',
+        'DESSERT HOT SPRING','EL CAJON','ENCINITAS', 'ESCONDIDO','GRAND TERRACE','HEMET','HESPERIA',
+        'IMPERIAL BEACH','INDIAN WELLS','INDIO','LA COSTA','LA JOLLA','LA MESA','LA QUINTA','LAKE ELSINORE',
+        'LAKE SAN MARCOS','LAKESIDE','LANCASTER','LEMON GROVE','LOMA LINDA','MENIFEE','MURRIETA', 'NATIONAL CITY',
+        'NEWBURY PARK','OCEANSIDE','OXNARD','PALMDALE','PALM DESSERT','PALM SPRING','PERRIS','PORT HUENEME','POWAY',
+        'RANCHO MIRAGE','REDLANDS','ROSAMOND','SACRAMENTO','SAN DIEGO','SAN JACINTO','SAN MARCOS','SAN YSIDRO','SANTEE',
+        'SOLANA BEACH','SPRING VALLEY','SUN CITY','TEMECULA','VENTURA','VICTORVILLE','VISTA','WILDOMAR','YUCAIPA']
         //console.log(selectedDate);
         //console.log(today.getMonth()+1 + '-' + today.getDate());
+        //console.log(pickupCity);
 
-        /* Conditions 1 : Sameday pick up in not allowed after 10am PST */
-        if(selectedDate == istoday && currentTime > 9){
-            
-            this.notAllowedSamedayPickup();
-            /* Disable selected date */
-            /* Todo :: Date is not cleared after click 'OK' on popup */
-            this.clearDate();
-        }
-
-        /* Conditions 2 : Sameday pick up in not allowed after 8am PST for the following area(city) 
+        /* 
+        ##### Conditions 1 : Sameday pick up in not allowed after 8am PST for the following area(city) 
         'ADELANTO','APPLE VALLEY','BAKERSFIELD','BANNING','BONITA','BEAUMONT','BERMUDA DUNES',
         'CAMARILLO','CARDIFF','CARLSBAD','CATHEDRAL CITY','CHULA VISTA','COACHELLA','CORONADO',
         'DESSERT HOT SPRING','EL CAJON','ENCINITAS', 'ESCONDIDO','GRAND TERRACE','HEMET','HESPERIA',
@@ -48,31 +53,58 @@ class Booking extends Component{
         'NEWBURY PARK','OCEANSIDE','OXNARD','PALMDALE','PALM DESSERT','PALM SPRING','PERRIS','PORT HUENEME','POWAY',
         'RANCHO MIRAGE','REDLANDS','ROSAMOND','SACRAMENTO','SAN DIEGO','SAN JACINTO','SAN MARCOS','SAN YSIDRO','SANTEE',
         'SOLANA BEACH','SPRING VALLEY','SUN CITY','TEMECULA','VENTURA','VICTORVILLE','VISTA','WILDOMAR','YUCAIPA'
+        
+        ##### Conditions 2 : Sameday pick up in not allowed after 10am PST
         */
+        
+        if(notAllowedCity.includes(pickupCity) && selectedDate === istoday && currentTime > 6){    
+
+            this.notAllowedArea();
+        
+        }else if(selectedDate === istoday && currentTime > 9){
+            
+            this.notAllowedTime();
+        
+        }
+
     }
 
-    clearDate = () =>{
-        this.setState({
-            date: ''
-        })
-        //console.log('working!');
+    setDate(){
+        this.setState({date:''});
     }
 
-    notAllowedSamedayPickup = () => {
-        const currentState = this.state.active;
-        this.setState({ active: !currentState });
+    clearDate = () => {
+        this.setDate();
+    }
+
+    notAllowedTime = () => {
+        const currentStateOfTime = this.state.activeTime;
+        this.setState({ activeTime: !currentStateOfTime });
+        this.setState({ date:'' });
+    }
+
+    notAllowedArea = () => {
+        const currentStateOfArea = this.state.activeArea;
+        this.setState({ activeArea: !currentStateOfArea });
+        this.setState({ date:'' });
     }
 
     render(){
 
         return(
             <div className="dashboard-bg-color">
-                <div className="alert-message first" style={this.state.active ? {display: "block"} : {display: "none"}}>
+                <div className="alert-message first" style={this.state.activeTime ? {display: "block"} : {display: "none"}}>
                     <div className="alert-popup">
                         <p style={{fontsize:"20px",lineheight:"100px"}}>Sorry! We cannot schedule a same day pick up after 10am PST.</p>
-                        <div className="alert-option"><span onClick={this.notAllowedSamedayPickup}>ok</span></div>
+                        <div className="alert-option"><span onClick={this.notAllowedTime}>ok</span></div>
                     </div>
-                </div>         
+                </div>
+                <div className="alert-message second" style={this.state.activeArea ? {display: "block"} : {display: "none"}}>
+                    <div className="alert-popup">
+                        <p style={{fontsize:"20px",lineheight:"100px"}}>Sorry! Same day pick up is not available in your area after 8:00am PST. Please choose the following business day.</p>
+                        <div className="alert-option"><span onClick={this.notAllowedArea}>ok</span></div>
+                    </div>
+                </div>          
                 <div className="container booking">
                     <div className="disclaimer pt-4">
                         <div className="inner text-danger"><p className="exclamation">&#33;</p>Due to Covid19, you may experience some delays with your orders. Thank you for your patience.</div> 
