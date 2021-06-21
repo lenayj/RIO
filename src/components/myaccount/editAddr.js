@@ -9,7 +9,17 @@ class EditAddr extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            page: props.location.state.page
+            page: props.location.state.page,
+            name:props.location.state.name,
+            license:props.location.state.license,
+            Email:props.location.state.Email,
+            Phone:props.location.state.Phone,
+            billingAddress:props.location.state.billingAddress,
+            mainContactName: props.location.state.mainContactName,
+            mainContactEmail:props.location.state.mainContactEmail,
+            officeName:props.location.state.officeName,
+            officeHours:props.location.state.officeHours,
+            officeLunchHours:props.location.state.officeLunchHours
         }
     }
     

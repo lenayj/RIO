@@ -5,6 +5,32 @@ import '@wojtekmaj/react-timerange-picker/dist/TimeRangePicker.css';
 import 'react-clock/dist/Clock.css';
 
 class UpdateMyInfo extends Component {
+
+    constructor(props){
+        super(props);
+        console.log("asdsd");
+        console.log(props);
+        this.state = {
+            name: props.location.state.name,
+            license : props.location.state.license,
+            Email: props.location.state.Email,
+            Phone: props.location.state.Phone,
+            billingAddress : props.location.state.billingAddress,
+            mainContactName : props.location.state.mainContactName,
+            mainContactEmail : props.location.state.mainContactEmail,
+            officeName : props.location.state.officeName,
+            officeHours : props.location.state.officeHours,
+            officeLunchHours: props.location.state.officeLunchHours
+        }
+
+        this.mon= "0";
+        this.tue= "0";
+        this.wed= "0";
+        this.thu= "0";
+        this.fri= "0";
+        this.sat= "0";
+        this.sun= "0";
+    }
     
     render(){
         return (
@@ -29,17 +55,17 @@ class UpdateMyInfo extends Component {
                                 <div className="form-row">
                                     <div className="form-group col-md-9">
                                         <div><span>Doctor Name/ Office Name</span></div>
-                                        <input type="text" className="form-control" name="doctorOrOfficeName"/>                                                
+                                        <input type="text" className="form-control" name="doctorOrOfficeName" value={this.state.officeName}/>
                                     </div>
                                     <div className="form-group col-md-3">
                                         <div><span>License#</span></div>
-                                        <input type="text" className="form-control" name="licenseNum"/>
+                                        <input type="text" className="form-control" name="licenseNum" value={this.state.license}/>
                                     </div>  
                                 </div>
                                 <div className="form-row">
                                     <div className="form-group col-md-12">
                                         <div><span>Address Line1</span></div>
-                                        <input type="text" className="form-control" name="address"/>                                                
+                                        <input type="text" className="form-control" name="address" value={this.state.billingAddress}/>                                                
                                     </div>
                                 </div>
                                 <div className="form-row">
@@ -68,13 +94,13 @@ class UpdateMyInfo extends Component {
                                         <div><b>Day:</b></div>
                                     </div>
                                     <div className="form-group col-md-8">
-                                        <input type="button" className="day btn btn-outline-secondary" value="Mon"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Tue"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Wed"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Thu"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Fri"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Sat"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Sun"/>
+                                        <input type="button" className="day btn btn-outline-secondary" value="Mon" onChange={(e) => { this.mon = "0" }}/>
+                                        <input type="button" className="day btn btn-outline-secondary" value="Tue" onChange={(e) => { this.tue = "0" }}/>
+                                        <input type="button" className="day btn btn-outline-secondary" value="Wed" onChange={(e) => { this.wed = "0" }}/>
+                                        <input type="button" className="day btn btn-outline-secondary" value="Thu" onChange={(e) => { this.thu = "0"}}/>
+                                        <input type="button" className="day btn btn-outline-secondary" value="Fri" onChange={(e) => { this.fri = "0"}}/>
+                                        <input type="button" className="day btn btn-outline-secondary" value="Sat" onChange={(e) => { this.sat = "0"}}/>
+                                        <input type="button" className="day btn btn-outline-secondary" value="Sun" onChange={(e) => { this.sun = "0" }}/>
                                     </div>  
                                 </div>
 
