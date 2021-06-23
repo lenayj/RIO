@@ -19,7 +19,8 @@ export class MyInfo extends Component {
             mainContactEmail:"",
             officeName:"",
             officeHours:"",
-            officeLunchHours:""
+            officeLunchHours:"",
+            addressesIds:[]
         }
 
         this.editBtn = this.editBtn.bind(this);
@@ -28,11 +29,12 @@ export class MyInfo extends Component {
     componentDidMount(){
         var yourConfig = {
             headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI0NTg3NzExLCJpYXQiOjE2MjQyODc3MTEsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.Z9SYXp7GSEGcyKwZ7r-wb3KzvTvrE6SxsLtAAQLxESaionl6tNwsKm561ML_3sjt3YrpkbTZp9K5Bnvr9jTfcQ"
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI0Njg5NjQ2LCJpYXQiOjE2MjQzODk2NDYsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.B3oGRXAZpQXh9_ovwa4tWuGN7UCVjgDqsU26fzvLYJjm2HrQ9PUQ70tWQyoTWvYpSHcHQYzz0K8JsR7tSCvjFQ"
             }
          }
         axios.get("http://localhost:8080/myInformation?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
-            var name, license, Email , Phone, billingAddress ,mainContactName ,mainContactEmail ,officeName ,officeHours ,officeLunchHours;
+            debugger;
+            var name, license, Email , Phone, billingAddress ,mainContactName ,mainContactEmail ,officeName ,officeHours ,officeLunchHours,addressesIds;
             name = a.data.name;
             license = a.data.license;
             Email = a.data.email;
@@ -43,19 +45,21 @@ export class MyInfo extends Component {
             officeName = a.data.officeName;
             officeHours = a.data.officeHours;
             officeLunchHours = a.data.officeLunchHours;
+            addressesIds = a.data.addressesIds;
 
             console.log(a);
 
-            this.setState({name,name});
-            this.setState({license,license});
-            this.setState({Email,Email});
-            this.setState({Phone,Phone});
-            this.setState({billingAddress,billingAddress});
-            this.setState({mainContactName,mainContactName});
-            this.setState({mainContactEmail,mainContactEmail});
-            this.setState({officeName,officeName});
-            this.setState({officeHours,officeHours});
-            this.setState({officeLunchHours,officeLunchHours});
+            this.setState({name:name});
+            this.setState({license:license});
+            this.setState({Email:Email});
+            this.setState({Phone:Phone});
+            this.setState({billingAddress:billingAddress});
+            this.setState({mainContactName:mainContactName});
+            this.setState({mainContactEmail:mainContactEmail});
+            this.setState({officeName:officeName});
+            this.setState({officeHours:officeHours});
+            this.setState({officeLunchHours:officeLunchHours});
+            this.setState({addressesIds:addressesIds});
         })
     }
 

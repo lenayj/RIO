@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 import '@wojtekmaj/react-timerange-picker/dist/TimeRangePicker.css';
 import 'react-clock/dist/Clock.css';
+import axios from 'axios';
 
 class UpdateMyInfo extends Component {
 
@@ -11,6 +12,7 @@ class UpdateMyInfo extends Component {
         console.log("asdsd");
         console.log(props);
         this.state = {
+            addressesIds: props.location.state.addressesIds,
             name: props.location.state.name,
             license : props.location.state.license,
             Email: props.location.state.Email,
@@ -31,8 +33,77 @@ class UpdateMyInfo extends Component {
         this.sat= "0";
         this.sun= "0";
     }
+    sendUpdatedAddress(event){
+        debugger;
+        console.log(event);
+        var params = {
+            "email" : "venkatesh@uniortholab.com",
+            "is_default" : 1,
+            "city" : "LA",
+            "street" : "1212 q3wqw",
+            "apartment" : "apartment crazy",
+            "zipcode" : "12121",
+            "office_hours_start" : 1000,
+            "office_hours_end" : 1200,
+            "lunch_hours_start"  : 1212,
+            "lunch_hours_end" : 3232,
+            "office_work_days" : "1234567"
+        }
+        var yourConfig = {
+            headers: {
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI0NzU5NTEzLCJpYXQiOjE2MjQ0NTk1MTMsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.aH-G3lOGBciPzylCA98cdJnbLhPoYeshY2lXP4Jx0jAIa2YSZ7U2eKFfcQr4Lv4ghtPG4-Yrp_2OdhoDV495-w"
+            }
+         }
+        axios.post("http://localhost:8080/modifyAddress/2",params,yourConfig).then((a) =>{
+            console.log(a);
+        })
+    } 
+
+    convertNumToTime(num){
+        var hr = parseInt(num) / 60;
+        var min = parseInt(num) % 60;
+        return hr + ":"+min;
+    }
+
+    onChangeLunchHour = (event) => {
+        console.log(event);
+        debugger;
+        var timeinnumbers = event.map((a) => {
+            var arr = a.split(":").map((b) => {
+                return parseInt(b)
+            });
+            console.log(parseInt(arr[0])*60 + parseInt(arr[1]));
+            return parseInt(arr[0])*60 + parseInt(arr[1]);
+        });
+        this.setState({officeLunchHours: timeinnumbers.join("-")});
+    }
+
+    onChangeOfficeHour = (event) => {
+        console.log(event);
+        debugger;
+        var timeinnumbers = event.map((a) => {
+            var arr = a.split(":").map((b) => {
+                return parseInt(b)
+            });
+            console.log(parseInt(arr[0])*60 + parseInt(arr[1]));
+            return parseInt(arr[0])*60 + parseInt(arr[1]);
+        });
+        
+        this.setState({officeHours: timeinnumbers.join("-")});
+    }
     
     render(){
+        debugger;
+        var temp = this.state.officeHours.split("-").map((a) => {
+            return this.convertNumToTime(a);
+        });
+        var temp2 = this.state.officeLunchHours.split("-").map((a) => {
+            return this.convertNumToTime(a);
+        });
+        console.log(temp);
+        console.log(temp2);
+        // const [officeHoursValue, onChange1] = useState(['12:00', '11:00']);
+        // const [officeLunchHoursValue, onChange2] = useState(['12:00', '11:00']);
         return (
             <div className="dashboard-bg-color">
                 <div className="container myacct update-myinfo">
@@ -114,8 +185,9 @@ class UpdateMyInfo extends Component {
                                             clearIcon={null}
                                             disableClock={true}
                                             clockClassName="office-hours"
+                                            value={temp}
+                                            onChange = {this.onChangeOfficeHour}
                                         />
-                                        
                                     </div>  
                                 </div>
 
@@ -129,6 +201,8 @@ class UpdateMyInfo extends Component {
                                             clearIcon={null}
                                             disableClock={true}
                                             clockClassName="office-hours"
+                                            value={temp2}
+                                            onChange = {this.onChangeLunchHour}
                                         />
                                     </div>  
                                 </div>
@@ -138,7 +212,7 @@ class UpdateMyInfo extends Component {
                     
                     <div className="save mt-4">
                         <div className="save-btn">
-                            <input type="button" value="Save" className="btn btn-primary btn-lg float-right mb-4" />
+                            <input type="button" value="Save" className="btn btn-primary btn-lg float-right mb-4" onClick = { (event) => this.sendUpdatedAddress(event) }/>
                         </div>
                     </div>
                 </div>

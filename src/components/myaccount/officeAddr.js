@@ -2,7 +2,7 @@ import '../../css/myAccount.css';
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
 /*Todo: Get User Data for default office address value*/
 
 /*Todo: When there is multiple office addresses get multiple office addresses from Numen*/
@@ -16,22 +16,43 @@ class OfficeAddr extends Component {
 
         this.state = {
             showdata : this.displayData,
-            postVal : ""
+            postVal : "",
+            rawAddresses: null,
+            loaded: false,
         }
 
         this.appendData = this.appendData.bind(this);
         this.prependData = this.prependData.bind(this);
     };
 
-    appendData() {
+    componentDidMount(){
+        var yourConfig = {
+            headers: {
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI0NzU5NTEzLCJpYXQiOjE2MjQ0NTk1MTMsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.aH-G3lOGBciPzylCA98cdJnbLhPoYeshY2lXP4Jx0jAIa2YSZ7U2eKFfcQr4Lv4ghtPG4-Yrp_2OdhoDV495-w"
+            }
+         }
+        axios.get("http://localhost:8080/viewAllAddresses?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
+            // this.prependData(a.data[0]);
+            this.setState({rawAddresses:a.data});
+            a.data.slice(1).forEach(address => {
+                console.log(address);
+                this.appendData(address);
+            });
+            this.setState({loaded: true});
+        })
+    }
+
+    appendData(address) {
+        debugger;
         this.displayData.push(
             <div className="defaultAddr col col-md-5">
                 <div className="addr-field">
                     <div className="first-row">
-                        <div className="user-name float-left"><b>John Smith</b></div>
-                        <div className="defaultAddr-mark float-right"><p>&#10003; Your Default</p></div>
+                        <div className="user-name float-left"><b>{address.user.firstName + " " + address.user.lastName}</b></div>
+                        {/* {address.is_default==0 ? <div className="defaultAddr-mark float-right"><p>&#10003; Your Default</p></div> : "" } */}
+                        
                     </div>
-                    <div className="second-row user-address">11917 FRONT ST, NORWALK, CA 90650</div>
+                    <div className="second-row user-address">{address.street+", "}</div>
                     <div className="third-row float-right">Edit | Delete</div>
                 </div>
             </div>
@@ -64,6 +85,7 @@ class OfficeAddr extends Component {
     }
 
     render(){
+        debugger;
         return (
             <div className="dashboard-bg-color">
                 <div className="container myacct officeAddr">
@@ -90,10 +112,11 @@ class OfficeAddr extends Component {
                                     <input type="button" value="+ New" className="btn btn-outline-primary btn-lg" />
                                 </Link>
                             </div>
+                            {this.state.loaded ? 
                             <div className="defaultAddr col col-md-5">
                                 <div className="addr-field">
                                     <div className="first-row">
-                                        <div className="user-name float-left"><b>John Smith</b></div>
+                                        <div className="user-name float-left"><b>{this.state.rawAddresses[0].user.firstName + " " + this.state.rawAddresses[0].user.lastName}</b></div>
                                         <div className="defaultAddr-mark float-right">
                                             <p>&#10003;</p>
                                             <span>Your Default</span>
@@ -104,7 +127,8 @@ class OfficeAddr extends Component {
                                         <Link to={{
                                             pathname: "/editAddr",
                                             state: {
-                                                page: "Edit"
+                                                page: "Edit",
+                                                address: this.state.rawAddresses[0]
                                             }
                                         }} className="addNew-btn links">
                                             <span>Edit</span>
@@ -114,7 +138,11 @@ class OfficeAddr extends Component {
                                     </div>
                                 </div>
                             </div>
+                            :
+                        ""
+                            }
                         </div>
+                        
                     </div>
 
                     <div className="officeAddr pt-3">
