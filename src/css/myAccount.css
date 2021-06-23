@@ -129,12 +129,12 @@
     height: 135px;
 }
 
-.defaultAddr-mark{
+.myacct .defaultAddr-mark {
     display: table;
     color: rgb(15, 160, 10);
 }
 
-.defaultAddr-mark p {
+.myacct .defaultAddr-mark p {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
@@ -144,7 +144,7 @@
     width: 25px;
 }
 
-.defaultAddr-mark span {
+.myacct .defaultAddr-mark span {
     margin-left: 0.35rem;
     font-weight: 600;
 }

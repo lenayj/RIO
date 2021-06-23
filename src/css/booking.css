@@ -1,0 +1,195 @@
+/*Calendar*/
+.booking-form .first,
+.booking-form .second{
+    display:inline-block;
+}
+
+.booking-form .second{
+    width:45%;
+}
+
+.booking-form .react-calendar.urx {
+    width: 600px;
+    max-width: 90%;
+    border: 1px solid lightgrey;
+    line-height: 2.25em;
+}
+
+.react-calendar__viewContainer {
+    padding: 0 40px 40px 40px;
+}
+
+button.react-calendar__navigation__label {
+    font-weight: bolder;
+    font-size: 1.5rem;
+}
+
+.booking-form .react-calendar__navigation {
+    height: 85px;
+    margin-bottom: 0;
+}
+
+.date-pick{
+    width: 540px;
+    height: 80px;
+    background: white;
+    border: 1px solid lightgrey;
+    border-bottom: none;
+}
+
+.pickup-date {
+    display: inline-block;
+    margin: 22px 22px 22px 40px;
+}
+
+.pickup-date span {
+    padding-right: 15px;
+    font-weight: bolder;
+}
+
+.pickup-date input {
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    height: 35px;
+    width: 150px;
+    text-align: center;
+}
+
+.reset {
+    display: inline-block;
+    font-weight: bold;
+    float: right;
+    margin: 27px 40px;
+    color:#0069d9;
+}
+
+.reset:hover {
+    cursor: pointer;
+    color: grey;
+}
+
+/*Doctor/Office Information*/
+.booking-form .doctorOfficeInfo {
+    /*width: 60%;*/
+    background-color: white;
+    border: 1px solid lightgrey;
+}
+
+.booking-form .doctorOfficeInfo .part-value {
+    height: 160px;
+    border: 1px solid #5ba95b;
+    border-radius: 5px;
+}
+
+.booking-form .doctorOfficeInfo .form-row {
+    height: 2rem;
+    margin-left: 0;
+    padding-left: 1.5rem;
+}
+
+.booking-form .form-row.user-name {
+    margin-top: 1.25rem;
+}
+
+.booking-form .form-row span {
+    font-weight: bold;
+}
+
+/*Booking Overview*/
+
+.booking-overview {
+    border: 1px solid lightgrey;
+    background-color: white;
+}
+
+.booking-overview .part-value {
+    padding: 2rem 2.75rem 0.75rem 2.75rem;
+    font-size: 1.125rem;
+}
+
+.booking-overview .form-row {
+    padding-top: 10px;
+}
+
+.booking-overview .form-row label {
+    float: left;
+    width: 50%;
+    text-align: right;
+    position: relative;
+    padding-right: 3%;
+}
+
+.booking-overview .form-row span {
+    float: right;
+    width: 49%;
+    position: relative;
+}
+
+.booking-overview .disclaimer {
+    padding: 2rem;
+}
+
+/*Header disclaimer*/
+.disclaimer .inner {
+    width: 85%;
+    background-color: white;
+    border: 1px solid red;
+    padding: 0.5rem 0;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: large;
+    box-shadow: 1px 1px 1px 0px;
+}
+
+.exclamation {
+    margin: 0 10px 0;
+    text-align: center;
+    color: white;
+    background-color: red;
+    border-radius: 50%;
+    width: 25px;
+    display: inline-block;
+}
+
+/*Alert Messgae*/
+.alert-message {
+    text-align: center;
+    position: relative;
+    top: 400px;
+    height:0;
+    z-index: 2000;
+}
+
+.alert-popup {
+    width: 700px;
+    height: 200px;
+    background-color: lightgrey;
+    border-radius: 4px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.alert-popup p {
+    font-size: 20px;
+    line-height: 100px;
+}
+
+.second .alert-popup p {
+    font-size: 20px;
+    line-height: 65px;
+}
+
+.alert-option span {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    padding: 15px 30px;
+    background-color: rgba(169, 68, 66, 0.74);
+    border-radius: 4px;
+}
+
+.alert-option span:hover {
+    cursor: pointer;
+    background-color: rgb(169 68 66 / 58%);
+}
