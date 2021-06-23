@@ -5,22 +5,23 @@ import {React, Component} from "react";
 import { Link } from 'react-router-dom';
 import { BiSearch } from "react-icons/bi";
 import { VscBell, VscGear, VscAccount } from "react-icons/vsc";
+import Dropdown from 'react-bootstrap/Dropdown'
 
 /*Icon :: https://react-icons.github.io/react-icons/search?q=setting */
 
 class Header extends Component{
-   
+    
+    constructor(props) {
+        super(props)
+    }
+
+    /* Todo:: Needed to fix BUG !! */
+    logoutHandler =(e) => {
+        this.props.history.push('/Login')
+    }
+    
     /* Todo:: Search Button Click Event */
     SearchBtnClick(){
-        
-    }
-
-    SettingBtnClick(){
-
-    }
-
-    /* Todo:: UserAccount click event */
-    UserAccountBtnClick() {
         
     }
 
@@ -41,16 +42,35 @@ class Header extends Component{
                         <div className="inner">
                             <div className="navbar searchbar">
                                     <input type="text" placeholder="Search by Patient"/><button type="submit" onClick={this.SearchBtnClick}><BiSearch /></button>
-                                </div>
-                            <div className="navbar alarm">
-                                <div><VscBell color="white" size="24"/></div>
                             </div>
-                            <div className="navbar setting">
+                            
+                            <Dropdown>
+                                <Dropdown.Toggle className="navbar alarm">
+                                <VscBell color="white" size="24"/>
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item href="#">message</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                            
+                            {/* Setting is not needed for the user portal */}
+                            {/*<div className="navbar setting">
                                 <div onClick={this.SettingBtnClick}><VscGear color="white" size="24"/></div>
-                            </div>
-                            <div className="navbar UserDropdown">
-                                <div onClick={this.UserAccountBtnClick}><VscAccount color="white" size="24"/></div>
-                            </div>
+                            </div>*/}
+                            
+                            <Dropdown>
+                                <Dropdown.Toggle className="navbar UserDropdown">
+                                    <VscAccount color="white" size="24"/>
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    <Dropdown.Item href="/myinfo">Edit My Profile</Dropdown.Item>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item href="#" onClick={e=>this.logoutHandler(e)}>Log out</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
                         </div>
                     </div>  
                 </div>
@@ -59,7 +79,7 @@ class Header extends Component{
                     <Link to= '/myCases' className="links">My Cases</Link>
                     <Link to= '/newCase' className="links">New Case</Link>
                     <Link to= '/' className="links">Booking</Link>
-                    <Link to= '/myAccount' className="links">My Account</Link>
+                    <Link to= '/myAccount' className="links">My Info</Link>
                     <Link to= '/invoices' className="links">View Invoices</Link>
                     <a href="https://uniortholab.com/us/" target="_blank" rel="noreferrer" className="links">Go To UniversalLab.com</a>
                     <Link to= '/' className="links">Need More Help?</Link>
