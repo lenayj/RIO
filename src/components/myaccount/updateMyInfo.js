@@ -5,6 +5,48 @@ import '@wojtekmaj/react-timerange-picker/dist/TimeRangePicker.css';
 import 'react-clock/dist/Clock.css';
 
 class UpdateMyInfo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            monActive: false,
+            tueActive: false,
+            wedActive: false,
+            thuActive: false,
+            friActive: false,
+            satActive: false,
+            sunActive: false,
+        }
+    }
+
+    MonClicked = (e) => { 
+        const currentState = this.state.monActive;
+        this.setState({ monActive: !currentState }); 
+    }
+    TueClicked = (e) => { 
+        const currentState = this.state.tueActive;
+        this.setState({ tueActive: !currentState });
+    }
+    WedClicked = (e) => { 
+        const currentState = this.state.wedActive;
+        this.setState({ wedActive: !currentState });
+    }
+    ThuClicked = (e) => { 
+        const currentState = this.state.thuActive;
+        this.setState({ thuActive: !currentState });
+    }
+    FriClicked = (e) => { 
+        const currentState = this.state.friActive;
+        this.setState({ friActive: !currentState });
+    }
+    SatClicked = (e) => { 
+        const currentState = this.state.satActive;
+        this.setState({ satActive: !currentState });
+    }
+    SunClicked = (e) => { 
+        const currentState = this.state.sunActive;
+        this.setState({ sunActive: !currentState });
+    }
     
     render(){
         return (
@@ -68,13 +110,13 @@ class UpdateMyInfo extends Component {
                                         <div><b>Day:</b></div>
                                     </div>
                                     <div className="form-group col-md-8">
-                                        <input type="button" className="day btn btn-outline-secondary" value="Mon"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Tue"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Wed"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Thu"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Fri"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Sat"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Sun"/>
+                                        <div className={"day" + (this.state.monActive ? ' active': '')} id="Mon" onClick={this.MonClicked} data-value="Mon">Mon</div>
+                                        <div className={"day" + (this.state.tueActive ? ' active': '')} id="Tue" onClick={this.TueClicked} data-value="Tue">Tue</div>
+                                        <div className={"day" + (this.state.wedActive ? ' active': '')} id="Wed" onClick={this.WedClicked} data-value="Wed">Wed</div>
+                                        <div className={"day" + (this.state.thuActive ? ' active': '')} id="Thu" onClick={this.ThuClicked} data-value="Thu">Thu</div>
+                                        <div className={"day" + (this.state.friActive ? ' active': '')} id="Fri" onClick={this.FriClicked} data-value="Fri">Fri</div>
+                                        <div className={"day" + (this.state.satActive ? ' active': '')} id="Sat" onClick={this.SatClicked} data-value="Sat">Sat</div>
+                                        <div className={"day" + (this.state.sunActive ? ' active': '')} id="Sun" onClick={this.SunClicked} data-value="Sun">Sun</div>
                                     </div>  
                                 </div>
 
