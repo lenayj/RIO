@@ -38,6 +38,9 @@ a.links:hover{
 }
 
 .navbar.btn-primary:focus, .navbar.btn-primary.focus {
+    color: black;
+    background-color: black;
+    border-color: black;
     box-shadow: none;
 }
 

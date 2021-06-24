@@ -17,7 +17,7 @@ class Header extends Component{
 
     /* Todo:: Needed to fix BUG !! */
     logoutHandler =(e) => {
-        this.props.history.push('/Login')
+        //this.props.history.push('/Login')
     }
     
     /* Todo:: Search Button Click Event */
@@ -51,7 +51,10 @@ class Header extends Component{
 
                                 <Dropdown.Menu>
                                     <Dropdown.Divider />
-                                    <Dropdown.Item href="#">message</Dropdown.Item>
+                                    <Dropdown.Header>NEW MESSAGE</Dropdown.Header>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item href="#">Message 1</Dropdown.Item>
+                                    <Dropdown.Item href="#">Message 2</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                             
@@ -66,7 +69,7 @@ class Header extends Component{
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
-                                    <Dropdown.Item href="/myinfo">Edit My Profile</Dropdown.Item>
+                                    <Dropdown.Item href="/myaccount">My Account</Dropdown.Item>
                                     <Dropdown.Divider />
                                     <Dropdown.Item href="#" onClick={e=>this.logoutHandler(e)}>Log out</Dropdown.Item>
                                 </Dropdown.Menu>
@@ -78,7 +81,7 @@ class Header extends Component{
                 <nav className="Navbar2">
                     <Link to= '/myCases' className="links">My Cases</Link>
                     <Link to= '/newCase' className="links">New Case</Link>
-                    <Link to= '/' className="links">Booking</Link>
+                    <Link to= '/booking' className="links">Booking</Link>
                     <Link to= '/myAccount' className="links">My Info</Link>
                     <Link to= '/invoices' className="links">View Invoices</Link>
                     <a href="https://uniortholab.com/us/" target="_blank" rel="noreferrer" className="links">Go To UniversalLab.com</a>
