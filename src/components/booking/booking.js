@@ -30,6 +30,7 @@ class Booking extends Component{
         //console.log(today.getMonth()+1 + '-' + today.getDate());
 
         if(selectedDate == istoday && currentTime > 9){
+            alert();
             this.clearDate();
         }
     }
