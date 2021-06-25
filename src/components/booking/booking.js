@@ -2,8 +2,28 @@ import '../../css/booking.css';
 import 'react-calendar/dist/Calendar.css';
 
 import {React, Component} from "react";
+import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 
+/* Todo :: Bring User's office addresses list */
+const options = [
+    {
+      label: "Select Office Address",
+      value: "",
+    },
+    {
+      label: "11917 Front St, Norwalk, CA 90060",
+      value: "11917 Front St, Norwalk, CA 90060",
+    },
+    {
+      label: "140 S Reno st, LA, CA 90057",
+      value: "140 S Reno st, LA, CA 90057",
+    },
+    {
+      label: "345 Lafayette park PL, LA, CA 90057",
+      value: "345 Lafayette park PL, LA, CA 90057",
+    },
+  ];
 
 class Booking extends Component{
 
@@ -14,7 +34,8 @@ class Booking extends Component{
           activeTime: false,
           activeArea:false,
           /* Todo :: Bring User's city data from user information and set state */
-          city: ''
+          city: 'ADELANTO',
+          pickupAddress: ''
         };
       }
       
@@ -89,6 +110,11 @@ class Booking extends Component{
         this.setState({ date:'' });
     }
 
+    selectAddress = (e) => {
+        console.log('address selected');
+        this.setState({ pickupAddress: e.target.value });
+    }
+
     render(){
 
         return(
@@ -144,12 +170,23 @@ class Booking extends Component{
                                     <div className="text-secondary mb-3">Please provide Information for booking</div>
                                 </div>
 
+                                <div className="office-addresses">
+                                    <div className="addresses-list">
+                                        <select className="custom-select" style={{width:"400px"}} value={this.state.pickupAddress} onChange={this.selectAddress}>
+                                            {options.map((option) => (
+                                                <option value={option.value}>{option.label}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <div className="address-edit"><Link to= '/myinfo' target="_blank" className="links">Edit</Link></div>
+                                </div>
+
                                 <div className="doctorOfficeInfo mt-4">
                                     <div className="part-value">
                                         <div className="defaultAddr-mark float-right"><p>&#10003; Your Default</p></div>
                                         <div className="form-row user-name">Doctor Name:&nbsp; <span>John Smith</span></div>
                                         <div className="form-row doctor-license">Doctor License #:&nbsp; <span>12345</span></div>
-                                        <div className="form-row user-address">Address:&nbsp; <span>11917 FRONT ST, NORWALK, CA 90650</span></div>
+                                        <div className="form-row user-address">Address:&nbsp; <span>{this.state.pickupAddress}</span></div>
                                         <div className="form-row office-hours">Office Hours:&nbsp; <span>Mon-Fri 9-6 | 12-1</span></div>
                                     </div>
                                 </div>
