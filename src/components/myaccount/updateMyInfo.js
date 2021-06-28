@@ -98,8 +98,41 @@ class UpdateMyInfo extends Component {
                                         <input type="text" className="form-control" name="zip"/>  
                                     </div> 
                                 </div>
+                                <div className="form-row">
+                                    <div className="form-group col-md-6">
+                                        <div><span>Phone</span></div>
+                                        <input type="text" className="form-control" name="phone"/>                                                
+                                    </div>
+                                    <div className="form-group col-md-6">
+                                        <div><span>Email</span></div>
+                                        <input type="text" className="form-control" name="email" disabled={true}/>  
+                                    </div> 
+                                </div>
                             </div>
                         </div>
+                        
+                        <div className="officeInfo mainContactInfo mb-3">
+                            <div className="part-header mb-4">
+                                <h3><b>Main Contact</b></h3>
+                            </div>
+                            <div className="part-value">
+                                <div className="form-row">
+                                    <div className="form-group col-md-4">
+                                        <div><span>Main Contact First Name</span></div>
+                                        <input type="text" className="form-control" name="mfName"/>                                                
+                                    </div>
+                                    <div className="form-group col-md-4">
+                                        <div><span>Main Contact Last Name</span></div>
+                                        <input type="text" className="form-control" name="mlName"/>  
+                                    </div> 
+                                    <div className="form-group col-md-4">
+                                        <div><span>Main Contact Email</span></div>
+                                        <input type="text" className="form-control" name="mEmail"/>  
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+
                         <div className="officeInfo date-and-hours">
                             <div className="part-header mb-4">
                                 <h3><b>Office Hours</b></h3>
