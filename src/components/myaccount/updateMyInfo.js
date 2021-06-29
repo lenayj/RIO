@@ -211,11 +211,15 @@ class UpdateMyInfo extends Component {
                                 </div>
                                 
                                 <div className="form-row">
-                                    <div className="form-group col-md-12">
-                                        <div><span>Address Line1</span></div>
+                                    <div className="form-group col-md-9">
+                                        <div><span>Address</span></div>
                                         <input type="text" className="form-control" name="address"
                                         value={this.state.input.address} onChange={this.handleChange}/>
                                         <div className="text-danger">{this.state.errors.address}</div>                                                 
+                                    </div>
+                                    <div className="form-group col-md-3">
+                                        <div><span>Suite / Building</span></div>
+                                        <input type="text" className="form-control" name="suite"/>
                                     </div>
                                 </div>
                                 <div className="form-row">
