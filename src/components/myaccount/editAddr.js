@@ -10,6 +10,8 @@ class EditAddr extends Component {
         super(props);
         this.state = {
             page: props.location.state.page,
+            input: {},
+            errors: {},
             monActive: false,
             tueActive: false,
             wedActive: false,
@@ -17,7 +19,80 @@ class EditAddr extends Component {
             friActive: false,
             satActive: false,
             sunActive: false,
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        let input = this.state.input;
+        input[event.target.name] = event.target.value;
+      
+        this.setState({
+          input
+        });
+      }
+         
+    handleSubmit(event) {
+        event.preventDefault();
+        
+        if(this.validate()){
+            //console.log(this.state);
+        
+            let input = {};
+            input["doctorName"] = "";
+            input["officeName"] = "";
+            input["address"] = "";
+            input["city"] = "";
+            input["state"] = "";
+            input["zip"] = "";
+            this.setState({input:input});
+        
+            //alert('Demo Form is submited');
         }
+    }
+
+    validate(){
+        let input = this.state.input;
+        let errors = {};
+        let isValid = true;
+    
+        if (!input["doctorName"]) {
+            isValid = false;
+            errors["doctorName"] = "Please enter your Doctor Name.";
+        }
+
+        if (!input["officeName"]) {
+            isValid = false;
+            errors["officeName"] = "Please enter your Office Name.";
+        }
+
+        if (!input["address"]) {
+            isValid = false;
+            errors["address"] = "Please enter Address.";
+        }
+    
+        if (!input["city"]) {
+            isValid = false;
+            errors["city"] = "Please enter City.";
+        }
+            
+        if (!input["state"]) {
+            isValid = false;
+            errors["state"] = "Please enter State.";
+        }
+        
+        if (!input["zip"]) {
+            isValid = false;
+            errors["zip"] = "Please enter Zip.";
+        }
+
+        this.setState({
+          errors: errors
+        });
+    
+        return isValid;
     }
 
     MonClicked = (e) => { 
@@ -69,6 +144,7 @@ class EditAddr extends Component {
                             : <h1 className="title-wording">Edit Addresses</h1>
                         }
                     </div>
+                    <form onSubmit={this.handleSubmit}>
                     <div className="editAddr default pt-3">
                         <div className="officeInfo mb-3">                
                             <div className="part-header mb-4">
@@ -76,34 +152,50 @@ class EditAddr extends Component {
                             </div>
                             <div className="part-value">
                                 <div className="form-row">
-                                    <div className="form-group col-md-9">
-                                        <div><span>Doctor Name/ Office Name</span></div>
-                                        <input type="text" className="form-control" name="doctorOrOfficeName"/>                                                
+                                    <div className="form-group col-md-6">
+                                        <div><span>Doctor Name</span></div>
+                                        <input type="text" className="form-control" name="doctorName"
+                                        value={this.state.input.doctorName} onChange={this.handleChange}/>
+                                        <div className="text-danger">{this.state.errors.doctorName}</div>
                                     </div>
-                                    <div className="form-group col-md-3">
-                                        <div><span>License#</span></div>
-                                        <input type="text" className="form-control" name="licenseNum"/>
-                                    </div>  
+                                    <div className="form-group col-md-6">
+                                        <div><span>Office Name</span></div>
+                                        <input type="text" className="form-control" name="officeName"
+                                        value={this.state.input.officeName} onChange={this.handleChange}/>  
+                                        <div className="text-danger">{this.state.errors.officeName}</div>                                              
+                                    </div>
                                 </div>
                                 <div className="form-row">
-                                    <div className="form-group col-md-12">
-                                        <div><span>Address Line1</span></div>
-                                        <input type="text" className="form-control" name="address"/>                                                
+                                    <div className="form-group col-md-9">
+                                        <div><span>Address</span></div>
+                                        <input type="text" className="form-control" name="address"
+                                        value={this.state.input.address} onChange={this.handleChange}/>
+                                        <div className="text-danger">{this.state.errors.address}</div>                                                 
+                                    </div>
+                                    <div className="form-group col-md-3">
+                                        <div><span>Suite / Building</span></div>
+                                        <input type="text" className="form-control" name="suite"/>
                                     </div>
                                 </div>
                                 <div className="form-row">
                                     <div className="form-group col-md-5">
                                         <div><span>City</span></div>
-                                        <input type="text" className="form-control" name="city"/>                                                
+                                        <input type="text" className="form-control" name="city"
+                                        value={this.state.input.city} onChange={this.handleChange}/> 
+                                        <div className="text-danger">{this.state.errors.city}</div>                                                  
                                     </div>
                                     <div className="form-group col-md-3">
                                         <div><span>State</span></div>
-                                        <input type="text" className="form-control" name="state"/>  
+                                        <input type="text" className="form-control" name="state"
+                                        value={this.state.input.state} onChange={this.handleChange}/>
+                                        <div className="text-danger">{this.state.errors.state}</div>    
                                     </div> 
                                     <div className="form-group col-md-2">
                                         <div><span>Zip</span></div>
-                                        <input type="text" className="form-control" name="zip"/>  
-                                    </div> 
+                                        <input type="text" className="form-control" name="zip"
+                                        value={this.state.input.zip} onChange={this.handleChange}/>
+                                        <div className="text-danger">{this.state.errors.zip}</div>   
+                                    </div>  
                                 </div>
                             </div>
                         </div>
@@ -167,9 +259,10 @@ class EditAddr extends Component {
                         </div>
                         <div className="save mt-4 mb-5">
                             <div className="save-btn">
-                                <input type="button" value="Save" className="btn btn-primary btn-lg" />
+                                <input type="submit" value="Save" className="btn btn-primary btn-lg" />
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div> 
         );
