@@ -37,7 +37,7 @@ class UpdateMyInfo extends Component {
         event.preventDefault();
         
         if(this.validate()){
-            console.log(this.state);
+            //console.log(this.state);
         
             let input = {};
             input["licenseNum"] = "";
