@@ -284,7 +284,7 @@ section.container.dropzone {
 }
 
 /*Office Address*/
-.newCase-form .doctorOfficeInfo .part-value {
+.newCase-form .doctorOfficeInfo .part-value{
     width: 45%;
     height: auto;
     padding:0;
@@ -306,7 +306,8 @@ section.container.dropzone {
     margin-bottom: 0.75rem;
 }
 
-.newCase-form .defaultAddr-mark {
+.newCase-form .defaultAddr-mark,
+.booking-form .defaultAddr-mark{
     display: inline-block;
     float: right;
     background-color: #5ba95b;

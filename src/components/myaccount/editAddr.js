@@ -9,46 +9,127 @@ import axios from 'axios';
 class EditAddr extends Component {
     constructor(props) {
         super(props);
+        debugger;
         this.state = {
-            addressesIds: props.location.state.address.addressesIds,
+            addressesId: props.location.state.address.id,
             name: props.location.state.address.user.firstName + " " + props.location.state.address.user.lastName,
             license : props.location.state.address.user.license,
             Email: props.location.state.address.user.email,
             Phone: props.location.state.address.user.phone,
-            billingAddress : props.location.state.address.user.billingAddress,
+            street: props.location.state.address.street,
+            apartment:props.location.state.address.apartment,
+            city: props.location.state.address.city,
+            state: props.location.state.address.state,
+            zipcode: props.location.state.address.zipcode,
             mainContactName : props.location.state.address.user.mainContactName,
             mainContactEmail : props.location.state.address.user.mainContactEmail,
-            officeName : props.location.state.address.user.officeName,
+            officeName : props.location.state.address.officeName,
             officeHours : props.location.state.address.office_hours_start+ "-" + props.location.state.address.office_hours_end,
             officeLunchHours: props.location.state.address.lunch_hours_start + "-" + props.location.state.address.lunch_hours_end,
-            is_default: props.location.state.is_default
+            is_default: props.location.state.address.is_default == "1" ? true : false,
+            page: props.location.state.page,
+            monActive: props.location.state.address.office_work_days.includes("1"),
+            tueActive: props.location.state.address.office_work_days.includes("2"),
+            wedActive: props.location.state.address.office_work_days.includes("3"),
+            thuActive: props.location.state.address.office_work_days.includes("4"),
+            friActive: props.location.state.address.office_work_days.includes("5"),
+            satActive: props.location.state.address.office_work_days.includes("6"),
+            sunActive: props.location.state.address.office_work_days.includes("7")
         }
+    }
+
+    MonClicked = (e) => { 
+        const currentState = this.state.monActive;
+        this.setState({ monActive: !currentState }); 
+    }
+    TueClicked = (e) => { 
+        const currentState = this.state.tueActive;
+        this.setState({ tueActive: !currentState });
+    }
+    WedClicked = (e) => { 
+        const currentState = this.state.wedActive;
+        this.setState({ wedActive: !currentState });
+    }
+    ThuClicked = (e) => { 
+        const currentState = this.state.thuActive;
+        this.setState({ thuActive: !currentState });
+    }
+    FriClicked = (e) => { 
+        const currentState = this.state.friActive;
+        this.setState({ friActive: !currentState });
+    }
+    SatClicked = (e) => { 
+        const currentState = this.state.satActive;
+        this.setState({ satActive: !currentState });
+    }
+    SunClicked = (e) => { 
+        const currentState = this.state.sunActive;
+        this.setState({ sunActive: !currentState });
+    }
+
+    getWorkDays(){
+        var str = "";
+        if(this.state.monActive){
+            str+="1";
+        }
+        if(this.state.tueActive){
+            str+="2";
+        }
+        if(this.state.wedActive){
+            str+="3";
+        }
+        if(this.state.thuActive){
+            str+="4";
+        }
+        if(this.state.friActive){
+            str+="5";
+        }
+        if(this.state.satActive){
+            str+="6";
+        }
+        if(this.state.sunActive){
+            str+="7";
+        }
+        return str;
     }
 
     modifyAddress = (event) => {
+
         var params = {
-            "email" : "venkatesh@uniortholab.com",
-            "is_default" : 1,
-            "city" : "LA",
-            "street" : "1212 q3wqw",
-            "apartment" : "apartment crazy",
-            "zipcode" : "12121",
-            "office_hours_start" : 1000,
-            "office_hours_end" : 1200,
-            "lunch_hours_start"  : 1212,
-            "lunch_hours_end" : 3232,
-            "office_work_days" : "1234567"
+            "email" : this.state.Email,
+            "is_default" : this.state.is_default ? 1 : 0,
+            "city" : this.state.city,
+            "street" : this.state.street,
+            "apartment" : this.state.apartment,
+            "zipcode" : this.state.zipcode,
+            "state": this.state.state,
+            "office_hours_start" : parseInt(this.state.officeHours.split("-")[0]),
+            "office_hours_end" : parseInt(this.state.officeHours.split("-")[1]),
+            "lunch_hours_start"  : parseInt(this.state.officeLunchHours.split("-")[0]),
+            "lunch_hours_end" : parseInt(this.state.officeLunchHours.split("-")[1]),
+            "office_work_days" : this.getWorkDays(),
+            "officeName": this.state.officeName
         }
+        debugger;
         var yourConfig = {
             headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI0NzU5NTEzLCJpYXQiOjE2MjQ0NTk1MTMsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.aH-G3lOGBciPzylCA98cdJnbLhPoYeshY2lXP4Jx0jAIa2YSZ7U2eKFfcQr4Lv4ghtPG4-Yrp_2OdhoDV495-w"
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI1MTkwMDY4LCJpYXQiOjE2MjQ4OTAwNjgsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.1bC_fnPe110WpWwlAtAhLBWhgkbPa-hV-anitOMHpvjhvxa-nAU0Lsd4X8yNiAT112EED1LcAGuTxXmE_sqU2Q"
             }
          }
-        axios.post("http://localhost:8080/modifyAddress/2",params,yourConfig).then((a) =>{
-            console.log(a);
-        })
+         
+        if(this.state.page == "New"){
+            axios.post("http://localhost:8080/addNewAddress",params,yourConfig).then((a) =>{
+                console.log(a);
+            })
+        }
+        else{
+            console.log(this.state)
+            axios.post("http://localhost:8080/modifyAddress/"+this.state.addressesId,params,yourConfig).then((a) =>{
+                console.log(a);
+            })
+        }
+        
     }
-
 
     convertNumToTime(num){
         var hr = parseInt(num) / 60;
@@ -93,6 +174,7 @@ class EditAddr extends Component {
         });
         console.log(temp);
         console.log(temp2);
+        debugger;
         return (
             <div className="dashboard-bg-color">
                 <div className="container myacct editAddr">
@@ -121,31 +203,31 @@ class EditAddr extends Component {
                                 <div className="form-row">
                                     <div className="form-group col-md-9">
                                         <div><span>Doctor Name/ Office Name</span></div>
-                                        <input type="text" className="form-control" name="doctorOrOfficeName" value = { this.state.officeName } onChange = {(event) => {alert(event.target.value);this.setState({officeName: event.target.value})}}/>                                                
+                                        <input type="text" className="form-control" name="doctorOrOfficeName" value = { this.state.officeName } onChange = {(event) => {this.setState({officeName: event.target.value})}}/>                                                
                                     </div>
                                     <div className="form-group col-md-3">
                                         <div><span>License#</span></div>
-                                        <input type="text" className="form-control" name="licenseNum" value = { this.state.officeName } onChange = {(event) => {alert(event.target.value);this.setState({officeName: event.target.value})}}/>                                               
+                                        <input type="text" className="form-control" name="licenseNum" value = { this.state.license } onChange = {(event) => {this.setState({license: event.target.value})}}/>                                               
                                     </div>  
                                 </div>
                                 <div className="form-row">
                                     <div className="form-group col-md-12">
                                         <div><span>Address Line1</span></div>
-                                        <input type="text" className="form-control" name="address" value = { this.state.officeName } onChange = {(event) => {alert(event.target.value);this.setState({officeName: event.target.value})}}/>                                                                                               
+                                        <input type="text" className="form-control" name="address" value = { this.state.street } onChange = {(event) => {this.setState({street: event.target.value})}}/>                                                                                               
                                     </div>
                                 </div>
                                 <div className="form-row">
                                     <div className="form-group col-md-5">
                                         <div><span>City</span></div>
-                                        <input type="text" className="form-control" name="city" value = { this.state.officeName } onChange = {(event) => {alert(event.target.value);this.setState({officeName: event.target.value})}}/>                                                                                               
+                                        <input type="text" className="form-control" name="city" value = { this.state.city } onChange = {(event) => {this.setState({city: event.target.value})}}/>                                                                                               
                                     </div>
                                     <div className="form-group col-md-3">
                                         <div><span>State</span></div>
-                                        <input type="text" className="form-control" name="state" value = { this.state.officeName } onChange = {(event) => {alert(event.target.value);this.setState({officeName: event.target.value})}}/>                                                
+                                        <input type="text" className="form-control" name="state" value = { this.state.state } onChange = {(event) => {this.setState({state: event.target.value})}}/>                                                
                                     </div> 
                                     <div className="form-group col-md-2">
                                         <div><span>Zip</span></div>
-                                        <input type="text" className="form-control" name="zip" value = { this.state.officeName } onChange = {(event) => {alert(event.target.value);this.setState({officeName: event.target.value})}}/>                                               
+                                        <input type="text" className="form-control" name="zip" value = { this.state.zipcode } onChange = {(event) => {this.setState({zipcode: event.target.value})}}/>                                               
                                     </div> 
                                 </div>
                             </div>
@@ -162,13 +244,13 @@ class EditAddr extends Component {
                                         <div><b>Day:</b></div>
                                     </div>
                                     <div className="form-group col-md-8">
-                                        <input type="button" className="day btn btn-outline-secondary" value="Mon"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Tue"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Wed"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Thu"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Fri"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Sat"/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Sun"/>
+                                        <div className={"day" + (this.state.monActive ? ' active': '')} id="Mon" onClick={this.MonClicked} data-value="Mon">Mon</div>
+                                        <div className={"day" + (this.state.tueActive ? ' active': '')} id="Tue" onClick={this.TueClicked} data-value="Tue">Tue</div>
+                                        <div className={"day" + (this.state.wedActive ? ' active': '')} id="Wed" onClick={this.WedClicked} data-value="Wed">Wed</div>
+                                        <div className={"day" + (this.state.thuActive ? ' active': '')} id="Thu" onClick={this.ThuClicked} data-value="Thu">Thu</div>
+                                        <div className={"day" + (this.state.friActive ? ' active': '')} id="Fri" onClick={this.FriClicked} data-value="Fri">Fri</div>
+                                        <div className={"day" + (this.state.satActive ? ' active': '')} id="Sat" onClick={this.SatClicked} data-value="Sat">Sat</div>
+                                        <div className={"day" + (this.state.sunActive ? ' active': '')} id="Sun" onClick={this.SunClicked} data-value="Sun">Sun</div>
                                     </div>  
                                 </div>
 
@@ -185,7 +267,6 @@ class EditAddr extends Component {
                                             value={temp}
                                             onChange = {this.onChangeOfficeHour}
                                         />
-                                        
                                     </div>  
                                 </div>
 
@@ -209,7 +290,7 @@ class EditAddr extends Component {
 
                         <div className="checkbox mt-4">
                             <div className="defaultAddress">
-                                <input type='checkbox' name='defaultAddress' value='defaultAddress'/> Make this as a default address
+                                <input type='checkbox' name='defaultAddress' value='defaultAddress' checked = {this.state.is_default} onChange = {(event) => { this.setState({is_default: event.target.checked})}}/> Make this as a default address
                             </div>
                         </div>
                         <div className="save mt-4 mb-5">

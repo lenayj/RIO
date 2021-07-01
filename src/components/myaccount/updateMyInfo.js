@@ -6,23 +6,35 @@ import 'react-clock/dist/Clock.css';
 import axios from 'axios';
 
 class UpdateMyInfo extends Component {
-
     constructor(props){
         super(props);
         console.log("asdsd");
         console.log(props);
+        debugger;
         this.state = {
-            addressesIds: props.location.state.addressesIds,
+            addressesId: props.location.state.addressesId,
             name: props.location.state.name,
             license : props.location.state.license,
             Email: props.location.state.Email,
             Phone: props.location.state.Phone,
-            billingAddress : props.location.state.billingAddress,
+            street : props.location.state.street,
+            apartment: props.location.state.apartment,
+            city: props.location.state.city,
+            state: props.location.state.state,
+            zipcode:props.location.state.zipcode,
             mainContactName : props.location.state.mainContactName,
             mainContactEmail : props.location.state.mainContactEmail,
             officeName : props.location.state.officeName,
             officeHours : props.location.state.officeHours,
-            officeLunchHours: props.location.state.officeLunchHours
+            officeLunchHours: props.location.state.officeLunchHours,
+            monActive: props.location.state.office_work_days.includes("1"),
+            tueActive: props.location.state.office_work_days.includes("2"),
+            wedActive: props.location.state.office_work_days.includes("3"),
+            thuActive: props.location.state.office_work_days.includes("4"),
+            friActive: props.location.state.office_work_days.includes("5"),
+            satActive: props.location.state.office_work_days.includes("6"),
+            sunActive: props.location.state.office_work_days.includes("7"),
+            is_default: 1,
         }
 
         this.mon= "0";
@@ -33,31 +45,149 @@ class UpdateMyInfo extends Component {
         this.sat= "0";
         this.sun= "0";
     }
+
+    getWorkDays(){
+        var str = "";
+        if(this.state.monActive){
+            str+="1";
+        }
+        if(this.state.tueActive){
+            str+="2";
+        }
+        if(this.state.wedActive){
+            str+="3";
+        }
+        if(this.state.thuActive){
+            str+="4";
+        }
+        if(this.state.friActive){
+            str+="5";
+        }
+        if(this.state.satActive){
+            str+="6";
+        }
+        if(this.state.sunActive){
+            str+="7";
+        }
+        return str;
+    }
+
+    MonClicked = (e) => { 
+        const currentState = this.state.monActive;
+        this.setState({ monActive: !currentState }); 
+    }
+    TueClicked = (e) => { 
+        const currentState = this.state.tueActive;
+        this.setState({ tueActive: !currentState });
+    }
+    WedClicked = (e) => { 
+        const currentState = this.state.wedActive;
+        this.setState({ wedActive: !currentState });
+    }
+    ThuClicked = (e) => { 
+        const currentState = this.state.thuActive;
+        this.setState({ thuActive: !currentState });
+    }
+    FriClicked = (e) => { 
+        const currentState = this.state.friActive;
+        this.setState({ friActive: !currentState });
+    }
+    SatClicked = (e) => { 
+        const currentState = this.state.satActive;
+        this.setState({ satActive: !currentState });
+    }
+    SunClicked = (e) => { 
+        const currentState = this.state.sunActive;
+        this.setState({ sunActive: !currentState });
+    }
+
     sendUpdatedAddress(event){
         debugger;
         console.log(event);
         var params = {
-            "email" : "venkatesh@uniortholab.com",
-            "is_default" : 1,
-            "city" : "LA",
-            "street" : "1212 q3wqw",
-            "apartment" : "apartment crazy",
-            "zipcode" : "12121",
-            "office_hours_start" : 1000,
-            "office_hours_end" : 1200,
-            "lunch_hours_start"  : 1212,
-            "lunch_hours_end" : 3232,
-            "office_work_days" : "1234567"
+            "email" : this.state.Email,
+            "is_default" : this.state.is_default,
+            "city" : this.state.city,
+            "street" : this.state.street,
+            "apartment" : this.state.apartment,
+            "zipcode" : this.state.zipcode,
+            "office_hours_start" : parseInt(this.state.officeHours.split("-")[0]),
+            "office_hours_end" : parseInt(this.state.officeHours.split("-")[1]),
+            "lunch_hours_start"  : parseInt(this.state.officeLunchHours.split("-")[0]),
+            "lunch_hours_end" : parseInt(this.state.officeLunchHours.split("-")[1]),
+            "office_work_days" : this.getWorkDays(),
+            "state":this.state.state,
+            "officeName": this.state.officeName
         }
         var yourConfig = {
             headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI0NzU5NTEzLCJpYXQiOjE2MjQ0NTk1MTMsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.aH-G3lOGBciPzylCA98cdJnbLhPoYeshY2lXP4Jx0jAIa2YSZ7U2eKFfcQr4Lv4ghtPG4-Yrp_2OdhoDV495-w"
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI1MTkwMDY4LCJpYXQiOjE2MjQ4OTAwNjgsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.1bC_fnPe110WpWwlAtAhLBWhgkbPa-hV-anitOMHpvjhvxa-nAU0Lsd4X8yNiAT112EED1LcAGuTxXmE_sqU2Q"
             }
          }
-        axios.post("http://localhost:8080/modifyAddress/2",params,yourConfig).then((a) =>{
+        axios.post("http://localhost:8080/modifyAddress/" + this.state.addressesId,params,yourConfig).then((a) =>{
+            debugger;
             console.log(a);
+            this.setState({office_work_days:this.getWorkDays()});
+            this.setState({monActive:this.state.office_work_days.includes("1")});
+            this.setState({tueActive:this.state.office_work_days.includes("2")});
+            this.setState({wedActive:this.state.office_work_days.includes("3")});
+            this.setState({thuActive:this.state.office_work_days.includes("4")});
+            this.setState({friActive:this.state.office_work_days.includes("5")});
+            this.setState({satActive:this.state.office_work_days.includes("6")});
+            this.setState({sunActive:this.state.office_work_days.includes("7")});
+            this.setState({addressesId: this.state.addressesId});
+            this.setState({name: this.state.name});
+            this.setState({license :this.state.license});
+            this.setState({Email: this.state.Email});
+            this.setState({Phone: this.state.Phone});
+            this.setState({street : this.state.street});
+            this.setState({apartment: this.state.apartment});
+            this.setState({city: this.state.city});
+            this.setState({state: this.state.state});
+            this.setState({zipcode:this.state.zipcode});
+            this.setState({mainContactName : this.state.mainContactName});
+            this.setState({mainContactEmail :this.state.mainContactEmail});
+            this.setState({officeName : this.state.officeName});
+            this.setState({officeHours : this.state.officeHours});
+            this.setState({officeLunchHours: this.state.officeLunchHours});
         })
-    } 
+    }
+
+    componentDidMount(){
+        var yourConfig = {
+            headers: {
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI1MTkwMDY4LCJpYXQiOjE2MjQ4OTAwNjgsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.1bC_fnPe110WpWwlAtAhLBWhgkbPa-hV-anitOMHpvjhvxa-nAU0Lsd4X8yNiAT112EED1LcAGuTxXmE_sqU2Q"
+            }
+         }
+        axios.get("http://localhost:8080/viewAddress/" + this.state.addressesId + "?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
+            debugger;
+            console.log(a);
+            this.setState({office_work_days:this.getWorkDays()});
+            this.setState({monActive:a.data.office_work_days.includes("1")});
+            this.setState({tueActive:a.data.office_work_days.includes("2")});
+            this.setState({wedActive:a.data.office_work_days.includes("3")});
+            this.setState({thuActive:a.data.office_work_days.includes("4")});
+            this.setState({friActive:a.data.office_work_days.includes("5")});
+            this.setState({satActive:a.data.office_work_days.includes("6")});
+            this.setState({sunActive:a.data.office_work_days.includes("7")});
+            this.setState({addressesId: a.data.id});
+            this.setState({name: a.data.name});
+            this.setState({license :a.data.license});
+            debugger;
+            this.setState({Email: a.data.user.email});
+            this.setState({Phone: a.data.Phone});
+            this.setState({street : a.data.street});
+            this.setState({apartment: a.data.apartment});
+            this.setState({city: a.data.city});
+            this.setState({state: a.data.state});
+            this.setState({zipcode:a.data.zipcode});
+            this.setState({mainContactName : a.data.mainContactName});
+            this.setState({mainContactEmail :a.data.mainContactEmail});
+            this.setState({officeName : a.data.officeName});
+            this.setState({officeHours : a.data.office_hours_start+ "-" + a.data.office_hours_end});
+            this.setState({ officeLunchHours: a.data.lunch_hours_start + "-" + a.data.lunch_hours_end});
+        })
+    }
 
     convertNumToTime(num){
         var hr = parseInt(num) / 60;
@@ -126,31 +256,31 @@ class UpdateMyInfo extends Component {
                                 <div className="form-row">
                                     <div className="form-group col-md-9">
                                         <div><span>Doctor Name/ Office Name</span></div>
-                                        <input type="text" className="form-control" name="doctorOrOfficeName" value={this.state.officeName}/>
+                                        <input type="text" className="form-control" name="doctorOrOfficeName" value={this.state.officeName} onChange = {(event) => {this.setState({officeName: event.target.value})}}/>
                                     </div>
                                     <div className="form-group col-md-3">
                                         <div><span>License#</span></div>
-                                        <input type="text" className="form-control" name="licenseNum" value={this.state.license}/>
+                                        <input type="text" className="form-control" name="licenseNum" value={this.state.license} onChange = {(event) => {this.setState({officeName: event.target.value})}}/>
                                     </div>  
                                 </div>
                                 <div className="form-row">
                                     <div className="form-group col-md-12">
                                         <div><span>Address Line1</span></div>
-                                        <input type="text" className="form-control" name="address" value={this.state.billingAddress}/>                                                
+                                        <input type="text" className="form-control" name="address" value={ this.state.street} onChange = {(event) => {this.setState({street: event.target.value})}}/>                                                
                                     </div>
                                 </div>
                                 <div className="form-row">
                                     <div className="form-group col-md-5">
                                         <div><span>City</span></div>
-                                        <input type="text" className="form-control" name="city"/>                                                
+                                        <input type="text" className="form-control" name="city" value = {this.state.city} onChange = {(event) => {this.setState({city: event.target.value})}}/>                                                
                                     </div>
                                     <div className="form-group col-md-3">
                                         <div><span>State</span></div>
-                                        <input type="text" className="form-control" name="state"/>  
+                                        <input type="text" className="form-control" name="state" value = {this.state.state} onChange = {(event) => {this.setState({state: event.target.value})}}/>  
                                     </div> 
                                     <div className="form-group col-md-2">
                                         <div><span>Zip</span></div>
-                                        <input type="text" className="form-control" name="zip"/>  
+                                        <input type="text" className="form-control" name="zip" value={this.state.zipcode} onChange = {(event) => {this.setState({zipcode: event.target.value})}}/>  
                                     </div> 
                                 </div>
                             </div>
@@ -165,13 +295,13 @@ class UpdateMyInfo extends Component {
                                         <div><b>Day:</b></div>
                                     </div>
                                     <div className="form-group col-md-8">
-                                        <input type="button" className="day btn btn-outline-secondary" value="Mon" onChange={(e) => { this.mon = "0" }}/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Tue" onChange={(e) => { this.tue = "0" }}/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Wed" onChange={(e) => { this.wed = "0" }}/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Thu" onChange={(e) => { this.thu = "0"}}/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Fri" onChange={(e) => { this.fri = "0"}}/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Sat" onChange={(e) => { this.sat = "0"}}/>
-                                        <input type="button" className="day btn btn-outline-secondary" value="Sun" onChange={(e) => { this.sun = "0" }}/>
+                                        <div className={"day" + (this.state.monActive ? ' active': '')} id="Mon" onClick={this.MonClicked} data-value="Mon">Mon</div>
+                                        <div className={"day" + (this.state.tueActive ? ' active': '')} id="Tue" onClick={this.TueClicked} data-value="Tue">Tue</div>
+                                        <div className={"day" + (this.state.wedActive ? ' active': '')} id="Wed" onClick={this.WedClicked} data-value="Wed">Wed</div>
+                                        <div className={"day" + (this.state.thuActive ? ' active': '')} id="Thu" onClick={this.ThuClicked} data-value="Thu">Thu</div>
+                                        <div className={"day" + (this.state.friActive ? ' active': '')} id="Fri" onClick={this.FriClicked} data-value="Fri">Fri</div>
+                                        <div className={"day" + (this.state.satActive ? ' active': '')} id="Sat" onClick={this.SatClicked} data-value="Sat">Sat</div>
+                                        <div className={"day" + (this.state.sunActive ? ' active': '')} id="Sun" onClick={this.SunClicked} data-value="Sun">Sun</div>
                                     </div>  
                                 </div>
 

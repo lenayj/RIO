@@ -17,7 +17,7 @@ class OfficeAddr extends Component {
         this.state = {
             showdata : this.displayData,
             postVal : "",
-            rawAddresses: null,
+            rawAddresses: {},
             loaded: false,
         }
 
@@ -28,17 +28,19 @@ class OfficeAddr extends Component {
     componentDidMount(){
         var yourConfig = {
             headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI0NzU5NTEzLCJpYXQiOjE2MjQ0NTk1MTMsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.aH-G3lOGBciPzylCA98cdJnbLhPoYeshY2lXP4Jx0jAIa2YSZ7U2eKFfcQr4Lv4ghtPG4-Yrp_2OdhoDV495-w"
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI1MTkwMDY4LCJpYXQiOjE2MjQ4OTAwNjgsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.1bC_fnPe110WpWwlAtAhLBWhgkbPa-hV-anitOMHpvjhvxa-nAU0Lsd4X8yNiAT112EED1LcAGuTxXmE_sqU2Q"
             }
          }
         axios.get("http://localhost:8080/viewAllAddresses?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
             // this.prependData(a.data[0]);
             this.setState({rawAddresses:a.data});
+            if(this.state.rawAddresses.length != 0){
+                this.setState({loaded: true});
+            }
             a.data.slice(1).forEach(address => {
                 console.log(address);
                 this.appendData(address);
             });
-            this.setState({loaded: true});
         })
     }
 
@@ -53,7 +55,16 @@ class OfficeAddr extends Component {
                         
                     </div>
                     <div className="second-row user-address">{address.street+", "}</div>
-                    <div className="third-row float-right">Edit | Delete</div>
+                    <div className="third-row float-right">
+                    <Link to={{
+                                            pathname: "/editAddr",
+                                            state: {
+                                                page: "Edit",
+                                                address: address
+                                            }
+                                        }} className="addNew-btn links">
+                                            <span>Edit</span>
+                                        </Link>  | Delete</div>
                 </div>
             </div>
 
@@ -106,7 +117,31 @@ class OfficeAddr extends Component {
                                 <Link to={{
                                         pathname: "/editAddr",
                                         state: {
-                                            page: "New"
+                                            page: "New",
+                                            address: {
+                                                addressesIds: [],
+                                                user:{
+                                                    firstName:"",
+                                                    lastName: "",
+                                                    license: "",
+                                                    email: "venkatesh@uniortholab.com",
+                                                    phone: "",
+                                                    mainContactName:"",
+                                                    mainContactEmail:"",
+                                                    officeName:""
+                                                },
+                                                street: "",
+                                                apartment:"",
+                                                state:"",
+                                                zipcode:"",
+                                                city:"",
+                                                office_hours_start:"0",
+                                                office_hours_end:"0",
+                                                lunch_hours_start:"0",
+                                                lunch_hours_end:"0",
+                                                is_default:"0",
+                                                office_work_days: ""
+                                            }
                                         }
                                     }} className="addNew-btn links">
                                     <input type="button" value="+ New" className="btn btn-outline-primary btn-lg" />
@@ -122,7 +157,7 @@ class OfficeAddr extends Component {
                                             <span>Your Default</span>
                                         </div>
                                     </div>
-                                    <div className="second-row user-address">11917 FRONT ST, NORWALK, CA 90650</div>
+                                    <div className="second-row user-address">{this.state.rawAddresses[0].street + " "  + this.state.rawAddresses[0].apartment + " " + this.state.rawAddresses[0].city + " " + this.state.rawAddresses[0].state }</div>
                                     <div className="third-row float-right">
                                         <Link to={{
                                             pathname: "/editAddr",

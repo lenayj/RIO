@@ -10,17 +10,23 @@ export class MyInfo extends Component {
         super(props);    
     
         this.state = {
+            addressesId:"",
             name:"",
-            license:"12112232",
-            Email:"venkatesh@uniortholab.com",
+            license:"",
+            Email:"",
             Phone:"",
-            billingAddress: "",
+            street : "",
+            state:"",
+            apartment: "",
+            city: "",
+            zipcode:"",
             mainContactName:"",
             mainContactEmail:"",
             officeName:"",
             officeHours:"",
             officeLunchHours:"",
-            addressesIds:[]
+            addressesIds:[],
+            office_work_days:""
         }
 
         this.editBtn = this.editBtn.bind(this);
@@ -29,37 +35,50 @@ export class MyInfo extends Component {
     componentDidMount(){
         var yourConfig = {
             headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI0Njg5NjQ2LCJpYXQiOjE2MjQzODk2NDYsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.B3oGRXAZpQXh9_ovwa4tWuGN7UCVjgDqsU26fzvLYJjm2HrQ9PUQ70tWQyoTWvYpSHcHQYzz0K8JsR7tSCvjFQ"
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI1MzA0MzQ3LCJpYXQiOjE2MjUwMDQzNDcsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.pEYqyippcV6bmpjjLN0U2kddJ9cASfhWkgZjLFf8l85A4ZOBezL42Qdy0P1b_Fl4DF834Nk6e2_WNBRYJY3_TA"
             }
          }
         axios.get("http://localhost:8080/myInformation?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
             debugger;
-            var name, license, Email , Phone, billingAddress ,mainContactName ,mainContactEmail ,officeName ,officeHours ,officeLunchHours,addressesIds;
+            var addressesId,name, license, Email , Phone,street ,state,apartment,city,zipcode ,mainContactName ,mainContactEmail ,officeName ,officeHours ,officeLunchHours,addressesIds,office_work_days;
+            addressesId = a.data.id;
             name = a.data.name;
             license = a.data.license;
             Email = a.data.email;
             Phone = a.data.phone;
-            billingAddress = a.data.billingAddress;
+            street  = a.data.street;
+            state = a.data.state;
+            apartment = a.data.apartment;
+            city = a.data.city; 
+            state = a.data.state;
+            zipcode = a.data.zipcode;
             mainContactName = a.data.mainContactName;
             mainContactEmail = a.data.mainContactEmail;
             officeName = a.data.officeName;
             officeHours = a.data.officeHours;
             officeLunchHours = a.data.officeLunchHours;
             addressesIds = a.data.addressesIds;
+            office_work_days = a.data.office_work_days;
 
             console.log(a);
 
+            this.setState({addressesId:addressesId});
             this.setState({name:name});
+            this.setState({state:state});
             this.setState({license:license});
             this.setState({Email:Email});
             this.setState({Phone:Phone});
-            this.setState({billingAddress:billingAddress});
+            this.setState({street:street });
+            this.setState({apartment:apartment });
+            this.setState({city:city});
+            this.setState({zipcode:zipcode});
             this.setState({mainContactName:mainContactName});
             this.setState({mainContactEmail:mainContactEmail});
             this.setState({officeName:officeName});
             this.setState({officeHours:officeHours});
             this.setState({officeLunchHours:officeLunchHours});
             this.setState({addressesIds:addressesIds});
+            this.setState({office_work_days:office_work_days});
         })
     }
 
@@ -120,7 +139,8 @@ export class MyInfo extends Component {
                             </div>
                             <div className="form-row">
                                 <div className="info-field col-md-4 ml-5"><span>Billing Address</span></div>
-                                <div className="info-value col-md-6"><span>{this.state.billingAddress}</span></div>
+                                <div className="info-value col-md-6"><span>{this.state.street + " " + this.state.apartment + 
+                                " " + this.state.city + " " + this.state.zipcode}</span></div>
                                 
                             </div>
                             <div className="form-row">
