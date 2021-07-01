@@ -108,7 +108,6 @@ class Booking extends Component{
             }
          }
         axios.get("http://localhost:8080/myInformation?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
-            debugger;
             var addressesId,name, license, Email , Phone,street ,state,apartment,city,zipcode ,mainContactName ,mainContactEmail ,officeName ,officeHours ,officeLunchHours,addressesIds,office_work_days;
             addressesId = a.data.id;
             name = a.data.name;
@@ -150,15 +149,8 @@ class Booking extends Component{
 
     pickItUp = (event) => {
         console.log(event );
-        debugger;
         var defaultAddressId = this.state.addressId;
         var yyyyMMdd = "";
-        // this.state.addresses.forEach((address) => {
-        //     debugger;
-        //     if(address.is_default == "1"){
-        //         defaultAddressInt =  address.id;
-        //     }
-        // });
 
         if(this.state.date != ""){
             var temp = this.state.date.split('/');

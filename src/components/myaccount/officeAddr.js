@@ -45,7 +45,6 @@ class OfficeAddr extends Component {
     }
 
     appendData(address) {
-        debugger;
         this.displayData.push(
             <div className="defaultAddr col col-md-5">
                 <div className="addr-field">
@@ -96,7 +95,6 @@ class OfficeAddr extends Component {
     }
 
     render(){
-        debugger;
         return (
             <div className="dashboard-bg-color">
                 <div className="container myacct officeAddr">

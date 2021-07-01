@@ -10,7 +10,6 @@ class UpdateMyInfo extends Component {
         super(props);
         console.log("asdsd");
         console.log(props);
-        debugger;
         this.state = {
             addressesId: props.location.state.addressesId,
             name: props.location.state.name,
@@ -102,7 +101,6 @@ class UpdateMyInfo extends Component {
     }
 
     sendUpdatedAddress(event){
-        debugger;
         console.log(event);
         var params = {
             "email" : this.state.Email,
@@ -125,7 +123,6 @@ class UpdateMyInfo extends Component {
             }
          }
         axios.post("http://localhost:8080/modifyAddress/" + this.state.addressesId,params,yourConfig).then((a) =>{
-            debugger;
             console.log(a);
             this.setState({office_work_days:this.getWorkDays()});
             this.setState({monActive:this.state.office_work_days.includes("1")});
@@ -160,7 +157,6 @@ class UpdateMyInfo extends Component {
             }
          }
         axios.get("http://localhost:8080/viewAddress/" + this.state.addressesId + "?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
-            debugger;
             console.log(a);
             this.setState({office_work_days:this.getWorkDays()});
             this.setState({monActive:a.data.office_work_days.includes("1")});
@@ -173,7 +169,6 @@ class UpdateMyInfo extends Component {
             this.setState({addressesId: a.data.id});
             this.setState({name: a.data.name});
             this.setState({license :a.data.license});
-            debugger;
             this.setState({Email: a.data.user.email});
             this.setState({Phone: a.data.Phone});
             this.setState({street : a.data.street});
@@ -187,6 +182,8 @@ class UpdateMyInfo extends Component {
             this.setState({officeHours : a.data.office_hours_start+ "-" + a.data.office_hours_end});
             this.setState({ officeLunchHours: a.data.lunch_hours_start + "-" + a.data.lunch_hours_end});
         })
+        debugger;
+        this.props.history.push('/myInfo');
     }
 
     convertNumToTime(num){
@@ -197,7 +194,6 @@ class UpdateMyInfo extends Component {
 
     onChangeLunchHour = (event) => {
         console.log(event);
-        debugger;
         var timeinnumbers = event.map((a) => {
             var arr = a.split(":").map((b) => {
                 return parseInt(b)
@@ -210,7 +206,6 @@ class UpdateMyInfo extends Component {
 
     onChangeOfficeHour = (event) => {
         console.log(event);
-        debugger;
         var timeinnumbers = event.map((a) => {
             var arr = a.split(":").map((b) => {
                 return parseInt(b)
@@ -223,7 +218,6 @@ class UpdateMyInfo extends Component {
     }
     
     render(){
-        debugger;
         var temp = this.state.officeHours.split("-").map((a) => {
             return this.convertNumToTime(a);
         });

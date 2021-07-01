@@ -39,7 +39,6 @@ export class MyInfo extends Component {
             }
          }
         axios.get("http://localhost:8080/myInformation?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
-            debugger;
             var addressesId,name, license, Email , Phone,street ,state,apartment,city,zipcode ,mainContactName ,mainContactEmail ,officeName ,officeHours ,officeLunchHours,addressesIds,office_work_days;
             addressesId = a.data.id;
             name = a.data.name;
