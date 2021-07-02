@@ -25,6 +25,43 @@ a.links:hover{
     padding-left:70px;
 }
 
+.navbar.btn-primary{
+    color: black;
+    background-color: black;
+    border-color: black;
+}
+
+.navbar.btn-primary:hover{
+    color: black;
+    background-color: black;
+    border-color: black;
+}
+
+.navbar.btn-primary:focus, .navbar.btn-primary.focus {
+    color: black;
+    background-color: black;
+    border-color: black;
+    box-shadow: none;
+}
+
+.navbar.btn-primary:not(:disabled):not(.disabled):active, 
+.navbar.btn-primary:not(:disabled):not(.disabled).active, 
+.show > .navbar.btn-primary.dropdown-toggle {
+    color: black;
+    background-color: black;
+    border-color: black;
+}
+
+.navbar.btn-primary:not(:disabled):not(.disabled):active:focus, 
+.navbar.btn-primary:not(:disabled):not(.disabled).active:focus, 
+.show > .navbar.btn-primary.dropdown-toggle:focus {
+    box-shadow: none;
+}
+
+.dropdown {
+    padding-top: 5px;
+}
+
 .leftSide .inner{
     padding-top:5px;
 }

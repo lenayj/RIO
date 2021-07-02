@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './Header';
 
+import Home from './Home';
+
 import Login from './login/Login';
 import Signup from './login/Signup';
 import privacyStatement from './login/privacyStatement';
@@ -30,6 +32,8 @@ import invoices from './invoices/invoices';
 export default () => (
     <Router>
         <Header />
+
+        <Route path="/" exact component={Home} />
 
         {/*Login and Sign up*/}
         <Route path='/Login' component={Login}/>
