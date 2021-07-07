@@ -3,6 +3,7 @@ import 'react-calendar/dist/Calendar.css';
 
 import {React, Component} from "react";
 import Calendar from 'react-calendar';
+import axios from 'axios';
 
 
 class Booking extends Component{
@@ -14,7 +15,18 @@ class Booking extends Component{
           activeTime: false,
           activeArea:false,
           /* Todo :: Bring User's city data from user information and set state */
-          city: ''
+          city: '',
+          street: "",
+          apartment:"",
+          city: "",
+          zipcode: "",
+          email:"",
+          docName:"",
+          docLicense: "",
+          docAddress: "",
+          docOfficeHours:"",
+          addresses:[],
+          addressId:"",
         };
       }
       
@@ -89,6 +101,86 @@ class Booking extends Component{
         this.setState({ date:'' });
     }
 
+    componentDidMount(){
+        var yourConfig = {
+            headers: {
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI1MTkwMDY4LCJpYXQiOjE2MjQ4OTAwNjgsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.1bC_fnPe110WpWwlAtAhLBWhgkbPa-hV-anitOMHpvjhvxa-nAU0Lsd4X8yNiAT112EED1LcAGuTxXmE_sqU2Q"
+            }
+         }
+        axios.get("http://localhost:8080/myInformation?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
+            var addressesId,name, license, Email , Phone,street ,state,apartment,city,zipcode ,mainContactName ,mainContactEmail ,officeName ,officeHours ,officeLunchHours,addressesIds,office_work_days;
+            addressesId = a.data.id;
+            name = a.data.name;
+            license = a.data.license;
+            Email = a.data.email;
+            Phone = a.data.phone;
+            street  = a.data.street;
+            state = a.data.state;
+            apartment = a.data.apartment;
+            city = a.data.city; 
+            state = a.data.state;
+            zipcode = a.data.zipcode;
+            mainContactName = a.data.mainContactName;
+            mainContactEmail = a.data.mainContactEmail;
+            officeName = a.data.officeName;
+            officeHours = a.data.officeHours;
+            officeLunchHours = a.data.officeLunchHours;
+            addressesIds = a.data.addressesIds;
+            office_work_days = a.data.office_work_days;
+
+            console.log(a);
+
+            this.setState({docName:name});
+            this.setState({license:license});
+            this.setState({email:Email});
+            this.setState({Phone:Phone});
+            this.setState({city: city});
+            this.setState({street:street });
+            this.setState({apartment:apartment });
+            this.setState({city:city});
+            this.setState({zipcode:zipcode});
+            this.setState({addressId:addressesId});
+            this.setState({mainContactEmail:mainContactEmail});
+            this.setState({officeName:officeName});
+            this.setState({officeHours:officeHours});
+            this.setState({officeLunchHours:officeLunchHours});
+        })
+    }
+
+    pickItUp = (event) => {
+        console.log(event );
+        var defaultAddressId = this.state.addressId;
+        var yyyyMMdd = "";
+
+        if(this.state.date != ""){
+            var temp = this.state.date.split('/');
+            var yyyy = temp[2];
+            var mm = temp[0];
+            var dd = temp[1];
+            if(mm.length != 2){
+                mm = "0"+mm;
+            }
+            if(dd.length != 2){
+                dd = "0"+dd;
+            }
+            yyyyMMdd = yyyy+"-"+mm+"-"+dd;
+        } 
+
+        var params = {
+            "email" : this.state.email,
+            "addressInt":defaultAddressId,
+            "pickup_date" : yyyyMMdd
+        }
+        var yourConfig = {
+            headers: {
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI1MTkwMDY4LCJpYXQiOjE2MjQ4OTAwNjgsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.1bC_fnPe110WpWwlAtAhLBWhgkbPa-hV-anitOMHpvjhvxa-nAU0Lsd4X8yNiAT112EED1LcAGuTxXmE_sqU2Q"
+            }
+         }
+        axios.post("http://localhost:8080/pickup",params,yourConfig).then((a) =>{
+            console.log(a);
+        })
+    }
+
     render(){
 
         return(
@@ -147,10 +239,11 @@ class Booking extends Component{
                                 <div className="doctorOfficeInfo mt-4">
                                     <div className="part-value">
                                         <div className="defaultAddr-mark float-right"><p>&#10003; Your Default</p></div>
-                                        <div className="form-row user-name">Doctor Name:&nbsp; <span>John Smith</span></div>
-                                        <div className="form-row doctor-license">Doctor License #:&nbsp; <span>12345</span></div>
-                                        <div className="form-row user-address">Address:&nbsp; <span>11917 FRONT ST, NORWALK, CA 90650</span></div>
-                                        <div className="form-row office-hours">Office Hours:&nbsp; <span>Mon-Fri 9-6 | 12-1</span></div>
+                                        <div className="form-row user-name">Doctor Name:&nbsp; <span>{this.state.docName}</span></div>
+                                        <div className="form-row doctor-license">Doctor License #:&nbsp; <span>{this.state.license}</span></div>
+                                        <div className="form-row user-address">Address:&nbsp; <span>{this.state.street + " " + this.state.apartment + 
+                                " " + this.state.city + " " + this.state.zipcode}</span></div>
+                                        <div className="form-row office-hours">Office Hours:&nbsp; <span>Mon-Fri 9-12|1-3</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -175,7 +268,7 @@ class Booking extends Component{
                         </form>
                     </div>
                     <div className="booking-submitBtn pt-5 pb-5">
-                            <input type="button" value="Submit" className="btn btn-primary btn-lg btn-block"/>
+                            <input type="button" value="Submit" className="btn btn-primary btn-lg btn-block" onClick={this.pickItUp}/>
                     </div>
                 </div>
             </div> 
