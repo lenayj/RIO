@@ -13,6 +13,7 @@ class OfficeAddr extends Component {
         super(props);    
     
         this.displayData = [];
+        this.default_address = {};
 
         this.state = {
             showdata : this.displayData,
@@ -26,20 +27,25 @@ class OfficeAddr extends Component {
     };
 
     componentDidMount(){
+        debugger;
         var yourConfig = {
             headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI1MTkwMDY4LCJpYXQiOjE2MjQ4OTAwNjgsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.1bC_fnPe110WpWwlAtAhLBWhgkbPa-hV-anitOMHpvjhvxa-nAU0Lsd4X8yNiAT112EED1LcAGuTxXmE_sqU2Q"
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI2MTQxNTMwLCJpYXQiOjE2MjU4NDE1MzAsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.GxmPgGEie-NxqmpezvqlMNKCxkPj9XJPKwCfGgZ5aG8z5ZV71P2U5jKChu8su8AZaLLTr8YKzTWaql4MvIBAWw"
             }
          }
         axios.get("http://localhost:8080/viewAllAddresses?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
             // this.prependData(a.data[0]);
             this.setState({rawAddresses:a.data});
-            if(this.state.rawAddresses.length != 0){
-                this.setState({loaded: true});
-            }
-            a.data.slice(1).forEach(address => {
-                console.log(address);
-                this.appendData(address);
+            a.data.forEach(address => {
+                debugger;
+                if(address.is_default==0){
+                    this.appendData(address);
+                }
+                else{
+                    this.default_address = address;
+                    this.setState({loaded: true});
+                }
+                
             });
         })
     }
@@ -149,19 +155,19 @@ class OfficeAddr extends Component {
                             <div className="defaultAddr col col-md-5">
                                 <div className="addr-field">
                                     <div className="first-row">
-                                        <div className="user-name float-left"><b>{this.state.rawAddresses[0].user.firstName + " " + this.state.rawAddresses[0].user.lastName}</b></div>
+                                        <div className="user-name float-left"><b>{this.default_address.user.firstName + " " + this.default_address.user.lastName}</b></div>
                                         <div className="defaultAddr-mark float-right">
                                             <p>&#10003;</p>
                                             <span>Your Default</span>
                                         </div>
                                     </div>
-                                    <div className="second-row user-address">{this.state.rawAddresses[0].street + " "  + this.state.rawAddresses[0].apartment + " " + this.state.rawAddresses[0].city + " " + this.state.rawAddresses[0].state }</div>
+                                    <div className="second-row user-address">{this.default_address.street + " "  + this.default_address.apartment + " " + this.default_address.city + " " + this.default_address.state }</div>
                                     <div className="third-row float-right">
                                         <Link to={{
                                             pathname: "/editAddr",
                                             state: {
                                                 page: "Edit",
-                                                address: this.state.rawAddresses[0]
+                                                address: this.default_address
                                             }
                                         }} className="addNew-btn links">
                                             <span>Edit</span>
