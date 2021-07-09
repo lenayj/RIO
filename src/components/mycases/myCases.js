@@ -8,7 +8,7 @@ import { getItems } from '../../actions/itemActions';
 import PropTypes from 'prop-types';
 import '../../css/pagination.css';
 import '../../css/myCases.css';
-    
+import Login from '../login/Login';
 
 class MyCases extends Component {
 
@@ -64,6 +64,7 @@ class MyCases extends Component {
    componentDidMount(){
        debugger;
        this.props.getItems();
+       
         // this.getData();
         // this.getData();
     }
@@ -93,6 +94,11 @@ class MyCases extends Component {
         if(isError){
         return <div>Error...</div>
         }
+
+        // if(!this.props.isAuthenticated){
+        //     return <Login></Login>;
+        // }
+
         return this.props.item.items.length > 0 
         ? (
             <div className="table-width myCases">

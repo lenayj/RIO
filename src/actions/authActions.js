@@ -8,7 +8,8 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  REFRESH_TOKEN
 } from './types';
 
 // Check token & load user
@@ -99,10 +100,48 @@ export const login = ({usernameOrEmail, password}) => (
 };
 
 // Logout User
-export const logout = () => {
-  return {
-    type: LOGOUT_SUCCESS
+export const logout = () => (dispatch) => {
+  dispatch(
+    {type: LOGOUT_SUCCESS}
+  );
+};
+
+export const refershToken = () => (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
   };
+
+  // Request body
+  axios
+    .post('/api/auth/refreshToken/', {}, config)
+    .then(res =>{
+      if(res.data== null || res.data=="" || res.data.length ==0){
+        dispatch(
+          returnErrors(res.data, "NO_DATA", 'LOGIN_FAIL')
+        );
+      }
+      else{
+        debugger;
+        dispatch({
+          type: REFRESH_TOKEN,
+          payload: res.data
+        });
+      }
+      
+    }
+      
+    )
+    .catch(err => {
+      debugger;
+      dispatch(
+        returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL')
+      );
+      // dispatch({
+      //   type: LOGIN_FAIL
+      // });
+    });
 };
 
 // Setup config/headers and token

@@ -5,6 +5,10 @@ import {React, Component} from "react";
 import Calendar from 'react-calendar';
 import axios from 'axios';
 
+import { connect } from "react-redux";
+import { putPickups } from '../../actions/pickupActions';
+import PropTypes from 'prop-types';
+
 
 class Booking extends Component{
 
@@ -104,7 +108,7 @@ class Booking extends Component{
     componentDidMount(){
         var yourConfig = {
             headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI1MTkwMDY4LCJpYXQiOjE2MjQ4OTAwNjgsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.1bC_fnPe110WpWwlAtAhLBWhgkbPa-hV-anitOMHpvjhvxa-nAU0Lsd4X8yNiAT112EED1LcAGuTxXmE_sqU2Q"
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI2MDYwMzU4LCJpYXQiOjE2MjU3NjAzNTksImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.-HsZC43qHgVdWDT-NhpCkwgkIzJGgYhQ0Y-nPNhli5tInZ-LXGlaC4H3A8XFpBbrHUQyRBWMfh2f29fhmRyBgg"
             }
          }
         axios.get("http://localhost:8080/myInformation?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
@@ -176,9 +180,16 @@ class Booking extends Component{
                Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI1MTkwMDY4LCJpYXQiOjE2MjQ4OTAwNjgsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.1bC_fnPe110WpWwlAtAhLBWhgkbPa-hV-anitOMHpvjhvxa-nAU0Lsd4X8yNiAT112EED1LcAGuTxXmE_sqU2Q"
             }
          }
-        axios.post("http://localhost:8080/pickup",params,yourConfig).then((a) =>{
-            console.log(a);
-        })
+
+         this.props.putPickups(params);
+         window.location.reload();
+        //  if(!this.props.isAuthenticated){
+        //     history.push("/Login");
+        //  }
+
+        // axios.post("http://localhost:8080/pickup",params,yourConfig).then((a) =>{
+        //     console.log(a);
+        // })
     }
 
     render(){
@@ -275,4 +286,12 @@ class Booking extends Component{
     )}
 }
 
-export default Booking;
+Booking.propTypes = {
+    putPickups: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.object.isRequired
+}
+const mapStateToProps = (state) => ({
+    item: state.item
+});
+
+export default connect(mapStateToProps, {putPickups})(Booking);

@@ -6,7 +6,8 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
-    REGISTER_FAIL
+    REGISTER_FAIL,
+    REFRESH_TOKEN
 } from '../actions/types';
 
 const initialState = {
@@ -31,6 +32,7 @@ const initialState = {
           user: action.payload
         };
       case LOGIN_SUCCESS:
+      case REFRESH_TOKEN:
       case REGISTER_SUCCESS:
         debugger;
         localStorage.setItem('token', action.payload.accessToken);
