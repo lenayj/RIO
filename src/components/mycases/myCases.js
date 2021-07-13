@@ -95,9 +95,10 @@ class MyCases extends Component {
         return <div>Error...</div>
         }
 
-        // if(!this.props.isAuthenticated){
-        //     return <Login></Login>;
-        // }
+        if(!this.props.isAuthenticated){
+            this.props.history.push("/Login");
+            window.location.reload();
+        }
 
         return this.props.item.items.length > 0 
         ? (
@@ -161,10 +162,12 @@ class MyCases extends Component {
 
 MyCases.propTypes = {
     getItems: PropTypes.func.isRequired,
-    item: PropTypes.object.isRequired
+    item: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.object.isRequired
 }
 const mapStateToProps = (state) => ({
-    item: state.item
+    item: state.item,
+    isAuthenticated:state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, {getItems})(MyCases);

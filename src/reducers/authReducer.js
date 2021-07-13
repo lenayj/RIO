@@ -12,7 +12,7 @@ import {
 
 const initialState = {
     token: localStorage.getItem('token'),
-    isAuthenticated: null,
+    isAuthenticated: localStorage.getItem('isAuthenticated'),
     isLoading: false,
     user: null
   };
@@ -36,17 +36,20 @@ const initialState = {
       case REGISTER_SUCCESS:
         debugger;
         localStorage.setItem('token', action.payload.accessToken);
+        localStorage.setItem('isAuthenticated', true);
         return {
-          ...state,
-          ...action.payload,
-          isAuthenticated: true,
-          isLoading: false
+          token: localStorage.getItem('token'),
+          isAuthenticated: localStorage.getItem('isAuthenticated'),
+          isLoading: false,
+          user: null,
+          ...action.payload
         };
       case AUTH_ERROR:
       case LOGIN_FAIL:
       case LOGOUT_SUCCESS:
       case REGISTER_FAIL:
         localStorage.removeItem('token');
+        localStorage.removeItem('isAuthenticated');
         return {
           ...state,
           token: null,

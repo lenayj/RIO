@@ -11,8 +11,15 @@ class Home extends Component{
     componentDidMount(){
         debugger;
         this.props.refershToken();
+        // if(!this.props.isAuthenticated){
+        //     this.props.history.push("/Login");
+        // }
     }
     render(){
+        if(!this.props.isAuthenticated){
+            this.props.history.push("/Login");
+            window.location.reload();
+        }
         return(
             <div className="dashboard-bg-color">
                 <div className="container home">
@@ -47,8 +54,8 @@ Home.propTypes = {
     isAuthenticated: PropTypes.object.isRequired
 }
 const mapStateToProps = (state) => ({
-    isAuthenticated: state.isAuthenticated,
-    refershToken: state.refershToken
+    isAuthenticated: state.auth.isAuthenticated,
+    refershToken: state.auth.refershToken
   });
 
   export default connect(mapStateToProps, { refershToken })(Home);

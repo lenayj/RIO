@@ -1,12 +1,12 @@
 import axios from 'axios';
-import {GET_ITEMS, ADD_ITEM, DELETE_ITEM, CREATE_PICKUP, CREATED_PICKUP, PICKUP_FAIL} from './types'
+import {GET_ITEMS, ADD_ITEM, CREATE_PICKUP, LOAD_USER_INFO, LOADED_FAIL_USER_INFO, PICKUP_FAIL} from './types'
 import { tokenConfig } from './authActions';
 import jwt_decode from 'jwt-decode';
 import { returnErrors } from './errorActions';
 import history from '../components/history';
 
 
-export const putPickups = (params) => (dispatch,getState) => {
+export const myInformation = () => (dispatch,getState) => {
     dispatch(setItemsLoading());
     // console.log(jwt_decode(getState().auth.token));
     const config = {
@@ -15,32 +15,29 @@ export const putPickups = (params) => (dispatch,getState) => {
         }
       };
     
-      // Request body
-      const body = JSON.stringify(params);
       debugger;
     try{
         // var token = jwt_decode(getState().auth.token,{header: true});
         axios
-        .post('/pickup', params, {
+        .get('/myInformation',{
             ...tokenConfig(getState)
         })
         .then(res =>{
-            dispatch({
-                type: CREATED_PICKUP,
-                payload: res.data
-            });
-            alert(res.data);
-        }
+            debugger;
+        dispatch({
+            type: LOAD_USER_INFO,
+            payload: res.data
+        })
+    }
         )
         .catch(err => {
             debugger;
-        dispatch(
-            returnErrors(err.response.data, err.response.status, 'PICKUP_FAIL')
-        );
-        dispatch({
-            type: PICKUP_FAIL
-        });
-        history.push("/login");        
+            dispatch(
+                returnErrors(err.response.data, err.response.status, 'LOADED_FAIL_USER_INFO')
+            );
+            dispatch({
+                type: LOADED_FAIL_USER_INFO
+            });
         });
     }
     catch(err){

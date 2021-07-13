@@ -103,7 +103,9 @@ async loadData(props) {
  render(){
   //  debugger;
    if(this.props.accessToken){
-     return (<Redirect to="/myCases" />)
+    //  return (<Redirect to="/myCases" />)
+    this.props.history.push("/");
+    // this.props.history.push("/myCases");
   }
     return (
      <Form>
