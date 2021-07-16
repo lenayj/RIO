@@ -82,7 +82,10 @@ export class MyInfo extends Component {
         //     this.setState({addressesIds:addressesIds});
         //     this.setState({office_work_days:office_work_days});
         // })
-
+        if(!this.props.isAuthenticated){
+            this.props.history.push("/Login");
+            window.location.reload();
+        }
         this.props.myInformation();
 
     }
@@ -133,7 +136,7 @@ export class MyInfo extends Component {
                             <div className="form-row">
                                 <div className="info-field col-md-4 ml-5"><span>Email</span></div>
                                 <div className="info-value col-md-7">
-                                    <span>{this.props.user.user!=null? this.props.user.user.Email : ""}</span>
+                                    <span>{this.props.user.user!=null? this.props.user.user.email : ""}</span>
                                     <div className="text-danger mt-1"><small>This field can't be changed</small></div>
                                 </div>
                             </div>
@@ -191,7 +194,8 @@ MyInfo.propTypes = {
     isAuthenticated: PropTypes.object.isRequired
 }
 const mapStateToProps = (state) => ({
-    user: state.user
+    user: state.user,
+    isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, {myInformation})(MyInfo);

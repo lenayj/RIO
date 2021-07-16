@@ -107,6 +107,10 @@ class Booking extends Component{
     }
 
     componentDidMount(){
+        if(!this.props.isAuthenticated){
+            this.props.history.push("/Login");
+            window.location.reload();
+        }
         var yourConfig = {
             headers: {
                Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI2NDExNDg5LCJpYXQiOjE2MjYxMTE0ODksImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.x1Vi_pccbGI9GqnRL2NHBNgfHdlGMrnrYnMFP-OoQibhGrLGGhRNhhHwXYvIvcDgjabBRvROOPFc01OqUZ4FHw"
@@ -311,7 +315,8 @@ Booking.propTypes = {
     isAuthenticated: PropTypes.object.isRequired
 }
 const mapStateToProps = (state) => ({
-    user: state.user
+    user: state.user,
+    isAuthenticated:state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, {putPickups,myInformation})(Booking);

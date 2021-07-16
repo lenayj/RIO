@@ -2,7 +2,7 @@ import '../css/Header.css';
 import '../App.css';
 import {React, Component} from "react";
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { BiSearch } from "react-icons/bi";
 import { VscBell, VscGear, VscAccount } from "react-icons/vsc";
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -13,6 +13,7 @@ import {logout} from '../actions/authActions';
 class Header extends Component{
     
     constructor(props) {
+        debugger;
         super(props)
     }
 
@@ -25,6 +26,12 @@ class Header extends Component{
     /* Todo:: Search Button Click Event */
     SearchBtnClick(){
         
+    }
+
+    componentDidMount(){
+        if(!this.props.isAuthenticated){
+            this.props.history.push("/Login");
+        }
     }
 
     render(){
@@ -104,4 +111,4 @@ const mapStateToProps = (state) => ({
     clearErrors: state.clearErrors
   });
 
-  export default connect(mapStateToProps, { logout })(Header);
+  export default withRouter(connect(mapStateToProps, { logout })(Header));

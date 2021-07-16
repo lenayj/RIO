@@ -50,11 +50,13 @@ export const signup = (SignupDetails) => (
   debugger;
   axios
     .post('api/auth/signup/', body, config)
-    .then(res =>
+    .then(res =>{
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
       })
+      alert("Registered Successfully!");
+    }
     )
     .catch(err => {
       dispatch(
