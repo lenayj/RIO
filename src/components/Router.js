@@ -17,20 +17,24 @@ import newCasePersonalInfo from './newCasePersonalInfo';
 import newCasePrescription from './newCasePrescription';
 import newCaseOfficeInfo from './newCaseOfficeInfo';
 
-export default () => (
+function App() {
+  return (
     <Router>
-        <Header />
-        <Route path='/Login' component={Login}/>
-        <Route path='/signup' component={Signup}/>
-        <Route path='/privacyStatement' component={privacyStatement}/>
-        <Route path='/termsAndService' component={termsAndService}/>
-        <Route path='/resetPassword' component={resetPassword}/>
-        <Route path='/forgotPassword' component={forgotPassword}/>
-        <Route path='/myCases' component={myCases}/>
-        <Route path='/renderOpenMSG' component={renderOpenMSG}/>
-        <Route path='/newCase' component={newCase}/>
-        <Route path='/newCasePersonalInfo' component={newCasePersonalInfo}/>
-        <Route path='/newCasePrescription' component={newCasePrescription}/>
-        <Route path='/newCaseOfficeInfo' component={newCaseOfficeInfo}/>
+      <Header />
+      <Route path="/Login" component={Login} />
+      <Route path="/signup" component={Signup} />
+      <Route path="/privacyStatement" component={privacyStatement} />
+      <Route path="/termsAndService" component={termsAndService} />
+      <Route path="/resetPassword" component={resetPassword} />
+      <Route path="/forgotPassword" component={forgotPassword} />
+      <Route path="/myCases" component={myCases} />
+      <Route path="/renderOpenMSG" component={renderOpenMSG} />
+      <Route path="/newCase" component={newCase} />
+      <Route path="/newCasePersonalInfo" component={newCasePersonalInfo} />
+      <Route path="/newCasePrescription" component={newCasePrescription} />
+      <Route path="/newCaseOfficeInfo" component={newCaseOfficeInfo} />
     </Router>
-)
+  );
+}
+
+export default App;
