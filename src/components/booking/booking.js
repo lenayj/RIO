@@ -25,8 +25,7 @@ class Booking extends Component{
           docOfficeHours:"",
           addresses:[],
           addressId:"",
-          officeAddresses:[],
-          selectedID:[],
+          officeAddresses:[]
         };
       }
       
@@ -107,14 +106,15 @@ class Booking extends Component{
         var selectedOfficeValue = e.target.value.split(',');
         var OfficeAddress = selectedOfficeValue[0] +", "+ selectedOfficeValue[1] +", "+ selectedOfficeValue[2] +", "+ selectedOfficeValue[3];
         var OfficeName = selectedOfficeValue[4];
-        //var OfficeHours = ;
+        var OfficeHours = selectedOfficeValue[6] + " - " + selectedOfficeValue[5] + " | " + selectedOfficeValue[8] + " - " + selectedOfficeValue[7];
         
-        alert(OfficeAddress + "Name: " + OfficeName + " Hours: "+ selectedOfficeValue[8]);
+        //alert(OfficeAddress + "Name: " + OfficeName + " Hours: "+ selectedOfficeValue[8]);
         
         /***split the value by comma and set office name / address / office hours***/
         //console.log(this.state.officeAddresses);
         this.setState({ defaultOfficeAddress: OfficeAddress });
         this.setState({ defaultOfficeName: OfficeName});
+        this.setState({ defaultOfficeHours: OfficeHours});
         
 
     }
