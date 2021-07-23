@@ -23,14 +23,13 @@ class NewCaseOfficeInfo extends Component {
       }
 
     selectAddress = (e) => {
-      debugger;
-        
+      
       var selectedOfficeValue = e.target.value.split(',');
       var OfficeAddress = selectedOfficeValue[0] +", "+ selectedOfficeValue[1] +", "+ selectedOfficeValue[2] +", "+ selectedOfficeValue[3];
       var OfficeName = selectedOfficeValue[4];
       var phone = selectedOfficeValue[5];
       
-      //alert(OfficeAddress + "Name: " + OfficeName + " Hours: "+ selectedOfficeValue[8]);
+      //alert(selectedOfficeValue[5]);
       
       /***split the value by comma and set office name / address / office hours***/
       //console.log(this.state.officeAddresses);
@@ -49,18 +48,22 @@ class NewCaseOfficeInfo extends Component {
        axios.get("http://192.168.1.194:8443/viewAllAddresses?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
           //var addressesId,name, license, Email , Phone,street ,state,apartment,city,zipcode ,mainContactName ,mainContactEmail ,officeName ,officeHours ,officeLunchHours,addressesIds,office_work_days,is_default;
           
-          var defaultOfficeAddress, phone, defaultOfficeName;
+          var officeAddresses, defaultOfficeAddress, phone, doctorName, defaultOfficeName;
 
+          officeAddresses = a.data;
           defaultOfficeAddress = a.data[0].street + ", " +  a.data[0].state + ", " + a.data[0].city + ", " + a.data[0].zipcode;
           defaultOfficeName = a.data[0].officeName;
-          phone = a.data[0].phone;
+          phone = a.data[0].user.phoneNumber;
+          doctorName = a.data[0].user.firstName + " " + a.data[0].user.lastName
 
-          debugger;
-          //console.log(a.data);
+          //debugger;
+          console.log(a.data);
           
+          this.setState({officeAddresses:officeAddresses});
           this.setState({defaultOfficeAddress:defaultOfficeAddress});
           this.setState({defaultOfficeName:defaultOfficeName});
           this.setState({phone:phone});
+          this.setState({doctorName:doctorName});
       
       })
   }
@@ -76,7 +79,7 @@ class NewCaseOfficeInfo extends Component {
                     <div className="addresses-list">
                       <select className="custom-select" style={{width:"400px"}} value={this.state.defaultOfficeAddress} onChange={this.selectAddress}>
                           {this.state.officeAddresses.map((address) => (
-                              <option value={[address.street, address.state, address.city, address.zipcode, address.officeName, address.phone]}
+                              <option value={[address.street, address.state, address.city, address.zipcode, address.officeName, address.user.phoneNumber]}
                                       key={address.id}>
                                   {address.street}, {address.state}, {address.city}, {address.zipcode}
                               </option>
@@ -88,10 +91,10 @@ class NewCaseOfficeInfo extends Component {
                 
                 <div className="part-value">
                     <div className="defaultAddr-mark"><p>&#10003; Your Default</p></div>
-                    <div className="form-row user-name"><span>Doctor Name:&nbsp;</span> John Smith</div>
-                    <div className="form-row office-nema"><span>Office Name:&nbsp;</span> John Dentistry</div>
-                    <div className="form-row user-address"><span>Address:&nbsp;</span>{this.state.pickupAddress}</div>
-                    <div className="form-row phone"><span>Phone:&nbsp;</span> 000-000-0000</div>
+                    <div className="form-row user-name"><span>Doctor Name:&nbsp;</span>{this.state.doctorName}</div>
+                    <div className="form-row office-nema"><span>Office Name:&nbsp;</span>{this.state.defaultOfficeName}</div>
+                    <div className="form-row user-address"><span>Address:&nbsp;</span>{this.state.defaultOfficeAddress}</div>
+                    <div className="form-row phone"><span>Phone:&nbsp;</span>{this.state.phone}</div>
                 </div>
             </div>
         );
