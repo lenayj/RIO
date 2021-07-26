@@ -1,10 +1,19 @@
 import '../../css/myAccount.css';
 import '../../css/Home.css';
 
+import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 
 class MyAccount extends Component {
+
+    componentDidMount(){
+        if(!this.props.isAuthenticated){
+            this.props.history.push("/Login");
+            window.location.reload();
+        }
+    }
 
     render(){
         return (
@@ -26,5 +35,11 @@ class MyAccount extends Component {
         );
     }
 }
+MyAccount.propTypes = {
+    isAuthenticated: PropTypes.object.isRequired
+}
+const mapStateToProps = (state) => ({
+    isAuthenticated:state.auth.isAuthenticated
+});
 
-export default MyAccount;
+export default connect(mapStateToProps, {})(MyAccount);

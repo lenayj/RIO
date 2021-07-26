@@ -1,28 +1,37 @@
 import '../css/Header.css';
 import '../App.css';
 import {React, Component} from "react";
-
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 import { BiSearch } from "react-icons/bi";
 import { VscBell, VscGear, VscAccount } from "react-icons/vsc";
-import Dropdown from 'react-bootstrap/Dropdown'
+import Dropdown from 'react-bootstrap/Dropdown';
+import {logout} from '../actions/authActions';
 
 /*Icon :: https://react-icons.github.io/react-icons/search?q=setting */
 
 class Header extends Component{
     
     constructor(props) {
+        debugger;
         super(props)
     }
 
     /* Todo:: Needed to fix BUG !! */
     logoutHandler =(e) => {
         //this.props.history.push('/Login')
+        this.props.logout();
     }
     
     /* Todo:: Search Button Click Event */
     SearchBtnClick(){
         
+    }
+
+    componentDidMount(){
+        if(!this.props.isAuthenticated){
+            this.props.history.push("/Login");
+        }
     }
 
     render(){
@@ -94,4 +103,12 @@ class Header extends Component{
     }
 }
 
-export default Header;
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    accessToken: state.auth.accessToken,
+    error: state.error,
+    login: state.login,
+    clearErrors: state.clearErrors
+  });
+
+  export default withRouter(connect(mapStateToProps, { logout })(Header));

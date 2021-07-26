@@ -1,10 +1,13 @@
 import '../../css/Login.css';
+import {login} from '../../actions/authActions';
 import { userService } from '../../_services';
 
 import {Button, Form} from 'reactstrap';
 import GoogleLogin from 'react-google-login';
+import { connect } from 'react-redux';
 import {React, Component} from "react";
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import { clearErrors } from '../../actions/errorActions';
 import MicrosoftLogin from 'react-microsoft-login';
 
 import bg from '../../assets/bg.png';
@@ -42,14 +45,17 @@ handleSubmit(e) {
   }
 
   this.setState({ loading: true });
-  userService.login(usernameOrEmail, password)
-      .then(
-          user => {
-              const { from } = this.props.location.state || { from: { pathname: "/" } };
-              this.props.history.push(from);
-          },
-          error => this.setState({ error, loading: false })
-      );
+  // userService.login(usernameOrEmail, password)
+  //     .then(
+  //         user => {
+  //             const { from } = this.props.location.state || { from: { pathname: "/" } };
+  //             this.props.history.push(from);
+  //         },
+  //         error => this.setState({ error, loading: false })
+  //     );
+
+  // debugger;
+  this.props.login({usernameOrEmail,password});
 }
 
 
@@ -86,7 +92,21 @@ handleChange = (e) => {
   })
 }
 
+async loadData(props) {
+  try {
+    
+ } catch (e) {
+     console.log(e);
+ }
+}
+
  render(){
+  //  debugger;
+   if(this.props.accessToken){
+    //  return (<Redirect to="/myCases" />)
+    this.props.history.push("/");
+    // this.props.history.push("/myCases");
+  }
     return (
      <Form>
        <div>
@@ -158,4 +178,12 @@ handleChange = (e) => {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  accessToken: state.auth.accessToken,
+  error: state.error,
+  login: state.login,
+  clearErrors: state.clearErrors
+});
+
+export default connect(mapStateToProps, { login, clearErrors })(Login);

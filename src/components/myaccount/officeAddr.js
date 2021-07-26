@@ -2,7 +2,11 @@ import '../../css/myAccount.css';
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import {viewAllAddresses} from '../../actions/AddressActions';
+
 /*Todo: Get User Data for default office address value*/
 
 /*Todo: When there is multiple office addresses get multiple office addresses from Numen*/
@@ -10,8 +14,9 @@ import axios from 'axios';
 class OfficeAddr extends Component {
 
     constructor(props) {
-        super(props);    
-    
+        super(props);
+        debugger;
+        
         this.displayData = [];
         this.default_address = {};
 
@@ -28,15 +33,35 @@ class OfficeAddr extends Component {
 
     componentDidMount(){
         debugger;
-        var yourConfig = {
-            headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI2MTQxNTMwLCJpYXQiOjE2MjU4NDE1MzAsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.GxmPgGEie-NxqmpezvqlMNKCxkPj9XJPKwCfGgZ5aG8z5ZV71P2U5jKChu8su8AZaLLTr8YKzTWaql4MvIBAWw"
-            }
-         }
-        axios.get("http://localhost:8080/viewAllAddresses?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
-            // this.prependData(a.data[0]);
+        // var yourConfig = {
+        //     headers: {
+        //        Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI2MTQxNTMwLCJpYXQiOjE2MjU4NDE1MzAsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.GxmPgGEie-NxqmpezvqlMNKCxkPj9XJPKwCfGgZ5aG8z5ZV71P2U5jKChu8su8AZaLLTr8YKzTWaql4MvIBAWw"
+        //     }
+        //  }
+        // axios.get("http://localhost:8080/viewAllAddresses?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
+        //     // this.prependData(a.data[0]);
+        //     this.setState({rawAddresses:a.data});
+        //     a.data.forEach(address => {
+        //         debugger;
+        //         if(address.is_default==0){
+        //             this.appendData(address);
+        //         }
+        //         else{
+        //             this.default_address = address;
+        //             this.setState({loaded: true});
+        //         }
+                
+        //     });
+        // })
+
+        // 
+        if(!this.props.isAuthenticated){
+            this.props.history.push("/Login");
+            window.location.reload();
+        }
+       this.props.viewAllAddresses().then((a)=>{
             this.setState({rawAddresses:a.data});
-            a.data.forEach(address => {
+            a.forEach(address => {
                 debugger;
                 if(address.is_default==0){
                     this.appendData(address);
@@ -45,9 +70,8 @@ class OfficeAddr extends Component {
                     this.default_address = address;
                     this.setState({loaded: true});
                 }
-                
             });
-        })
+        });
     }
 
     appendData(address) {
@@ -55,7 +79,7 @@ class OfficeAddr extends Component {
             <div className="defaultAddr col col-md-5">
                 <div className="addr-field">
                     <div className="first-row">
-                        <div className="user-name float-left"><b>{address.user.firstName + " " + address.user.lastName}</b></div>
+                        <div className="user-name float-left"><b>{address.officeName}</b></div>
                         {/* {address.is_default==0 ? <div className="defaultAddr-mark float-right"><p>&#10003; Your Default</p></div> : "" } */}
                         
                     </div>
@@ -101,6 +125,18 @@ class OfficeAddr extends Component {
     }
 
     render(){
+        // if(this.props.address.addresses !=null && this.props.address.addresses.length!=0){
+        //     this.props.address.addresses.forEach(address => {
+        //         debugger;
+        //         if(address.is_default==0){
+        //             this.appendData(address);
+        //         }
+        //         else{
+        //             this.default_address = address;
+        //             // this.setState({loaded: true});
+        //         }
+        //     });
+        // }
         return (
             <div className="dashboard-bg-color">
                 <div className="container myacct officeAddr">
@@ -155,7 +191,7 @@ class OfficeAddr extends Component {
                             <div className="defaultAddr col col-md-5">
                                 <div className="addr-field">
                                     <div className="first-row">
-                                        <div className="user-name float-left"><b>{this.default_address.user.firstName + " " + this.default_address.user.lastName}</b></div>
+                                        <div className="user-name float-left"><b>{this.default_address.officeName}</b></div>
                                         <div className="defaultAddr-mark float-right">
                                             <p>&#10003;</p>
                                             <span>Your Default</span>
@@ -196,4 +232,14 @@ class OfficeAddr extends Component {
     }
 }
 
-export default OfficeAddr;
+
+OfficeAddr.propTypes = {
+    viewAllAddresses: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.object.isRequired
+}
+const mapStateToProps = (state) => ({
+    address: state.address,
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, {viewAllAddresses})(OfficeAddr);

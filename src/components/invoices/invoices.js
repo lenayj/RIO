@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import '../../css/pagination.css';
-
+import { connect } from "react-redux";
+import { getInvoices } from '../../actions/invoiceActions';
+import PropTypes from 'prop-types';
     
 
 class Invoices extends Component {
@@ -49,7 +51,11 @@ class Invoices extends Component {
     }
 
    componentDidMount(){
-        this.getData();
+    if(!this.props.isAuthenticated){
+        this.props.history.push("/Login");
+        window.location.reload();
+    }
+        this.props.getInvoices();
     }
     getData() {
         axios
@@ -78,7 +84,7 @@ class Invoices extends Component {
         if(isError){
         return <div>Error...</div>
         }
-        return tableData.length > 0 
+        return this.props.invoice.invoice.length > 0 
         ? (
             <div className="table-width invoices">
                  <div class="myInvoices-banner text-left mb-5 mt-4"><h1 className="title-wording">My Invoices</h1></div>                
@@ -98,15 +104,15 @@ class Invoices extends Component {
                      {/*Todo:: Key modify required here*/}
                      <tbody>
                         {
-                          this.state.tableData.map((tdata, i) => (
+                          this.props.invoice.invoice.map((tdata, i) => (
                                 <tr key={tdata.id}>
                                     <td># {tdata.id}</td>
-                                    <td>{tdata.userId}</td>
-                                    <td>{tdata.title}</td>
-                                    <td>$ {tdata.userId}</td>
-                                    <td><span className="paid">PAID</span></td>
+                                    <td>{tdata.updatedDateUTC}</td>
+                                    <td>{tdata.status}</td>
+                                    <td>$ {tdata.total}</td>
+                                    <td><span className="paid">{tdata.status}</span></td>
                                     <td>
-                                        <a href="https://in.xero.com/U1FCmXxE4cWfDs9XH62PDllUJS9brKWSCcspyRWO" target="_blank" rel="noreferrer">
+                                        <a href={tdata.onlineInvoiceUrl} target="_blank" rel="noreferrer">
                                             <input type="button" className="view-invoices btn btn-primary" value="View"/>
                                         </a>
                                     </td>
@@ -118,14 +124,14 @@ class Invoices extends Component {
                      </tbody>
                  </table>   
                 
-                <div className="text-right">{dataTotal} Entries in Total </div>
+                <div className="text-right">{this.props.invoice.invoice.length} Entries in Total </div>
 
                  <ReactPaginate
                     previousLabel={"<"}
                     nextLabel={">"}
                     breakLabel={"..."}
                     breakClassName={"break-me"}
-                    pageCount={this.state.pageCount}
+                    pageCount={this.props.invoice.invoice.length}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={5}
                     onPageChange={this.handlePageClick}
@@ -138,5 +144,14 @@ class Invoices extends Component {
           )
     }
 }
+Invoices.propTypes = {
+    getInvoices: PropTypes.func.isRequired,
+    invoice: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.object.isRequired
+}
+const mapStateToProps = (state) => ({
+    invoice: state.invoice,
+    isAuthenticated:state.auth.isAuthenticated
+});
 
-export default Invoices;
+export default connect(mapStateToProps, {getInvoices})(Invoices);

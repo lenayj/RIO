@@ -4,12 +4,17 @@ import 'react-calendar/dist/Calendar.css';
 import {React, Component} from "react";
 import Calendar from 'react-calendar';
 import axios from 'axios';
+import { myInformation } from '../../actions/userActions';
+
+import { connect } from "react-redux";
+import { putPickups} from '../../actions/pickupActions';
+import PropTypes from 'prop-types';
 
 
 class Booking extends Component{
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
           date: '',
           activeTime: false,
@@ -102,54 +107,76 @@ class Booking extends Component{
     }
 
     componentDidMount(){
+        if(!this.props.isAuthenticated){
+            this.props.history.push("/Login");
+            window.location.reload();
+        }
         var yourConfig = {
             headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI2MTQxNTMwLCJpYXQiOjE2MjU4NDE1MzAsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.GxmPgGEie-NxqmpezvqlMNKCxkPj9XJPKwCfGgZ5aG8z5ZV71P2U5jKChu8su8AZaLLTr8YKzTWaql4MvIBAWw"
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI2NDExNDg5LCJpYXQiOjE2MjYxMTE0ODksImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.x1Vi_pccbGI9GqnRL2NHBNgfHdlGMrnrYnMFP-OoQibhGrLGGhRNhhHwXYvIvcDgjabBRvROOPFc01OqUZ4FHw"
             }
          }
-        axios.get("http://localhost:8080/myInformation?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
-            var addressesId,name, license, Email , Phone,street ,state,apartment,city,zipcode ,mainContactName ,mainContactEmail ,officeName ,officeHours ,officeLunchHours,addressesIds,office_work_days;
-            addressesId = a.data.id;
-            name = a.data.name;
-            license = a.data.license;
-            Email = a.data.email;
-            Phone = a.data.phone;
-            street  = a.data.street;
-            state = a.data.state;
-            apartment = a.data.apartment;
-            city = a.data.city; 
-            state = a.data.state;
-            zipcode = a.data.zipcode;
-            mainContactName = a.data.mainContactName;
-            mainContactEmail = a.data.mainContactEmail;
-            officeName = a.data.officeName;
-            officeHours = a.data.officeHours;
-            officeLunchHours = a.data.officeLunchHours;
-            addressesIds = a.data.addressesIds;
-            office_work_days = a.data.office_work_days;
+        // axios.get("http://localhost:8080/myInformation?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
+            // var addressesId,name, license, Email , Phone,street ,state,apartment,city,zipcode ,mainContactName ,mainContactEmail ,officeName ,officeHours ,officeLunchHours,addressesIds,office_work_days;
+            // addressesId = a.data.id;
+            // name = a.data.name;
+            // license = a.data.license;
+            // Email = a.data.email;
+            // Phone = a.data.phone;
+            // street  = a.data.street;
+            // state = a.data.state;
+            // apartment = a.data.apartment;
+            // city = a.data.city; 
+            // state = a.data.state;
+            // zipcode = a.data.zipcode;
+            // mainContactName = a.data.mainContactName;
+            // mainContactEmail = a.data.mainContactEmail;
+            // officeName = a.data.officeName;
+            // officeHours = a.data.officeHours;
+            // officeLunchHours = a.data.officeLunchHours;
+            // addressesIds = a.data.addressesIds;
+            // office_work_days = a.data.office_work_days;
 
-            console.log(a);
+            // console.log(a);
 
-            this.setState({docName:name});
-            this.setState({license:license});
-            this.setState({email:Email});
-            this.setState({Phone:Phone});
-            this.setState({city: city});
-            this.setState({street:street });
-            this.setState({apartment:apartment });
-            this.setState({city:city});
-            this.setState({zipcode:zipcode});
-            this.setState({addressId:addressesId});
-            this.setState({mainContactEmail:mainContactEmail});
-            this.setState({officeName:officeName});
-            this.setState({officeHours:officeHours});
-            this.setState({officeLunchHours:officeLunchHours});
-        })
+            // this.setState({docName:name});
+            // this.setState({license:license});
+            // this.setState({email:Email});
+            // this.setState({Phone:Phone});
+            // this.setState({city: city});
+            // this.setState({street:street });
+            // this.setState({apartment:apartment });
+            // this.setState({city:city});
+            // this.setState({zipcode:zipcode});
+            // this.setState({addressId:addressesId});
+            // this.setState({mainContactEmail:mainContactEmail});
+            // this.setState({officeName:officeName});
+            // this.setState({officeHours:officeHours});
+            // this.setState({officeLunchHours:officeLunchHours});
+        // })
+         debugger;
+        this.props.myInformation();
+        this.setState({docName:this.props.user.name});
+        this.setState({license:this.props.user.license});
+        this.setState({email:this.props.user.Email});
+        this.setState({Phone:this.props.user.Phone});
+        this.setState({city: this.props.user.city});
+        this.setState({street:this.props.user.street });
+        this.setState({apartment:this.props.user.apartment });
+        this.setState({city:this.props.user.city});
+        this.setState({zipcode:this.props.user.zipcode});
+        this.setState({addressId:this.props.user.addressesId});
+        this.setState({mainContactEmail:this.props.user.mainContactEmail});
+        this.setState({officeName:this.props.user.officeName});
+        this.setState({officeHours:this.props.user.officeHours});
+        this.setState({officeLunchHours:this.props.user.officeLunchHours});
+
     }
 
     pickItUp = (event) => {
+        event.preventDefault();
         console.log(event );
-        var defaultAddressId = this.state.addressId;
+        var defaultAddressId = this.props.user.user.id;
         var yyyyMMdd = "";
 
         if(this.state.date != ""){
@@ -173,12 +200,19 @@ class Booking extends Component{
         }
         var yourConfig = {
             headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI2MTQxNTMwLCJpYXQiOjE2MjU4NDE1MzAsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.GxmPgGEie-NxqmpezvqlMNKCxkPj9XJPKwCfGgZ5aG8z5ZV71P2U5jKChu8su8AZaLLTr8YKzTWaql4MvIBAWw"
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI2NDExNDg5LCJpYXQiOjE2MjYxMTE0ODksImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.x1Vi_pccbGI9GqnRL2NHBNgfHdlGMrnrYnMFP-OoQibhGrLGGhRNhhHwXYvIvcDgjabBRvROOPFc01OqUZ4FHw"
             }
          }
-        axios.post("http://localhost:8080/pickup",params,yourConfig).then((a) =>{
-            console.log(a);
-        })
+
+         this.props.putPickups(params);
+        //  window.location.reload();
+        //  if(!this.props.isAuthenticated){
+        //     history.push("/Login");
+        //  }
+
+        // axios.post("http://localhost:8080/pickup",params,yourConfig).then((a) =>{
+        //     console.log(a);
+        // })
     }
 
     render(){
@@ -239,10 +273,10 @@ class Booking extends Component{
                                 <div className="doctorOfficeInfo mt-4">
                                     <div className="part-value">
                                         <div className="defaultAddr-mark float-right"><p>&#10003; Your Default</p></div>
-                                        <div className="form-row user-name">Doctor Name:&nbsp; <span>{this.state.docName}</span></div>
-                                        <div className="form-row doctor-license">Doctor License #:&nbsp; <span>{this.state.license}</span></div>
-                                        <div className="form-row user-address">Address:&nbsp; <span>{this.state.street + " " + this.state.apartment + 
-                                " " + this.state.city + " " + this.state.zipcode}</span></div>
+                                        <div className="form-row user-name">Doctor Name:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.name: ""}</span></div>
+                                        <div className="form-row doctor-license">Doctor License #:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.license: ""}</span></div>
+                                        <div className="form-row user-address">Address:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.street + " " + this.props.user.user.apartment + 
+                                " " + this.props.user.user.city + " " + this.props.user.user.zipcode : ""}</span></div>
                                         <div className="form-row office-hours">Office Hours:&nbsp; <span>Mon-Fri 9-12|1-3</span></div>
                                     </div>
                                 </div>
@@ -275,4 +309,14 @@ class Booking extends Component{
     )}
 }
 
-export default Booking;
+Booking.propTypes = {
+    putPickups: PropTypes.func.isRequired,
+    myInformation: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.object.isRequired
+}
+const mapStateToProps = (state) => ({
+    user: state.user,
+    isAuthenticated:state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, {putPickups,myInformation})(Booking);
