@@ -29,7 +29,8 @@ class Header extends Component{
         if(window.location.pathname === '/Login' || window.location.pathname === '/signup' || 
         window.location.pathname === '/privacyStatement' || window.location.pathname === '/termsAndService' ||
         window.location.pathname === '/forgotPassword' || window.location.pathname === '/resetPassword' ||
-        window.location.pathname === '/renderOpenMSG') return null;
+        window.location.pathname === '/renderOpenMSG' || window.location.pathname === '/session' ||
+        window.location.pathname === '/page404' || window.location.pathname === '/signupSuccess') return null;
         return (
             <header className="Header">
                 <div className="Navbar">

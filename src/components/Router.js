@@ -29,6 +29,10 @@ import booking from './booking/booking';
 
 import invoices from './invoices/invoices';
 
+import session from './errors/session'
+import page404 from './errors/page404'
+import signupSuccess from './errors/signupSuccess'
+
 export default () => (
     <Router>
         <Header />
@@ -64,7 +68,12 @@ export default () => (
         <Route path='/booking' component={booking}/>
         
         {/*Allow users to check invoices list*/}
-        <Route path='/invoices' component={invoices}/>   
+        <Route path='/invoices' component={invoices}/>
+
+        {/*Error pages*/}
+        <Route path='/session' component={session}/>
+        <Route path='/page404' component={page404}/>
+        <Route path='/signupSuccess' component={signupSuccess}/>        
 
     </Router>
 )

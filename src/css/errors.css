@@ -1,0 +1,56 @@
+.container.errors {
+    display: table;
+}
+
+.errors-container {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/***session expired****/
+.session-expired {
+    margin: 0 auto;
+    width: 60%;
+    display: flex;
+    align-items: center;
+}
+
+.session-okay{
+    width: 15%;
+    margin: 0 auto;
+}
+
+
+/***404****/
+.page404 {
+    text-align: center;
+}
+.page404 .first {
+    font-size: 15rem;
+}
+.page404 .second {
+    font-size: 2.75rem;
+}
+.page404 .third {
+    font-size: 1.15rem;
+}
+
+
+/****signup success****/
+.successIcon img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 15%;
+}
+.signup-success {
+    text-align: center;
+    color: #7a2eb5;
+}
+.signup-success .first {
+    font-size: 2.5rem;
+}
+.signup-success .second {
+    padding-top: 5px;
+    font-size: 1.125rem;
+}
