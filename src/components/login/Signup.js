@@ -57,7 +57,7 @@ function SignUp () {
                   
                   <div>
                     <div className="part-header">
-                      <h5>Account Security</h5>
+                      <h5>Login Information</h5>
                     </div>
                     <div className="form-input">
                       <div className="col-md-12">
