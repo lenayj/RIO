@@ -15,6 +15,24 @@ class NewCasePrescription extends PureComponent {
     this.onDrop = (files) => {
       this.setState({ files });
       //console.log(files)
+  
+      this.props.submitted(
+        this.canvasDrawDataStack,
+        this.saveableCanvas,
+        this.state.appliance_types,
+        this.state.files,
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      );
     };
 
     this.canvasDrawDataStack = [];
@@ -64,8 +82,20 @@ class NewCasePrescription extends PureComponent {
     this.props.submitted(
       this.canvasDrawDataStack,
       this.saveableCanvas,
-      this.state.appliance_types
-    );
+      this.state.appliance_types,
+      this.state.files,
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+  );
   };
 
   toggleUpperApplianceImages = (event) => {
@@ -86,8 +116,20 @@ class NewCasePrescription extends PureComponent {
     this.props.submitted(
       this.canvasDrawDataStack,
       this.saveableCanvas,
-      this.state.appliance_types
-    );
+      this.state.appliance_types,
+      this.state.files,
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    )
   };
 
   storeCanvasDrawingData(data) {
@@ -106,8 +148,20 @@ class NewCasePrescription extends PureComponent {
     this.props.submitted(
       this.canvasDrawDataStack,
       this.saveableCanvas,
-      this.state.appliance_types
-    );
+      this.state.appliance_types,
+      this.state.files,
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    )
 
     return this.canvasDrawDataStack;
 
@@ -122,6 +176,224 @@ class NewCasePrescription extends PureComponent {
     // this.setState({canvasElement:this.saveableCanvas.canvas.interface.toDataURL()});
     // console.log(this.state.canvasElement);
   }
+
+  addBands_required = (event) => {
+    this.props.submitted(
+      this.canvasDrawDataStack,
+      this.saveableCanvas,
+      this.state.appliance_types,
+      this.state.files,
+      event.target.value,
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    )
+  };
+
+  addPointicL = (event) => {
+    this.props.submitted(
+      this.canvasDrawDataStack,
+      this.saveableCanvas,
+      this.state.appliance_types,
+      this.state.files,
+      "",
+      event.target.id,
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    )
+  };
+  addPointicU = (event) => {
+    this.props.submitted(
+      this.canvasDrawDataStack,
+      this.saveableCanvas,
+      this.state.appliance_types,
+      this.state.files,
+      "",
+      "",
+      event.target.id,
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    )
+  };
+  addAdamsClaspL = (event) => {
+    this.props.submitted(
+      this.canvasDrawDataStack,
+      this.saveableCanvas,
+      this.state.appliance_types,
+      this.state.files,
+      "",
+      "",
+      "",
+      event.target.id,
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    )
+  };
+  addAdamsClaspU = (event) => {
+    this.props.submitted(
+      this.canvasDrawDataStack,
+      this.saveableCanvas,
+      this.state.appliance_types,
+      this.state.files,
+      "",
+      "",
+      "",
+      "",
+      event.target.id,
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    )
+  };
+  addCClaspL = (event) => {
+    this.props.submitted(
+      this.canvasDrawDataStack,
+      this.saveableCanvas,
+      this.state.appliance_types,
+      this.state.files,
+      "",
+      "",
+      "",
+      "",
+      "",
+      event.target.id,
+      "",
+      "",
+      "",
+      "",
+      ""
+    )
+  };
+  addCClaspU = (event) => {
+    this.props.submitted(
+      this.canvasDrawDataStack,
+      this.saveableCanvas,
+      this.state.appliance_types,
+      this.state.files,
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      event.target.id,
+      "",
+      "",
+      "",
+      ""
+    )
+  };
+  addBallClaspL = (event) => {
+    debugger;
+    console.log(event.target)
+    this.props.submitted(
+      this.canvasDrawDataStack,
+      this.saveableCanvas,
+      this.state.appliance_types,
+      this.state.files,
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      event.target.id,
+      "",
+      "",
+      ""
+    )
+  };
+  addBallClaspU = (event) => {
+    debugger;
+    console.log(event.target)
+    this.props.submitted(
+      this.canvasDrawDataStack,
+      this.saveableCanvas,
+      this.state.appliance_types,
+      this.state.files,
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      event.target.id,
+      "",
+      ""
+    )
+  };
+
+  addtextForPontic = (event) => {
+    this.props.submitted(
+      this.canvasDrawDataStack,
+      this.saveableCanvas,
+      this.state.appliance_types,
+      this.state.files,
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      event.target.id,
+      ""
+    )
+  };
+
+  addtextForNotes = (event) => {
+    this.props.submitted(
+      this.canvasDrawDataStack,
+      this.saveableCanvas,
+      this.state.appliance_types,
+      this.state.files,
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      event.target.value
+    )
+  };
+
 
   render() {
     const files = this.state.files.map((file) => (
@@ -1726,12 +1998,12 @@ class NewCasePrescription extends PureComponent {
                 </b>
               </div>
               <div className="inp-bands col-md-9">
-                <select id="inp-bands" name="inp-bands">
+                <select id="inp-bands" name="inp-bands" onChange={this.addBands_required}>
                   <option value="select-NA">--Select Option--</option>
                   <option value="request-bands">
                     Please include bands (Additional charge applied per band)
                   </option>
-                  <option value="send-bands">
+                  <option value="send-bands-separately">
                     Will send bands separately (Case will be pending until bands
                     are received)
                   </option>
@@ -1752,10 +2024,12 @@ class NewCasePrescription extends PureComponent {
                 <label
                   className="instructions instructions_u bc_u"
                   id="Ball_Clasp_U"
+                  onClick={this.addBallClaspU}
                 ></label>
                 <label
                   className="instructions instructions_l bc_l"
                   id="Ball_Clasp_L"
+                  onClick={this.addBallClaspL}
                 ></label>
                 <label className="instruction_title">Ball Clasp</label>
                 <input
@@ -1769,10 +2043,12 @@ class NewCasePrescription extends PureComponent {
                 <label
                   className="instructions instructions_u cc_u"
                   id="C_Clasp_U"
+                  onClick={this.addCClaspU}
                 ></label>
                 <label
                   className="instructions instructions_l cc_l"
                   id="C_Clasp_L"
+                  onClick={this.addCClaspL}
                 ></label>
                 <label className="instruction_title">"C" Clasp</label>
                 <input
@@ -1786,10 +2062,12 @@ class NewCasePrescription extends PureComponent {
                 <label
                   className="instructions instructions_u ac_u"
                   id="Adams_Clasp_U"
+                  onClick={this.addAdamsClaspU}
                 ></label>
                 <label
                   className="instructions instructions_l ac_l"
                   id="Adams_Clasp_L"
+                  onClick={this.addAdamsClaspL}
                 ></label>
                 <label className="instruction_title">Adams Clasp</label>
                 <input
@@ -1803,13 +2081,15 @@ class NewCasePrescription extends PureComponent {
                 <label
                   className="instructions instructions_u pontic_u"
                   id="Pontic_U"
+                  onClick={this.addPointicU}
                 ></label>
                 <label
                   className="instructions instructions_l pontic_l"
                   id="Pontic_L"
+                  onClick={this.addPointicL}
                 ></label>
                 <label className="instruction_title">Add Pontics</label>
-                <input type="text" id="pontic-txt" maxLength="35" />
+                <input type="text" id="pontic-txt" maxLength="35" onChange={this.addtextForPontic}/>
                 <input
                   type="text"
                   name="inp-pontic"
@@ -1856,6 +2136,7 @@ class NewCasePrescription extends PureComponent {
                   name="inp-note"
                   id="inp-note"
                   placeholder="&nbsp;Type Your Special Requests Here."
+                  onChange={this.addtextForNotes}
                 ></textarea>
               </div>
             </div>
