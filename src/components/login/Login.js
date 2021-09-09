@@ -22,7 +22,7 @@ class Login extends Component {
         password: '', 
         submitted: false,
         loading: false,
-        error: ''
+        error: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -112,6 +112,16 @@ async loadData(props) {
        <div>
          <div className="login-form">
            <div className="form-container">
+                {this.state.loading 
+                    ? (
+                      <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Login Failed!</strong><br/>Please check your login information.
+                      </div>
+                      )
+                    : (
+                      <div className="hidden"></div>
+                    ) 
+                  }
               <div className="login-banner">
                 <h6 className="text-left">Welcome back</h6>
                 <h3 className="text-left">Login to your account</h3>
