@@ -221,6 +221,16 @@ class EditAddr extends Component {
         return (
             <div className="dashboard-bg-color">
                 <div className="container myacct editAddr">
+                    {this.state.loading 
+                    ? (
+                      <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Login Failed!</strong><br/>Please check your login information.
+                      </div>
+                      )
+                    : (
+                      <div className="hidden"></div>
+                    ) 
+                  }
                     <div className="directory pt-4">
                         <div className="row pt-3">
                         <Link to= '/myAccount' className="links"><div className="col text-secondary">My Account &gt;&nbsp;</div></Link>
@@ -256,7 +266,7 @@ class EditAddr extends Component {
                                 <div className="form-row">
                                     <div className="form-group col-md-12">
                                         <div><span>Address</span></div>
-                                        <input type="text" id="autocomplete" className="form-control" name="address" ref="input" autocomplete="off" value = { this.state.street } onMouseDown = {(event) => {this.setState({street: ''})}}/>                                                                                               
+                                        <input type="text" id="autocomplete" className="form-control" name="address" ref="input" autoComplete="off" value = { this.state.street } onChange = {(event) => {this.setState({street: event.target.value})}}/>                                                                                               
                                     </div>
                                 </div>
                                 <div className="form-row">
