@@ -23,15 +23,14 @@ textarea::placeholder {
   padding: 1% 0;
 }
 
-.newCase-form .part-header {
-  margin-bottom: 3%;
+.newCase-form .part-header{
+    margin-bottom: 1rem;
 }
 
 .newCase-form .part-value {
-  /*margin: 0 auto;*/
-  padding: 15px;
-  border: 1px solid lightgrey;
-  background-color: white;
+    padding: 15px;
+    border: 1px solid lightgrey;
+    background-color: white;
 }
 
 .accordion .card {
@@ -50,6 +49,9 @@ textarea::placeholder {
 .canvas {
   border: 1px solid lightgray;
 }
+.appliance-image {
+    border: 1px solid lightgray;
+}
 
 .part-value.section-bands {
   padding: 5px 15px 5px 15px;
@@ -67,19 +69,9 @@ textarea::placeholder {
   font-weight: 600;
 }
 
-.doctorOfficeInfo .part-value {
-  width: 600px;
-  height: 150px;
-}
-
-.doctorOfficeInfo .form-row {
-  display: block;
-  height: 35%;
-}
-
-.deliveryType {
-  display: flex;
-  margin-top: 1rem;
+.deliveryType{
+    display:flex;
+    margin-top: 1rem;
 }
 
 .newCase-step {
@@ -137,6 +129,10 @@ label.instructions {
 }
 
 /*Prescription Part*/
+.section-prescription .card-body{
+    padding: 0.5rem 1.25rem;
+}
+
 .location {
   margin-top: 0.5rem;
 }
@@ -197,6 +193,81 @@ label.instructions {
 .section-design {
   border: 1px solid lightgray;
 }
+
+ul.react-tabs__tab-list {
+    height: auto;
+    width: 135px;
+    float: left;
+    list-style: none;
+    padding: 1rem 0 0 0;
+    margin-bottom: 0;
+}
+
+.react-tabs__tab {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0px;
+    text-align: left;
+    padding: 10px;
+    height: 65px;
+}
+
+.react-tabs__tab:hover{
+    cursor:pointer;
+    color: cornflowerblue;
+}
+
+.react-tabs__tab--selected {
+    color: cornflowerblue;
+}
+
+.section-design .card-body {
+    padding: 0 1.25rem;
+}
+
+.react-tabs__tab-panel {
+    width: 87%;
+    padding-left: 1rem;
+    float:right;
+    border-left: 1px solid lightgray;
+}
+
+.react-tabs__tab-panel--selected {
+    border-left: 1px solid lightgray;
+    min-height: 520px;
+    padding-top: 1rem;
+}
+
+.tab-pane img {
+    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display:block;
+}
+
+.design {
+    display: inline-block;
+    width: 145px;
+    padding: 0.55rem;
+    margin: 0.125rem;
+    text-align: center;
+}
+
+.custom .design{
+    width:625px;
+}
+
+.design:hover{
+    border: 1px solid lightsteelblue;
+    background-color: rgb(229, 238, 248, 0.5);
+    border-radius: 15%;
+}
+
+
+.design span {
+    font-weight: bolder;
+}
+
 
 /*Dropzone*/
 section.container.dropzone {
@@ -313,11 +384,57 @@ section.container.dropzone {
 /*urxGenerator*/
 
 .canvas-contents {
-  position: relative;
-  z-index: 10;
+  position: absolute;
+  z-index: -1;
 }
 
 .labslip-inner-element {
   position: absolute;
   z-index: 5;
+}
+/*Office Address*/
+.newCase-form .doctorOfficeInfo .part-value{
+    width: 45%;
+    height: auto;
+    padding:0;
+    border: 1px solid #5ba95b;
+    border-radius: 5px;
+}
+
+.newCase-form .doctorOfficeInfo .form-row {
+    height: 2rem;
+    margin-left: 0;
+    padding-left: 1.5rem;
+}
+
+.newCase-form .form-row.user-name {
+    margin-top: 1.25rem;
+}
+
+.newCase-form .form-row.phone {
+    margin-bottom: 0.75rem;
+}
+
+.newCase-form .defaultAddr-mark,
+.booking-form .defaultAddr-mark{
+    display: inline-block;
+    float: right;
+    background-color: #5ba95b;
+    padding: 8px 25px 0 25px;
+    height: 43px;
+    color: white;
+    font-weight: 600;
+    border-bottom-left-radius: 15px;
+}
+
+.newCase-form .doctorOfficeInfo h3 {
+    display: inline-block;
+}
+
+.address-edit {
+    padding-left: 3rem;
+    display: inline-block;
+    color:#007bff;
+    font-weight:bolder;
+    font-size: 1.25rem;
 }

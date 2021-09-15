@@ -1,0 +1,174 @@
+/**********My Information Page*************/
+.myacct{
+    margin: 0 auto;
+}
+
+.myacct.myinfo{
+    width: 900px;
+}
+
+.myacct .row{
+    display: block;
+    margin: auto;
+    width:75%;
+}
+
+.directory .row{
+    width:100%;
+}
+
+.directory .col{
+    display: contents;
+}
+
+/**************My Info********************/
+.myinfo .panel-body {
+    border: 2px solid #e5e5e5;
+    background-color: white;
+}
+
+.myinfo .form-row {
+    border-bottom: 2px solid #e5e5e5;
+    height: 90px;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.myinfo .btn{
+    width: 65px;
+    height: 30px;
+}
+
+.myinfo .edit{
+    margin: auto;
+}
+
+.info-field, .info-value{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.info-value{
+    font-weight:600;
+}
+
+.update-info .btn {
+    width: 200px;
+    height: 45px;
+    float: right;
+    border-radius: 40px;
+}
+
+/*****************Update my informtaion**************************/
+
+.day {
+    display: inline-block;
+    width: 80px;
+    padding: 8px 15px;
+    margin-right: 15px;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.day.active {
+    background-color: lightgrey;
+}
+
+.react-timerange-picker {
+    height: 40px;
+    width: 250px;
+}
+
+.react-timerange-picker__inputGroup {
+    text-align: center;
+}
+
+/**********Office Addresses Page*************/
+
+.officeAddr .row{
+    width:100%;
+}
+
+.officeAddr .col {
+    height: 180px;
+    border: 1px solid lightgrey;
+}
+
+.officeAddr.default .col, .officeAddr .col{
+    background-color: white;
+}
+
+.officeAddr.default .addNew{
+    display: flex;
+    border: 1px dashed lightgrey;
+}
+
+.officeAddr .addNew-btn{
+    margin: auto auto;
+}
+
+.officeAddr.default .first-row, .newAddr .first-row{
+    height:40%;
+}
+
+.officeAddr.default .second-row, .newAddr .second-row{
+    height:50%;
+}
+
+.officeAddr.default .third-row, .newAddr .third-row{
+    height:10%;
+}
+
+.addr-field {
+    margin: 20px;
+    height: 135px;
+}
+
+.myacct .defaultAddr-mark {
+    display: table;
+    color: rgb(15, 160, 10);
+}
+
+.myacct .defaultAddr-mark p {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: white;
+    background-color: rgb(15, 160, 10);
+    border-radius: 50%;
+    width: 25px;
+}
+
+.myacct .defaultAddr-mark span {
+    margin-left: 0.35rem;
+    font-weight: 600;
+}
+
+.addNew, .newAddr{
+    margin-right: 48px;
+}
+
+.addNew-btn .btn{
+    width:150px;
+    border-radius: 40px;
+}
+
+
+/**********Edit/New Addresses Page*************/
+
+.editAddr .officeInfo, 
+.update-myinfo .officeInfo{
+    background-color: white;
+    border: 1px solid lightgray;
+    padding: 30px;
+}
+
+.save-btn .btn {
+    width: 200px;
+    border-radius: 40px;
+}

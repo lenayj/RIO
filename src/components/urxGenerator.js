@@ -230,8 +230,8 @@ class UrxGenerator extends Component {
   }
 
   componentWillReceiveProps(props){
-    debugger;
-    alert("i came heeere atlast")
+    // debugger;
+    // alert("i came heeere atlast")
   }
 
   render() {
