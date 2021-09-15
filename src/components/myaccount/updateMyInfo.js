@@ -7,8 +7,8 @@ import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { modifyAddress} from '../../actions/AddressActions';
 import axios from 'axios';
+import SearchLocationInput from './SearchLocationInput';
 
-/*global google*/
 class UpdateMyInfo extends Component {
     constructor(props){
         super(props);
@@ -46,40 +46,14 @@ class UpdateMyInfo extends Component {
         this.sat= "0";
         this.sun= "0";
 
-        this.handlePlaceSelect = this.handlePlaceSelect.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.autocomplete = null
-
+    
     }
 
     handleChange(event) {
         this.setState({[event.target.name]: event.target.value})
       }
     
-    handlePlaceSelect() {
-        let addressObject = this.autocomplete.getPlace()
-        let address = addressObject.address_components
-        
-        if (address[2].types[0] === "locality") {
-            this.setState({
-                 street: `${address[0].long_name} ${address[1].long_name}`,
-                 city: address[2].long_name,
-                 state: address[4].short_name,
-                 zipcode: address[6].short_name,
-                 //googleMapLink: addressObject.url
-               })
-         } else if(address[3].types[0] === "locality") {
-             this.setState({
-                 street: `${address[0].long_name} ${address[1].long_name}`,
-                 city: address[3].long_name,
-                 state: address[5].short_name,
-                 zipcode: address[7].short_name,
-                 //googleMapLink: addressObject.url
-             })
-         } 
-
-      }
-
     getWorkDays(){
         var str = "";
         if(this.state.monActive){
@@ -190,8 +164,6 @@ class UpdateMyInfo extends Component {
     }
 
     componentDidMount(){
-        this.autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'), {})
-        this.autocomplete.addListener("place_changed", this.handlePlaceSelect)
         
         var yourConfig = {
             headers: {
@@ -299,26 +271,7 @@ class UpdateMyInfo extends Component {
                                         <input type="text" className="form-control" name="licenseNum" value={this.state.license} onChange = {(event) => {this.setState({officeName: event.target.value})}}/>
                                     </div>  
                                 </div>
-                                <div className="form-row">
-                                    <div className="form-group col-md-12">
-                                        <div><span>Address</span></div>
-                                            <input type="text" id="autocomplete" className="form-control" name="address" ref="input" autoComplete="off" value = { this.state.street } onChange = {(event) => {this.setState({street: event.target.value})}}/>                                                                                               
-                                        </div>
-                                </div>
-                                <div className="form-row">
-                                    <div className="form-group col-md-5">
-                                        <div><span>City</span></div>
-                                        <input type="text" className="form-control" name="city" value = {this.state.city} onChange = {this.handleChange}/>                                                
-                                    </div>
-                                    <div className="form-group col-md-3">
-                                        <div><span>State</span></div>
-                                        <input type="text" className="form-control" name="state" value = {this.state.state} onChange = {this.handleChange}/>  
-                                    </div> 
-                                    <div className="form-group col-md-2">
-                                        <div><span>Zip</span></div>
-                                        <input type="text" className="form-control" name="zip" value={this.state.zipcode} onChange = {this.handleChange}/>  
-                                    </div> 
-                                </div>
+                                <SearchLocationInput address={this.state} handleChange = {this.handleChange}/>
                             </div>
                         </div>
                         <div className="officeInfo date-and-hours">
