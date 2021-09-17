@@ -1,13 +1,19 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
+// import '../css/pagination.css';
+// import '../css/myCases.css';
+import { connect } from "react-redux";
+import { getItems } from '../../actions/itemActions';
+import PropTypes from 'prop-types';
 import '../../css/pagination.css';
 import '../../css/myCases.css';
-    
+import Login from '../login/Login';
 
-export class MyCases extends PureComponent {
+class MyCases extends Component {
 
     constructor(props) {
+        debugger;
         super(props)
     
         this.state = {
@@ -24,6 +30,13 @@ export class MyCases extends PureComponent {
 
     }
 
+    makeLinkForAttachments = (attachments) => {
+        var i = 0;
+        return attachments.map((attachment) => {
+            return <a href={attachment.filepath}>STL FILE {i++} </a>;
+        })
+    }
+
     handlePageClick = (e) => {
         const selectedPage = e.selected;
         const offset = selectedPage * this.state.perPage;
@@ -38,46 +51,49 @@ export class MyCases extends PureComponent {
     };
 
     /* Call Open Msg Modal */
-    openMSG = (e) => {
-        const case_id = e.target.id
-        const url = 'http://localhost:3000/renderOpenMSG'
-        window.open(url+'?msgurl="' + url + '"&caseid='+ case_id, "Messenger", "width=350, height=400")
-    }
+    // openMSG = (e) => {
+    //     const case_id = e.target.id
+    //     const url = 'http://localhost:3000/renderOpenMSG'
+    //     window.open(url+'?msgurl="' + url + '"&caseid='+ case_id, "Messenger", "width=350, height=400")
+    // }
 
     loadMoreData() {
-		const data = this.state.orgtableData;
+        debugger;
+		const data = this.props.item.items;
 		
 		const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
 		this.setState({
 			pageCount: Math.ceil(data.length / this.state.perPage),
 			tableData:slice
 		})
-	
     }
 
    componentDidMount(){
-        this.getData();
+       debugger;
+       this.props.getItems();
+       
+        // this.getData();
+        // this.getData();
     }
-    getData() {
-        axios
-            .get('https://jsonplaceholder.typicode.com/users')
-            .then(res => {
-                var tdata = res.data;
-                //console.log('data-->'+JSON.stringify(tdata))
-                var slice = tdata.slice(this.state.offset, this.state.offset + this.state.perPage)
-                this.setState({
-                    pageCount: Math.ceil(tdata.length / this.state.perPage),
-                    orgtableData : tdata,
-                    tableData:slice,
-                    dataTotal: tdata.length
-                })
-            });
-    }
-
+    
+    // getData() {
+    //     axios
+    //         .get('https://jsonplaceholder.typicode.com/users')
+    //         .then(res => {
+    //             var tdata = res.data;
+	// 			var slice = tdata.slice(this.state.offset, this.state.offset + this.state.perPage)
+    //             this.setState({
+    //                 pageCount: Math.ceil(tdata.length / this.state.perPage),
+    //                 orgtableData : tdata,
+    //                 tableData:slice
+    //             })
+    //         });
+    // }
 
     render() {
-        const {tableData,dataTotal,isLoading, isError} = this.state
-    
+        debugger;
+        const {tableData,isLoading, isError} = this.state
+        debugger;
         if(isLoading){
         return <div>Loading...</div>
         }
@@ -85,7 +101,13 @@ export class MyCases extends PureComponent {
         if(isError){
         return <div>Error...</div>
         }
-        return tableData.length > 0 
+
+        if(!this.props.isAuthenticated){
+            this.props.history.push("/Login");
+            window.location.reload();
+        }
+
+        return this.props.item.items.length > 0 
         ? (
             <div className="table-width myCases">
                  <h1 className="title-wording">My Cases</h1>
@@ -98,53 +120,40 @@ export class MyCases extends PureComponent {
                             <th>PATIENT NAME</th>
                             <th>LABSLIP</th>
                             <th>STL FILES</th>                            
-                            <th>DATA SENT</th>
+                            <th>DATE SENT</th>
                             <th>QUESTION</th>
                         </tr>
                      </thead>
                      {/*Todo:: Key modify required here*/}
                      <tbody>
                         {
-                          this.state.tableData.map((tdata, i) => (
+                            this.props.item.items.map((tdata, i) => (
                                 <tr key={tdata.id}>
+                                <td>{tdata.case_id}</td>
                                     {/*Case No field 'case_id'*/}
-                                    <td>{tdata.id}</td>
+                                    <td>{tdata.status}</td>
                                     {/*Data Sent field 'reg_data'*/}
-                                    <td>{tdata.name}</td>
-                                    {/*Patient Name field 'patient_first_name' + 'patient_last_name'*/}
-                                    <td>{tdata.username}</td>
-                                    {/*Labslip field 'img_name'
-                                    :: Link required
-                                    :: <td><a href={tdata.img_name} target="_blank" rel="noreferrer">View</a></td>*/}
-                                    <td>{tdata.email}</td>
-                                    {/*STL File field 'file_name'
-                                    :: if !files -> Not Uploaded else File Link required
-                                    Refer)) <td>{`${tdata.website}` === 'kale.biz' 
-                                    ? <a href={tdata.img_name} className="stl_file" id='stl_file' target="_blank">View & Download</a> 
-                                    : 'Not Uploaded'}</td>*/}
-                                    <td>
-                                       {`${tdata.address.street},${tdata.address.city}`}
-                                    </td>
-                                    {/*STATUS field 'status'*/}
-                                    <td>{tdata.website}</td>
-                                    {/*Message field 'case_id'*/}
+                                    <td>{tdata.patient_first_name + " " + tdata.patient_last_name}</td>
+                                    <td><a href={tdata.img_name}>CASE IMAGE</a></td>
+                                    <td>{this.makeLinkForAttachments(tdata.fileAttachments)}</td>
+                                    <td>{tdata.reg_date}</td>
                                     <td><button id={tdata.id} onClick={this.openMSG}>Leave a message</button></td>
                                 </tr>
-                            
                           ))
                         }
 
                      </tbody>
                  </table>   
                 
-                <div className="text-right">{dataTotal} Entries in Total </div>
+                <div>{this.props.item.items.length} Entries in Total </div>
+                {/* <div className="text-right">{tableData.length} Entries in Total </div> */}
 
                  <ReactPaginate
                     previousLabel={"<"}
                     nextLabel={">"}
                     breakLabel={"..."}
                     breakClassName={"break-me"}
-                    pageCount={this.state.pageCount}
+                    pageCount={1}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={5}
                     onPageChange={this.handlePageClick}
@@ -158,4 +167,14 @@ export class MyCases extends PureComponent {
     }
 }
 
-export default MyCases;
+MyCases.propTypes = {
+    getItems: PropTypes.func.isRequired,
+    item: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.object.isRequired
+}
+const mapStateToProps = (state) => ({
+    item: state.item,
+    isAuthenticated:state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, {getItems})(MyCases);

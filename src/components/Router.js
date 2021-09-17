@@ -28,9 +28,10 @@ import newCaseOfficeInfo from './newcase/newCaseOfficeInfo';
 import booking from './booking/booking';
 
 import invoices from './invoices/invoices';
+import history from './history';
 
 export default () => (
-    <Router>
+    <Router  history={history}>
         <Header />
 
         <Route path="/" exact component={Home} />
@@ -67,4 +68,4 @@ export default () => (
         <Route path='/invoices' component={invoices}/>   
 
     </Router>
-)
+  );

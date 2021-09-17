@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 import '@wojtekmaj/react-timerange-picker/dist/TimeRangePicker.css';
 import 'react-clock/dist/Clock.css';
+import { connect } from "react-redux";
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import {modifyAddress,addNewAddress} from '../../actions/AddressActions';
 
 class EditAddr extends Component {
     constructor(props) {
@@ -25,7 +28,7 @@ class EditAddr extends Component {
             officeName : props.location.state.address.officeName,
             officeHours : props.location.state.address.office_hours_start+ "-" + props.location.state.address.office_hours_end,
             officeLunchHours: props.location.state.address.lunch_hours_start + "-" + props.location.state.address.lunch_hours_end,
-            is_default: props.location.state.address.is_default === "1" ? true : false,
+            is_default: props.location.state.address.is_default == "1" ? true : false,
             page: props.location.state.page,
             monActive: props.location.state.address.office_work_days.includes("1"),
             tueActive: props.location.state.address.office_work_days.includes("2"),
@@ -109,22 +112,12 @@ class EditAddr extends Component {
             "office_work_days" : this.getWorkDays(),
             "officeName": this.state.officeName
         }
-        var yourConfig = {
-            headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI1MTkwMDY4LCJpYXQiOjE2MjQ4OTAwNjgsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.1bC_fnPe110WpWwlAtAhLBWhgkbPa-hV-anitOMHpvjhvxa-nAU0Lsd4X8yNiAT112EED1LcAGuTxXmE_sqU2Q"
-            }
-         }
-         
-        if(this.state.page === "New"){
-            axios.post("http://localhost:8080/addNewAddress",params,yourConfig).then((a) =>{
-                console.log(a);
-            })
+
+        if(this.state.page == "New"){
+            this.props.addNewAddress(params,this.props);
         }
         else{
-            console.log(this.state)
-            axios.post("http://localhost:8080/modifyAddress/"+this.state.addressesId,params,yourConfig).then((a) =>{
-                console.log(a);
-            })
+            this.props.modifyAddress(params,this.state.addressesId,this.props);
         }
         
     }
@@ -298,4 +291,13 @@ class EditAddr extends Component {
     }
 }
 
-export default EditAddr;
+EditAddr.propTypes = {
+    modifyAddress: PropTypes.func.isRequired,
+    addNewAddress: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.object.isRequired
+}
+const mapStateToProps = (state) => ({
+    address: state.address
+});
+
+export default connect(mapStateToProps, {modifyAddress, addNewAddress})(EditAddr);

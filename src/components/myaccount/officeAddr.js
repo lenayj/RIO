@@ -2,7 +2,11 @@ import '../../css/myAccount.css';
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import {viewAllAddresses} from '../../actions/AddressActions';
+
 /*Todo: Get User Data for default office address value*/
 
 /*Todo: When there is multiple office addresses get multiple office addresses from Numen*/
@@ -10,9 +14,11 @@ import axios from 'axios';
 class OfficeAddr extends Component {
 
     constructor(props) {
-        super(props);    
-    
+        super(props);
+        debugger;
+        
         this.displayData = [];
+        this.default_address = {};
 
         this.state = {
             showdata : this.displayData,
@@ -26,22 +32,23 @@ class OfficeAddr extends Component {
     };
 
     componentDidMount(){
-        var yourConfig = {
-            headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI1MTkwMDY4LCJpYXQiOjE2MjQ4OTAwNjgsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.1bC_fnPe110WpWwlAtAhLBWhgkbPa-hV-anitOMHpvjhvxa-nAU0Lsd4X8yNiAT112EED1LcAGuTxXmE_sqU2Q"
-            }
-         }
-        axios.get("http://localhost:8080/viewAllAddresses?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
-            // this.prependData(a.data[0]);
+        if(!this.props.isAuthenticated){
+            this.props.history.push("/Login");
+            window.location.reload();
+        }
+       this.props.viewAllAddresses().then((a)=>{
             this.setState({rawAddresses:a.data});
-            if(this.state.rawAddresses.length !== 0){
-                this.setState({loaded: true});
-            }
-            a.data.slice(1).forEach(address => {
-                console.log(address);
-                this.appendData(address);
+            a.forEach(address => {
+                debugger;
+                if(address.is_default==0){
+                    this.appendData(address);
+                }
+                else{
+                    this.default_address = address;
+                    this.setState({loaded: true});
+                }
             });
-        })
+        });
     }
 
     appendData(address) {
@@ -49,7 +56,7 @@ class OfficeAddr extends Component {
             <div className="defaultAddr col col-md-5">
                 <div className="addr-field">
                     <div className="first-row">
-                        <div className="user-name float-left"><b>{address.user.firstName + " " + address.user.lastName}</b></div>
+                        <div className="user-name float-left"><b>{address.officeName}</b></div>
                         {/* {address.is_default==0 ? <div className="defaultAddr-mark float-right"><p>&#10003; Your Default</p></div> : "" } */}
                         
                     </div>
@@ -95,6 +102,18 @@ class OfficeAddr extends Component {
     }
 
     render(){
+        // if(this.props.address.addresses !=null && this.props.address.addresses.length!=0){
+        //     this.props.address.addresses.forEach(address => {
+        //         debugger;
+        //         if(address.is_default==0){
+        //             this.appendData(address);
+        //         }
+        //         else{
+        //             this.default_address = address;
+        //             // this.setState({loaded: true});
+        //         }
+        //     });
+        // }
         return (
             <div className="dashboard-bg-color">
                 <div className="container myacct officeAddr">
@@ -149,19 +168,19 @@ class OfficeAddr extends Component {
                             <div className="defaultAddr col col-md-5">
                                 <div className="addr-field">
                                     <div className="first-row">
-                                        <div className="user-name float-left"><b>{this.state.rawAddresses[0].user.firstName + " " + this.state.rawAddresses[0].user.lastName}</b></div>
+                                        <div className="user-name float-left"><b>{this.default_address.officeName}</b></div>
                                         <div className="defaultAddr-mark float-right">
                                             <p>&#10003;</p>
                                             <span>Your Default</span>
                                         </div>
                                     </div>
-                                    <div className="second-row user-address">{this.state.rawAddresses[0].street + " "  + this.state.rawAddresses[0].apartment + " " + this.state.rawAddresses[0].city + " " + this.state.rawAddresses[0].state }</div>
+                                    <div className="second-row user-address">{this.default_address.street + " "  + this.default_address.apartment + " " + this.default_address.city + " " + this.default_address.state }</div>
                                     <div className="third-row float-right">
                                         <Link to={{
                                             pathname: "/editAddr",
                                             state: {
                                                 page: "Edit",
-                                                address: this.state.rawAddresses[0]
+                                                address: this.default_address
                                             }
                                         }} className="addNew-btn links">
                                             <span>Edit</span>
@@ -190,4 +209,14 @@ class OfficeAddr extends Component {
     }
 }
 
-export default OfficeAddr;
+
+OfficeAddr.propTypes = {
+    viewAllAddresses: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.object.isRequired
+}
+const mapStateToProps = (state) => ({
+    address: state.address,
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, {viewAllAddresses})(OfficeAddr);

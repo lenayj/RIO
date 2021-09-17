@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 import '@wojtekmaj/react-timerange-picker/dist/TimeRangePicker.css';
 import 'react-clock/dist/Clock.css';
+import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import { modifyAddress} from '../../actions/AddressActions';
 import axios from 'axios';
 
 class UpdateMyInfo extends Component {
@@ -11,11 +14,11 @@ class UpdateMyInfo extends Component {
         console.log("asdsd");
         console.log(props);
         this.state = {
-            addressesId: props.location.state.addressesId,
+            addressesId: props.location.state.id,
             name: props.location.state.name,
             license : props.location.state.license,
-            Email: props.location.state.Email,
-            Phone: props.location.state.Phone,
+            Email: props.location.state.email,
+            Phone: props.location.state.phone,
             street : props.location.state.street,
             apartment: props.location.state.apartment,
             city: props.location.state.city,
@@ -101,9 +104,9 @@ class UpdateMyInfo extends Component {
     }
 
     sendUpdatedAddress(event){
-        console.log(event);
+        event.preventDefault();
         var params = {
-            "email" : this.state.Email,
+            "email" : this.state.email,
             "is_default" : this.state.is_default,
             "city" : this.state.city,
             "street" : this.state.street,
@@ -119,41 +122,18 @@ class UpdateMyInfo extends Component {
         }
         var yourConfig = {
             headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI1MTkwMDY4LCJpYXQiOjE2MjQ4OTAwNjgsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.1bC_fnPe110WpWwlAtAhLBWhgkbPa-hV-anitOMHpvjhvxa-nAU0Lsd4X8yNiAT112EED1LcAGuTxXmE_sqU2Q"
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI2MTQxNTMwLCJpYXQiOjE2MjU4NDE1MzAsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.GxmPgGEie-NxqmpezvqlMNKCxkPj9XJPKwCfGgZ5aG8z5ZV71P2U5jKChu8su8AZaLLTr8YKzTWaql4MvIBAWw"
             }
          }
-        axios.post("http://localhost:8080/modifyAddress/" + this.state.addressesId,params,yourConfig).then((a) =>{
-            console.log(a);
-            this.setState({office_work_days:this.getWorkDays()});
-            this.setState({monActive:this.state.office_work_days.includes("1")});
-            this.setState({tueActive:this.state.office_work_days.includes("2")});
-            this.setState({wedActive:this.state.office_work_days.includes("3")});
-            this.setState({thuActive:this.state.office_work_days.includes("4")});
-            this.setState({friActive:this.state.office_work_days.includes("5")});
-            this.setState({satActive:this.state.office_work_days.includes("6")});
-            this.setState({sunActive:this.state.office_work_days.includes("7")});
-            this.setState({addressesId: this.state.addressesId});
-            this.setState({name: this.state.name});
-            this.setState({license :this.state.license});
-            this.setState({Email: this.state.Email});
-            this.setState({Phone: this.state.Phone});
-            this.setState({street : this.state.street});
-            this.setState({apartment: this.state.apartment});
-            this.setState({city: this.state.city});
-            this.setState({state: this.state.state});
-            this.setState({zipcode:this.state.zipcode});
-            this.setState({mainContactName : this.state.mainContactName});
-            this.setState({mainContactEmail :this.state.mainContactEmail});
-            this.setState({officeName : this.state.officeName});
-            this.setState({officeHours : this.state.officeHours});
-            this.setState({officeLunchHours: this.state.officeLunchHours});
-        })
+
+        this.props.modifyAddress(params,this.state.addressesId, this.props);
+        
     }
 
     componentDidMount(){
         var yourConfig = {
             headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI1MTkwMDY4LCJpYXQiOjE2MjQ4OTAwNjgsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.1bC_fnPe110WpWwlAtAhLBWhgkbPa-hV-anitOMHpvjhvxa-nAU0Lsd4X8yNiAT112EED1LcAGuTxXmE_sqU2Q"
+               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI2MTQxNTMwLCJpYXQiOjE2MjU4NDE1MzAsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.GxmPgGEie-NxqmpezvqlMNKCxkPj9XJPKwCfGgZ5aG8z5ZV71P2U5jKChu8su8AZaLLTr8YKzTWaql4MvIBAWw"
             }
          }
         axios.get("http://localhost:8080/viewAddress/" + this.state.addressesId + "?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
@@ -182,8 +162,6 @@ class UpdateMyInfo extends Component {
             this.setState({officeHours : a.data.office_hours_start+ "-" + a.data.office_hours_end});
             this.setState({ officeLunchHours: a.data.lunch_hours_start + "-" + a.data.lunch_hours_end});
         })
-        debugger;
-        this.props.history.push('/myInfo');
     }
 
     convertNumToTime(num){
@@ -345,4 +323,13 @@ class UpdateMyInfo extends Component {
     }
 }
 
-export default UpdateMyInfo;
+
+UpdateMyInfo.propTypes = {
+    myInformation: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.object.isRequired
+}
+const mapStateToProps = (state) => ({
+    user: state.user
+});
+
+export default connect(mapStateToProps, {modifyAddress})(UpdateMyInfo);
