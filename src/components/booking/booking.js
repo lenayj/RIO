@@ -155,22 +155,24 @@ class Booking extends Component{
             // this.setState({officeLunchHours:officeLunchHours});
         // })
          debugger;
-        this.props.myInformation();
-        this.setState({docName:this.props.user.name});
-        this.setState({license:this.props.user.license});
-        this.setState({email:this.props.user.Email});
-        this.setState({Phone:this.props.user.Phone});
-        this.setState({city: this.props.user.city});
-        this.setState({street:this.props.user.street });
-        this.setState({apartment:this.props.user.apartment });
-        this.setState({city:this.props.user.city});
-        this.setState({zipcode:this.props.user.zipcode});
-        this.setState({addressId:this.props.user.addressesId});
-        this.setState({mainContactEmail:this.props.user.mainContactEmail});
-        this.setState({officeName:this.props.user.officeName});
-        this.setState({officeHours:this.props.user.officeHours});
-        this.setState({officeLunchHours:this.props.user.officeLunchHours});
+        this.props.myInformation().then((a)=>{
+            this.setState({docName:a.name});
+            this.setState({license:a.license});
+            this.setState({email:a.Email});
+            this.setState({Phone:a.Phone});
+            this.setState({city: a.city});
+            this.setState({street:a.street });
+            this.setState({apartment:a.apartment });
+            this.setState({city:a.city});
+            this.setState({zipcode:a.zipcode});
+            this.setState({addressId:a.addressesId});
+            this.setState({mainContactEmail:a.mainContactEmail});
+            this.setState({officeName:a.officeName});
+            this.setState({officeHours:a.officeHours});
+            this.setState({officeLunchHours:a.officeLunchHours});
 
+        });
+        
     }
 
     pickItUp = (event) => {

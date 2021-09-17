@@ -68,4 +68,4 @@ export default () => (
         <Route path='/invoices' component={invoices}/>   
 
     </Router>
-)
+  );

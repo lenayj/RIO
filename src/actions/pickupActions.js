@@ -1,4 +1,5 @@
 import axios from 'axios';
+import axiosConfig from "../_services/axiosConfig";
 import {GET_ITEMS, ADD_ITEM, DELETE_ITEM, CREATE_PICKUP, CREATED_PICKUP, PICKUP_FAIL} from './types'
 import { tokenConfig } from './authActions';
 import jwt_decode from 'jwt-decode';
@@ -20,7 +21,7 @@ export const putPickups = (params) => (dispatch,getState) => {
       debugger;
     try{
         // var token = jwt_decode(getState().auth.token,{header: true});
-        axios
+        axiosConfig
         .post('/pickup', params, {
             ...tokenConfig(getState)
         })
