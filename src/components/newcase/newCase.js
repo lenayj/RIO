@@ -10,6 +10,8 @@ import "../../css/newCase.css";
 import reactCanvasDraw from '../react-canvas-draw';
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 import axios from 'axios';
+import axiosConfig from "../../_services/axiosConfig";
+
 
 import { myInformation } from '../../actions/userActions';
 import PropTypes from 'prop-types';
@@ -345,7 +347,7 @@ class NewCase extends Component {
       },
     }));
 
-    axios.post("/api/user/set_prescription",this.state.data).then((res)=>{
+    axiosConfig.post("/api/user/set_prescription",this.state.data).then((res)=>{
         debugger;
         console.log(res.data)
         // this.completeCaseImage =  new Image();
@@ -362,7 +364,7 @@ class NewCase extends Component {
         formData.append('caseId', res.data.case_id);
         this.setState({case_id:res.data.case_id});
 
-        axios.post("/api/user/uploadCaseImage", formData, {
+        axiosConfig.post("/api/user/uploadCaseImage", formData, {
             headers: {
                 'content-type': 'multipart/form-data'
             }
@@ -408,7 +410,7 @@ class NewCase extends Component {
       });
       formData.append("caseId", case_id);
       // formData.append("caseIdRandom","caseIdRandom");
-      axios.post("/uploadStlFiles",formData).then((res)=> alert("uploaded"),(rej)=> alert("rejected"))
+      axiosConfig.post("/uploadStlFiles",formData).then((res)=> alert("uploaded"),(rej)=> alert("rejected"))
     } 
                            
   }

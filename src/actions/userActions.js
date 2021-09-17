@@ -1,4 +1,5 @@
 import axios from 'axios';
+import axiosConfig from "../_services/axiosConfig";
 import {GET_ITEMS, ADD_ITEM, CREATE_PICKUP, LOAD_USER_INFO, LOADED_FAIL_USER_INFO, PICKUP_FAIL} from './types'
 import { tokenConfig } from './authActions';
 import jwt_decode from 'jwt-decode';
@@ -18,7 +19,7 @@ export const myInformation = () => (dispatch,getState) => {
       debugger;
     try{
         // var token = jwt_decode(getState().auth.token,{header: true});
-        return axios
+        return axiosConfig
         .get('/myInformation',{
             ...tokenConfig(getState)
         })
