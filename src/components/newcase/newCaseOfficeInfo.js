@@ -1,7 +1,7 @@
 import {React, Component} from "react";
 import { Link } from 'react-router-dom';
 import {viewAllAddresses} from "../../actions/AddressActions"
-
+import { myInformation } from '../../actions/userActions';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 
@@ -10,59 +10,55 @@ class NewCaseOfficeInfo extends Component {
         super();
         this.state = {
           street: "",
+          state: "",
           apartment:"",
           city: "",
           zipcode: "",
-          email:"",
           docName:"",
-          docLicense: "",
-          docAddress: "",
-          docOfficeHours:"",
           addresses:[],
-          addressId:"",
           officeAddresses:[],
           defaultOfficeAddress:"",
           phone:"",
-          doctorName:"",
-          defaultOfficeName:""
+          overviewAddress:"",
         };
       }
 
     selectAddress = (e) => {
       
       var selectedOfficeValue = e.target.value.split(',');
-      var OfficeAddress = selectedOfficeValue[0] +", "+ selectedOfficeValue[1] +", "+ selectedOfficeValue[2] +", "+ selectedOfficeValue[3];
-      var OfficeName = selectedOfficeValue[4];
-      var phone = selectedOfficeValue[5];
-      
-      //alert(selectedOfficeValue[5]);
+      var OfficeAddress = selectedOfficeValue[0] +", "+ selectedOfficeValue[1] +", "+ selectedOfficeValue[2] +", "+ selectedOfficeValue[3] +", "+ selectedOfficeValue[4];
+      var OfficeName = selectedOfficeValue[5];
+      var phone = selectedOfficeValue[6];
       
       /***split the value by comma and set office name / address / office hours***/
-      //console.log(this.state.officeAddresses);
-      this.setState({ defaultOfficeAddress: OfficeAddress });
-      this.setState({ defaultOfficeName: OfficeName});
-      this.setState({ phone: phone});
+      this.setState({ overviewAddress: OfficeAddress });
+      this.setState({ officeName: OfficeName});
+      this.setState({ Phone: phone});
     }
 
     componentDidMount(){
-      this.props.viewAllAddresses().then((a)=>{
-        var officeAddresses, defaultOfficeAddress, phone, doctorName, defaultOfficeName;
+    
+        this.props.viewAllAddresses().then((a)=>{
+            this.setState({officeAddresses:a});
+        });
 
-        officeAddresses = a.data;
-        defaultOfficeAddress = a.data[0].street + ", " +  a.data[0].state + ", " + a.data[0].city + ", " + a.data[0].zipcode;
-        defaultOfficeName = a.data[0].officeName;
-        phone = a.data[0].user.phoneNumber;
-        doctorName = a.data[0].user.firstName + " " + a.data[0].user.lastName
+        this.props.myInformation().then((a)=>{
+            this.setState({docName:a.name});
+            this.setState({Phone:a.Phone});
+            this.setState({state: a.state});
+            this.setState({street:a.street });
+            this.setState({apartment:a.apartment });
+            this.setState({city:a.city});
+            this.setState({zipcode:a.zipcode});
+            this.setState({officeName:a.officeName});
+            this.setState({officeHours:a.officeHours});
+            this.setState({officeLunchHours:a.officeLunchHours});
 
-        //debugger;
-        console.log(a.data);
-        
-        this.setState({officeAddresses:officeAddresses});
-        this.setState({defaultOfficeAddress:defaultOfficeAddress});
-        this.setState({defaultOfficeName:defaultOfficeName});
-        this.setState({phone:phone});
-        this.setState({doctorName:doctorName});
-    });
+        });
+
+        var OverviewAddress = this.state.street +" "+ this.state.apartment + ", "+ this.state.state +", "+ this.state.city +", "+ this.state.zipcode;
+        this.setState({overviewAddress: OverviewAddress})
+
   }
 
     render(){
@@ -74,11 +70,11 @@ class NewCaseOfficeInfo extends Component {
 
                 <div className="office-addresses mb-3">
                     <div className="addresses-list">
-                      <select className="custom-select" style={{width:"400px"}} value={this.state.defaultOfficeAddress} onChange={this.selectAddress}>
+                      <select className="custom-select" style={{width:"400px"}} value={this.state.street} onChange={this.selectAddress}>
                           {this.state.officeAddresses.map((address) => (
-                              <option value={[address.street, address.state, address.city, address.zipcode, address.officeName, address.user.phoneNumber]}
+                              <option value={[address.street, address.apartment, address.state, address.city, address.zipcode, address.officeName, address.user.phoneNumber]}
                                       key={address.id}>
-                                  {address.street}, {address.state}, {address.city}, {address.zipcode}
+                                  {address.street}, {address.apartment}, {address.state}, {address.city}, {address.zipcode}
                               </option>
                           ))}
                       </select>
@@ -88,10 +84,10 @@ class NewCaseOfficeInfo extends Component {
                 
                 <div className="part-value">
                     <div className="defaultAddr-mark"><p>&#10003; Your Default</p></div>
-                    <div className="form-row user-name"><span>Doctor Name:&nbsp;</span>{this.state.doctorName}</div>
-                    <div className="form-row office-nema"><span>Office Name:&nbsp;</span>{this.state.defaultOfficeName}</div>
-                    <div className="form-row user-address"><span>Address:&nbsp;</span>{this.state.defaultOfficeAddress}</div>
-                    <div className="form-row phone"><span>Phone:&nbsp;</span>{this.state.phone}</div>
+                    <div className="form-row user-name"><span>Doctor Name:&nbsp;</span>{this.state.docName}</div>
+                    <div className="form-row office-nema"><span>Office Name:&nbsp;</span>{this.state.officeName}</div>
+                    <div className="form-row user-address"><span>Address:&nbsp;</span>{this.state.overviewAddress}</div>
+                    <div className="form-row phone"><span>Phone:&nbsp;</span>{this.state.Phone}</div>
                 </div>
             </div>
         );
@@ -100,11 +96,12 @@ class NewCaseOfficeInfo extends Component {
 
 NewCaseOfficeInfo.propTypes = {
     isAuthenticated: PropTypes.object.isRequired,
-    viewAllAddresses: PropTypes.func.isRequired
+    viewAllAddresses: PropTypes.func.isRequired,
+    myInformation: PropTypes.func.isRequired,
 }
 const mapStateToProps = (state) => ({
     user: state.user,
     isAuthenticated:state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, {viewAllAddresses})(NewCaseOfficeInfo);
+export default connect(mapStateToProps, {viewAllAddresses,myInformation})(NewCaseOfficeInfo);

@@ -21,7 +21,6 @@ class Booking extends Component{
           date: '',
           activeTime: false,
           activeArea:false,
-          /* Todo :: Bring User's city data from user information and set state */
           city: '',
           street: "",
           apartment:"",
@@ -35,9 +34,7 @@ class Booking extends Component{
           addresses:[],
           addressId:"",
           officeAddresses:[],
-          defaultOfficeAddress:"",
-          defaultOfficeHours : "",
-          defaultOfficeName:""
+          overviewAddress:""
         };
       }
       
@@ -113,22 +110,15 @@ class Booking extends Component{
     }
 
     selectAddress = (e) => {
-        debugger;
-        
         var selectedOfficeValue = e.target.value.split(',');
-        var OfficeAddress = selectedOfficeValue[0] +", "+ selectedOfficeValue[1] +", "+ selectedOfficeValue[2] +", "+ selectedOfficeValue[3];
-        var OfficeName = selectedOfficeValue[4];
-        var OfficeHours = selectedOfficeValue[6] + " - " + selectedOfficeValue[5] + " | " + selectedOfficeValue[8] + " - " + selectedOfficeValue[7];
-        
-        //alert(OfficeAddress + "Name: " + OfficeName + " Hours: "+ selectedOfficeValue[8]);
+        var OfficeAddress = selectedOfficeValue[0] +", "+ selectedOfficeValue[1] +", "+ selectedOfficeValue[2] +", "+ selectedOfficeValue[3] +", " + selectedOfficeValue[4];
+        var OfficeName = selectedOfficeValue[5];
+        var OfficeHours = selectedOfficeValue[7] + " - " + selectedOfficeValue[6] + " | " + selectedOfficeValue[9] + " - " + selectedOfficeValue[8];
         
         /***split the value by comma and set office name / address / office hours***/
-        //console.log(this.state.officeAddresses);
-        this.setState({ defaultOfficeAddress: OfficeAddress });
-        this.setState({ defaultOfficeName: OfficeName});
-        this.setState({ defaultOfficeHours: OfficeHours});
-        
-
+        this.setState({ overviewAddress: OfficeAddress });
+        this.setState({ officeName: OfficeName});
+        this.setState({ officeHours: OfficeHours});
     }
 
 
@@ -139,17 +129,7 @@ class Booking extends Component{
         }
 
          this.props.viewAllAddresses().then((a)=>{
-            var officeAddresses, defaultOfficeAddress, defaultOfficeHours, defaultOfficeName;
-            officeAddresses = a.data;
-            defaultOfficeAddress = a.data[0].street + ", " +  a.data[0].state + ", " + a.data[0].city + ", " + a.data[0].zipcode;
-            defaultOfficeHours = a.data[0].office_hours_start + " - " + a.data[0].office_hours_end + " | " + a.data[0].lunch_hours_start + " - " + a.data[0].lunch_hours_end
-            defaultOfficeName = a.data[0].officeName;
-            debugger;
-            console.log(a.data);
-            this.setState({officeAddresses:officeAddresses});
-            this.setState({defaultOfficeAddress:defaultOfficeAddress});
-            this.setState({defaultOfficeHours:defaultOfficeHours});
-            this.setState({defaultOfficeName:defaultOfficeName});
+            this.setState({officeAddresses:a});
         });
        
         this.props.myInformation().then((a)=>{
@@ -157,7 +137,7 @@ class Booking extends Component{
             this.setState({license:a.license});
             this.setState({email:a.Email});
             this.setState({Phone:a.Phone});
-            this.setState({city: a.city});
+            this.setState({state: a.state});
             this.setState({street:a.street });
             this.setState({apartment:a.apartment });
             this.setState({city:a.city});
@@ -169,6 +149,9 @@ class Booking extends Component{
             this.setState({officeLunchHours:a.officeLunchHours});
 
         });
+
+        var OverviewAddress = this.state.street +" "+ this.state.apartment + ", "+ this.state.state +", "+ this.state.city +", "+ this.state.zipcode;
+        this.setState({overviewAddress: OverviewAddress})
         
     }
 
@@ -266,11 +249,11 @@ class Booking extends Component{
 
                                 <div className="office-addresses">
                                     <div className="addresses-list">
-                                        <select className="custom-select" style={{width:"400px"}} value={this.state.defaultOfficeAddress} onChange={this.selectAddress}>
+                                        <select className="custom-select" style={{width:"400px"}} value={this.state.street} onChange={this.selectAddress}>
                                             {this.state.officeAddresses.map((address) => (
-                                                <option value={[address.street, address.state, address.city, address.zipcode, address.officeName, address.office_hours_end, address.office_hours_start, address.lunch_hours_end, address.lunch_hours_start]}
+                                                <option value={[address.street, address.apartment, address.state, address.city, address.zipcode, address.officeName, address.office_hours_end, address.office_hours_start, address.lunch_hours_end, address.lunch_hours_start]}
                                                         key={address.id}>
-                                                    {address.street}, {address.state}, {address.city}, {address.zipcode}
+                                                    {address.street}, {address.apartment}, {address.state}, {address.city}, {address.zipcode}
                                                 </option>
                                             ))}
                                         </select>
@@ -284,8 +267,8 @@ class Booking extends Component{
                                         <div className="form-row user-name">Doctor Name:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.name: ""}</span></div>
                                         <div className="form-row doctor-license">Doctor License #:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.license: ""}</span></div>
                                         <div className="form-row user-address">Address:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.street + " " + this.props.user.user.apartment + 
-                                " " + this.props.user.user.city + " " + this.props.user.user.zipcode : ""}</span></div>
-                                        <div className="form-row office-hours">Office Hours:&nbsp; <span>Mon-Fri 9-12|1-3</span></div>
+                                " " + this.props.user.user.state + " " + this.props.user.user.city + " " + this.props.user.user.zipcode : ""}</span></div>
+                                        <div className="form-row office-hours">Office Hours:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.officeHours + " | " + this.props.user.user.officeLunchHours: ""}</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -298,9 +281,9 @@ class Booking extends Component{
                                 <div className="booking-overview mt-4">
                                     <div className="part-value">
                                         <div className="form-row date"><label>Date:</label><span>{this.state.date}</span></div>
-                                        <div className="form-row office-name"><label>Office Name:</label><span>{this.state.defaultOfficeName}</span></div>
-                                        <div className="form-row user-address"><label>Address:</label><span>{this.state.defaultOfficeAddress}</span></div>
-                                        <div className="form-row office-hours"><label>Office Hours:</label><span>{this.state.defaultOfficeHours}</span></div>
+                                        <div className="form-row office-name"><label>Office Name:</label><span>{this.state.officeName}</span></div>
+                                        <div className="form-row user-address"><label>Address:</label><span>{this.state.overviewAddress}</span></div>
+                                        <div className="form-row office-hours"><label>Office Hours:</label><span>{this.state.officeHours}</span></div>
                                     </div>
                                     <div className="disclaimer">
                                         <span className="text-danger">Pick up time is not guaranteed and can vary depending on availability.</span>    
