@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import axios from 'axios';
 import { myInformation } from '../../actions/userActions';
+import {viewAllAddresses} from "../../actions/AddressActions"
 
 import { connect } from "react-redux";
 import { putPickups} from '../../actions/pickupActions';
@@ -33,6 +34,10 @@ class Booking extends Component{
           docOfficeHours:"",
           addresses:[],
           addressId:"",
+          officeAddresses:[],
+          defaultOfficeAddress:"",
+          defaultOfficeHours : "",
+          defaultOfficeName:""
         };
       }
       
@@ -132,11 +137,20 @@ class Booking extends Component{
             this.props.history.push("/Login");
             window.location.reload();
         }
-        var yourConfig = {
-            headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI2NDExNDg5LCJpYXQiOjE2MjYxMTE0ODksImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.x1Vi_pccbGI9GqnRL2NHBNgfHdlGMrnrYnMFP-OoQibhGrLGGhRNhhHwXYvIvcDgjabBRvROOPFc01OqUZ4FHw"
-            }
-         }
+
+         this.props.viewAllAddresses().then((a)=>{
+            var officeAddresses, defaultOfficeAddress, defaultOfficeHours, defaultOfficeName;
+            officeAddresses = a.data;
+            defaultOfficeAddress = a.data[0].street + ", " +  a.data[0].state + ", " + a.data[0].city + ", " + a.data[0].zipcode;
+            defaultOfficeHours = a.data[0].office_hours_start + " - " + a.data[0].office_hours_end + " | " + a.data[0].lunch_hours_start + " - " + a.data[0].lunch_hours_end
+            defaultOfficeName = a.data[0].officeName;
+            debugger;
+            console.log(a.data);
+            this.setState({officeAddresses:officeAddresses});
+            this.setState({defaultOfficeAddress:defaultOfficeAddress});
+            this.setState({defaultOfficeHours:defaultOfficeHours});
+            this.setState({defaultOfficeName:defaultOfficeName});
+        });
        
         this.props.myInformation().then((a)=>{
             this.setState({docName:a.name});
@@ -306,11 +320,12 @@ class Booking extends Component{
 Booking.propTypes = {
     putPickups: PropTypes.func.isRequired,
     myInformation: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.object.isRequired
+    isAuthenticated: PropTypes.object.isRequired,
+    viewAllAddresses: PropTypes.func.isRequired
 }
 const mapStateToProps = (state) => ({
     user: state.user,
     isAuthenticated:state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, {putPickups,myInformation})(Booking);
+export default connect(mapStateToProps, {viewAllAddresses,putPickups,myInformation})(Booking);

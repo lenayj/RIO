@@ -1,7 +1,9 @@
 import {React, Component} from "react";
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import {viewAllAddresses} from "../../actions/AddressActions"
 
+import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 
 class NewCaseOfficeInfo extends Component {
     constructor() {
@@ -18,7 +20,11 @@ class NewCaseOfficeInfo extends Component {
           docOfficeHours:"",
           addresses:[],
           addressId:"",
-          officeAddresses:[]
+          officeAddresses:[],
+          defaultOfficeAddress:"",
+          phone:"",
+          doctorName:"",
+          defaultOfficeName:""
         };
       }
 
@@ -39,33 +45,24 @@ class NewCaseOfficeInfo extends Component {
     }
 
     componentDidMount(){
-      var yourConfig = {
-          headers: {
-             Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI3MTA1Mjg1LCJpYXQiOjE2MjY4MDUyODUsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.EClEoaTZ-G8pxlQ-O5niddluUbcuj2T6-fwmLy54Tqehcsw4ZgIqyXn7QXocl0Rvu_iw7igVJ5Oap8FQD0MIyA"
-          }
-       }
+      this.props.viewAllAddresses().then((a)=>{
+        var officeAddresses, defaultOfficeAddress, phone, doctorName, defaultOfficeName;
 
-       axios.get("http://192.168.1.194:8443/viewAllAddresses?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
-          //var addressesId,name, license, Email , Phone,street ,state,apartment,city,zipcode ,mainContactName ,mainContactEmail ,officeName ,officeHours ,officeLunchHours,addressesIds,office_work_days,is_default;
-          
-          var officeAddresses, defaultOfficeAddress, phone, doctorName, defaultOfficeName;
+        officeAddresses = a.data;
+        defaultOfficeAddress = a.data[0].street + ", " +  a.data[0].state + ", " + a.data[0].city + ", " + a.data[0].zipcode;
+        defaultOfficeName = a.data[0].officeName;
+        phone = a.data[0].user.phoneNumber;
+        doctorName = a.data[0].user.firstName + " " + a.data[0].user.lastName
 
-          officeAddresses = a.data;
-          defaultOfficeAddress = a.data[0].street + ", " +  a.data[0].state + ", " + a.data[0].city + ", " + a.data[0].zipcode;
-          defaultOfficeName = a.data[0].officeName;
-          phone = a.data[0].user.phoneNumber;
-          doctorName = a.data[0].user.firstName + " " + a.data[0].user.lastName
-
-          //debugger;
-          console.log(a.data);
-          
-          this.setState({officeAddresses:officeAddresses});
-          this.setState({defaultOfficeAddress:defaultOfficeAddress});
-          this.setState({defaultOfficeName:defaultOfficeName});
-          this.setState({phone:phone});
-          this.setState({doctorName:doctorName});
-      
-      })
+        //debugger;
+        console.log(a.data);
+        
+        this.setState({officeAddresses:officeAddresses});
+        this.setState({defaultOfficeAddress:defaultOfficeAddress});
+        this.setState({defaultOfficeName:defaultOfficeName});
+        this.setState({phone:phone});
+        this.setState({doctorName:doctorName});
+    });
   }
 
     render(){
@@ -100,4 +97,14 @@ class NewCaseOfficeInfo extends Component {
         );
     }
 }
-export default NewCaseOfficeInfo;
+
+NewCaseOfficeInfo.propTypes = {
+    isAuthenticated: PropTypes.object.isRequired,
+    viewAllAddresses: PropTypes.func.isRequired
+}
+const mapStateToProps = (state) => ({
+    user: state.user,
+    isAuthenticated:state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, {viewAllAddresses})(NewCaseOfficeInfo);
