@@ -15,9 +15,7 @@ class NewCaseOfficeInfo extends Component {
           city: "",
           zipcode: "",
           docName:"",
-          addresses:[],
           officeAddresses:[],
-          defaultOfficeAddress:"",
           Phone:"",
           overviewAddress:"",
           officeName:''
@@ -25,16 +23,26 @@ class NewCaseOfficeInfo extends Component {
       }
 
     selectAddress = (e) => {
-      
       var selectedOfficeValue = this.state.officeAddresses[e.target.value];
       var OfficeAddress = selectedOfficeValue.street +", "+ selectedOfficeValue.apartment +", "+ selectedOfficeValue.state +", "+ selectedOfficeValue.city +", " + selectedOfficeValue.zipcode;
       var OfficeName = selectedOfficeValue.officeName;
       var phone = selectedOfficeValue.phone;
+
+      
       
       /***split the value by comma and set office name / address / office hours***/
       this.setState({ overviewAddress: OfficeAddress });
       this.setState({ officeName: OfficeName});
       this.setState({ Phone: phone});
+      this.props.caseOfficeInfo({
+        street: selectedOfficeValue.street,
+        state: selectedOfficeValue.state,
+        apartment:selectedOfficeValue.apartment,
+        city: selectedOfficeValue.city,
+        zipcode: selectedOfficeValue.zipcode,
+        Phone:phone,
+        officeName:OfficeName
+    });
     }
 
     componentDidMount(){
