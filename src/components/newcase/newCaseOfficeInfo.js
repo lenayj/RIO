@@ -18,17 +18,18 @@ class NewCaseOfficeInfo extends Component {
           addresses:[],
           officeAddresses:[],
           defaultOfficeAddress:"",
-          phone:"",
+          Phone:"",
           overviewAddress:"",
+          officeName:''
         };
       }
 
     selectAddress = (e) => {
       
-      var selectedOfficeValue = e.target.value.split(',');
-      var OfficeAddress = selectedOfficeValue[0] +", "+ selectedOfficeValue[1] +", "+ selectedOfficeValue[2] +", "+ selectedOfficeValue[3] +", "+ selectedOfficeValue[4];
-      var OfficeName = selectedOfficeValue[5];
-      var phone = selectedOfficeValue[6];
+      var selectedOfficeValue = this.state.officeAddresses[e.target.value];
+      var OfficeAddress = selectedOfficeValue.street +", "+ selectedOfficeValue.apartment +", "+ selectedOfficeValue.state +", "+ selectedOfficeValue.city +", " + selectedOfficeValue.zipcode;
+      var OfficeName = selectedOfficeValue.officeName;
+      var phone = selectedOfficeValue.phone;
       
       /***split the value by comma and set office name / address / office hours***/
       this.setState({ overviewAddress: OfficeAddress });
@@ -53,13 +54,11 @@ class NewCaseOfficeInfo extends Component {
             this.setState({officeName:a.officeName});
             this.setState({officeHours:a.officeHours});
             this.setState({officeLunchHours:a.officeLunchHours});
+            this.setState({overviewAddress: a.street +" "+ a.apartment + ", "+ a.state +", "+ a.city +", "+ a.zipcode});
 
         });
 
-        var OverviewAddress = this.state.street +" "+ this.state.apartment + ", "+ this.state.state +", "+ this.state.city +", "+ this.state.zipcode;
-        this.setState({overviewAddress: OverviewAddress})
-
-  }
+    }
 
     render(){
         return (
@@ -70,13 +69,12 @@ class NewCaseOfficeInfo extends Component {
 
                 <div className="office-addresses mb-3">
                     <div className="addresses-list">
-                      <select className="custom-select" style={{width:"400px"}} value={this.state.street} onChange={this.selectAddress}>
-                          {this.state.officeAddresses.map((address) => (
-                              <option value={[address.street, address.apartment, address.state, address.city, address.zipcode, address.officeName, address.user.phoneNumber]}
-                                      key={address.id}>
-                                  {address.street}, {address.apartment}, {address.state}, {address.city}, {address.zipcode}
-                              </option>
-                          ))}
+                      <select className="custom-select" style={{width:"400px"}} onChange={this.selectAddress}>
+                        {this.state.officeAddresses.map((address,index) => {
+                            return <option value={index} key={address.id}>
+                                {address.street}, {address.apartment}, {address.state}, {address.city}, {address.zipcode}
+                            </option>
+                        })}
                       </select>
                     </div>
                     <div className="address-edit"><Link to= '/myinfo' target="_blank" className="links">Edit</Link></div>

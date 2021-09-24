@@ -34,7 +34,9 @@ class Booking extends Component{
           addresses:[],
           addressId:"",
           officeAddresses:[],
-          overviewAddress:""
+          overviewAddress:"",
+          officeName:'',
+          officeHours:''
         };
       }
       
@@ -110,17 +112,21 @@ class Booking extends Component{
     }
 
     selectAddress = (e) => {
-        var selectedOfficeValue = e.target.value.split(',');
-        var OfficeAddress = selectedOfficeValue[0] +", "+ selectedOfficeValue[1] +", "+ selectedOfficeValue[2] +", "+ selectedOfficeValue[3] +", " + selectedOfficeValue[4];
-        var OfficeName = selectedOfficeValue[5];
-        var OfficeHours = selectedOfficeValue[7] + " - " + selectedOfficeValue[6] + " | " + selectedOfficeValue[9] + " - " + selectedOfficeValue[8];
+
+        var selectedOfficeValue = this.state.officeAddresses[e.target.value];
+        //console.log(selectedOfficeValue);
+        var OfficeAddress = selectedOfficeValue.street +", "+ selectedOfficeValue.apartment +", "+ selectedOfficeValue.state +", "+ selectedOfficeValue.city +", " + selectedOfficeValue.zipcode;
+        var OfficeName = selectedOfficeValue.officeName;
+        var OfficeHours = selectedOfficeValue.office_hours_start + " - " + selectedOfficeValue.office_hours_end + " | " + selectedOfficeValue.lunch_hours_start + " - " + selectedOfficeValue.lunch_hours_end;
+        var AddressID = selectedOfficeValue.id;
         
         /***split the value by comma and set office name / address / office hours***/
         this.setState({ overviewAddress: OfficeAddress });
         this.setState({ officeName: OfficeName});
         this.setState({ officeHours: OfficeHours});
+        this.setState({ addressId: AddressID});
+        
     }
-
 
     componentDidMount(){
         if(!this.props.isAuthenticated){
@@ -142,23 +148,20 @@ class Booking extends Component{
             this.setState({apartment:a.apartment });
             this.setState({city:a.city});
             this.setState({zipcode:a.zipcode});
-            this.setState({addressId:a.addressesId});
+            this.setState({addressId:a.id});
             this.setState({mainContactEmail:a.mainContactEmail});
             this.setState({officeName:a.officeName});
             this.setState({officeHours:a.officeHours});
             this.setState({officeLunchHours:a.officeLunchHours});
-
-        });
-
-        var OverviewAddress = this.state.street +" "+ this.state.apartment + ", "+ this.state.state +", "+ this.state.city +", "+ this.state.zipcode;
-        this.setState({overviewAddress: OverviewAddress})
-        
+            this.setState({overviewAddress: a.street +" "+ a.apartment + ", "+ a.state +", "+ a.city +", "+ a.zipcode});
+        }); 
     }
 
+    /* Todo: Change defaultAddressId to selected office address's ID */
     pickItUp = (event) => {
         event.preventDefault();
         console.log(event );
-        var defaultAddressId = this.props.user.user.id;
+        var defaultAddressId = this.state.addressId;
         var yyyyMMdd = "";
 
         if(this.state.date != ""){
@@ -249,13 +252,13 @@ class Booking extends Component{
 
                                 <div className="office-addresses">
                                     <div className="addresses-list">
-                                        <select className="custom-select" style={{width:"400px"}} value={this.state.street} onChange={this.selectAddress}>
-                                            {this.state.officeAddresses.map((address) => (
-                                                <option value={[address.street, address.apartment, address.state, address.city, address.zipcode, address.officeName, address.office_hours_end, address.office_hours_start, address.lunch_hours_end, address.lunch_hours_start]}
-                                                        key={address.id}>
-                                                    {address.street}, {address.apartment}, {address.state}, {address.city}, {address.zipcode}
-                                                </option>
-                                            ))}
+                                    {/* Add Selected Options */}
+                                        <select className="custom-select" style={{width:"400px"}} onChange={this.selectAddress}>
+                                          {this.state.officeAddresses.map((address,index) => {
+                                            return <option value={index} key={address.id}>
+                                              {address.street}, {address.apartment}, {address.state}, {address.city}, {address.zipcode}
+                                            </option>
+                                          })}
                                         </select>
                                     </div>
                                     <div className="address-edit"><Link to= '/myinfo' target="_blank" className="links">Edit</Link></div>
@@ -266,8 +269,8 @@ class Booking extends Component{
                                         <div className="defaultAddr-mark float-right"><p>&#10003; Your Default</p></div>
                                         <div className="form-row user-name">Doctor Name:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.name: ""}</span></div>
                                         <div className="form-row doctor-license">Doctor License #:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.license: ""}</span></div>
-                                        <div className="form-row user-address">Address:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.street + " " + this.props.user.user.apartment + 
-                                " " + this.props.user.user.state + " " + this.props.user.user.city + " " + this.props.user.user.zipcode : ""}</span></div>
+                                        <div className="form-row user-address">Address:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.street + ", " + this.props.user.user.apartment + 
+                                ", " + this.props.user.user.state + ", " + this.props.user.user.city + ", " + this.props.user.user.zipcode : ""}</span></div>
                                         <div className="form-row office-hours">Office Hours:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.officeHours + " | " + this.props.user.user.officeLunchHours: ""}</span></div>
                                     </div>
                                 </div>
