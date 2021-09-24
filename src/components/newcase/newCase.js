@@ -383,7 +383,15 @@ class NewCase extends Component {
 
   returnCaseOfficeInfo = (data) => {
     this.CaseOfficeInfo = data;
+    var data_state = this.state.data;
+    data_state.doctor_office_name = data.officeName;
+    data_state.addr = data.street + " " + data.apartment;
+    data_state.city =  data.city;
+    data_state.state = data.state;
+    data_state.zip = data.zipcode;
+    data_state.phone = "tobesolved";//a.Phone;
     console.log(data);
+    this.setState({data:data_state});
   };
 
   getCompleteCaseImage = (completeCaseImage) => {

@@ -95,8 +95,8 @@ class EditAddr extends Component {
         return str;
     }
 
-    modifyAddressAction = (event) => {
-        debugger;
+    modifyAddress = (event) => {
+
         var params = {
             "email" : this.state.Email,
             "is_default" : this.state.is_default ? 1 : 0,
@@ -112,23 +112,6 @@ class EditAddr extends Component {
             "office_work_days" : this.getWorkDays(),
             "officeName": this.state.officeName
         }
-        var yourConfig = {
-            headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI2MTQxNTMwLCJpYXQiOjE2MjU4NDE1MzAsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.GxmPgGEie-NxqmpezvqlMNKCxkPj9XJPKwCfGgZ5aG8z5ZV71P2U5jKChu8su8AZaLLTr8YKzTWaql4MvIBAWw"
-            }
-         }
-         
-        // if(this.state.page == "New"){
-        //     axios.post("http://localhost:8080/addNewAddress",params,yourConfig).then((a) =>{
-        //         console.log(a);
-        //     })
-        // }
-        // else{
-        //     console.log(this.state)
-        //     axios.post("http://localhost:8080/modifyAddress/"+this.state.addressesId,params,yourConfig).then((a) =>{
-        //         console.log(a);
-        //     })
-        // }
 
         if(this.state.page == "New"){
             this.props.addNewAddress(params,this.props);
@@ -299,7 +282,7 @@ class EditAddr extends Component {
                         </div>
                         <div className="save mt-4 mb-5">
                             <div className="save-btn">
-                                <input type="button" value="Save" className="btn btn-primary btn-lg" onClick={this.modifyAddressAction}/>
+                                <input type="button" value="Save" className="btn btn-primary btn-lg" onClick={this.modifyAddress}/>
                             </div>
                         </div>
                     </div>

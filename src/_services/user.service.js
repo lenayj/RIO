@@ -16,7 +16,7 @@ function login(usernameOrEmail, password) {
         body: JSON.stringify({ usernameOrEmail, password })
     };
 
-    return fetch(`http://localhost:8080/api/auth/signin/`, requestOptions)
+    return fetch(`http://192.168.1.194:8080/api/auth/signin/`, requestOptions)
         .then(handleResponse)
         .then(user => {
             if (user) {
@@ -95,9 +95,12 @@ function signup(SignupDetails) {
 }
 
 function handleResponse(response) {
+    debugger;
+    console.log(response);
     return response.text().then(text => {
         const data = text && JSON.parse(text);
         console.log(data);
+        
         if (!response.ok) {
             if (response.status === 401) {
                 logout();

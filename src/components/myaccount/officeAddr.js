@@ -32,29 +32,6 @@ class OfficeAddr extends Component {
     };
 
     componentDidMount(){
-        debugger;
-        // var yourConfig = {
-        //     headers: {
-        //        Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI2MTQxNTMwLCJpYXQiOjE2MjU4NDE1MzAsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.GxmPgGEie-NxqmpezvqlMNKCxkPj9XJPKwCfGgZ5aG8z5ZV71P2U5jKChu8su8AZaLLTr8YKzTWaql4MvIBAWw"
-        //     }
-        //  }
-        // axios.get("http://localhost:8080/viewAllAddresses?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
-        //     // this.prependData(a.data[0]);
-        //     this.setState({rawAddresses:a.data});
-        //     a.data.forEach(address => {
-        //         debugger;
-        //         if(address.is_default==0){
-        //             this.appendData(address);
-        //         }
-        //         else{
-        //             this.default_address = address;
-        //             this.setState({loaded: true});
-        //         }
-                
-        //     });
-        // })
-
-        // 
         if(!this.props.isAuthenticated){
             this.props.history.push("/Login");
             window.location.reload();

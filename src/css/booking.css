@@ -193,3 +193,8 @@ button.react-calendar__navigation__label {
     cursor: pointer;
     background-color: rgb(169 68 66 / 58%);
 }
+
+/**Custom Select Box**/
+.addresses-list{
+    display:inline-block;
+}
