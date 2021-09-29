@@ -1,5 +1,6 @@
 export const GET_ITEMS = 'GET_ITEMS';
-export const ADD_ITEM = 'ADD_ITEM';
+export const ADD_CASE = 'ADD_CASE';
+export const ADDING_CASE = "ADDING_CASE";
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const ITEMS_LOADING = 'ITEMS_LOADING';
 export const USER_LOADING = 'USER_LOADING';

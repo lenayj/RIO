@@ -13,14 +13,14 @@
 }
 */
 
-input::placeholder, 
+input::placeholder,
 textarea::placeholder {
-	font-style: oblique;
+  font-style: oblique;
 }
 
 .newCase-form form {
-    margin: 0 auto;
-    padding: 1% 0;
+  margin: 0 auto;
+  padding: 1% 0;
 }
 
 .newCase-form .part-header{
@@ -33,32 +33,40 @@ textarea::placeholder {
     background-color: white;
 }
 
-.accordion .card{
-    border:none;
+.accordion .card {
+  border: none;
 }
 
-.accordion .card .card-header{
-    background-color: white;
+.accordion .card .card-header {
+  background-color: white;
+  border-bottom: none;
 }
 
+.accordion .card .card-body {
+  padding: 0.5rem 1.25rem;
+}
+
+.canvas {
+  border: 1px solid lightgray;
+}
 .appliance-image {
     border: 1px solid lightgray;
 }
 
 .part-value.section-bands {
-    padding: 5px 15px 5px 15px;
+  padding: 5px 15px 5px 15px;
 }
 
 .part-value.section-instruction {
-    padding: 10px 15px 5px 15px;
+  padding: 10px 15px 5px 15px;
 }
 
-.newCase-form .form-row span{
-    font-weight: bold;
+.newCase-form .form-row span {
+  font-weight: bold;
 }
 
 .newCase-form h3 {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .deliveryType{
@@ -67,57 +75,57 @@ textarea::placeholder {
 }
 
 .newCase-step {
-    display: flex;
+  display: flex;
 }
 
 #inp-note {
-    width: 100%;
-    height: 80px;
-    border: 0.5px solid lightgrey;
-    resize: none;
+  width: 100%;
+  height: 80px;
+  border: 0.5px solid lightgrey;
+  resize: none;
 }
 
 label.instructions {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .instruction_title {
-    margin-right: 15px;
+  margin-right: 15px;
 }
 
 .inp-instructions .active:before {
-    background-color: #2b6fb6;
-    opacity: 0.7;
+  background-color: #2b6fb6;
+  opacity: 0.7;
 }
 
 .inp-instructions .instructions_u {
-    background-image: url(../assets/newcase/upper.png);
-    width: 20px;
-    height: 20px;
-    margin: 0 5px 0px 0;
-    vertical-align: sub;
+  background-image: url(../assets/newcase/upper.png);
+  width: 20px;
+  height: 20px;
+  margin: 0 5px 0px 0;
+  vertical-align: sub;
 }
 
 .inp-instructions .instructions_l {
-    background-image: url(../assets/newcase/lower.png);
-    width: 20px;
-    height: 20px;
-    margin: 0 5px 0px 0;
-    vertical-align: sub;
+  background-image: url(../assets/newcase/lower.png);
+  width: 20px;
+  height: 20px;
+  margin: 0 5px 0px 0;
+  vertical-align: sub;
 }
 
 /*Bands*/
 .section-bands select {
-    width: 100%;
-    height:40px;
-    padding: 0 15px;
-    border: none;
-    /*text-align-last: center;*/
+  width: 100%;
+  height: 40px;
+  padding: 0 15px;
+  border: none;
+  /*text-align-last: center;*/
 }
 
 .section-bands.title {
-    display: inline-flex;
-    align-items: center;
+  display: inline-flex;
+  align-items: center;
 }
 
 /*Prescription Part*/
@@ -126,58 +134,64 @@ label.instructions {
 }
 
 .location {
-    margin-top: 0.5rem;
+  margin-top: 0.5rem;
 }
 
-.location .location_u:hover, .location .location_l:hover {
-    cursor: pointer;
+.location .location_u:hover,
+.location .location_l:hover {
+  cursor: pointer;
 }
 
 .location .active:before {
-    background-color: #2b6fb6;
-    opacity: 0.7;
+  background-color: #2b6fb6;
+  opacity: 0.7;
 }
 
 .location .deactivate:before {
-    background-color: #ffffff;
-    opacity: 0.7;
+  background-color: #ffffff;
+  opacity: 0.7;
 }
 
 .location .location_u {
-    background-image: url(../assets/newcase/upper.png);
-    width: 20px;
-    height: 20px;
-    margin: 0 5px 0px 0;
-    vertical-align: middle;
-    float: right;
+  background-image: url(../assets/newcase/upper.png);
+  width: 20px;
+  height: 20px;
+  margin: 0 5px 0px 0;
+  vertical-align: middle;
+  float: right;
 }
 
 .location .location_u:before {
-    display: inline-block;
-    content: "";
-    width: 20px;
-    height: 20px;
+  display: inline-block;
+  content: "";
+  width: 20px;
+  height: 20px;
 }
 
 .location .location_l {
-    background-image: url(../assets/newcase/lower.png);
-    width: 20px;
-    height: 20px;
-    margin: 0 5px 0px 0;
-    vertical-align: middle;
-    float: right;
+  background-image: url(../assets/newcase/lower.png);
+  width: 20px;
+  height: 20px;
+  margin: 0 5px 0px 0;
+  vertical-align: middle;
+  float: right;
 }
 
 .location .location_l:before {
-    display: inline-block;
-    content: "";
-    width: 20px;
-    height: 20px;
+  display: inline-block;
+  content: "";
+  width: 20px;
+  height: 20px;
+}
+
+.location .active:before {
+  background-color: #2b6fb6;
+  opacity: 0.7;
 }
 
 /*Add Designs*/
-.section-design{
-    border: 1px solid lightgray;
+.section-design {
+  border: 1px solid lightgray;
 }
 
 ul.react-tabs__tab-list {
@@ -257,32 +271,127 @@ ul.react-tabs__tab-list {
 
 /*Dropzone*/
 section.container.dropzone {
-    width: 100%;
-    height: 160px;
-    margin: 18px auto 40px;
-    border: 3px dashed lightgray;
-    float: left;
-    padding: 0px 20px;
-    /*overflow: scroll;*/
-    overflow-x: hidden;
+  width: 100%;
+  height: 160px;
+  margin: 18px auto 40px;
+  border: 3px dashed lightgray;
+  float: left;
+  padding: 0px 20px;
+  /*overflow: scroll;*/
+  overflow-x: hidden;
 }
 
 .field.dropzone {
-    width: 100%;
-    height: 135px;
-    display: inline-flex;
-    align-items: center;
-    padding-top: 30px;
+  width: 100%;
+  height: 135px;
+  display: inline-flex;
+  align-items: center;
+  padding-top: 30px;
 }
 
-.field.dropzone p{
-    text-align: center;
-    width: 100%;
-    color:cornflowerblue;
-    font-size: 1.25rem;
-    font-weight: 600;
+.field.dropzone p {
+  text-align: center;
+  width: 100%;
+  color: cornflowerblue;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
+/*Doctor/Office Info*/
+.defaultAddr-mark {
+  display: table;
+  background-color: rgb(15, 160, 10);
+  color: white;
+  width: 150px;
+  height: 35px;
+  border-radius: 2em;
+}
+
+.defaultAddr-mark p {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.doctorOfficeInfo .part-value {
+  padding-left: 25px;
+}
+
+/*Drawing*/
+.teethImg {
+  background-image: url("/src/assets/newcase/teeth.png");
+  width: 630px;
+  height: 380px;
+  display: inline-block;
+}
+
+.drawing-canvas {
+  position: absolute;
+  z-index: 10;
+  background: none !important;
+}
+
+.drawing-tool {
+  float: right;
+  padding: 10px 10px 0 10px;
+}
+
+.overview-titles {
+  margin-bottom: 8px;
+  text-align: center;
+  font-style: italic;
+  font-weight: 700;
+  color: #6495ed;
+}
+
+.drawing-tool button {
+  font-style: italic;
+  font-size: 12px;
+  color: black;
+  padding: 8px;
+  font-weight: 500;
+  border: 1px solid #5a6268;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.drawing-tool #color-picker {
+  padding: 0px;
+  vertical-align: bottom;
+}
+
+.drawing-tool #line-color {
+  width: 46px;
+  height: 46px;
+}
+
+.drawing-tool #reset-btn {
+  margin-right: 0px;
+  margin-left: -1px;
+}
+
+#appliance-img-u {
+  position: absolute;
+  top: 132px;
+  right: 308px;
+}
+
+#appliance-img-l {
+  position: absolute;
+  top: 132px;
+  right: 35px;
+}
+
+/*urxGenerator*/
+
+.canvas-contents {
+  position: absolute;
+  z-index: -1;
+}
+
+.labslip-inner-element {
+  position: absolute;
+  z-index: 5;
+}
 /*Office Address*/
 .newCase-form .doctorOfficeInfo .part-value{
     width: 45%;

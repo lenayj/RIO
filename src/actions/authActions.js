@@ -1,4 +1,5 @@
 import axios from 'axios';
+import axiosConfig from "../_services/axiosConfig";
 import { returnErrors } from './errorActions';
 import {
   USER_LOADED,
@@ -18,7 +19,7 @@ export const loadUser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
   debugger;
 
-  axios
+  axiosConfig
     .get('/api/auth/user', tokenConfig(getState))
     .then(res =>
       dispatch({
@@ -48,7 +49,7 @@ export const signup = (SignupDetails) => (
   // Request body
   const body = JSON.stringify( SignupDetails );
   debugger;
-  axios
+  axiosConfig
     .post('api/auth/signup/', body, config)
     .then(res =>{
       dispatch({
@@ -83,7 +84,7 @@ export const login = ({usernameOrEmail, password}) => (
   const body = JSON.stringify({ usernameOrEmail, password });
   debugger;
 
-  return axios
+  return axiosConfig
     .post('/api/auth/signin/', body, config)
     .then(res => {
       dispatch({
@@ -118,7 +119,7 @@ export const refershToken = () => (dispatch) => {
   };
 
   // Request body
-  axios
+  axiosConfig
     .post('/api/auth/refreshToken/', {}, config)
     .then(res =>{
       if(res.data== null || res.data=="" || res.data.length ==0){

@@ -30,6 +30,13 @@ class MyCases extends Component {
 
     }
 
+    makeLinkForAttachments = (attachments) => {
+        var i = 0;
+        return attachments.map((attachment) => {
+            return <a href={attachment.filepath}>STL FILE {i++} </a>;
+        })
+    }
+
     handlePageClick = (e) => {
         const selectedPage = e.selected;
         const offset = selectedPage * this.state.perPage;
@@ -122,13 +129,13 @@ class MyCases extends Component {
                         {
                             this.props.item.items.map((tdata, i) => (
                                 <tr key={tdata.id}>
-                                <td>{tdata.id}</td>
+                                <td>{tdata.case_id}</td>
                                     {/*Case No field 'case_id'*/}
                                     <td>{tdata.status}</td>
                                     {/*Data Sent field 'reg_data'*/}
                                     <td>{tdata.patient_first_name + " " + tdata.patient_last_name}</td>
-                                    <td>{tdata.id}</td>
-                                    <td>{tdata.id}</td>
+                                    <td><a href={tdata.img_name}>CASE IMAGE</a></td>
+                                    <td>{this.makeLinkForAttachments(tdata.fileAttachments)}</td>
                                     <td>{tdata.reg_date}</td>
                                     <td><button id={tdata.id} onClick={this.openMSG}>Leave a message</button></td>
                                 </tr>

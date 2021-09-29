@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import { connect } from "react-redux";
 import { refershToken } from "../actions/authActions";
+import { myInformation } from "../actions/userActions";
 import PropTypes from 'prop-types';
 
 class Home extends Component{
@@ -21,6 +22,7 @@ class Home extends Component{
     componentDidMount(){
         debugger;
         this.props.refershToken();
+        this.props.myInformation();
         // if(!this.props.isAuthenticated){
         //     this.props.history.push("/Login");
         // }
@@ -28,6 +30,7 @@ class Home extends Component{
     render(){
         if(!this.props.isAuthenticated){
             this.props.history.push("/Login");
+            
             window.location.reload();
         }
         return(
@@ -61,6 +64,7 @@ class Home extends Component{
 
 Home.propTypes = {
     refershToken: PropTypes.func.isRequired,
+    myInformation:PropTypes.func.isRequired,
     isAuthenticated: PropTypes.object.isRequired
 }
 const mapStateToProps = (state) => ({
@@ -69,4 +73,4 @@ const mapStateToProps = (state) => ({
     refershToken: state.auth.refershToken
   });
 
-export default connect(mapStateToProps, { refershToken })(Home);
+export default connect(mapStateToProps, { myInformation,refershToken })(Home);

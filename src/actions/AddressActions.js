@@ -1,4 +1,5 @@
 import axios from 'axios';
+import axiosConfig from "../_services/axiosConfig";
 import {ADDRESS_MODIFY_FAIL, LOAD_ADDRESSES, MODIFIED_ADDRESS, LOAD_ADDRESSES_FAIL, LOADED_ADDRESSES, ADD_NEW_ADDRESS} from './types'
 import { tokenConfig } from './authActions';
 import jwt_decode from 'jwt-decode';
@@ -21,7 +22,7 @@ export const viewAllAddresses = (params) => (dispatch, getState) => {
       debugger;
       try{
         // var token = jwt_decode(getState().auth.token,{header: true});
-        return axios
+        return axiosConfig
             .get('/viewAllAddresses',{
                 ...tokenConfig(getState)
             })
@@ -64,7 +65,7 @@ export const addNewAddress = (params,props) => (dispatch,getState) => {
       debugger;
     try{
         // var token = jwt_decode(getState().auth.token,{header: true});
-        axios
+        axiosConfig
         .post('/addNewAddress/', params, {
             ...tokenConfig(getState)
         })
@@ -110,7 +111,7 @@ export const modifyAddress = (params,id,props) => (dispatch,getState) => {
       debugger;
     try{
         // var token = jwt_decode(getState().auth.token,{header: true});
-        axios
+        axiosConfig
         .post('/modifyAddress/' + id, params, {
             ...tokenConfig(getState)
         })

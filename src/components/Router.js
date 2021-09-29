@@ -72,4 +72,4 @@ export default () => (
         {/*<Route component={page404}/>*/}
 
     </Router>
-)
+  );
