@@ -84,14 +84,15 @@ export const login = ({usernameOrEmail, password}) => (
   const body = JSON.stringify({ usernameOrEmail, password });
   debugger;
 
-  axiosConfig
+  return axiosConfig
     .post('/api/auth/signin/', body, config)
-    .then(res =>
+    .then(res => {
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
-      })
-    )
+      });
+      return new Promise((receive,reject) => {receive(res.data)});
+    })
     .catch(err => {
       dispatch(
         returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL')
@@ -99,6 +100,7 @@ export const login = ({usernameOrEmail, password}) => (
       dispatch({
         type: LOGIN_FAIL
       });
+      return new Promise((receive,reject) => {reject(err.response.data)});
     });
 };
 

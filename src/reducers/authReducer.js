@@ -44,9 +44,16 @@ const initialState = {
           user: null,
           ...action.payload
         };
-      case AUTH_ERROR:
       case LOGIN_FAIL:
+        return {
+          ...state,
+          token: null,
+          user: null,
+          isAuthenticated: null,
+          isLoading: false
+        };
       case LOGOUT_SUCCESS:
+      case AUTH_ERROR:
       case REGISTER_FAIL:
         localStorage.removeItem('token');
         localStorage.removeItem('isAuthenticated');

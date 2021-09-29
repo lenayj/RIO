@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import {modifyAddress,addNewAddress} from '../../actions/AddressActions';
+import SearchLocationInput from './SearchLocationInput';
 
 class EditAddr extends Component {
     constructor(props) {
@@ -38,6 +39,13 @@ class EditAddr extends Component {
             satActive: props.location.state.address.office_work_days.includes("6"),
             sunActive: props.location.state.address.office_work_days.includes("7")
         }
+
+        this.handleChange = this.handleChange.bind(this)
+        
+    }
+
+    handleChange = (event) => {
+        this.setState({[event.target.name]: event.target.value})
     }
 
     MonClicked = (e) => { 
@@ -197,26 +205,7 @@ class EditAddr extends Component {
                                         <input type="text" className="form-control" name="licenseNum" value = { this.state.license } onChange = {(event) => {this.setState({license: event.target.value})}}/>                                               
                                     </div>  
                                 </div>
-                                <div className="form-row">
-                                    <div className="form-group col-md-12">
-                                        <div><span>Address Line1</span></div>
-                                        <input type="text" className="form-control" name="address" value = { this.state.street } onChange = {(event) => {this.setState({street: event.target.value})}}/>                                                                                               
-                                    </div>
-                                </div>
-                                <div className="form-row">
-                                    <div className="form-group col-md-5">
-                                        <div><span>City</span></div>
-                                        <input type="text" className="form-control" name="city" value = { this.state.city } onChange = {(event) => {this.setState({city: event.target.value})}}/>                                                                                               
-                                    </div>
-                                    <div className="form-group col-md-3">
-                                        <div><span>State</span></div>
-                                        <input type="text" className="form-control" name="state" value = { this.state.state } onChange = {(event) => {this.setState({state: event.target.value})}}/>                                                
-                                    </div> 
-                                    <div className="form-group col-md-2">
-                                        <div><span>Zip</span></div>
-                                        <input type="text" className="form-control" name="zip" value = { this.state.zipcode } onChange = {(event) => {this.setState({zipcode: event.target.value})}}/>                                               
-                                    </div> 
-                                </div>
+                                <SearchLocationInput address={this.state} handleChange = {this.handleChange}/>
                             </div>
                         </div>
                     </div>

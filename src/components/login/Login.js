@@ -9,6 +9,7 @@ import {React, Component} from "react";
 import { Redirect, Link } from 'react-router-dom';
 import { clearErrors } from '../../actions/errorActions';
 import MicrosoftLogin from 'react-microsoft-login';
+//import FlashMessage from 'react-flash-message';
 
 import bg from '../../assets/bg.png';
 
@@ -22,7 +23,8 @@ class Login extends Component {
         password: '', 
         submitted: false,
         loading: false,
-        error: ''
+        error: '',
+        loginStatus: null
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -55,7 +57,9 @@ handleSubmit(e) {
   //     );
 
   // debugger;
-  this.props.login({usernameOrEmail,password});
+  this.props.login({usernameOrEmail,password}).then((res) => {
+    this.setState({ loginStatus: true });
+  }).catch((err)=>{ this.setState({ loginStatus: false });});
 }
 
 
@@ -102,6 +106,16 @@ async loadData(props) {
 
  render(){
   //  debugger;
+  var flashingMessage = (this.state.loginStatus !=  null)
+    ? (!this.state.loginStatus) 
+    ? (
+      <div className="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Login Failed</strong><br/>Please check your login information.
+      </div>
+      )
+    : (<div></div>)
+    : (<div></div>);
+
    if(this.props.accessToken){
     //  return (<Redirect to="/myCases" />)
     this.props.history.push("/");
@@ -112,6 +126,7 @@ async loadData(props) {
        <div>
          <div className="login-form">
            <div className="form-container">
+              {flashingMessage}
               <div className="login-banner">
                 <h6 className="text-left">Welcome back</h6>
                 <h3 className="text-left">Login to your account</h3>

@@ -5,12 +5,24 @@ import { Link } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import { connect } from "react-redux";
 import { refershToken } from "../actions/authActions";
+import { myInformation } from "../actions/userActions";
 import PropTypes from 'prop-types';
 
 class Home extends Component{
+
+    constructor(props) {
+        super(props);    
+    
+        this.state = {
+            name:"",
+        }
+
+    };
+
     componentDidMount(){
         debugger;
         this.props.refershToken();
+        this.props.myInformation();
         // if(!this.props.isAuthenticated){
         //     this.props.history.push("/Login");
         // }
@@ -18,6 +30,7 @@ class Home extends Component{
     render(){
         if(!this.props.isAuthenticated){
             this.props.history.push("/Login");
+            
             window.location.reload();
         }
         return(
@@ -25,7 +38,7 @@ class Home extends Component{
                 <div className="container home">
                     <div className="grettingMsg pt-4">
                         {/* Todo :: Implement Login UserName */}
-                        <div className="greetingUsers pt-3"><h1>Welcome,</h1>{/*UserName is required*/}</div>
+                        <div className="greetingUsers pt-3"><h1>Welcome, {this.props.user.user!=null? this.props.user.user.name: ""} </h1></div>
                         <div className="text-secondary pt-2">Upload your Case and Book your pick-up online to avoid delay! <a href="http://uniortholab.com/us">Learn more</a></div>
                     </div>
                     <div className="menuIcon">
@@ -51,11 +64,13 @@ class Home extends Component{
 
 Home.propTypes = {
     refershToken: PropTypes.func.isRequired,
+    myInformation:PropTypes.func.isRequired,
     isAuthenticated: PropTypes.object.isRequired
 }
 const mapStateToProps = (state) => ({
+    user: state.user,
     isAuthenticated: state.auth.isAuthenticated,
     refershToken: state.auth.refershToken
   });
 
-  export default connect(mapStateToProps, { refershToken })(Home);
+export default connect(mapStateToProps, { myInformation,refershToken })(Home);

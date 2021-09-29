@@ -30,6 +30,8 @@ import booking from './booking/booking';
 import invoices from './invoices/invoices';
 import history from './history';
 
+import page404 from './errors/page404';
+
 export default () => (
     <Router  history={history}>
         <Header />
@@ -65,7 +67,9 @@ export default () => (
         <Route path='/booking' component={booking}/>
         
         {/*Allow users to check invoices list*/}
-        <Route path='/invoices' component={invoices}/>   
+        <Route path='/invoices' component={invoices}/>  
+
+        {/*<Route component={page404}/>*/}
 
     </Router>
   );
