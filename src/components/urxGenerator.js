@@ -310,14 +310,14 @@ class UrxGenerator extends Component {
           className="labslip-inner-element"
           style={{ fontsize: '18px', top: '148px', left: '80px' }}
         >
-          {this.props.casePersonalInfo.city}
+          {this.props.casePersonalInfo.addr}
         </p>
         {/* addr */}
         <p
           className="labslip-inner-element"
           style={{ fontsize: '18px', top: '178px', left: '55px' }}
         >
-          {this.props.casePersonalInfo.addr}
+          {this.props.casePersonalInfo.city}
         </p>
         {/* city */}
         <p

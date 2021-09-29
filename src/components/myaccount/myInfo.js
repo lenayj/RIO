@@ -36,58 +36,11 @@ export class MyInfo extends Component {
     };
 
     componentDidMount(){
-        // var yourConfig = {
-        //     headers: {
-        //        Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI1MzA0MzQ3LCJpYXQiOjE2MjUwMDQzNDcsImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.pEYqyippcV6bmpjjLN0U2kddJ9cASfhWkgZjLFf8l85A4ZOBezL42Qdy0P1b_Fl4DF834Nk6e2_WNBRYJY3_TA"
-        //     }
-        //  }
-        // axios.get("http://localhost:8080/myInformation?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
-        //     var addressesId,name, license, Email , Phone,street ,state,apartment,city,zipcode ,mainContactName ,mainContactEmail ,officeName ,officeHours ,officeLunchHours,addressesIds,office_work_days;
-        //     addressesId = a.data.id;
-        //     name = a.data.name;
-        //     license = a.data.license;
-        //     Email = a.data.email;
-        //     Phone = a.data.phone;
-        //     street  = a.data.street;
-        //     state = a.data.state;
-        //     apartment = a.data.apartment;
-        //     city = a.data.city; 
-        //     state = a.data.state;
-        //     zipcode = a.data.zipcode;
-        //     mainContactName = a.data.mainContactName;
-        //     mainContactEmail = a.data.mainContactEmail;
-        //     officeName = a.data.officeName;
-        //     officeHours = a.data.officeHours;
-        //     officeLunchHours = a.data.officeLunchHours;
-        //     addressesIds = a.data.addressesIds;
-        //     office_work_days = a.data.office_work_days;
-
-        //     console.log(a);
-
-        //     this.setState({addressesId:addressesId});
-        //     this.setState({name:name});
-        //     this.setState({state:state});
-        //     this.setState({license:license});
-        //     this.setState({Email:Email});
-        //     this.setState({Phone:Phone});
-        //     this.setState({street:street });
-        //     this.setState({apartment:apartment });
-        //     this.setState({city:city});
-        //     this.setState({zipcode:zipcode});
-        //     this.setState({mainContactName:mainContactName});
-        //     this.setState({mainContactEmail:mainContactEmail});
-        //     this.setState({officeName:officeName});
-        //     this.setState({officeHours:officeHours});
-        //     this.setState({officeLunchHours:officeLunchHours});
-        //     this.setState({addressesIds:addressesIds});
-        //     this.setState({office_work_days:office_work_days});
-        // })
         if(!this.props.isAuthenticated){
             this.props.history.push("/Login");
             window.location.reload();
         }
         this.props.myInformation();
-
     }
 
     editBtn() {

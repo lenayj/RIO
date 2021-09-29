@@ -2,9 +2,11 @@ import '../../css/booking.css';
 import 'react-calendar/dist/Calendar.css';
 
 import {React, Component} from "react";
+import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import axios from 'axios';
 import { myInformation } from '../../actions/userActions';
+import {viewAllAddresses} from "../../actions/AddressActions"
 
 import { connect } from "react-redux";
 import { putPickups} from '../../actions/pickupActions';
@@ -19,7 +21,6 @@ class Booking extends Component{
           date: '',
           activeTime: false,
           activeArea:false,
-          /* Todo :: Bring User's city data from user information and set state */
           city: '',
           street: "",
           apartment:"",
@@ -32,6 +33,10 @@ class Booking extends Component{
           docOfficeHours:"",
           addresses:[],
           addressId:"",
+          officeAddresses:[],
+          overviewAddress:"",
+          officeName:'',
+          officeHours:''
         };
       }
       
@@ -58,7 +63,7 @@ class Booking extends Component{
         'SOLANA BEACH','SPRING VALLEY','SUN CITY','TEMECULA','VENTURA','VICTORVILLE','VISTA','WILDOMAR','YUCAIPA']
         //console.log(selectedDate);
         //console.log(today.getMonth()+1 + '-' + today.getDate());
-        //console.log(pickupCity);
+        console.log(pickupCity);
 
         /* 
         ##### Conditions 1 : Sameday pick up in not allowed after 8am PST for the following area(city) 
@@ -106,79 +111,57 @@ class Booking extends Component{
         this.setState({ date:'' });
     }
 
+    selectAddress = (e) => {
+
+        var selectedOfficeValue = this.state.officeAddresses[e.target.value];
+        //console.log(selectedOfficeValue);
+        var OfficeAddress = selectedOfficeValue.street +", "+ selectedOfficeValue.apartment +", "+ selectedOfficeValue.state +", "+ selectedOfficeValue.city +", " + selectedOfficeValue.zipcode;
+        var OfficeName = selectedOfficeValue.officeName;
+        var OfficeHours = selectedOfficeValue.office_hours_start + " - " + selectedOfficeValue.office_hours_end + " | " + selectedOfficeValue.lunch_hours_start + " - " + selectedOfficeValue.lunch_hours_end;
+        var AddressID = selectedOfficeValue.id;
+        
+        /***split the value by comma and set office name / address / office hours***/
+        this.setState({ overviewAddress: OfficeAddress });
+        this.setState({ officeName: OfficeName});
+        this.setState({ officeHours: OfficeHours});
+        this.setState({ addressId: AddressID});
+        
+    }
+
     componentDidMount(){
         if(!this.props.isAuthenticated){
             this.props.history.push("/Login");
             window.location.reload();
         }
-        var yourConfig = {
-            headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI2NDExNDg5LCJpYXQiOjE2MjYxMTE0ODksImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.x1Vi_pccbGI9GqnRL2NHBNgfHdlGMrnrYnMFP-OoQibhGrLGGhRNhhHwXYvIvcDgjabBRvROOPFc01OqUZ4FHw"
-            }
-         }
-        // axios.get("http://localhost:8080/myInformation?email=venkatesh@uniortholab.com",yourConfig).then((a) =>{
-            // var addressesId,name, license, Email , Phone,street ,state,apartment,city,zipcode ,mainContactName ,mainContactEmail ,officeName ,officeHours ,officeLunchHours,addressesIds,office_work_days;
-            // addressesId = a.data.id;
-            // name = a.data.name;
-            // license = a.data.license;
-            // Email = a.data.email;
-            // Phone = a.data.phone;
-            // street  = a.data.street;
-            // state = a.data.state;
-            // apartment = a.data.apartment;
-            // city = a.data.city; 
-            // state = a.data.state;
-            // zipcode = a.data.zipcode;
-            // mainContactName = a.data.mainContactName;
-            // mainContactEmail = a.data.mainContactEmail;
-            // officeName = a.data.officeName;
-            // officeHours = a.data.officeHours;
-            // officeLunchHours = a.data.officeLunchHours;
-            // addressesIds = a.data.addressesIds;
-            // office_work_days = a.data.office_work_days;
 
-            // console.log(a);
-
-            // this.setState({docName:name});
-            // this.setState({license:license});
-            // this.setState({email:Email});
-            // this.setState({Phone:Phone});
-            // this.setState({city: city});
-            // this.setState({street:street });
-            // this.setState({apartment:apartment });
-            // this.setState({city:city});
-            // this.setState({zipcode:zipcode});
-            // this.setState({addressId:addressesId});
-            // this.setState({mainContactEmail:mainContactEmail});
-            // this.setState({officeName:officeName});
-            // this.setState({officeHours:officeHours});
-            // this.setState({officeLunchHours:officeLunchHours});
-        // })
-         debugger;
+         this.props.viewAllAddresses().then((a)=>{
+            this.setState({officeAddresses:a});
+        });
+       
         this.props.myInformation().then((a)=>{
             this.setState({docName:a.name});
             this.setState({license:a.license});
             this.setState({email:a.Email});
             this.setState({Phone:a.Phone});
-            this.setState({city: a.city});
+            this.setState({state: a.state});
             this.setState({street:a.street });
             this.setState({apartment:a.apartment });
             this.setState({city:a.city});
             this.setState({zipcode:a.zipcode});
-            this.setState({addressId:a.addressesId});
+            this.setState({addressId:a.id});
             this.setState({mainContactEmail:a.mainContactEmail});
             this.setState({officeName:a.officeName});
             this.setState({officeHours:a.officeHours});
             this.setState({officeLunchHours:a.officeLunchHours});
-
-        });
-        
+            this.setState({overviewAddress: a.street +" "+ a.apartment + ", "+ a.state +", "+ a.city +", "+ a.zipcode});
+        }); 
     }
 
+    /* Todo: Change defaultAddressId to selected office address's ID */
     pickItUp = (event) => {
         event.preventDefault();
         console.log(event );
-        var defaultAddressId = this.props.user.user.id;
+        var defaultAddressId = this.state.addressId;
         var yyyyMMdd = "";
 
         if(this.state.date != ""){
@@ -200,12 +183,7 @@ class Booking extends Component{
             "addressInt":defaultAddressId,
             "pickup_date" : yyyyMMdd
         }
-        var yourConfig = {
-            headers: {
-               Authorization: "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjI2NDExNDg5LCJpYXQiOjE2MjYxMTE0ODksImVtYWlsIjoidmVua2F0ZXNoQHVuaW9ydGhvbGFiLmNvbSJ9.x1Vi_pccbGI9GqnRL2NHBNgfHdlGMrnrYnMFP-OoQibhGrLGGhRNhhHwXYvIvcDgjabBRvROOPFc01OqUZ4FHw"
-            }
-         }
-
+       
          this.props.putPickups(params);
         //  window.location.reload();
         //  if(!this.props.isAuthenticated){
@@ -272,14 +250,28 @@ class Booking extends Component{
                                     <div className="text-secondary mb-3">Please provide Information for booking</div>
                                 </div>
 
+                                <div className="office-addresses">
+                                    <div className="addresses-list">
+                                    {/* Add Selected Options */}
+                                        <select className="custom-select" style={{width:"400px"}} onChange={this.selectAddress}>
+                                          {this.state.officeAddresses.map((address,index) => {
+                                            return <option value={index} key={address.id}>
+                                              {address.street}, {address.apartment}, {address.state}, {address.city}, {address.zipcode}
+                                            </option>
+                                          })}
+                                        </select>
+                                    </div>
+                                    <div className="address-edit"><Link to= '/myinfo' target="_blank" className="links">Edit</Link></div>
+                                </div>
+
                                 <div className="doctorOfficeInfo mt-4">
                                     <div className="part-value">
                                         <div className="defaultAddr-mark float-right"><p>&#10003; Your Default</p></div>
                                         <div className="form-row user-name">Doctor Name:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.name: ""}</span></div>
                                         <div className="form-row doctor-license">Doctor License #:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.license: ""}</span></div>
-                                        <div className="form-row user-address">Address:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.street + " " + this.props.user.user.apartment + 
-                                " " + this.props.user.user.city + " " + this.props.user.user.zipcode : ""}</span></div>
-                                        <div className="form-row office-hours">Office Hours:&nbsp; <span>Mon-Fri 9-12|1-3</span></div>
+                                        <div className="form-row user-address">Address:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.street + ", " + this.props.user.user.apartment + 
+                                ", " + this.props.user.user.state + ", " + this.props.user.user.city + ", " + this.props.user.user.zipcode : ""}</span></div>
+                                        <div className="form-row office-hours">Office Hours:&nbsp; <span>{this.props.user.user!=null ? this.props.user.user.officeHours + " | " + this.props.user.user.officeLunchHours: ""}</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -292,9 +284,9 @@ class Booking extends Component{
                                 <div className="booking-overview mt-4">
                                     <div className="part-value">
                                         <div className="form-row date"><label>Date:</label><span>{this.state.date}</span></div>
-                                        <div className="form-row office-name"><label>Office Name:</label><span>USOP Dental</span></div>
-                                        <div className="form-row user-address"><label>Address:</label><span>11917 FRONT ST, NORWALK, CA 90650</span></div>
-                                        <div className="form-row office-hours"><label>Office Hours:</label><span>Mon-Fri 9-6 | 12-1</span></div>
+                                        <div className="form-row office-name"><label>Office Name:</label><span>{this.state.officeName}</span></div>
+                                        <div className="form-row user-address"><label>Address:</label><span>{this.state.overviewAddress}</span></div>
+                                        <div className="form-row office-hours"><label>Office Hours:</label><span>{this.state.officeHours}</span></div>
                                     </div>
                                     <div className="disclaimer">
                                         <span className="text-danger">Pick up time is not guaranteed and can vary depending on availability.</span>    
@@ -314,11 +306,12 @@ class Booking extends Component{
 Booking.propTypes = {
     putPickups: PropTypes.func.isRequired,
     myInformation: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.object.isRequired
+    isAuthenticated: PropTypes.object.isRequired,
+    viewAllAddresses: PropTypes.func.isRequired
 }
 const mapStateToProps = (state) => ({
     user: state.user,
     isAuthenticated:state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, {putPickups,myInformation})(Booking);
+export default connect(mapStateToProps, {viewAllAddresses,putPickups,myInformation})(Booking);
