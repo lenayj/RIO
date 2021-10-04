@@ -21,7 +21,7 @@ export const putPickups = (params) => (dispatch,getState) => {
       debugger;
     try{
         // var token = jwt_decode(getState().auth.token,{header: true});
-        axiosConfig
+        return axiosConfig
         .post('/pickup', params, {
             ...tokenConfig(getState)
         })
@@ -31,6 +31,7 @@ export const putPickups = (params) => (dispatch,getState) => {
                 payload: res.data
             });
             alert(res.data);
+            return new Promise((resf,errf)=>{resf(res.data)});
         }
         )
         .catch(err => {
@@ -41,11 +42,14 @@ export const putPickups = (params) => (dispatch,getState) => {
         dispatch({
             type: PICKUP_FAIL
         });
-        history.push("/login");        
+        
+        //history.push("/login");        
         });
+         
     }
     catch(err){
-        history.push("/login");   
+        history.push("/login");  
+        return new Promise((resf,errf)=>{errf(err)});
     }
 
 }

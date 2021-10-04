@@ -65,7 +65,7 @@ export const addNewAddress = (params,props) => (dispatch,getState) => {
       debugger;
     try{
         // var token = jwt_decode(getState().auth.token,{header: true});
-        axiosConfig
+        return axiosConfig
         .post('/addNewAddress/', params, {
             ...tokenConfig(getState)
         })
@@ -83,7 +83,7 @@ export const addNewAddress = (params,props) => (dispatch,getState) => {
         .catch(err => {
             debugger;
         dispatch(
-            returnErrors(err.response.data, err.response.status, 'ADDRESS_MODIFY_FAIL')
+            returnErrors(err?.response?.data, err?.response?.status, 'ADDRESS_MODIFY_FAIL')
         );
         dispatch({
             type: ADDRESS_MODIFY_FAIL
@@ -92,7 +92,8 @@ export const addNewAddress = (params,props) => (dispatch,getState) => {
         });
     }
     catch(err){
-        history.push("/login");   
+        history.push("/login");
+        return new Promise((resf,errf)=>{errf(err)});   
     }
 
 }
@@ -111,7 +112,7 @@ export const modifyAddress = (params,id,props) => (dispatch,getState) => {
       debugger;
     try{
         // var token = jwt_decode(getState().auth.token,{header: true});
-        axiosConfig
+        return axiosConfig
         .post('/modifyAddress/' + id, params, {
             ...tokenConfig(getState)
         })
@@ -122,12 +123,13 @@ export const modifyAddress = (params,id,props) => (dispatch,getState) => {
             });
             alert(res.data);
             props.history.push("/myInfo");
+            return new Promise((resf,errf)=>{resf(res.data)});
         }
         )
         .catch(err => {
             debugger;
         dispatch(
-            returnErrors(err.response.data, err.response.status, 'ADDRESS_MODIFY_FAIL')
+            returnErrors(err?.response.data, err?.response?.status, 'ADDRESS_MODIFY_FAIL')
         );
         dispatch({
             type: ADDRESS_MODIFY_FAIL
@@ -137,6 +139,7 @@ export const modifyAddress = (params,id,props) => (dispatch,getState) => {
     }
     catch(err){
         history.push("/login");   
+        return new Promise((resf,errf)=>{errf(err)});
     }
 
 }

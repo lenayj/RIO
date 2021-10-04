@@ -11,7 +11,7 @@ import {viewAllAddresses} from "../../actions/AddressActions"
 import { connect } from "react-redux";
 import { putPickups} from '../../actions/pickupActions';
 import PropTypes from 'prop-types';
-
+import { store } from 'react-notifications-component';
 
 class Booking extends Component{
 
@@ -184,7 +184,36 @@ class Booking extends Component{
             "pickup_date" : yyyyMMdd
         }
        
-         this.props.putPickups(params);
+         this.props.putPickups(params).then((res,rej) => {
+             console.log(res);
+             console.log(rej);
+             if(res!=null){
+                store.addNotification({
+                    title: "Success!",
+                    message: res,
+                    type: "success",
+                    insert: "top",
+                    container: "top-right",
+                    dismiss: {
+                        duration: 5000
+                    }
+                })
+             }
+             if(rej!=null){
+                store.addNotification({
+                    title: "Error :(",
+                    message: rej,
+                    type: "danger",
+                    insert: "top",
+                    container: "top-right",
+                    dismiss: {
+                        duration: 5000
+                    }
+                })
+             }
+            
+            
+         });
         //  window.location.reload();
         //  if(!this.props.isAuthenticated){
         //     history.push("/Login");

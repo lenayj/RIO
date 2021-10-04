@@ -37,7 +37,7 @@ class UpdateMyInfo extends Component {
             friActive: props.location.state.office_work_days.includes("5"),
             satActive: props.location.state.office_work_days.includes("6"),
             sunActive: props.location.state.office_work_days.includes("7"),
-            is_default: 1,
+            is_default: 1
         }
 
         this.mon= "0";
@@ -134,7 +134,19 @@ class UpdateMyInfo extends Component {
             }
          }
 
-        this.props.modifyAddress(params,this.state.addressesId, this.props);
+        //this.props.modifyAddress(params,this.state.addressesId, this.props);
+        this.props.modifyAddress(params,this.state.addressesId, this.props).then((res,rej) => {
+           //alert("res god know what this is" + res);
+           //alert("rej god know what this is " + rej);
+
+            if(res!=null){
+               
+            }
+            else{
+               
+            }
+            
+        });
         
     }
 
@@ -237,11 +249,11 @@ class UpdateMyInfo extends Component {
                                 <div className="form-row">
                                     <div className="form-group col-md-9">
                                         <div><span>Doctor Name/ Office Name</span></div>
-                                        <input type="text" className="form-control" name="doctorOrOfficeName" value={this.state.officeName} onChange = {(event) => {this.setState({officeName: event.target.value})}}/>
+                                        <input type="text" className="form-control" name="officeName" value={this.state.officeName} onChange = {this.handleChange}/>
                                     </div>
                                     <div className="form-group col-md-3">
                                         <div><span>License#</span></div>
-                                        <input type="text" className="form-control" name="licenseNum" value={this.state.license} onChange = {(event) => {this.setState({officeName: event.target.value})}}/>
+                                        <input type="text" className="form-control" name="license" value={this.state.license} onChange = {this.handleChange}/>
                                     </div>  
                                 </div>
                                 <SearchLocationInput address={this.state} handleChange = {this.handleChange}/>

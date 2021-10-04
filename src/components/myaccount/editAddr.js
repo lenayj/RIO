@@ -118,14 +118,32 @@ class EditAddr extends Component {
             "lunch_hours_start"  : parseInt(this.state.officeLunchHours.split("-")[0]),
             "lunch_hours_end" : parseInt(this.state.officeLunchHours.split("-")[1]),
             "office_work_days" : this.getWorkDays(),
-            "officeName": this.state.officeName
+            "officeName": this.state.officeName,
+            "license": this.state.license
         }
 
         if(this.state.page == "New"){
-            this.props.addNewAddress(params,this.props);
+            this.props.addNewAddress(params,this.props).then((res,rej) => {
+                console.log(res);
+                console.log(rej);
+                if(res!=null){
+                   
+                }
+                else{
+                   
+                }
+            });;
         }
         else{
-            this.props.modifyAddress(params,this.state.addressesId,this.props);
+            this.props.modifyAddress(params,this.state.addressesId,this.props).then((res,rej) => {
+                debugger;
+                if(res!=null){
+                   
+                }
+                else{
+                   
+                }
+            });;
         }
         
     }
@@ -198,11 +216,11 @@ class EditAddr extends Component {
                                 <div className="form-row">
                                     <div className="form-group col-md-9">
                                         <div><span>Doctor Name/ Office Name</span></div>
-                                        <input type="text" className="form-control" name="doctorOrOfficeName" value = { this.state.officeName } onChange = {(event) => {this.setState({officeName: event.target.value})}}/>                                                
+                                        <input type="text" className="form-control" name="officeName" value = { this.state.officeName } onChange = {this.handleChange}/>                                                
                                     </div>
                                     <div className="form-group col-md-3">
                                         <div><span>License#</span></div>
-                                        <input type="text" className="form-control" name="licenseNum" value = { this.state.license } onChange = {(event) => {this.setState({license: event.target.value})}}/>                                               
+                                        <input type="text" className="form-control" name="license" value = { this.state.license } onChange = {this.handleChange}/>                                               
                                     </div>  
                                 </div>
                                 <SearchLocationInput address={this.state} handleChange = {this.handleChange}/>
