@@ -2,7 +2,7 @@ import React, { PureComponent, Component } from 'react';
 import { Accordion, Card } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
 import CanvasDraw from 'react-canvas-draw';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import AddDesigns from './addDesigns';
 
 import '../../css/newCase.css';
 
@@ -2119,7 +2119,9 @@ class NewCasePrescription extends PureComponent {
                   <div className="font-weight-bold float-right">&#43;</div>
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="8">
-                  <Card.Body></Card.Body>
+                  <Card.Body>
+                    <AddDesigns/>
+                  </Card.Body>
                 </Accordion.Collapse>
               </Card>
             </Accordion>
