@@ -1,6 +1,33 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import React, { useState } from "react";
 
-function AddDesigns() {
+/*
+Todo:: 
+1) Toggle ClassName to add CSS style when design is clicked
+2) Check if data is being sent correctly
+*/
+
+function AddDesigns(props) {
+
+    const [designName, setDesignName] = useState(null);
+    
+    const toggle = (event) => {
+        if(event.target.id != designName){
+            if(designName != null){
+                document.getElementById(designName).className = "design";
+            }
+            setDesignName(event.target.id);
+            event.target.className = "design selected";
+        }
+        else{
+            setDesignName(null);
+            event.target.className = "design";
+        }
+        debugger;
+        props.addDesignName(event.target.id);
+        
+    };
+
     return (
         <Tabs>
         <TabList>
@@ -16,9 +43,9 @@ function AddDesigns() {
 
         <TabPanel>
             <div className="tab-pane pattern" id="pills-pattern">
-                <div className="design"><img src="../images/newcase/design/1.pattern/americanflag.jpg" id="americanflag" /><span>American Flag</span></div>
-                <div className="design"><img src="../images/newcase/design/1.pattern/apple.jpg" id="apple" /><span>Apple</span></div>
-                <div className="design"><img src="../images/newcase/design/1.pattern/baseball.jpg" id="baseball" /><span>Baseball</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="americanflag"><img src="../images/newcase/design/1.pattern/americanflag.jpg"/><span>American Flag</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="apple"><img src="../images/newcase/design/1.pattern/apple.jpg"/><span>Apple</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="baseball"><img src="../images/newcase/design/1.pattern/baseball.jpg"/><span>Baseball</span></div>
                 <div className="design"><img src="../images/newcase/design/1.pattern/checker.jpg" id="checker" /><span>Checker</span></div>
                 <div className="design"><img src="../images/newcase/design/1.pattern/dice.jpg" id="dice" /><span>Dice</span></div>
                 <div className="design"><img src="../images/newcase/design/1.pattern/eyes.jpg" id="eyes" /><span>Eyes</span></div>

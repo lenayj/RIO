@@ -54,7 +54,7 @@ class NewCase extends Component {
         pouring: 'f', // not req
         pontics: '', // notes for ponitcs
         bands: 'firstdata', // not req
-        color: 'firstdata', // design 
+        color: "", // design 
         notes: '', //special req
         doctor_office_name: '', 
         addr: '',
@@ -170,7 +170,8 @@ class NewCase extends Component {
     ballClaspL,
     ballClaspU,
     textForPontic,
-    textForNotes) => {
+    textForNotes,
+    designName) => {
     var data_state = this.state.data;
     console.log(canvasDrawDataStack);
     console.log(canvasHtml);
@@ -267,6 +268,19 @@ class NewCase extends Component {
       }
       this.setState({data:data_state});
     }
+    debugger;
+    if(this.state.color != designName){
+      if(designName!= null  && designName.length > 0){
+        data_state.color = designName;
+        this.setState({data:data_state});
+      }
+    }
+    else{
+      data_state.color = "";
+      this.setState({data:data_state});
+    }
+    
+    
     console.log(this.state.data);
     var htmlEleCanvas = <UrxGenRefForwarder
     canvasDrawDataStack={this.state.canvasData.canvasDrawDataStack}

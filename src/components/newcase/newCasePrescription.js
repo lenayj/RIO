@@ -32,6 +32,7 @@ class NewCasePrescription extends PureComponent {
         "",
         "",
         "",
+        "",
         ""
       );
     };
@@ -95,6 +96,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       "",
+      "",
       ""
   );
   };
@@ -129,6 +131,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       "",
+      "",
       ""
     )
   };
@@ -151,6 +154,7 @@ class NewCasePrescription extends PureComponent {
       this.saveableCanvas,
       this.state.appliance_types,
       this.state.files,
+      "",
       "",
       "",
       "",
@@ -194,6 +198,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       "",
+      "",
       ""
     )
   };
@@ -206,6 +211,7 @@ class NewCasePrescription extends PureComponent {
       this.state.files,
       "",
       event.target.id,
+      "",
       "",
       "",
       "",
@@ -233,6 +239,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       "",
+      "",
       ""
     )
   };
@@ -246,6 +253,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       event.target.id,
+      "",
       "",
       "",
       "",
@@ -271,6 +279,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       "",
+      "",
       ""
     )
   };
@@ -286,6 +295,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       event.target.id,
+      "",
       "",
       "",
       "",
@@ -306,6 +316,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       event.target.id,
+      "",
       "",
       "",
       "",
@@ -330,6 +341,7 @@ class NewCasePrescription extends PureComponent {
       event.target.id,
       "",
       "",
+      "",
       ""
     )
   };
@@ -351,6 +363,7 @@ class NewCasePrescription extends PureComponent {
       "",
       event.target.id,
       "",
+      "",
       ""
     )
   };
@@ -371,6 +384,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       event.target.id,
+      "",
       ""
     )
   };
@@ -391,9 +405,32 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       "",
-      event.target.value
+      event.target.value,
+      ""
     )
   };
+
+  addDesignName = (nameId) => {
+    this.props.submitted(
+      this.canvasDrawDataStack,
+      this.saveableCanvas,
+      this.state.appliance_types,
+      this.state.files,
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      nameId
+    )
+  };
+
 
 
   render() {
@@ -2120,7 +2157,7 @@ class NewCasePrescription extends PureComponent {
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="8">
                   <Card.Body>
-                    <AddDesigns/>
+                    <AddDesigns addDesignName={this.addDesignName}/>
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
