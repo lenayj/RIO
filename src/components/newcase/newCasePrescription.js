@@ -11,7 +11,7 @@ class NewCasePrescription extends PureComponent {
     super(props);
     this.upperImage = React.createRef();
     this.lowerImage = React.createRef();
-    console.log(props);
+    //console.log(props);
 
     this.onDrop = (files) => {
       this.setState({ files });
@@ -138,7 +138,7 @@ class NewCasePrescription extends PureComponent {
 
   storeCanvasDrawingData(data) {
     this.setState({ canvasDrawData: data });
-    console.log(this.state.canvasDrawData);
+    //console.log(this.state.canvasDrawData);
   }
 
   static getDerivedStateFromProps(nextProps) {
@@ -148,7 +148,7 @@ class NewCasePrescription extends PureComponent {
   storeCanvasElement(canvasElement) {
     // this.setState({canvasData: canvasElement});
     this.canvasDrawDataStack.push(this.saveableCanvas.getSaveData());
-    console.log(this.canvasDrawDataStack);
+    //console.log(this.canvasDrawDataStack);
     this.props.submitted(
       this.canvasDrawDataStack,
       this.saveableCanvas,
@@ -325,7 +325,7 @@ class NewCasePrescription extends PureComponent {
   };
   addBallClaspL = (event) => {
     debugger;
-    console.log(event.target)
+    //console.log(event.target)
     this.props.submitted(
       this.canvasDrawDataStack,
       this.saveableCanvas,
@@ -347,7 +347,7 @@ class NewCasePrescription extends PureComponent {
   };
   addBallClaspU = (event) => {
     debugger;
-    console.log(event.target)
+    //console.log(event.target)
     this.props.submitted(
       this.canvasDrawDataStack,
       this.saveableCanvas,
@@ -2016,7 +2016,7 @@ class NewCasePrescription extends PureComponent {
                       hideGrid={true}
                       imgSrc="/src/assets/newcase/teeth.png"
                       onChange={(event) => {
-                        console.log(event);
+                        //console.log(event);
                         //this.saveableCanvas.getSaveData()
 
                         this.storeCanvasElement(event);

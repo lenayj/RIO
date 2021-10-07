@@ -268,7 +268,6 @@ class NewCase extends Component {
       }
       this.setState({data:data_state});
     }
-    debugger;
     if(this.state.color != designName){
       if(designName!= null  && designName.length > 0){
         data_state.color = designName;
