@@ -1,19 +1,17 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import React, { useState } from "react";
 
-/*
-Todo:: 
-1) Toggle ClassName to add CSS style when design is clicked
-2) Check if data is being sent correctly
-*/
 
 function AddDesigns(props) {
 
     const [designName, setDesignName] = useState(null);
     
+    
     const toggle = (event) => {
+        alert(designName);
+        alert(event.target.id);
         if(event.target.id != designName){
-            if(designName != null){
+            if(designName != null && document.getElementById(designName)!=null){
                 document.getElementById(designName).className = "design";
             }
             setDesignName(event.target.id);
@@ -46,28 +44,28 @@ function AddDesigns(props) {
                 <div className="design" onClick={(e) => toggle(e)} id="americanflag"><img src="../images/newcase/design/1.pattern/americanflag.jpg"/><span>American Flag</span></div>
                 <div className="design" onClick={(e) => toggle(e)} id="apple"><img src="../images/newcase/design/1.pattern/apple.jpg"/><span>Apple</span></div>
                 <div className="design" onClick={(e) => toggle(e)} id="baseball"><img src="../images/newcase/design/1.pattern/baseball.jpg"/><span>Baseball</span></div>
-                <div className="design" onClick={(e) => toggle(e)} ><img src="../images/newcase/design/1.pattern/checker.jpg" id="checker" /><span>Checker</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/dice.jpg" id="dice" /><span>Dice</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/eyes.jpg" id="eyes" /><span>Eyes</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/fire.jpg" id="fire" /><span>Fire</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/flowers.jpg" id="flowers" /><span>Flowers</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/forest_green.jpg" id="forest_green" /><span>Forest Green</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/giraffe.jpg" id="giraffe" /><span>Giraffe</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/kite.jpg" id="kite" /><span>Kite</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/ladybug.jpg" id="ladybug" /><span>Ladybug</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/merrygoaround.jpg" id="merrygoaround" /><span>Merry-go-round</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/mexicoflag.jpg" id="mexicoflag" /><span>Mexico Flag</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/moonlight.jpg" id="moonlight" /><span>Moonlight</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/rainbow.jpg" id="rainbow" /><span>Rainbow</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/redrose.jpg" id="redrose" /><span>Red Rose</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/sailboat.jpg" id="sailboat" /><span>Sailboat</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/soccerball.jpg" id="soccerball" /><span>Soccer Ball</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/strawberry.jpg" id="strawberry" /><span>Strawberry</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/tiedie.jpg" id="tiedie" /><span>Tiedie</span></div>    
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/tiger.jpg" id="tiger" /><span>Tiger</span></div>    
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/watermelon.jpg" id="watermelon" /><span>Watermelon</span></div>
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/whitedots.jpg" id="whitedots" /><span>White Dots</span></div>    
-                <div className="design" onClick={(e) => toggle(e)}><img src="../images/newcase/design/1.pattern/yinyang.jpg" id="yinyang" /><span>Yinyang</span>
+                <div className="design" onClick={(e) => toggle(e)} id="checker" ><img src="../images/newcase/design/1.pattern/checker.jpg"/><span>Checker</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="dice" ><img src="../images/newcase/design/1.pattern/dice.jpg"/><span>Dice</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="eyes" ><img src="../images/newcase/design/1.pattern/eyes.jpg"/><span>Eyes</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="fire" ><img src="../images/newcase/design/1.pattern/fire.jpg"/><span>Fire</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="flowers" ><img src="../images/newcase/design/1.pattern/flowers.jpg"/><span>Flowers</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="forest_green" ><img src="../images/newcase/design/1.pattern/forest_green.jpg"/><span>Forest Green</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="giraffe" ><img src="../images/newcase/design/1.pattern/giraffe.jpg"/><span>Giraffe</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="kite" ><img src="../images/newcase/design/1.pattern/kite.jpg"/><span>Kite</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="ladybug" ><img src="../images/newcase/design/1.pattern/ladybug.jpg"/><span>Ladybug</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="merrygoaround" ><img src="../images/newcase/design/1.pattern/merrygoaround.jpg"/><span>Merry-go-round</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="mexicoflag" ><img src="../images/newcase/design/1.pattern/mexicoflag.jpg"/><span>Mexico Flag</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="moonlight" ><img src="../images/newcase/design/1.pattern/moonlight.jpg"/><span>Moonlight</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="rainbow" ><img src="../images/newcase/design/1.pattern/rainbow.jpg"/><span>Rainbow</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="redrose" ><img src="../images/newcase/design/1.pattern/redrose.jpg"/><span>Red Rose</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="sailboat" ><img src="../images/newcase/design/1.pattern/sailboat.jpg"/><span>Sailboat</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="soccerball" ><img src="../images/newcase/design/1.pattern/soccerball.jpg"/><span>Soccer Ball</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="strawberry" ><img src="../images/newcase/design/1.pattern/strawberry.jpg"/><span>Strawberry</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="tiedie" ><img src="../images/newcase/design/1.pattern/tiedie.jpg"/><span>Tiedie</span></div>    
+                <div className="design" onClick={(e) => toggle(e)} id="tiger" ><img src="../images/newcase/design/1.pattern/tiger.jpg"/><span>Tiger</span></div>    
+                <div className="design" onClick={(e) => toggle(e)} id="watermelon" ><img src="../images/newcase/design/1.pattern/watermelon.jpg"/><span>Watermelon</span></div>
+                <div className="design" onClick={(e) => toggle(e)} id="whitedots" ><img src="../images/newcase/design/1.pattern/whitedots.jpg"/><span>White Dots</span></div>    
+                <div className="design" onClick={(e) => toggle(e)} id="yinyang" ><img src="../images/newcase/design/1.pattern/yinyang.jpg"/><span>Yinyang</span>
                 </div>
             </div>
         </TabPanel>
