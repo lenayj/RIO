@@ -232,11 +232,13 @@ ul.react-tabs__tab-list {
     border-left: 1px solid lightgray;
 }
 
+
 .react-tabs__tab-panel--selected {
     border-left: 1px solid lightgray;
     min-height: 520px;
     padding-top: 1rem;
 }
+
 
 .tab-pane img {
     margin: 10px;
@@ -257,15 +259,25 @@ ul.react-tabs__tab-list {
     width:625px;
 }
 
-.design:hover{
-    border: 1px solid lightsteelblue;
-    background-color: rgb(229, 238, 248, 0.5);
-    border-radius: 15%;
+.design:hover, .design.selected:hover{
+  border: 1px solid lightsteelblue;
+  background-color: rgb(229, 238, 248, 0.5);
+  border-radius: 15%;
 }
 
+.design.selected{
+  border: 1px solid lightgray;
+  background-color: rgba(207, 207, 207, 0.5);
+  border-radius: 15%;
+}
+
+.design img {
+  pointer-events: none
+}
 
 .design span {
     font-weight: bolder;
+    pointer-events: none
 }
 
 

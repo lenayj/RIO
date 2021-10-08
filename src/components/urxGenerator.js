@@ -403,9 +403,9 @@ class UrxGenerator extends Component {
 
         <p
           className="labslip-inner-element"
-          style={{ fontsize: '18px', top: '756px', left: '452px' }}
+          style={{ fontsize: '18px', top: '762px', left: '452px' }}
         >
-          {this.state.color}
+          {this.props.casePersonalInfo.color}
         </p>
         <p
           className="labslip-inner-element"

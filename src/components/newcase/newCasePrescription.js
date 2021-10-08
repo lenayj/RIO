@@ -2,7 +2,7 @@ import React, { PureComponent, Component } from 'react';
 import { Accordion, Card } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
 import CanvasDraw from 'react-canvas-draw';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import AddDesigns from './addDesigns';
 
 import '../../css/newCase.css';
 
@@ -11,7 +11,7 @@ class NewCasePrescription extends PureComponent {
     super(props);
     this.upperImage = React.createRef();
     this.lowerImage = React.createRef();
-    console.log(props);
+    //console.log(props);
 
     this.onDrop = (files) => {
       this.setState({ files });
@@ -22,6 +22,7 @@ class NewCasePrescription extends PureComponent {
         this.saveableCanvas,
         this.state.appliance_types,
         this.state.files,
+        "",
         "",
         "",
         "",
@@ -95,6 +96,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       "",
+      "",
       ""
   );
   };
@@ -129,13 +131,14 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       "",
+      "",
       ""
     )
   };
 
   storeCanvasDrawingData(data) {
     this.setState({ canvasDrawData: data });
-    console.log(this.state.canvasDrawData);
+    //console.log(this.state.canvasDrawData);
   }
 
   static getDerivedStateFromProps(nextProps) {
@@ -145,12 +148,13 @@ class NewCasePrescription extends PureComponent {
   storeCanvasElement(canvasElement) {
     // this.setState({canvasData: canvasElement});
     this.canvasDrawDataStack.push(this.saveableCanvas.getSaveData());
-    console.log(this.canvasDrawDataStack);
+    //console.log(this.canvasDrawDataStack);
     this.props.submitted(
       this.canvasDrawDataStack,
       this.saveableCanvas,
       this.state.appliance_types,
       this.state.files,
+      "",
       "",
       "",
       "",
@@ -194,6 +198,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       "",
+      "",
       ""
     )
   };
@@ -206,6 +211,7 @@ class NewCasePrescription extends PureComponent {
       this.state.files,
       "",
       event.target.id,
+      "",
       "",
       "",
       "",
@@ -233,6 +239,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       "",
+      "",
       ""
     )
   };
@@ -246,6 +253,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       event.target.id,
+      "",
       "",
       "",
       "",
@@ -271,6 +279,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       "",
+      "",
       ""
     )
   };
@@ -286,6 +295,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       event.target.id,
+      "",
       "",
       "",
       "",
@@ -309,12 +319,13 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       "",
+      "",
       ""
     )
   };
   addBallClaspL = (event) => {
     debugger;
-    console.log(event.target)
+    //console.log(event.target)
     this.props.submitted(
       this.canvasDrawDataStack,
       this.saveableCanvas,
@@ -328,6 +339,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       event.target.id,
+      "",
       "",
       "",
       ""
@@ -335,7 +347,7 @@ class NewCasePrescription extends PureComponent {
   };
   addBallClaspU = (event) => {
     debugger;
-    console.log(event.target)
+    //console.log(event.target)
     this.props.submitted(
       this.canvasDrawDataStack,
       this.saveableCanvas,
@@ -350,6 +362,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       event.target.id,
+      "",
       "",
       ""
     )
@@ -371,6 +384,7 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       event.target.id,
+      "",
       ""
     )
   };
@@ -391,9 +405,32 @@ class NewCasePrescription extends PureComponent {
       "",
       "",
       "",
-      event.target.value
+      event.target.value,
+      ""
     )
   };
+
+  addDesignName = (nameId) => {
+    this.props.submitted(
+      this.canvasDrawDataStack,
+      this.saveableCanvas,
+      this.state.appliance_types,
+      this.state.files,
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      nameId
+    )
+  };
+
 
 
   render() {
@@ -1979,7 +2016,7 @@ class NewCasePrescription extends PureComponent {
                       hideGrid={true}
                       imgSrc="/src/assets/newcase/teeth.png"
                       onChange={(event) => {
-                        console.log(event);
+                        //console.log(event);
                         //this.saveableCanvas.getSaveData()
 
                         this.storeCanvasElement(event);
@@ -2119,7 +2156,9 @@ class NewCasePrescription extends PureComponent {
                   <div className="font-weight-bold float-right">&#43;</div>
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="8">
-                  <Card.Body></Card.Body>
+                  <Card.Body>
+                    <AddDesigns addDesignName={this.addDesignName}/>
+                  </Card.Body>
                 </Accordion.Collapse>
               </Card>
             </Accordion>
